@@ -1,0 +1,18 @@
+
+.stories{
+    background-color: rgb(255, 255, 255);
+    height: 10%;
+    display: flex;
+    position: relative;
+    border: 2px solid rgba(251, 250, 250, 0.479);
+    border-radius: 20px;
+    box-shadow: 2px 2px 200px 2px grey;
+
+}
+.stories img{
+    width:70px;
+    height: 70px;
+    border: 2px solid rgba(128, 128, 128, 0);
+    border-radius: 50px;
+    padding: 2%;
+}

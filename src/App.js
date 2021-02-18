@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Main from './Main';
+import Signin from './Sign in/Signin';
+import Signup from './Sign up/Signup';
+import axios from 'axios';
+import {useSelector,useDispatch} from 'react-redux';
+
+import {useEffect, useState} from 'react';
+const URL =process.env.REACT_APP_URL;
+const App=()=>{
+  const dispatch=useDispatch();
+  let access=useSelector(state=>state.signinReducer.access);
+  const issignup=useSelector(state=>state.signinReducer.signup);
+  console.log(access);
+  useEffect(()=>{
+axios.get(`${URL}/auth/verify`,{withCredentials:true}).then((res)=>{
+  console.log(res.data.access)
+  dispatch({type:'access',payload:res.data.access});
+
+}).catch(err=>console.log(err));
+  },[])
+    return (<div>
+    
+      {access?<Main/>:issignup?<Signup/>:<Signin/>}
+  
+    </div>)
 }
-
 export default App;

@@ -1,0 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+.Footer{
+    position: fixed;
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+    top:96%;
+   
+    
+}
+.Footer button{
+    width: 100%;
+}
