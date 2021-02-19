@@ -1,6 +1,10 @@
+import {useDispatch } from 'react-redux'
 const Message=()=>{
+    const dispatch =useDispatch();
     return(<>
-    //message
+   <div>
+       <button onClick={()=>dispatch({type:"SHOWHOME",payload:true})}  >BACK</button>
+   </div>
     
     </>)
 }

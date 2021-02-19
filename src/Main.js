@@ -1,9 +1,10 @@
-import Header from './Top Bar/Header';
+
 import Home from './Home/Home';
 import Like from './Like/Like';
 import Search from './Search/Search';
 import Footer from './Bottom Bar/Footer';
 import {useSelector} from 'react-redux';
+import Message from './Home/Messagesec/Message'
 import Profile from './Profile/Profile';
 
 const Main=()=>{
@@ -11,12 +12,13 @@ const Main=()=>{
     let home=useSelector(state=>state.main.home);
     let search=useSelector(state=>state.main.search);
     let like=useSelector(state=>state.main.like);
+    let message=useSelector(state=>state.main.message);
     
   console.log(home,search,like,profile)
     return(
       <>
-        <Header/>
-        {home?<Home/>:like?<Like/>:profile?<Profile/>:search?<Search/>:null}
+      
+        {home?<Home/>:like?<Like/>:profile?<Profile/>:search?<Search/>:message?<Message/>:null}
         <Footer/>
       </>
 

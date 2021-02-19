@@ -1,14 +1,23 @@
 import Styles from './Footer.module.css'
-import {useDispatch} from 'react-redux';
+import searchimg from '../Search/icons/search.png'
+import searchblackimg from '../Search/icons/searchblack.png'
+import likeimg from '../Like/icons/heart.png'
+import likeblackimg from '../Like/icons/heartblack.png'
+import homeimg from '../Home/icons/home.png'
+import homeblackimg from '../Home/icons/homeblack.png'
+import profileimg from '../Home/Feed/content/images/pic6.jpg'
+import {useDispatch,useSelector} from 'react-redux';
 const Footer=()=>{
   const dispatch=useDispatch();
+  const {home,search,like,profile}=useSelector(state=>state.main);
+  
     return(
       <>
-        <div className={Styles.Footer}>
-           <button  onClick={()=>dispatch({type:"SHOWHOME",payload:true})}  >Home</button>
-           <button onClick={()=>dispatch({type:"SHOWSEARCH",payload:true})}   >Search</button>
-           <button  onClick={()=>dispatch({type:"SHOWLIKE",payload:true})}   >likes</button>
-           <button  onClick={()=>dispatch({type:"SHOWPROFILE",payload:true})}   >profile</button>
+        <div className={Styles.footer}>
+           <img  src={home?homeblackimg:homeimg} onClick={()=>dispatch({type:"SHOWHOME",payload:true})}      />
+           <img src={search?searchblackimg:searchimg}   onClick={()=>dispatch({type:"SHOWSEARCH",payload:true})}   />
+           <img  src={like?likeblackimg:likeimg}    onClick={()=>dispatch({type:"SHOWLIKE",payload:true})}  />
+           <img  src={profile?profileimg:profileimg}    className={Styles.profile}  onClick={()=>dispatch({type:"SHOWPROFILE",payload:true})}   />
           
         </div>
       </>

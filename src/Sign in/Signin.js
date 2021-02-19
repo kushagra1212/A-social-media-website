@@ -2,7 +2,7 @@ import Styles from './signin.module.css'
 import {useSelector,useDispatch} from 'react-redux';
 import { useState } from 'react';
 import axios from 'axios';
-
+import {getuser} from '../reduces/actions/userAction'
 const URL=process.env.REACT_APP_URL;
 const Signin=()=>{
     const dispatch=useDispatch();
@@ -17,7 +17,14 @@ const loginhandle=async(e)=>{
         withCredentials: true
       });
    const success=res.data.success;
-    if(success) dispatch({type:'access',payload:success});
+
+
+    if(success) {dispatch({type:'access',payload:success});
+ 
+    dispatch(getuser(res.data.user._id));
+
+
+}
     else console.log("fail",success)
   }catch(err){
       console.log(err);

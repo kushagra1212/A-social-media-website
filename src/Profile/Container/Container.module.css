@@ -1,0 +1,16 @@
+.maindiv{
+    position: relative;
+    width:100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+}
+.maindiv img{
+position: relative;
+height: 100px;
+width:33%;
+
+
+}

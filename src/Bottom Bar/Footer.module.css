@@ -1,15 +1,26 @@
 *{
     box-sizing: border-box;
 }
-.Footer{
+.footer{
     position: fixed;
     display: flex;
     width:100%;
-    justify-content: space-between;
-    top:96%;
-   
+    justify-content: space-around;
+    top:94%;
+    background-color: rgb(255, 255, 255);
+   border: 2px solid rgba(0, 0, 0, 0);
+   border-radius: 10px;
+   box-shadow: 20px 2px 20px 2px rgb(255, 255, 255);
     
 }
-.Footer button{
-    width: 100%;
+
+.footer img{
+    background-color: rgb(255,255,255);
+    border: 2px solid rgba(245, 222, 179, 0);
+    border-radius: 10px;
+    
+     height: 30px;
+     width: 30px;
+ 
+   
 }

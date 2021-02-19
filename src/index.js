@@ -2,11 +2,13 @@
 import ReactDOM from 'react-dom'
 import App from './App';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import Reducers from './reduces/Reducers'
+import thunk from 'redux-thunk'
 import AlertTemplate from 'react-alert-template-basic'
-const store=createStore(Reducers);
+
+const store=createStore(Reducers,compose(applyMiddleware(thunk)));
 const options = {
  
     position: positions.BOTTOM_CENTER,

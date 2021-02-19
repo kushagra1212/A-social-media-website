@@ -4,7 +4,7 @@ import Signin from './Sign in/Signin';
 import Signup from './Sign up/Signup';
 import axios from 'axios';
 import {useSelector,useDispatch} from 'react-redux';
-
+import {getuser} from './reduces/actions/userAction'
 import {useEffect, useState} from 'react';
 const URL =process.env.REACT_APP_URL;
 const App=()=>{
@@ -16,6 +16,7 @@ const App=()=>{
 axios.get(`${URL}/auth/verify`,{withCredentials:true}).then((res)=>{
   console.log(res.data.access)
   dispatch({type:'access',payload:res.data.access});
+  dispatch(getuser(res.data.id));
 
 }).catch(err=>console.log(err));
   },[])
