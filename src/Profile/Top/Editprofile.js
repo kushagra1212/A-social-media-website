@@ -44,7 +44,7 @@ setTimeout(()=>{
     }
     if(loading)
     {
-        return(<div>Loding</div>)
+        return(<div>Loading</div>)
     }
     return(
         <div>

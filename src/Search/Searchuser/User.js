@@ -1,5 +1,11 @@
+
+import { useState } from 'react'
 import Styles from './User.module.css'
 const User=({profpic,name,username,bio,postsnumber,followingcount,followerscount})=>{
+    const [following,setfollowing]=useState(false)
+    const setfollowinghandle=()=>{
+        setfollowing(!following)
+    }
     return(
         <div className={Styles.maindiv}  >
           
@@ -23,7 +29,7 @@ const User=({profpic,name,username,bio,postsnumber,followingcount,followerscount
 
 <label>following <h6>{followingcount}</h6></label>
 
-<button >follow </button>
+<button  onClick={()=>setfollowinghandle()}    >{following?"Following":"Follow"} </button>
 
         </div>
       

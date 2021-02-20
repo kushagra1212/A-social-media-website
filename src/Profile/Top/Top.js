@@ -14,14 +14,17 @@ const Top = ({setposthand}) => {
     name,
     profilepic,
     email,
-    postsnumber,
-    followerscount,
-    followingcount,
+
+ 
+  
     bio,
   } = useSelector((state) => {
     console.log(state);
     return state.user;
   });
+  const {postcount,followerscount,followingcount}=useSelector(state=>state.count);
+ 
+
 
 
   const [img, setimg] = useState(null);
@@ -36,7 +39,9 @@ const Top = ({setposthand}) => {
   
   };
 
-  const logouthandle = () => {
+  const logouthandle = () =>
+  
+  {
     axios
       .get(`${URL}/auth/logout`, { withCredentials: true })
       .then((res) => {
@@ -68,7 +73,7 @@ setprofpic(pic);
           img={img}
           username={username}
           bio={bio}
-          postsnumber={postsnumber}
+          postsnumber={postcount}
           setposthandle={setposthandle}
           followerscount={followerscount}
           followingcount={followingcount}

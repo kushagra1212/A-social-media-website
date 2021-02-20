@@ -1,20 +1,23 @@
-import { useSelector} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import Top from './Top/Top'
-import {returnpost} from './Top/Top.js'
 
+import Userposts from '../posts/Userposts'
 import Container from './Container/Container'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Profile = () => {
+  
  const [post,setpost]=useState(false);
  const posts=useSelector(state=>state.userposts);
 const setposthand=()=>{
   setpost(!post);
 }
+
+
   return (
     <div>
       <Top    setposthand={setposthand}   />
-      {post?null:<Container posts={posts} />}
+      {post?null:<><Container posts={posts} /> <Userposts   /> </>}
      
      
     </div>

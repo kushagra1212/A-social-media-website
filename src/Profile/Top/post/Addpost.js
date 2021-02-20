@@ -1,15 +1,20 @@
 import FileBase64 from "react-file-base64";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {updatecountforpost} from '../../../reduces/actions/countAction'
 import axios from "axios";
 const URL = process.env.REACT_APP_URL;
 const Addpost = ({ setposthandle }) => {
+
   const [pic, setpic] = useState("");
   const [desc, setdesc] = useState("");
+ 
   const { username, proffilepic } = useSelector((state) => state.user);
 const [loading,setloading]=useState(false);
-   
+const dispatch=useDispatch();
+const {postcount}=useSelector(state=>state.count);
 const savehandle = async () => {
+  
       setloading(!loading);
     try{
         const res=await axios.post(`${URL}/post/uploadpost`, {
@@ -17,15 +22,20 @@ const savehandle = async () => {
             picture: pic,
             desc: desc,
           });
-console.log(res.data);
+      
+
 
     }catch(err)
     {
         console.log(err);
     }
+    dispatch(updatecountforpost(username,postcount))
+
+   
+
     setloading(!loading);
     setposthandle();
-  };
+  }
   if(loading)
   {
       return(<div>

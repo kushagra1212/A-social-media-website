@@ -1,17 +1,16 @@
 import Styles from "./signin.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import {useDispatch} from 'react-redux'
 import { useState } from "react";
 import axios from "axios";
 import { getuser } from "../reduces/actions/userAction";
-import {getposts} from '../methods/getposts'
-import {updatecount} from "../methods/updatecount"
+
 const URL = process.env.REACT_APP_URL;
 const Signin = () => {
   const dispatch = useDispatch();
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  const [postcount,setpostcount]=useState(0);
-  const {_id,postsnumber,followingcount,followerscount}=useSelector(state=>state.user);
+
+ 
   const loginhandle = async (e) => {
 
     e.preventDefault();
