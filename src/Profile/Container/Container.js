@@ -1,15 +1,17 @@
-import Styles from './Container.module.css'
 
-const images=[];
-const Container=()=>{
-    
-    return(
-        <div className={Styles.maindiv}>
-        {images.map((image,key)=>(<img src={image} key={key}   />
-           ))}
+import Styles from "./Container.module.css";
 
-
-        </div>
-    )
-}
+import Userposts from "../../posts/Userposts";
+const Container = ({ posts }) => {
+  return (
+    <div className={Styles.maindiv}>
+      {posts.length > 0
+        ? posts.map((dat, id) => {
+            return <img key={id} src={dat.picture} />;
+          })
+        : null}
+      <Userposts />
+    </div>
+  );
+};
 export default Container;

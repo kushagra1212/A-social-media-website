@@ -5,8 +5,6 @@ const user=(state=initial,action)=>{
         case "GET_USER":
             return (state);
         case "SET_USER":
-          
-            
             state._id=action.payload._id; 
             state.profilepic=action.payload.profilepic;
             state.email=action.payload.email;
@@ -24,6 +22,12 @@ const user=(state=initial,action)=>{
             state.bio=bio;
             state.profilepic=profilepic;
             return state;
+        case "UPDATE_USER_COUNT":
+            state.followerscount=action.payload.followerscount;
+            state.followingcount=action.payload.followingcount;
+            state.postsnumber=action.payload.postsnumber;
+            return state;
+        
         default:
             return (state);
 

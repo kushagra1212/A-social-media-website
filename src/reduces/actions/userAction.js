@@ -11,6 +11,13 @@ const getuserfor=()=>{
         type:"GET_USER"
     }
 }
+export const updateusercount=(data)=>{
+    return( {type:"UPDATE_USER_COUNT",payload:data})
+    
+}
+export const addposts=(posts)=>{
+return({type:"ADD_POSTS",payload:posts})
+}
 export const getuser=(id)=>{
     return async(dispatch)=>{
       

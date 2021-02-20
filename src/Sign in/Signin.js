@@ -1,50 +1,81 @@
-import Styles from './signin.module.css'
-import {useSelector,useDispatch} from 'react-redux';
-import { useState } from 'react';
-import axios from 'axios';
-import {getuser} from '../reduces/actions/userAction'
-const URL=process.env.REACT_APP_URL;
-const Signin=()=>{
-    const dispatch=useDispatch();
-    const [username,setusername]=useState("");
-    const [password,setpassword]=useState("");
-const loginhandle=async(e)=>{
+import Styles from "./signin.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import axios from "axios";
+import { getuser } from "../reduces/actions/userAction";
+import {getposts} from '../methods/getposts'
+import {updatecount} from "../methods/updatecount"
+const URL = process.env.REACT_APP_URL;
+const Signin = () => {
+  const dispatch = useDispatch();
+  const [username, setusername] = useState("");
+  const [password, setpassword] = useState("");
+  const [postcount,setpostcount]=useState(0);
+  const {_id,postsnumber,followingcount,followerscount}=useSelector(state=>state.user);
+  const loginhandle = async (e) => {
+
     e.preventDefault();
-  try{
-    const res=await axios.post(`${URL}/auth/signin`,{
-        username:username,password:password
-    }, {
-        withCredentials: true
-      });
-   const success=res.data.success;
+    try {
+      const res = await axios.post(
+        `${URL}/auth/signin`,
+        {
+          username: username,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      const success = res.data.success;
 
+      if (success) {
+        dispatch({ type: "access", payload: success });
+       
+     
 
-    if(success) {dispatch({type:'access',payload:success});
- 
-    dispatch(getuser(res.data.user._id));
-
-
-}
-    else console.log("fail",success)
-  }catch(err){
+        dispatch(getuser(res.data.user._id));
+    
+        
+      } else console.log("fail", success);
+    } catch (err) {
       console.log(err);
-  }
+    }
+  };
+  return (
+    <>
+      <div className={Styles.container}>
+        <label className={Styles.instagram}>Instagram</label>
+        <div className={Styles.input}>
+          {" "}
+          <input
+            placeholder="username"
+            onChange={(e) => setusername(e.target.value.substr(0, 15))}
+            value={username}
+            type="text"
+          />
+          <input
+            onChange={(e) => setpassword(e.target.value)}
+            value={password}
+            placeholder="Password"
+            type="password"
+          />
+        </div>
+        <button onClick={loginhandle} className={Styles.loginbut}>
+          Log in
+        </button>
 
-}
-    return(
-        <>
-       <div className={Styles.container}>
-           <label className={Styles.instagram}>Instagram</label>
-          <div className={Styles.input}> <input placeholder="username" onChange={e=>setusername(e.target.value.substr(0,15))} value={username} type="text"   />
-           <input onChange={e=>setpassword(e.target.value)} value={password} placeholder="Password" type="password"/></div>
-           <button onClick={loginhandle} className={Styles.loginbut}>Log in</button>
-           
-           <div className={Styles.account}>
-               <label>Don't have an account?</label>
-               <a href="#"  onClick={()=>dispatch({type:"signup",payload:true})}  >  Sign up</a>
-           </div>
-       </div>
-        </>
-    )
-}
+        <div className={Styles.account}>
+          <label>Don't have an account?</label>
+          <a
+            href="#"
+            onClick={() => dispatch({ type: "signup", payload: true })}
+          >
+            {" "}
+            Sign up
+          </a>
+        </div>
+      </div>
+    </>
+  );
+};
 export default Signin;

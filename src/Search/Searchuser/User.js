@@ -1,18 +1,17 @@
-
-import FileBase64 from 'react-file-base64';
-import Styles from './Top.module.css'
-const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,bio,postsnumber,followerscount,followingcount})=>{
+import Styles from './User.module.css'
+const User=({profpic,name,username,bio,postsnumber,followingcount,followerscount})=>{
     return(
         <div className={Styles.maindiv}  >
+          
         <div className={Styles.firstdiv} >
         <img src={profpic}  />
-        <button onClick={edit_it} className={Styles.editbut}>Edit Profile</button>
-        <button onClick={logouthandle}>Log out</button>
+       
+       
 
         </div>
         <div className={Styles.seconddiv}  >
         <h3>{name}</h3>
-        <img src={img}/>
+      
         <h6>@{username}</h6>
         <h5>{bio}</h5>
         
@@ -24,10 +23,12 @@ const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,
 
 <label>following <h6>{followingcount}</h6></label>
 
-<button onClick={setposthandle}   >Add a Post </button>
+<button >follow </button>
+
         </div>
+      
 
     </div>
     )
 }
-export default Topprofile;
+export default User;
