@@ -9,7 +9,7 @@ const Userposts = () => {
   const [loading, setloading] = useState(false);
 
   useEffect(() => {
-    setloading(!loading);
+   
     getposts(_id, dispatch);
   }, []);
 

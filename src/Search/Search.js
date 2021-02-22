@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import User from "./Searchuser/User";
 import Container from "./Searchuser/Container";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Profile from "../Profile/Profile";
 import Styles from "./Search.module.css";
+import verifiesusers from '../methods/verifiesusers'
 const URL = process.env.REACT_APP_URL;
 const Search = () => {
   const [searchuser, setsearchuser] = useState("");
@@ -14,7 +15,41 @@ const Search = () => {
   const [posts, setposts] = useState(null);
   const [showprofile, setshowprofile] = useState(false);
   const { username } = useSelector((state) => state.user);
+  const [postcount,setpostcount]=useState(null);
+  const [followerscount,setfollowerscount]=useState(null);
+  const [followingcount,setfollowingcount]=useState(null);
+  const [following,setfollowing]=useState(null);
+  const dispatch=useDispatch();
+
+const setfollowingfunc=(value)=>{
+  setfollowing(value);
+}
+
+const getcounts=async()=>{
+  try{
+ await axios.patch(`${URL}/count/updatefollowerscount`,{
+   username:searchuser
+ });
+    const res2=await axios.patch(`${URL}/count/updatefollowingcount`,{
+      username:searchuser
+    });
+    if(res2.data)
+    {
+      console.log(res2.data,"cc")
+      setpostcount(res2.data.postcount);
+      setfollowerscount(res2.data.followerscount);
+      setfollowingcount(res2.data.followingcount);
+    }
+
+  }catch(err)
+  {
+    console.log(err);
+  }
+
+}
+
   const collectposts = async (id) => {
+    setloading(true);
     try {
       const res = await axios.get(`${URL}/post/getpost?id=${id}`);
       if (res) {
@@ -24,13 +59,14 @@ const Search = () => {
     } catch (err) {
       console.log(err);
     }
+    setloading(false)
   };
 
   const searchuserhandle = async (username) => {
     try {
       setloading(true);
       const res = await axios.get(`${URL}/users/getuser?username=${username}`);
-      setloading(false);
+    
       if (res) {
         collectposts(res.data._id);
         setuser(res.data);
@@ -40,17 +76,22 @@ const Search = () => {
         setfound({ found: false, text: "user not found" });
       }
     } catch (err) {
-      setloading(false);
+     
       setfound({ found: false, text: "user not found" });
       console.log(err);
     }
+    setloading(false);
   };
 
   const showuserprofilehandle = () => {
     setposts("");
     setshowprofile(!showprofile);
   };
-
+  useEffect(()=>{
+    let usernameofsender=searchuser;
+    console.log(usernameofsender)
+    verifiesusers(setfollowingfunc,username,usernameofsender);
+  },[searchuser])
   if (showprofile) {
     if (username === searchuser) {
       return (
@@ -64,6 +105,8 @@ const Search = () => {
       );
     }
 
+  
+
     return (
       <>
         <button className={Styles.backbut} onClick={showuserprofilehandle}>
@@ -74,10 +117,11 @@ const Search = () => {
           profpic={user.profilepic}
           name={user.name}
           bio={user.bio}
-          postsnumber={posts.length}
-          followerscount={0}
-          followingcount={0}
+          postsnumber={postcount}
+          followerscount={followerscount}
+          followingcount={followingcount}
           username={user.username}
+          getcounts={getcounts}
         />
         <Container posts={posts} />
       </>
@@ -103,7 +147,7 @@ const Search = () => {
           <img width="30px" height="30px" src={user.profilepic} />
           <h4>{user.name}</h4>
           <h6>@{user.username}</h6>
-          <button>follow</button>
+          <button>{following?"following":"follow"}</button>
         </div>
       ) : (
         <div></div>

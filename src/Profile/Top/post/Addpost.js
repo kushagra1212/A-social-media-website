@@ -22,8 +22,9 @@ const savehandle = async () => {
             picture: pic,
             desc: desc,
           });
+          setloading(!loading);
       
-
+          setposthandle();
 
     }catch(err)
     {
@@ -33,8 +34,8 @@ const savehandle = async () => {
 
    
 
-    setloading(!loading);
-    setposthandle();
+ 
+  
   }
   if(loading)
   {
