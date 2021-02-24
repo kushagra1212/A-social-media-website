@@ -8,7 +8,7 @@ import Topprofile from "./Topprofile";
 
 const URL = process.env.REACT_APP_URL;
 
-const Top = ({setposthand}) => {
+const Top = ({setposthand,setshowfollowershandle,setshowfollowinghandle}) => {
   let {
     username,
     name,
@@ -77,7 +77,8 @@ setprofpic(pic);
           setposthandle={setposthandle}
           followerscount={followerscount}
           followingcount={followingcount}
-          
+          setshowfollowershandle={setshowfollowershandle}
+          setshowfollowinghandle={setshowfollowinghandle}
         />
       ):(<Addpost  setposthandle={setposthandle} />)}
     </>

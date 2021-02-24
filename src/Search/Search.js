@@ -7,7 +7,7 @@ import Profile from "../Profile/Profile";
 import Styles from "./Search.module.css";
 import verifiesusers from '../methods/verifiesusers'
 const URL = process.env.REACT_APP_URL;
-const Search = () => {
+const Search = ({fromshowbar,usernameformshowbar}) => {
   const [searchuser, setsearchuser] = useState("");
   const [user, setuser] = useState("");
   const [loading, setloading] = useState(false);
@@ -24,7 +24,13 @@ const Search = () => {
 const setfollowingfunc=(value)=>{
   setfollowing(value);
 }
-
+useEffect(()=>{
+  if(fromshowbar)
+  {
+    setsearchuser(usernameformshowbar);
+    searchuserhandle(usernameformshowbar);
+  }
+    },[])
 const getcounts=async()=>{
   try{
  await axios.patch(`${URL}/count/updatefollowerscount`,{
@@ -105,12 +111,14 @@ const getcounts=async()=>{
       );
     }
 
-  
+
 
     return (
       <>
         <button className={Styles.backbut} onClick={showuserprofilehandle}>
+          
           BACK
+
         </button>
 
         <User
@@ -127,17 +135,20 @@ const getcounts=async()=>{
       </>
     );
   }
+  
   return (
     <div>
-      <input
+      {fromshowbar?null:<div>
+        <input
         placeholder="Search User Here"
         value={searchuser}
         onChange={(e) => {
           setsearchuser(e.target.value);
           searchuserhandle(e.target.value);
-        }}
+        }}   
       />
       <button onClick={() => setshowprofile(true)}>Search</button>
+        </div>}
       {loading ? <div>Loading...</div> : null}
       {found.found ? (
         <div

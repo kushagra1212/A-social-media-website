@@ -1,7 +1,10 @@
 
+import { useState } from 'react';
 import FileBase64 from 'react-file-base64';
 import Styles from './Top.module.css'
-const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,bio,postsnumber,followerscount,followingcount})=>{
+const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,bio,postsnumber,followerscount,followingcount,setshowfollowershandle,setshowfollowinghandle})=>{
+   
+
     return(
         <div className={Styles.maindiv}  >
         <div className={Styles.firstdiv} >
@@ -20,9 +23,9 @@ const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,
         <div  className={Styles.thirddiv} >
 <label>Posts <h6> {postsnumber}</h6></label>
 
-<label>followers <h6>{followerscount}</h6></label>
+<label> <button   onClick={()=>setshowfollowershandle(true)}      >followers </button> <h6>{followerscount}</h6>  </label>
 
-<label>following <h6>{followingcount}</h6></label>
+<label> <button   onClick={()=>setshowfollowinghandle(true)}      >following </button> <h6>{followingcount}</h6></label>
 
 <button onClick={setposthandle}   >Add a Post </button>
         </div>

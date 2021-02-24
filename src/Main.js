@@ -18,7 +18,7 @@ const Main=()=>{
     return(
       <>
       
-        {home?<Home/>:like?<Like/>:profile?<Profile/>:search?<Search/>:message?<Message/>:null}
+        {home?<Home/>:like?<Like/>:profile?<Profile/>:search?<Search  fromshowbar={false} usernameformshowbar={null}           />:message?<Message/>:null}
         <Footer/>
       </>
 
