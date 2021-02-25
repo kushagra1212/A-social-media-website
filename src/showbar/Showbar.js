@@ -46,12 +46,12 @@ if(showfollowers)
           <button onClick={()=>{setshowfollowershandle(false); setshowfollowinghandle(false)}}  > Back </button>
       <List   list={item}    />
     {noone.nofollowers && showfollowers? <div>
-     <h1>   you have no followers</h1>
+     <h1>    no followers</h1>
       </div>:null}
      
 
       {noone.nofollowing && showfollowing?      <div>
-<h1>seems like no one is following you</h1>
+<h1>seems like no one is following</h1>
       </div>:null}
       </div>
   )

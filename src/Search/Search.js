@@ -12,23 +12,28 @@ const Search = ({fromshowbar,usernameformshowbar}) => {
   const [user, setuser] = useState("");
   const [loading, setloading] = useState(false);
   const [found, setfound] = useState({ found: false, text: "" });
-  const [posts, setposts] = useState(null);
+
   const [showprofile, setshowprofile] = useState(false);
   const { username } = useSelector((state) => state.user);
   const [postcount,setpostcount]=useState(null);
   const [followerscount,setfollowerscount]=useState(null);
   const [followingcount,setfollowingcount]=useState(null);
   const [following,setfollowing]=useState(null);
+  const [showfollowers,setshowfollowers]=useState(false);
+  const [showfollowing,setshowfollowing]=useState(false);
+  useSelector(state=>console.log(state));
   const dispatch=useDispatch();
 
 const setfollowingfunc=(value)=>{
   setfollowing(value);
 }
+
 useEffect(()=>{
   if(fromshowbar)
   {
     setsearchuser(usernameformshowbar);
     searchuserhandle(usernameformshowbar);
+
   }
     },[])
 const getcounts=async()=>{
@@ -59,8 +64,8 @@ const getcounts=async()=>{
     try {
       const res = await axios.get(`${URL}/post/getpost?id=${id}`);
       if (res) {
-        console.log(res);
-        setposts(res.data);
+      
+        return res.data;
       }
     } catch (err) {
       console.log(err);
@@ -74,7 +79,7 @@ const getcounts=async()=>{
       const res = await axios.get(`${URL}/users/getuser?username=${username}`);
     
       if (res) {
-        collectposts(res.data._id);
+       
         setuser(res.data);
         setfound({ found: true, text: "" });
         console.log(res.data);
@@ -90,7 +95,7 @@ const getcounts=async()=>{
   };
 
   const showuserprofilehandle = () => {
-    setposts("");
+  
     setshowprofile(!showprofile);
   };
   useEffect(()=>{
@@ -102,7 +107,7 @@ const getcounts=async()=>{
     if (username === searchuser) {
       return (
         <>
-          <button className={Styles.backbut} onClick={showuserprofilehandle}>
+          <button  className={Styles.backbut} onClick={showuserprofilehandle}>
             BACK
           </button>
 
@@ -110,16 +115,19 @@ const getcounts=async()=>{
         </>
       );
     }
+    const setshowfollowershandle = (val) => {
+      setshowfollowers(val);
+    };
+    const setshowfollowinghandle = (value) => {
+      setshowfollowing(value);
+    };
+  
 
 
 
     return (
       <>
-        <button className={Styles.backbut} onClick={showuserprofilehandle}>
-          
-          BACK
-
-        </button>
+       
 
         <User
           profpic={user.profilepic}
@@ -130,8 +138,12 @@ const getcounts=async()=>{
           followingcount={followingcount}
           username={user.username}
           getcounts={getcounts}
+          setshowfollowershandle={setshowfollowershandle}
+          setshowfollowinghandle={setshowfollowinghandle}
+          showfollowers={showfollowers}
+          showfollowing={showfollowing}
         />
-        <Container posts={posts} />
+        {showfollowers ||showfollowing?null:<Container collectposts={collectposts} user={user}  />}
       </>
     );
   }
@@ -158,7 +170,7 @@ const getcounts=async()=>{
           <img width="30px" height="30px" src={user.profilepic} />
           <h4>{user.name}</h4>
           <h6>@{user.username}</h6>
-          <button>{following?"following":"follow"}</button>
+          <button>Go to profile</button>
         </div>
       ) : (
         <div></div>

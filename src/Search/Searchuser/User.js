@@ -14,13 +14,17 @@ const User = ({
   followingcount,
   followerscount,
   getcounts,
+  setshowfollowershandle,
+  setshowfollowinghandle,
+  showfollowers,
+  showfollowing
+
 }) => {
   const [following, setfollowing] = useState(false);
 
   const dispatch = useDispatch();
   const usernameofsender = useSelector((state) => state.user.username);
-  const [showfollowers,setshowfollowers]=useState(false);
-  const [showfollowing,setshowfollowing]=useState(false);
+
   const setfollowinghandle = (e) => {
     if (following == false) {
       setfollowers(username, usernameofsender, dispatch);
@@ -35,12 +39,7 @@ const User = ({
     getcounts();
     verifiesusers(setfollowingfunc, username, usernameofsender);
   }, []);
-  const setshowfollowershandle = (val) => {
-    setshowfollowers(val);
-  };
-  const setshowfollowinghandle = (value) => {
-    setshowfollowing(value);
-  };
+ 
 
   if (showfollowers) {
     return (

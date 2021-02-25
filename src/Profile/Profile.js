@@ -23,7 +23,7 @@ useEffect(()=>{
 getfollowing(username,dispatch);
 getpostcount(username,dispatch);
 getfollowers(username,dispatch);
-},[])
+},[username])
 const setshowfollowershandle=(val)=>{
   setshowfollowers(val)
 }
@@ -38,14 +38,13 @@ if(showfollowers)
 
     )
 }
-if(showfollowing)
+else if(showfollowing)
 {
   return (
     <Showbar setshowfollowershandle={setshowfollowershandle} setshowfollowinghandle={setshowfollowinghandle} showfollowing={showfollowing} showfollowers={showfollowers}   username={username}       />
 
 )
-}
-
+}else{
 
   return (
     <div>
@@ -55,5 +54,11 @@ if(showfollowing)
     </div>
   );
 };
+
+
+
+}
+
+
 
 export default Profile;

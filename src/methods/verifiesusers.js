@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { setfollowers } from './setfollowers';
 const URL=process.env.REACT_APP_URL;
 const verifiesusers=async(setfollowingfunc,username,usernameofsender)=>{
     try{
@@ -7,6 +8,8 @@ const verifiesusers=async(setfollowingfunc,username,usernameofsender)=>{
        if(res.data)
        {
            if(res.data.found) setfollowingfunc(res.data.found);
+           else setfollowingfunc(false);
+           console.log(res.data.found)
 
        }
     }catch(err)
