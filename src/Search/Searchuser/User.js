@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Styles from "./User.module.css";
 import { setfollowers } from "../../methods/setfollowers";
-import verifiesusers from '../../methods/verifiesusers'
-const URL=process.env.REACT_APP_URL;
+import verifiesusers from "../../methods/verifiesusers";
+import Showbar from '../../showbar/Showbar'
+const URL = process.env.REACT_APP_URL;
 const User = ({
   profpic,
   name,
@@ -15,22 +16,54 @@ const User = ({
   getcounts,
 }) => {
   const [following, setfollowing] = useState(false);
+
   const dispatch = useDispatch();
   const usernameofsender = useSelector((state) => state.user.username);
+  const [showfollowers,setshowfollowers]=useState(false);
+  const [showfollowing,setshowfollowing]=useState(false);
   const setfollowinghandle = (e) => {
     if (following == false) {
       setfollowers(username, usernameofsender, dispatch);
       setfollowing(true);
     }
   };
-  const setfollowingfunc=(value)=>{
-      setfollowing(value);
-  }
- 
+  const setfollowingfunc = (value) => {
+    setfollowing(value);
+  };
+
   useEffect(() => {
     getcounts();
-    verifiesusers(setfollowingfunc,username,usernameofsender);
+    verifiesusers(setfollowingfunc, username, usernameofsender);
   }, []);
+  const setshowfollowershandle = (val) => {
+    setshowfollowers(val);
+  };
+  const setshowfollowinghandle = (value) => {
+    setshowfollowing(value);
+  };
+
+  if (showfollowers) {
+    return (
+      <Showbar
+        setshowfollowershandle={setshowfollowershandle}
+        setshowfollowinghandle={setshowfollowinghandle}
+        showfollowing={showfollowing}
+        showfollowers={showfollowers}
+        username={username}
+      />
+    );
+  }
+  if (showfollowing) {
+    return (
+      <Showbar
+        setshowfollowershandle={setshowfollowershandle}
+        setshowfollowinghandle={setshowfollowinghandle}
+        showfollowing={showfollowing}
+        showfollowers={showfollowers}
+        username={username}
+      />
+    );
+  }
   return (
     <div className={Styles.maindiv}>
       <div className={Styles.firstdiv}>
@@ -48,11 +81,11 @@ const User = ({
         </label>
 
         <label>
-          followers <h6>{followerscount}</h6>
+        <button   onClick={()=>setshowfollowershandle(true)}      >followers </button> <h6>{followerscount}</h6>
         </label>
 
         <label>
-          following <h6>{followingcount}</h6>
+        <button   onClick={()=>setshowfollowinghandle(true)}      >following </button> <h6>{followingcount}</h6>
         </label>
 
         <button onClick={() => setfollowinghandle()}>

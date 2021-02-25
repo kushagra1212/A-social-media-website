@@ -55,7 +55,7 @@ const getcounts=async()=>{
 }
 
   const collectposts = async (id) => {
-    setloading(true);
+   
     try {
       const res = await axios.get(`${URL}/post/getpost?id=${id}`);
       if (res) {
@@ -65,7 +65,7 @@ const getcounts=async()=>{
     } catch (err) {
       console.log(err);
     }
-    setloading(false)
+  
   };
 
   const searchuserhandle = async (username) => {

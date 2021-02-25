@@ -50,7 +50,7 @@ setTimeout(()=>{
         <div>
             <button onClick={edit_it}  >Back</button>
             <img width="50px" height="50px"  src={file} />
-            <FileBase64 multiple={false} onDone={e=>setfile(e.base64)}        />
+            <FileBase64 multiple={false} onDone={e=>{setfile(e.base64); console.log(e)}}        />
             <input  onChange={e=>setnewemail(e.target.value)}   value={newemail} />
             <input onChange={e=>setnewusername(e.target.value)} value={newusername}  />
             <input onChange={e=>setnewbio(e.target.value)}  value={newbio}   />
