@@ -1,12 +1,17 @@
 import Styles from "./Content.module.css";
-import propic from "./images/pic2.jpg";
 
+import {getpostsforfeed} from '../../../methods/getpostsforfeed'
 import sharepic from "./images/share.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import getitem from '../../../methods/getitem';
 const Contentmain = () => {
   const [liked, setlike] = useState(false);
   const [likecount,setlikecount]=useState(0);
- const [images,setimages]=useState([])
+
+ const [posts,setposts]=useState([]);
+ const {_id,profilepic,username}=useSelector(state=>state.user)
+ const [loading,setloading]=useState(false);
   const likefunction=()=>{
     liked?setlikecount(likecount):setlikecount(likecount+1);
     setlike(true);
@@ -15,17 +20,38 @@ const Contentmain = () => {
 !liked || likecount==0?setlikecount(likecount):setlikecount(likecount-1);
 setlike(false);
   }
+  useEffect(()=>{
+    setloading(true);
+   
+   getpostsforfeed(username).then(post=>{setposts(post); console.log(post); setloading(false);}).catch(err=>console.log(err));
+    getitem(username).then(item=>item.following.map((dat)=>{
+      setloading(true);
+      getpostsforfeed(dat.username).then(post=>{
+        console.log(post);
+      }).catch(err=>console.log(err));
+    }))
+    },[])
+    if(loading)
+    {
+      return <div  className={Styles.maincontent} >  fetching posts....</div>
+    }
+    if(posts.length==0)
+    {
+      return <div className={Styles.maincontent}>
+        Seems like you are not following any one , please follow others to see their posts
+      </div>
+    }
   return (
     <>
       <div className={Styles.maincontent}>
-       {images.map((image,key)=>(
+       {posts.map((post,key)=>(
             <div key={key} className={Styles.singlecontainer}>
             <div className={Styles.topdiv}>
-              <img src={propic} />
-              <h5>Nature world</h5>
+              <img src={profilepic} />
+              <h5>{post.username}</h5>
             </div>
             <button onDoubleClick={likefunction}  className={Styles.imgdiv}>
-              <img src={image} width="100%" height="200px" />
+              <img src={post.picture} width="100%" height="200px" />
             </button>
             <div className={Styles.bottomdiv}>
             {liked ? <span  onClick={unlikefunction}   >💖 {likecount}</span  > : <span  onClick={likefunction}  >🤍 {likecount}</span>}

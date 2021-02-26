@@ -16,6 +16,7 @@ const Profile = () => {
  const {postcount}=useSelector(state=>state.count);
  const [showfollowers,setshowfollowers]=useState(false);
  const [showfollowing,setshowfollowing]=useState(false);
+ const {followerscount,followingcount}=useSelector(state=>state.count);
 const setposthand=()=>{
   setpost(!post);
 }
@@ -23,7 +24,9 @@ useEffect(()=>{
 getfollowing(username,dispatch);
 getpostcount(username,dispatch);
 getfollowers(username,dispatch);
-},[username])
+
+},[username],followingcount,followerscount)
+
 const setshowfollowershandle=(val)=>{
   setshowfollowers(val)
 }
