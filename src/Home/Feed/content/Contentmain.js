@@ -6,12 +6,15 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import getitem from '../../../methods/getitem';
 const Contentmain = () => {
+  const {_id,profilepic,username}=useSelector(state=>state.user)
   const [liked, setlike] = useState(false);
   const [likecount,setlikecount]=useState(0);
+  
 
- const [posts,setposts]=useState([]);
- const {_id,profilepic,username}=useSelector(state=>state.user)
- const [loading,setloading]=useState(false);
+ const [posts,setposts]=useState([{username:"",picture:""}]);
+
+ const [loading,setloading]=useState(true);
+
   const likefunction=()=>{
     liked?setlikecount(likecount):setlikecount(likecount+1);
     setlike(true);
@@ -20,27 +23,44 @@ const Contentmain = () => {
 !liked || likecount==0?setlikecount(likecount):setlikecount(likecount-1);
 setlike(false);
   }
-  useEffect(()=>{
-    setloading(true);
-   
-   getpostsforfeed(username).then(post=>{setposts(post); console.log(post); setloading(false);}).catch(err=>console.log(err));
-    getitem(username).then(item=>item.following.map((dat)=>{
-      setloading(true);
+  let post1=[];
+  const call_func=()=>{
+   if(username)
+   {
+    getpostsforfeed(username).then(post=>{  post1=post;     getothers();   console.log(post,"own"); }).catch(err=>console.log(err));
+   }
+
+ 
+  }
+  const getothers=()=>{
+    getitem(username).then(item=>item?.following?.map((dat)=>{
+      
       getpostsforfeed(dat.username).then(post=>{
-        console.log(post);
+        
+         setposts([...post1,...post]);
+         setloading(false);
+            console.log(post,"different");
       }).catch(err=>console.log(err));
     }))
-    },[])
-    if(loading)
+}
+  
+ 
+  useEffect(()=>{
+call_func();
+  },[]);
+ 
+    
+    if(loading===true)
     {
       return <div  className={Styles.maincontent} >  fetching posts....</div>
     }
-    if(posts.length==0)
+    else if(posts.length==0)
     {
       return <div className={Styles.maincontent}>
         Seems like you are not following any one , please follow others to see their posts
       </div>
     }
+    else{
   return (
     <>
       <div className={Styles.maincontent}>
@@ -66,6 +86,6 @@ setlike(false);
        
       </div>
     </>
-  );
+  );}
 };
 export default Contentmain;

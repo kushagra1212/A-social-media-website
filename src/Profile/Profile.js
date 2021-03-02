@@ -21,8 +21,12 @@ const setposthand=()=>{
   setpost(!post);
 }
 useEffect(()=>{
-getfollowing(username,dispatch);
-getpostcount(username,dispatch);
+setTimeout(() => {
+  getfollowing(username,dispatch);
+}, 100);
+setTimeout(() => {
+  getpostcount(username,dispatch);
+}, 100);
 getfollowers(username,dispatch);
 
 },[username],followingcount,followerscount)
