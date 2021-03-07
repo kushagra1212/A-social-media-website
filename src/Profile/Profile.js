@@ -17,6 +17,7 @@ const Profile = () => {
  const [showfollowers,setshowfollowers]=useState(false);
  const [showfollowing,setshowfollowing]=useState(false);
  const {followerscount,followingcount}=useSelector(state=>state.count);
+
 const setposthand=()=>{
   setpost(!post);
 }
@@ -26,8 +27,11 @@ setTimeout(() => {
 }, 100);
 setTimeout(() => {
   getpostcount(username,dispatch);
-}, 100);
-getfollowers(username,dispatch);
+  getfollowers(username,dispatch);
+
+}, 200);
+
+
 
 },[username],followingcount,followerscount)
 

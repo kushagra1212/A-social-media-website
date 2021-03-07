@@ -1,10 +1,11 @@
 
 import { useState } from 'react';
 import FileBase64 from 'react-file-base64';
+import { useSelector } from 'react-redux';
 import Styles from './Top.module.css'
-const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,bio,postsnumber,followerscount,followingcount,setshowfollowershandle,setshowfollowinghandle})=>{
-   
-
+const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,bio,postsnumber,setshowfollowershandle,setshowfollowinghandle})=>{
+    const {followerscount,followingcount}=useSelector(state=>state.count);
+   console.log("from topprof",followerscount)
     return(
         <div className={Styles.maindiv}  >
         <div className={Styles.firstdiv} >

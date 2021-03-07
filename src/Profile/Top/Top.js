@@ -22,7 +22,7 @@ const Top = ({setposthand,setshowfollowershandle,setshowfollowinghandle}) => {
     console.log(state);
     return state.user;
   });
-  const {postcount,followerscount,followingcount}=useSelector(state=>state.count);
+  const {postcount}=useSelector(state=>state.count);
  
 
 
@@ -75,8 +75,7 @@ setprofpic(pic);
           bio={bio}
           postsnumber={postcount}
           setposthandle={setposthandle}
-          followerscount={followerscount}
-          followingcount={followingcount}
+        
           setshowfollowershandle={setshowfollowershandle}
           setshowfollowinghandle={setshowfollowinghandle}
         />

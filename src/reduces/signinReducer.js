@@ -5,15 +5,13 @@ const signinReducer =(state={signup:false,access:false},action)=>
     switch(action.type)
 {
     case "signup":
-        state.signup=action.payload;
-        return(
-           state
-        )
+        
+        return {...state,signup:action.payload}
     case "access":
-        state.access=action.payload;
-        return state;
+        
+        return {...state,access:action.payload};
     default:
-        return(state);
+        return state;
       
     
 
