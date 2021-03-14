@@ -12,8 +12,6 @@ const signinReducer =(state={signup:false,access:false},action)=>
         return {...state,access:action.payload};
     default:
         return state;
-      
-    
 
 }
 
