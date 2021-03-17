@@ -13,6 +13,7 @@ const Contentmain = () => {
   const [liked, setlike] = useState(false);
   const [likecount, setlikecount] = useState(0);
   const [array,setarray]=useState([])
+  const [start,setstart]=useState(true);
   const { access } = useSelector((state) => state.signinReducer);
 
   const [posts, setposts] = useState([
@@ -22,6 +23,7 @@ const Contentmain = () => {
   const [loading, setloading] = useState(true);
 
   const likefunction = (post,key) => {
+    setstart(false);
     setlike(true);
     post.liked = true;
     let newArray=[...array];
@@ -42,6 +44,7 @@ const Contentmain = () => {
   };
   const unlikefunction = (post,key) => {
     setlike(false);
+    setstart(false);
     let index=array.findIndex(ele=>ele.key==key);
     let newArray=[...array];
   
@@ -113,7 +116,7 @@ const Contentmain = () => {
 useEffect(()=>{
 
   call_func();
-
+setstart(true);
 },[])
 
   if (loading == true) {
@@ -141,12 +144,12 @@ useEffect(()=>{
               </button>
               <div className={Styles.bottomdiv}>
              {console.log(array,"checker")}
-                { array[key]?.liked ? (
+                { (start && post.likes.find(ele=>ele.username==username)) || array[key].liked? (
                   <span onClick={() => unlikefunction(post,key)}>
                     💖 {post.likes.length + array[key].liked?1:0 }
                   </span>
                 ) : (
-                  <span onClick={() => likefunction(post,key)}>🤍 {post.likes.length }</span>
+                  <span onClick={() => likefunction(post,key)}>🤍 {post.likes.length + array[key].liked?0:0  }</span>
                 )} 
                 <span>💬 5</span>
 
