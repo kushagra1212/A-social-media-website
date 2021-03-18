@@ -8,12 +8,14 @@ import { useSelector } from "react-redux";
 import getitem from "../../../methods/getitem";
 import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
+import Comments from './comments/Comments'
 const Contentmain = () => {
   const { _id, profilepic, username } = useSelector((state) => {console.log(state.user.username); return state.user});
-  const [liked, setlike] = useState(false);
-  const [likecount, setlikecount] = useState(0);
+ 
+  
   const [array,setarray]=useState([])
-  const [start,setstart]=useState(true);
+  
+  const [showcomments,setshowcomments]=useState(false);
   const { access } = useSelector((state) => state.signinReducer);
 
   const [posts, setposts] = useState([
@@ -23,8 +25,8 @@ const Contentmain = () => {
   const [loading, setloading] = useState(true);
 
   const likefunction = (post,key) => {
-    setstart(false);
-    setlike(true);
+    
+   
     post.liked = true;
     let newArray=[...array];
     
@@ -43,8 +45,8 @@ const Contentmain = () => {
     updatelikes({ username: username, id: post._id });
   };
   const unlikefunction = (post,key) => {
-    setlike(false);
-    setstart(false);
+
+    
     let index=array.findIndex(ele=>ele.key==key);
     let newArray=[...array];
   
@@ -74,7 +76,7 @@ const Contentmain = () => {
               for(var i=0;i<post1.length+post2.length;i++)
               {
                 
-                newArray=[...newArray,{key:i,liked:false}];
+                newArray=[...newArray,{key:i,liked:true}];
               }
               setarray(newArray);
               setloading(false);
@@ -111,13 +113,16 @@ const Contentmain = () => {
     }
   
   };
-
- 
+const setcommentsfunc=({val,post})=>{
+setshowcomments({val:val,post:post});
+}
 useEffect(()=>{
 
   call_func();
-setstart(true);
+
 },[])
+ 
+
 
   if (loading == true) {
     return <div className={Styles.maincontent}> fetching posts....</div>;
@@ -128,7 +133,19 @@ setstart(true);
         their posts
       </div>
     );
-  } else if(array.length!=undefined){
+  } 
+  else if(showcomments.val===true)
+  {
+    return(
+      <>
+      <Comments username={username} showcomments={showcomments}  setcommentsfunc={setcommentsfunc}   />
+      </>
+    )
+  }
+  
+  
+  
+  else if(array.length!=undefined){
     return (
       <>
         <div className={Styles.maincontent}>
@@ -144,14 +161,14 @@ setstart(true);
               </button>
               <div className={Styles.bottomdiv}>
              {console.log(array,"checker")}
-                { (start && post.likes.find(ele=>ele.username==username)) || array[key].liked? (
+                { ( post.likes.find(ele=>ele.username==username)) && array[key].liked? (
                   <span onClick={() => unlikefunction(post,key)}>
                     💖 {post.likes.length + array[key].liked?1:0 }
                   </span>
                 ) : (
                   <span onClick={() => likefunction(post,key)}>🤍 {post.likes.length + array[key].liked?0:0  }</span>
                 )} 
-                <span>💬 5</span>
+                <span onClick={()=>setcommentsfunc({val:true,post:post})}      >💬 {post?.comments?.length}</span>
 
                 <img src={sharepic} width="4.5%" height="2%" />
               </div>
