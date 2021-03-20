@@ -5,11 +5,12 @@ import likeimg from '../Like/icons/heart.png'
 import likeblackimg from '../Like/icons/heartblack.png'
 import homeimg from '../Home/icons/home.png'
 import homeblackimg from '../Home/icons/homeblack.png'
-import profileimg from '../Home/Feed/content/images/pic6.jpg'
+
 import {useDispatch,useSelector} from 'react-redux';
 const Footer=()=>{
   const dispatch=useDispatch();
   const {home,search,like,profile}=useSelector(state=>state.main);
+  const {profilepic}=useSelector(state=>state.user);
   
     return(
       <>
@@ -17,7 +18,7 @@ const Footer=()=>{
            <img  src={home?homeblackimg:homeimg} onClick={()=>dispatch({type:"SHOWHOME",payload:true})}      />
            <img src={search?searchblackimg:searchimg}   onClick={()=>dispatch({type:"SHOWSEARCH",payload:true})}   />
            <img  src={like?likeblackimg:likeimg}    onClick={()=>dispatch({type:"SHOWLIKE",payload:true})}  />
-           <img  src={profile?profileimg:profileimg}    className={Styles.profile}  onClick={()=>dispatch({type:"SHOWPROFILE",payload:true})}   />
+           <img  src={profile?profilepic:profilepic}    className={Styles.profile}  onClick={()=>dispatch({type:"SHOWPROFILE",payload:true})}   />
           
         </div>
       </>

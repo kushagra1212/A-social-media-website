@@ -1,5 +1,5 @@
 import Styles from "./Content.module.css";
-
+import InfiniteScroll from 'react-infinite-scroll-component'
 import { getpostsforfeed } from "../../../methods/getpostsforfeed";
 import sharepic from "./images/share.png";
 import { useEffect, useState } from "react";
@@ -14,18 +14,18 @@ const Contentmain = () => {
  
   
   const [array,setarray]=useState([])
+  const [start,setstart]=useState(false);
+  const [lastcount,setlastcount]=useState(0);
   
   const [showcomments,setshowcomments]=useState(false);
   const { access } = useSelector((state) => state.signinReducer);
 
-  const [posts, setposts] = useState([
-    { username: "", picture: "", pic: null },
-  ]);
+  const [posts, setposts] = useState([]);
 
   const [loading, setloading] = useState(true);
 
   const likefunction = (post,key) => {
-    
+    setstart(true);
    
     post.liked = true;
     let newArray=[...array];
@@ -33,7 +33,7 @@ const Contentmain = () => {
     let index=array.findIndex(ele=>ele.key==key);
     if(index>=0)
     {
-      newArray[index]={...newArray[index],liked:true};
+      newArray[index]={...newArray[index],liked:true,length:newArray[index].length+1};
       setarray(newArray);
       console.log(newArray);
     }
@@ -46,44 +46,64 @@ const Contentmain = () => {
   };
   const unlikefunction = (post,key) => {
 
-    
+    setstart(false);
     let index=array.findIndex(ele=>ele.key==key);
     let newArray=[...array];
   
      if(index>=0)
      {
-      newArray[index]={...newArray[index],liked:false};
+      newArray[index]={...newArray[index],liked:false,length:newArray[index].length-1};
      
       setarray(newArray);
       console.log(newArray);
      }
     deletelike({ username: username, id: post._id });
   };
-  const getothers = () => {
+  const getothers = (post1) => {
     let post2 = [];
   if(username)
   {
     getitem(username).then((item) =>
     item?.following?.map((dat) => {
-      getpostsforfeed(dat.username)
+      getpostsforfeed(dat.username,lastcount)
         .then((post) => {
           post2 = post;
           getuser(dat.username).then((ele) =>
-            post2.map((elee) => {
-              elee["pic"] = ele.profilepic;
-              setposts([...post1, ...post2]);
-              let newArray=[];
-              for(var i=0;i<post1.length+post2.length;i++)
-              {
-                
-                newArray=[...newArray,{key:i,liked:true}];
-              }
-              setarray(newArray);
-              setloading(false);
-            })
-          );
+          post2.map((elee) => {
+
+            elee["pic"] = ele.profilepic;       
+          
+          })
+        );
+          let newArray=[];
+             
+          let newpost=[...post1,...post2];
+          console.log(newpost,"new post")
+          newpost.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+          
+         
+        
+        
+          
+          newpost.forEach(ele=>{ 
+            
+                   
+                   newArray.push({liked:ele.likes.find(elee=>ele.username=username),length:ele.likes.length});
+                  
+           
+               
+
+          })
+          newpost=[...posts,...newpost];
+          setposts(newpost);
+          setarray([...array,...newArray]);
+          console.log([...array,...newArray],"final array")
+          console.log(newpost);
+          setloading(false);
+          setlastcount(lastcount+1);
         })
         .catch((err) => console.log(err));
+
     })
   );
   }else{
@@ -92,14 +112,14 @@ const Contentmain = () => {
   };
   let post1 = [];
   const call_func = async () => {
-    console.log(post1, "start");
+  
     if (username) {
       try {
-        const res = await getpostsforfeed(username);
+        const res = await getpostsforfeed(username,lastcount);
        if(res)
-       {
-         getothers();
-        post1 = res;
+       { post1 = res;
+         getothers(post1);
+       
        
         post1.map((ele) => {
           ele["pic"] = profilepic;
@@ -149,6 +169,15 @@ useEffect(()=>{
     return (
       <>
         <div className={Styles.maincontent}>
+          <InfiniteScroll
+            dataLength={posts.length}
+            next={call_func}
+            hasMore={true}
+            loader={<div>Loading...</div>}
+          
+           
+         
+          >
           {posts.map((post, key) => (
             <div key={key} className={Styles.singlecontainer}>
               <div className={Styles.topdiv}>
@@ -160,13 +189,14 @@ useEffect(()=>{
                 <img src={post.picture} width="100%" height="200px" />
               </button>
               <div className={Styles.bottomdiv}>
-             {console.log(array,"checker")}
-                { ( post.likes.find(ele=>ele.username==username)) && array[key].liked? (
+             {console.log(array[key]?.liked,"checker")}
+                { ((post.likes.find(ele=>ele.username==username)) && array[key]?.liked) || array[key]?.liked ? (
                   <span onClick={() => unlikefunction(post,key)}>
-                    💖 {post.likes.length + array[key].liked?1:0 }
+                    💖 { array[key]?.length  }
+                 
                   </span>
                 ) : (
-                  <span onClick={() => likefunction(post,key)}>🤍 {post.likes.length + array[key].liked?0:0  }</span>
+                  <span onClick={() => likefunction(post,key)}>🤍 { array[key]?.length }</span>
                 )} 
                 <span onClick={()=>setcommentsfunc({val:true,post:post})}      >💬 {post?.comments?.length}</span>
 
@@ -174,6 +204,8 @@ useEffect(()=>{
               </div>
             </div>
           ))}
+          </InfiniteScroll>
+   
         </div>
       </>
     );
