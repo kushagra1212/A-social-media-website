@@ -11,7 +11,7 @@ import deletelike from "../../../methods/deletelike";
 import Comments from './comments/Comments'
 const Contentmain = () => {
   const { _id, profilepic, username } = useSelector((state) => {console.log(state.user.username); return state.user});
- 
+  const [hasMore,sethasmore]=useState(true);
   
   const [array,setarray]=useState([])
   const [start,setstart]=useState(false);
@@ -78,7 +78,7 @@ const Contentmain = () => {
           let newArray=[];
              
           let newpost=[...post1,...post2];
-          console.log(newpost,"new post")
+         if(newpost.length==0) sethasmore(false);
           newpost.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
           
          
@@ -172,9 +172,13 @@ useEffect(()=>{
           <InfiniteScroll
             dataLength={posts.length}
             next={call_func}
-            hasMore={true}
-            loader={<div>Loading...</div>}
-          
+            hasMore={hasMore}
+            loader={<div style={{backgroundColor:"red",width:"100%",height:"30px",marginBottom:"5%",position:"relative",position:"relative"}} >Loading...</div>}
+            endMessage={
+              <p style={{ textAlign: 'center',backgroundColor:"red",width:"100%",height:"30px",marginTop:"1%",marginBottom:"5%",position:"relative" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
            
          
           >
@@ -205,7 +209,7 @@ useEffect(()=>{
             </div>
           ))}
           </InfiniteScroll>
-   
+
         </div>
       </>
     );
