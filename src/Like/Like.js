@@ -8,12 +8,12 @@ const Like=()=>{
     const [hasMore,sethasmore]=useState(true);
     const [last,setlast]=useState(0);
     const getposts=async()=>{
-        getpostsforfeed(username,last,2).then(res=>{
+        getpostsforfeed(username,last).then(res=>{
            if(res.length>0)
            {
             let arr=[...posts,...res];
             setposts(arr);
-            setlast(last+1);
+            setlast(last+2);
             console.log(res);
            }else{
                sethasmore(false);
@@ -55,7 +55,7 @@ const Like=()=>{
                      </div>
              )
          })}
-         <button  onClick={getposts}  >LOAD MORE</button>
+         <button style={{}} onClick={getposts}  >LOAD MORE</button>
 
            </InfiniteScroll>
         </div>

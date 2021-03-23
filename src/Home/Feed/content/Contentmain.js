@@ -30,10 +30,11 @@ const Contentmain = () => {
     post.liked = true;
     let newArray=[...array];
     
-    let index=array.findIndex(ele=>ele.key==key);
-    if(index>=0)
+  //  let index=array.findIndex(ele=>ele.key==key);
+ 
+    if(key>=0)
     {
-      newArray[index]={...newArray[index],liked:true,length:newArray[index].length+1};
+      newArray[key]={...newArray[key],liked:true,length:newArray[key].length+1};
       setarray(newArray);
       console.log(newArray);
     }
@@ -47,12 +48,12 @@ const Contentmain = () => {
   const unlikefunction = (post,key) => {
 
     setstart(false);
-    let index=array.findIndex(ele=>ele.key==key);
+   // let index=array.findIndex(ele=>ele.key==key);
     let newArray=[...array];
   
-     if(index>=0)
+     if(key>=0)
      {
-      newArray[index]={...newArray[index],liked:false,length:newArray[index].length-1};
+      newArray[key]={...newArray[key],liked:false,length:newArray[key].length-1};
      
       setarray(newArray);
       console.log(newArray);
@@ -88,7 +89,7 @@ const Contentmain = () => {
           newpost.forEach(ele=>{ 
             
                    
-                   newArray.push({liked:ele.likes.find(elee=>ele.username=username),length:ele.likes.length});
+                   newArray.push({liked:ele.likes.find(elee=>elee.username==username),length:ele.likes.length});
                   
            
                

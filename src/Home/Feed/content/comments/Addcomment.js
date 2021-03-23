@@ -5,7 +5,7 @@ const Addcomment = ({addCommentFunc})=>{
  
     return(
         <>
-        <input type="text" value={comment}  onChange={e=>setcomment(e.target.value)}  />
+        <input placeholder="Add Comment" type="text" value={comment}  onChange={e=>setcomment(e.target.value)}  />
         <button onClick={()=>{addCommentFunc(comment);  setcomment("");}}  > Add </button>
         </>
     )

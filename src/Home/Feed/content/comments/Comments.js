@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Addcomment from './Addcomment';
 import addcomment  from '../../../../methods/addcomments'
+import Styles from './Comments.module.css'
 const Comment=({username,showcomments,setcommentsfunc})=>{
    const [post,setpost]=useState(showcomments.post);
    
@@ -15,18 +16,22 @@ const Comment=({username,showcomments,setcommentsfunc})=>{
 
  },[post])
     return(
-<>
+<div className={Styles.c}>
 <button onClick={()=>setcommentsfunc({val:false,post:null})}   >back</button>
 <Addcomment addCommentFunc={addCommentFunc}   />
+<div className={Styles.main}  >
 {post?.comments.map((ele,id)=>{
    return(
-    <div  key={id}   >
-    <div>{ele.username}</div>
-    <div>{ele.comment}</div>
+    <div className={Styles.commentdiv}  key={id}   >
+    <div>@{ele.username}
+    <div className={Styles.comment}   >{ele.comment}</div>
+    </div>
+    
  </div>
    )
 })}
-</>
+</div>
+</div>
   
    )
 }

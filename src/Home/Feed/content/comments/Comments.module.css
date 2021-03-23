@@ -1,0 +1,23 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+
+ 
+
+}
+.commentdiv{
+    background-color: antiquewhite;
+    margin: 1%;
+    border: 2px solid black;
+    box-shadow: 2px 2px 2px solid black;
+}
+.comment{
+    background-color: blueviolet;
+    color: white;
+}
+.c{
+    position: absolute;
+    min-height: 560px;
+    overflow: hidden;
+}
