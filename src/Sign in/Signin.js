@@ -40,7 +40,7 @@ const Signin = () => {
   return (
     <>
       <div className={Styles.container}>
-        <label className={Styles.instagram}>Flern#7</label>
+        <label className={Styles.instagram}>WebDil</label>
         <div className={Styles.input}>
           {" "}
           <input

@@ -101,7 +101,7 @@ const Signup = () => {
   return (
     <>
       <div className={Styles.container}>
-        <label className={Styles.instagram}>Instagram</label>
+        <label className={Styles.instagram}>WebDil</label>
         <div className={Styles.input}>
           <input
             value={email}

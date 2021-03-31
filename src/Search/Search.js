@@ -150,8 +150,8 @@ const getcounts=async()=>{
   
   return (
     <div>
-      {fromshowbar?null:<div>
-        <input
+      {fromshowbar?null:<div className={Styles.topsearchbar}>
+        <input className={Styles.searchinput}
         placeholder="Search User Here"
         value={searchuser}
         onChange={(e) => {
@@ -159,13 +159,14 @@ const getcounts=async()=>{
           searchuserhandle(e.target.value);
         }}   
       />
-      <button onClick={() => setshowprofile(true)}>Search</button>
+      <button className={Styles.searchbutton} onClick={() => searchuser.length>0?setshowprofile(true):null}>Search</button>
         </div>}
       {loading ? <div>Loading...</div> : null}
       {found.found ? (
         <div
+        className={Styles.userprofile}
           onClick={showuserprofilehandle}
-          style={{ backgroundColor: "pink" }}
+       
         >
           <img width="30px" height="30px" src={user.profilepic} />
           <h4>{user.name}</h4>
