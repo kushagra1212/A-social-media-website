@@ -1,16 +1,23 @@
 .maindiv{
     position: relative;
     width:100%;
-
+   
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    
+    overflow-y: scroll;
+    background-color: rgba(222, 248, 230, 0.616);
+   
 }
 .maindiv img{
 position: relative;
 height: 100px;
 width:33%;
+margin: 2%;
 
 
+
+}
+.post{
+    
 }

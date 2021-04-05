@@ -3,6 +3,7 @@ import FileBase64 from 'react-file-base64';
 import axios from 'axios';
 import {useAlert} from 'react-alert';
 import { useState } from 'react';
+import Styles from './Editprofile.module.css'
 const URL=process.env.REACT_APP_URL;
 const Editprofile=({edit_it,setprofpichandle})=>{
     const Alert=useAlert();
@@ -47,14 +48,14 @@ setTimeout(()=>{
         return(<div>Loading</div>)
     }
     return(
-        <div>
-            <button onClick={edit_it}  >Back</button>
-            <img width="50px" height="50px"  src={file} />
+        <div className={Styles.editprofile}>
+            <button className={Styles.editbut} onClick={edit_it}  >Back</button>
+            <img className={Styles.editimg} width="50px" height="50px"  src={file} />
             <FileBase64 multiple={false} onDone={e=>{setfile(e.base64); console.log(e)}}        />
             <input  onChange={e=>setnewemail(e.target.value)}   value={newemail} />
             <input onChange={e=>setnewusername(e.target.value)} value={newusername}  />
             <input onChange={e=>setnewbio(e.target.value)}  value={newbio}   />
-            <button onClick={save_it}  >save</button>
+            <button className={Styles.savebut} onClick={save_it}  >save</button>
 
         </div>
     )

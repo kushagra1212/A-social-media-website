@@ -58,7 +58,7 @@ else if(showfollowing)
 }else{
 
   return (
-    <div>
+    <div style={{margin:'0px',padding:'0px'}}>
       <Top   setshowfollowershandle={setshowfollowershandle} setshowfollowinghandle={setshowfollowinghandle}  setposthand={setposthand}   />
       {post?null:<><Container posts={posts} /> <Userposts   /> </>}
    

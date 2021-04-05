@@ -17,7 +17,7 @@ const Container = ({ posts }) => {
          
       {posts.length > 0
         ? posts.map((dat, id) => {
-            return <img key={id} src={dat.picture} />;
+            return <img className={Styles.post} key={id} src={dat.picture} />;
           })
         : null}
    
