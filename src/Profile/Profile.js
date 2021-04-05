@@ -7,7 +7,7 @@ import Userposts from '../posts/Userposts'
 import Container from './Container/Container'
 import Showbar from '../showbar/Showbar'
 import { useEffect, useState } from "react";
-
+import Styles from './Profile.module.css'
 const Profile = () => {
   const dispatch=useDispatch();
  const [post,setpost]=useState(false);
@@ -60,7 +60,7 @@ else if(showfollowing)
   return (
     <div style={{margin:'0px',padding:'0px'}}>
       <Top   setshowfollowershandle={setshowfollowershandle} setshowfollowinghandle={setshowfollowinghandle}  setposthand={setposthand}   />
-      {post?null:<><Container posts={posts} /> <Userposts   /> </>}
+      {post?<div Styles={{width:"100%"}} className={Styles.loader} ></div>:<><Container posts={posts} /> <Userposts   /> </>}
    
     </div>
   );

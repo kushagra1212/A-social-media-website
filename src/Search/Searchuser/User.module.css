@@ -6,6 +6,7 @@ background-color: rgb(255, 255, 255);
 border: 2px solid rgba(128, 128, 128, 0);
 border-radius: 5%;
 box-shadow: 2px 2px 20px 2px rgb(128, 128, 128);
+
 padding-bottom: 2%;
 }
 .firstdiv{
@@ -16,6 +17,7 @@ padding-bottom: 2%;
 padding:5%;
 padding-bottom:0% ;
    
+
 }
 
 .firstdiv img{
@@ -27,6 +29,55 @@ padding-bottom:0% ;
 
 }
 
+.followersbut
+{
+   
+    width: 70px;
+    font-size: 0.9em;
+    color: white;
+    background-color: rgb(21, 21, 221);
+    outline: none;
+    border:2px solid rgba(128, 128, 128, 0);
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 1px grey;
+   transform-origin:center;
+  
+}
+.followersbut:active{
+    font-size: 0.5em;
+    width:50px;
+    transform-origin:center;
+  
+}
+.followingbut{
+    width: 70px;
+    font-size: 0.9em;
+    color: white;
+    background-color: rgb(21, 21, 221);
+    outline: none;
+    border:2px solid rgba(128, 128, 128, 0);
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 1px grey;
+   transform-origin:center;
+  
+}
+.followingbut:active
+{
+    font-size: 0.5em;
+    width:50px;
+    transform-origin:center;
+}
+.isfollowing{
+  
+    font-size: 0.9em;
+    color: white;
+    background-color: rgb(29, 194, 117);
+    outline: none;
+    border:2px solid rgba(128, 128, 128, 0);
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 1px grey;
+   transform-origin:center;
+}
 
 .seconddiv{
     position: relative;
@@ -53,4 +104,28 @@ padding-bottom:0% ;
 }
 .thirddiv label h6{
     color: black;
+}
+.posts
+{
+    position: relative;
+    padding: 0%;
+    margin-right: 1%;
+    align-items: center;
+    
+   
+}
+.posts label
+{
+    
+    font-size: 0.9em;
+  
+  text-decoration: aliceblue;   
+    background-color: rgb(207, 159, 25);
+    outline: none;
+    border-radius: 2px;
+    border:2px solid rgba(128, 128, 128, 0.466);
+  
+
+   transform-origin:center;
+
 }

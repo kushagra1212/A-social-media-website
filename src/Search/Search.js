@@ -107,7 +107,7 @@ const getcounts=async()=>{
     if (username === searchuser) {
       return (
         <>
-          <button  className={Styles.backbut} onClick={showuserprofilehandle}>
+          <button style={{zIndex:10}}  className={Styles.backbut} onClick={showuserprofilehandle}>
             BACK
           </button>
 
@@ -161,7 +161,7 @@ const getcounts=async()=>{
       />
       <button className={Styles.searchbutton} onClick={() => searchuser.length>0?setshowprofile(true):null}>Search</button>
         </div>}
-      {loading ? <div>Loading...</div> : null}
+      {loading ? <div><div className={Styles.loader}  ></div></div> : null}
       {found.found ? (
         <div
         className={Styles.userprofile}

@@ -146,7 +146,7 @@ useEffect(()=>{
 
 
   if (loading == true) {
-    return <div className={Styles.maincontent}> fetching posts....</div>;
+    return  (<div className={Styles.loader}></div>);
   } else if (posts.length == 0) {
     return (
       <div className={Styles.maincontent}>
@@ -174,9 +174,9 @@ useEffect(()=>{
             dataLength={posts.length}
             next={call_func}
             hasMore={hasMore}
-            loader={<div style={{backgroundColor:"red",width:"100%",height:"30px",marginBottom:"5%",position:"relative",position:"relative"}} >Loading...</div>}
+            loader={<div  className={Styles.loader} ></div>}
             endMessage={
-              <p style={{ textAlign: 'center',backgroundColor:"red",width:"100%",height:"30px",marginTop:"1%",marginBottom:"5%",position:"relative" }}>
+              <p style={{ textAlign: 'center',backgroundColor:"black",color:"white",width:"100%",height:"30px",marginTop:"1%",marginBottom:"5%",position:"relative" }}>
                 <b>Yay! You have seen it all</b>
               </p>
             }
@@ -207,9 +207,7 @@ useEffect(()=>{
 
                 <img src={sharepic} width="4.5%" height="2%" />
               </div>
-              <div className={Styles.caption}  >Caption this is ht ecpscascaskc
-                ssacascascklnsacjsacsa
-                cascklascbjkascjbasjcbas ascjsajckbsajkc c asahcsac sacashc ascasc ashcsa chas chascasc sac sahchaschas cashc ascha hs chsa
+              <div className={Styles.caption}  >{post.desc}
               </div>
             </div>
           ))}
@@ -219,7 +217,7 @@ useEffect(()=>{
       </>
     );
   }else{
-    return <div>Loading...</div>
+    return <div className={Styles.loader}></div>
   }
 };
 export default Contentmain;

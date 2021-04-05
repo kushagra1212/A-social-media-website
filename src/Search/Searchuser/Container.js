@@ -2,22 +2,28 @@ import { useEffect, useState } from 'react';
 import Styles from './Container.module.css'
 const Container=({collectposts,user})=>{
   const [posts,setposts]=useState(null);
+  const [loading,setloading]=useState(true);
    useEffect(()=>{
-    collectposts(user._id).then(res=>setposts(res)).catch(err=>console.log(err))
+     setloading(true);
+    collectposts(user._id).then(res=>{setposts(res);setloading(false)}).catch(err=>console.log(err))
     
 
    },[]);
-    if(!posts)
+ 
+    if(loading)
     {
-        return (<div>Loading...</div>);
+        return (<div  ><div className={Styles.loader}></div></div>);
         
-    }
-    return(<div className={Styles.maindiv}>
+    }else{
+      return(<div className={Styles.maindiv}>
         {posts.length > 0
           ? posts.map((dat, id) => {
-              return <img key={id} src={dat.picture} />;
+              return <img  key={id} src={dat.picture} />;
             })
           : <h3></h3>}
       </div>)
+
+    }
+    
 }
 export default Container;

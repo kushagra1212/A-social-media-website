@@ -75,19 +75,21 @@ const User = ({
         <h5>{bio}</h5>
       </div>
       <div className={Styles.thirddiv}>
+      <div  className={Styles.posts}  >
+            <label style={{color:"white"}} >Posts</label><br/>
+            {postsnumber}
+
+            </div>
+
         <label>
-          Posts <h6> {postsnumber}</h6>
+        <button className={Styles.followersbut}   onClick={()=>setshowfollowershandle(true)}      >followers </button> <h6>{followerscount}</h6>
         </label>
 
         <label>
-        <button   onClick={()=>setshowfollowershandle(true)}      >followers </button> <h6>{followerscount}</h6>
+        <button className={Styles.followingbut}  onClick={()=>setshowfollowinghandle(true)}      >following </button> <h6>{followingcount}</h6>
         </label>
 
-        <label>
-        <button   onClick={()=>setshowfollowinghandle(true)}      >following </button> <h6>{followingcount}</h6>
-        </label>
-
-        <button onClick={() => setfollowinghandle()}>
+        <button className={Styles.isfollowing} onClick={() => setfollowinghandle()}>
           {following ? "Following" : "Follow"}{" "}
         </button>
       </div>
