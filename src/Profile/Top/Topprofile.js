@@ -11,7 +11,7 @@ const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,
         <div className={Styles.maindiv}  >
         <div className={Styles.firstdiv} >
         <img src={profpic}  />
-        <button onClick={edit_it} className={Styles.editbut}>Edit Profile</button>
+        <button onClick={()=>edit_it()} className={Styles.editbut}>Edit Profile</button>
         <button className={Styles.logoutbut} onClick={logouthandle}>Log out</button>
 
         </div>

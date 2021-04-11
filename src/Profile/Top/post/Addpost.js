@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {updatecountforpost} from '../../../reduces/actions/countAction'
 import axios from "axios";
+import Styles from './Addpost.module.css'
 const URL = process.env.REACT_APP_URL;
 const Addpost = ({ setposthandle }) => {
 
@@ -24,7 +25,7 @@ const savehandle = async () => {
           });
           setloading(!loading);
       
-          setposthandle();
+          setposthandle(false);
 
     }catch(err)
     {
@@ -40,17 +41,19 @@ const savehandle = async () => {
   if(loading)
   {
       return(<div>
-          loading....
+         <div className={Styles.loader}  ></div>
       </div>)
   }
   return (
-    <div>
-      <img src={pic} width="100px" height="100px" />
+    <div className={Styles.maindiv} >
+      <button onClick={()=>setposthandle(false)}>Back</button>
+      <img src={pic} width="100px" height="100px" alt='Please choose' />
       <FileBase64 multiple={false} onDone={(e) => setpic(e.base64)} />
       <textarea
         type="name"
         value={desc}
         onChange={(e) => setdesc(e.target.value.substr(0, 100))}
+        placeholder="    Write Something 😜   "
       />
       <button onClick={savehandle}>save</button>
     </div>

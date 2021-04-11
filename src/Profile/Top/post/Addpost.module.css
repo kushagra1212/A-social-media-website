@@ -1,61 +1,28 @@
-.editprofile
+.maindiv
 {
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
-    
+    height: 100%;
     background-color: rgb(112, 112, 112);
-  z-index: 110;
- 
+  z-index: 200;
 }
-.editbut
+.maindiv button
 {
-  position: relative;
-  margin-left:-80% ;
-margin-top: 5%;
-
-  width: 70px;
-  font-size: 0.9em;
-  color: white;
-  background-color: rgb(21, 164, 221);
-  outline: none;
-  border:2px solid rgba(128, 128, 128, 0);
-  border-radius: 10px;
-  box-shadow: 1px 1px 10px 1px grey;
- transform-origin:center;
-
+    font-size: 0.9em;
+    color: white;
+    background-color: rgba(158, 21, 221, 0.246);
+    outline: none;
+    border:2px solid rgba(128, 128, 128, 0);
+    background-color: rgb(86, 209, 15);
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 1px grey;
+   transform-origin:center;
 }
-.editbut:active{
-    font-size: 0.5em;
-    width:50px;
-    transform-origin:center;
-}
-.backbut
-{
-  position: absolute;
-  top:0%;
-  left:2%;
-  z-index: 10;
-  width: 70px;
-  font-size: 0.9em;
-  color: white;
-  background-color: rgb(21, 21, 221);
-  outline: none;
-  border:2px solid rgba(128, 128, 128, 0);
-  border-radius: 10px;
-  box-shadow: 1px 1px 10px 1px grey;
- transform-origin:center;
-}
-.backbut:active{
-  font-size: 0.5em;
-  width:50px;
-  transform-origin:center;
-}
-.editimg
-{ 
+.maindiv img{
     width: 50%;
     height: 50%;
     font-size: 0.9em;
@@ -67,35 +34,17 @@ margin-top: 5%;
     box-shadow: 1px 1px 10px 1px grey;
    transform-origin:center;
 }
-.editprofile input
+.maindiv textarea
 {
-   position: relative;
-   margin: 5%;
-    font-size: 0.9em;
-
-  
+     position: relative;
     outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    padding: 1.6%;
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 1px grey;
-   transform-origin:center;
-  
+    border: 2px solid black;
+    border-radius: 20px;
+    width:90%;
+   max-height: 300px;
 
 }
-.savebut
-{
-    font-size: 0.9em;
-    color: white;
-    background-color: rgba(158, 21, 221, 0.246);
-    outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    background-color: rgb(86, 209, 15);
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 1px grey;
-   transform-origin:center;
 
-}
 .loader,
 .loader:after {
   border-radius: 50%;
@@ -111,7 +60,7 @@ margin-top: 5%;
   border-top: 1.1em solid rgba(255, 255, 255, 0.2);
   border-right: 1.1em solid rgba(255, 255, 255, 0.2);
   border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
-  border-left: 1.1em solid #94c71e;
+  border-left: 1.1em solid #1e62c7;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);

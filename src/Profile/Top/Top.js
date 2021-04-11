@@ -35,7 +35,7 @@ const Top = ({setposthand,setshowfollowershandle,setshowfollowinghandle}) => {
 
   const edit_it = () => {
     setedit(!edit);
-    setposthand();
+
   
   };
 
@@ -54,7 +54,7 @@ setprofpic(pic);
   }
   const setposthandle=()=>{
     setpost(!post);
- setposthand();
+ setposthand(true);
   }
  
   
@@ -62,7 +62,7 @@ setprofpic(pic);
   return (
     <>
       {!post?edit ? (
-        <Editprofile  setprofpichandle={setprofpichandle} edit_it={edit_it} />
+        <Editprofile setprofpichandle={setprofpichandle} edit_it={edit_it} />
       ) : (
         <Topprofile
           name={name}
@@ -79,7 +79,7 @@ setprofpic(pic);
           setshowfollowershandle={setshowfollowershandle}
           setshowfollowinghandle={setshowfollowinghandle}
         />
-      ):(<Addpost  setposthandle={setposthandle} />)}
+      ):(<Addpost     setposthandle={setposthandle} />)}
     </>
   );
 };

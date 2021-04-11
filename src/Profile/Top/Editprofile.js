@@ -37,7 +37,7 @@ const Editprofile=({edit_it,setprofpichandle})=>{
 setTimeout(()=>{
     setloading(false);
     edit_it();
-},2000)
+},50)
 
        
      }
@@ -45,19 +45,21 @@ setTimeout(()=>{
     }
     if(loading)
     {
-        return(<div>Loading</div>)
+        return(<div><div className={Styles.loader} ></div></div>)
+    }else{
+        return(
+            <div className={Styles.editprofile}>
+                <button className={Styles.backbut} onClick={edit_it}  >BACK</button>
+                <img className={Styles.editimg} width="50px" height="50px"  src={file} />
+                <FileBase64 multiple={false} onDone={e=>{setfile(e.base64); console.log(e)}}        />
+                <input  onChange={e=>setnewemail(e.target.value)}   value={newemail} />
+                <input onChange={e=>setnewusername(e.target.value)} value={newusername}  />
+                <input onChange={e=>setnewbio(e.target.value)}  value={newbio}   />
+                <button className={Styles.savebut} onClick={save_it}  >save</button>
+    
+            </div>
+        )
     }
-    return(
-        <div className={Styles.editprofile}>
-            <button className={Styles.editbut} onClick={edit_it}  >Back</button>
-            <img className={Styles.editimg} width="50px" height="50px"  src={file} />
-            <FileBase64 multiple={false} onDone={e=>{setfile(e.base64); console.log(e)}}        />
-            <input  onChange={e=>setnewemail(e.target.value)}   value={newemail} />
-            <input onChange={e=>setnewusername(e.target.value)} value={newusername}  />
-            <input onChange={e=>setnewbio(e.target.value)}  value={newbio}   />
-            <button className={Styles.savebut} onClick={save_it}  >save</button>
 
-        </div>
-    )
 }
 export default Editprofile;

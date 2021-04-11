@@ -2,6 +2,7 @@
 import getitem from '../methods/getitem';
 import List from './list/List';
 import { useEffect, useState } from 'react';
+import Styles from "./Showbar.module.css"
 const Showbar=({username,setshowfollowershandle,setshowfollowinghandle,showfollowers,showfollowing})=>{
   
     const [item,setitem]=useState(null);
@@ -42,9 +43,12 @@ if(showfollowers)
   {
    
     return(
-      <div>
-          <button onClick={()=>{setshowfollowershandle(false); setshowfollowinghandle(false)}}  > Back </button>
-      <List   list={item}    />
+      <>
+       <button className={Styles.backbut} onClick={()=>{setshowfollowershandle(false); setshowfollowinghandle(false)}}  > Back </button>
+      <div className={Styles.maindiv}   >
+         
+    <div className={Styles.list} >
+    <List  list={item}    />
     {noone.nofollowers && showfollowers? <div>
      <h1>    no followers</h1>
       </div>:null}
@@ -53,11 +57,13 @@ if(showfollowers)
       {noone.nofollowing && showfollowing?      <div>
 <h1>seems like no one is following</h1>
       </div>:null}
+    </div>
       </div>
+      </>
   )
   }else{
     return (<div>
-      Loading... 
+ 
     </div>)
   }
  
