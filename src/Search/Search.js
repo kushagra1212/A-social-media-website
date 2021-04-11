@@ -143,7 +143,7 @@ const getcounts=async()=>{
           showfollowers={showfollowers}
           showfollowing={showfollowing}
         />
-        {showfollowers ||showfollowing?null:<Container collectposts={collectposts} user={user}  />}
+        {showfollowers || showfollowing?null:<Container collectposts={collectposts} user={user}  />}
       </>
     );
   }

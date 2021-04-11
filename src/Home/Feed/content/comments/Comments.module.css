@@ -1,23 +1,32 @@
+.maindiv{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    min-height: 510px;
+}
 .main{
     display: flex;
     flex-direction: column;
     overflow: scroll;
-
- 
-
 }
 .commentdiv{
-    background-color: antiquewhite;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
     margin: 1%;
-    border: 2px solid black;
+    border: 3px solid black;
     box-shadow: 2px 2px 2px solid black;
+    border-radius: 10px;
+    padding: 3%;
+
+}
+.username{
+   
+    margin-bottom: 1%;
+  font-size: 1em;
+ 
 }
 .comment{
-    background-color: blueviolet;
-    color: white;
-}
-.c{
-    position: absolute;
-    min-height: 560px;
-    overflow: hidden;
+   font-size: 0.8em;
 }

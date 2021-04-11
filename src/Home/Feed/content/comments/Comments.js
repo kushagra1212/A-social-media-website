@@ -16,17 +16,16 @@ const Comment=({username,showcomments,setcommentsfunc})=>{
 
  },[post])
     return(
-<div className={Styles.c}>
-<button onClick={()=>setcommentsfunc({val:false,post:null})}   >back</button>
-<Addcomment addCommentFunc={addCommentFunc}   />
+<div className={Styles.maindiv}>
+<button className={Styles.backbut}  onClick={()=>setcommentsfunc({val:false,post:null})} >back</button>
+<Addcomment  addCommentFunc={addCommentFunc}   />
 <div className={Styles.main}  >
 {post?.comments.map((ele,id)=>{
    return(
     <div className={Styles.commentdiv}  key={id}   >
-    <div>@{ele.username}
+    <div className={Styles.username}>@{ele.username} </div>
     <div className={Styles.comment}   >{ele.comment}</div>
-    </div>
-    
+   
  </div>
    )
 })}
