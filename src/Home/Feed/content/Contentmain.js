@@ -142,21 +142,19 @@ const Contentmain = () => {
         their posts
       </div>
     );
-  } else if (showcomments.val === true) {
+  } else if (array.length != undefined) {
     return (
       <>
+      {showcomments.val? 
         <Comments
           username={username}
           showcomments={showcomments}
           setcommentsfunc={setcommentsfunc}
-        />
-      </>
-    );
-  } else if (array.length != undefined) {
-    return (
-      <>
+        />:
+      
         <div className={Styles.maincontent}>
           <InfiniteScroll
+          className={Styles.infi}
             dataLength={posts.length}
             next={call_func}
             hasMore={hasMore}
@@ -213,7 +211,7 @@ const Contentmain = () => {
               </div>
             ))}
           </InfiniteScroll>
-        </div>
+        </div>}
       </>
     );
   } else {
