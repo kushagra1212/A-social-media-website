@@ -11,6 +11,9 @@ const getuserfor=()=>{
         type:"GET_USER"
     }
 }
+export const addfeedposts=(posts)=>{
+    return({type:"ADD_FEED_POSTS",payload:posts});
+}
 
 export const addposts=(posts)=>{
 return({type:"ADD_POSTS",payload:posts})

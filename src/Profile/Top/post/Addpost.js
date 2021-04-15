@@ -39,7 +39,7 @@ const Addpost = ({ setposthandle }) => {
     <div className={Styles.maindiv}>
       <button onClick={() => setposthandle(false)}>Back</button>
       <img src={pic} width="100px" height="100px" alt="Please choose" />
-      <FileBase64 multiple={false} onDone={(e) => setpic(e.base64)} />
+      <div className={Styles.choosebut}><FileBase64  multiple={false} onDone={(e) => setpic(e.base64)} /></div>
       <textarea
         type="name"
         value={desc}

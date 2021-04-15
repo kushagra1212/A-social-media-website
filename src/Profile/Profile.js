@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import Styles from './Profile.module.css'
 const Profile = () => {
   const dispatch=useDispatch();
- const [post,setpost]=useState(true);
+ const [post,setpost]=useState(false);
  const posts=useSelector(state=>state.userposts);
  const {username}=useSelector(state=>state.user);
  const {postcount}=useSelector(state=>state.count);
@@ -60,8 +60,8 @@ else if(showfollowing)
   return (
     <div style={{margin:'0px',padding:'0px'}}>
       <Top   setshowfollowershandle={setshowfollowershandle} setshowfollowinghandle={setshowfollowinghandle}  setposthand={setposthand}   />
-      {!post?<div style={{position:"absolute",top:"200px"}}  ><div className={Styles.loader} ></div></div>:<><Container posts={posts} /> <Userposts   /> </>}
-   
+      {!posts.length>0?<div className={Styles.loadermaindiv} style={{position:"absolute"}}  ><div className={Styles.loader} ></div><Userposts   /></div>:<><Container posts={posts} />  </>}
+    
     </div>
   );
 };

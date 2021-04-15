@@ -62,8 +62,8 @@ const Like = () => {
                     key={id}
                   className={Styles.likes}
                   >
-                
-                   <h3>{like.username} liked your post</h3>
+                {like.username==username? <h3>You liked your post</h3>: <h3>{like.username} liked your post</h3>} 
+                  
                   </div>
                 );
               }):<div   className={Styles.likes}><h3>Not liked yet</h3></div>}

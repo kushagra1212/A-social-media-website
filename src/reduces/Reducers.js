@@ -6,5 +6,6 @@ import {combineReducers} from 'redux';
 import count from './count'
 import main from './main';
 import user from './user'
-const Reducers=combineReducers({signinReducer,main,user,userposts,count});
+import feedposts from './feedposts'
+const Reducers=combineReducers({signinReducer,main,user,userposts,count,feedposts});
 export default Reducers;

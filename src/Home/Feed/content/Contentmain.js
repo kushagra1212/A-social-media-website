@@ -4,12 +4,14 @@ import { getpostsforfeed } from "../../../methods/getpostsforfeed";
 import sharepic from "./images/share.png";
 import { useEffect, useState } from "react";
 import getuser from "../../../methods/getuser";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import getitem from "../../../methods/getitem";
 import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
+import Feedposts from '../../../posts/Feedposts';
 import Comments from "./comments/Comments";
 const Contentmain = () => {
+  const dispatch=useDispatch();
   const { _id, profilepic, username } = useSelector((state) => {
     console.log(state.user.username);
     return state.user;
@@ -18,13 +20,15 @@ const Contentmain = () => {
 
   const [array, setarray] = useState([]);
   const [start, setstart] = useState(false);
-  const [lastcount, setlastcount] = useState(0);
+ 
 
   const [showcomments, setshowcomments] = useState(false);
   const { access } = useSelector((state) => state.signinReducer);
 
+ 
+  const state=useSelector(state=>state);
   const [posts, setposts] = useState([]);
-
+  const [lastcount, setlastcount] = useState(0);
   const [loading, setloading] = useState(true);
 
   const likefunction = (post, key) => {
@@ -93,6 +97,7 @@ const Contentmain = () => {
               });
               newpost = [...posts, ...newpost];
               setposts(newpost);
+            Feedposts(newpost,dispatch);
               setarray([...array, ...newArray]);
               console.log([...array, ...newArray], "final array");
               console.log(newpost);
@@ -129,8 +134,13 @@ const Contentmain = () => {
   const setcommentsfunc = ({ val, post }) => {
     setshowcomments({ val: val, post: post });
   };
+  useEffect(()=>{
+    setposts(state.feedposts);
+  },[])
   useEffect(() => {
-    call_func();
+   
+      call_func();
+ 
   }, []);
 
   if (loading == true) {
@@ -145,6 +155,7 @@ const Contentmain = () => {
   } else if (array.length != undefined) {
     return (
       <>
+     
       {showcomments.val? 
         <Comments
           username={username}
