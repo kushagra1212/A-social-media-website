@@ -17,6 +17,7 @@ const Profile = () => {
  const [showfollowers,setshowfollowers]=useState(false);
  const [showfollowing,setshowfollowing]=useState(false);
  const {followerscount,followingcount}=useSelector(state=>state.count);
+ const [start,setstart]=useState(true);
 
 const setposthand=(is)=>{
   setpost(is);
@@ -34,7 +35,11 @@ setTimeout(() => {
 
 
 },[username],followingcount,followerscount)
-
+useEffect(()=>{
+  setTimeout(()=>{
+    setstart(false);
+  },1000)
+},[])
 const setshowfollowershandle=(val)=>{
   setshowfollowers(val)
 }
@@ -60,7 +65,7 @@ else if(showfollowing)
   return (
     <div style={{margin:'0px',padding:'0px'}}>
       <Top   setshowfollowershandle={setshowfollowershandle} setshowfollowinghandle={setshowfollowinghandle}  setposthand={setposthand}   />
-      {!posts.length>0?<div className={Styles.loadermaindiv} style={{position:"absolute"}}  ><div className={Styles.loader} ></div><Userposts   /></div>:<><Container posts={posts} />  </>}
+      {!posts.length>0?<div className={Styles.loadermaindiv} style={{position:"absolute"}}  >{start?<div className={Styles.loader} ></div>:<div>NOTHING POSTED YET</div>}<Userposts   /></div>:<><Container posts={posts} />  </>}
     
     </div>
   );

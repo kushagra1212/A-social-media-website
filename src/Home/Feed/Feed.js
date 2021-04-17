@@ -7,7 +7,7 @@ const Feed=()=>{
     useEffect(()=>{
    setTimeout(()=>{
 setgo(true);
-   },500)
+   },100)
     },[])
     return(
         <div className={Styles.maindiv}>

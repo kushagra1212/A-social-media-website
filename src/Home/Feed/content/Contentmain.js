@@ -157,9 +157,10 @@ const Contentmain = () => {
    
       }
       console.log(state.feedposts.lastcount," ",state.feedposts.lastcount2)
-     
+     setloading(false);
  setarray(state.feedposts.array);
   }, []);
+ 
 
   if (loading == true) {
     return <div className={Styles.loader}></div>;
@@ -243,8 +244,6 @@ const Contentmain = () => {
         </div>}
       </>
     );
-  } else {
-    return <div className={Styles.loader}></div>;
-  }
+  } 
 };
 export default Contentmain;
