@@ -18,7 +18,7 @@ const Contentmain = () => {
   });
   const [hasMore, sethasmore] = useState(true);
 
-  const [array, setarray] = useState([]);
+  
   const [start, setstart] = useState(false);
  
 
@@ -27,9 +27,10 @@ const Contentmain = () => {
 
  
   const state=useSelector(state=>state);
-  const [posts, setposts] = useState([]);
-  const [lastcount, setlastcount] = useState(0);
-  const [loading, setloading] = useState(true);
+  const [array, setarray] = useState([]);
+  {console.log(state.feedposts);}
+
+  const [loading, setloading] = useState(false);
 
   const likefunction = (post, key) => {
     setstart(true);
@@ -70,10 +71,11 @@ const Contentmain = () => {
   };
   const getothers = (post1) => {
     let post2 = [];
+    
     if (username) {
       getitem(username).then((item) =>
         item?.following?.map((dat) => {
-          getpostsforfeed(dat.username, lastcount)
+          getpostsforfeed(dat.username, state.feedposts.lastcount2)
             .then((post) => {
               post2 = post;
               getuser(dat.username).then((ele) =>
@@ -81,9 +83,11 @@ const Contentmain = () => {
                   elee["pic"] = ele.profilepic;
                 })
               );
+             
               let newArray = [];
 
               let newpost = [...post1, ...post2];
+             
               if (newpost.length == 0) sethasmore(false);
               newpost.sort(
                 (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -95,14 +99,18 @@ const Contentmain = () => {
                   length: ele.likes.length,
                 });
               });
-              newpost = [...posts, ...newpost];
-              setposts(newpost);
-            Feedposts(newpost,dispatch);
+              newpost = [...state.feedposts.posts, ...newpost];
+              let array1=[...array, ...newArray];
+              let lastcount=2,lastcount2=2;
+              Feedposts(newpost,lastcount,array1,lastcount2,dispatch);
+            console.log(lastcount,"y",lastcount2);
               setarray([...array, ...newArray]);
+             
               console.log([...array, ...newArray], "final array");
               console.log(newpost);
               setloading(false);
-              setlastcount(lastcount + 1);
+             
+              
             })
             .catch((err) => console.log(err));
         })
@@ -115,10 +123,13 @@ const Contentmain = () => {
   const call_func = async () => {
     if (username) {
       try {
-        const res = await getpostsforfeed(username, lastcount);
+        const res = await getpostsforfeed(username,state.feedposts.lastcount);
+        
         if (res) {
           post1 = res;
+         
           getothers(post1);
+         
 
           post1.map((ele) => {
             ele["pic"] = profilepic;
@@ -134,18 +145,25 @@ const Contentmain = () => {
   const setcommentsfunc = ({ val, post }) => {
     setshowcomments({ val: val, post: post });
   };
-  useEffect(()=>{
-    setposts(state.feedposts);
-  },[])
+
   useEffect(() => {
    
-      call_func();
- 
+      if(state.feedposts.posts.length==0)
+      {
+        
+        setloading(true);
+        call_func();
+      
+   
+      }
+      console.log(state.feedposts.lastcount," ",state.feedposts.lastcount2)
+     
+ setarray(state.feedposts.array);
   }, []);
 
   if (loading == true) {
     return <div className={Styles.loader}></div>;
-  } else if (posts.length == 0) {
+  } else if (state.feedposts.posts.length == 0) {
     return (
       <div className={Styles.maincontent}>
         Seems like you are not following any one , please follow others to see
@@ -166,7 +184,7 @@ const Contentmain = () => {
         <div className={Styles.maincontent}>
           <InfiniteScroll
           className={Styles.infi}
-            dataLength={posts.length}
+            dataLength={state.feedposts.posts.length}
             next={call_func}
             hasMore={hasMore}
             loader={<div className={Styles.loader}></div>}
@@ -187,7 +205,7 @@ const Contentmain = () => {
               </p>
             }
           >
-            {posts.map((post, key) => (
+            {state.feedposts.posts.map((post, key) => (
               <div key={key} className={Styles.singlecontainer}>
                 <div className={Styles.topdiv}>
                   <img src={post.pic} />
