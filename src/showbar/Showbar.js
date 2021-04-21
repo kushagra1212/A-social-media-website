@@ -43,11 +43,11 @@ if(showfollowers)
   {
    
     return(
-      <>
+    <>
        <button className={Styles.backbut} onClick={()=>{setshowfollowershandle(false); setshowfollowinghandle(false)}}  > Back </button>
       <div className={Styles.maindiv}   >
          
-    <div className={Styles.list} >
+    <div className={Styles.list}   >
     <List  list={item}    />
     {noone.nofollowers && showfollowers? <div>
      <h1>    no followers</h1>

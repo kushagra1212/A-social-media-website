@@ -15,7 +15,7 @@ const List=({list})=>{
     {
        console.log(list,"list")
         return(
-            <div>
+            <div >
                 
               
               {users.map((ele,id)=><div  key={id}     >

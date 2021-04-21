@@ -6,7 +6,9 @@ const Container=({collectposts,user})=>{
    useEffect(()=>{
      setloading(true);
     collectposts(user._id).then(res=>{setposts(res);setloading(false)}).catch(err=>console.log(err))
-    
+    setTimeout(()=>{
+setloading(false);
+    },2000)
 
    },[]);
  
@@ -16,11 +18,11 @@ const Container=({collectposts,user})=>{
         
     }else{
       return(<div className={Styles.maindiv}>
-        {posts.length > 0
+        {posts?.length > 0
           ? posts.map((dat, id) => {
               return <img  key={id} src={dat.picture} />;
             })
-          : <h3></h3>}
+          : <h3>Nothing posted YET</h3>}
       </div>)
 
     }

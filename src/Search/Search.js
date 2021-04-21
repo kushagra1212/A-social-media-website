@@ -21,6 +21,7 @@ const Search = ({fromshowbar,usernameformshowbar}) => {
   const [following,setfollowing]=useState(null);
   const [showfollowers,setshowfollowers]=useState(false);
   const [showfollowing,setshowfollowing]=useState(false);
+  const[showlist,setshowlist]=useState(true);
   useSelector(state=>console.log(state));
   const dispatch=useDispatch();
 
@@ -97,22 +98,56 @@ const getcounts=async()=>{
   const showuserprofilehandle = () => {
   
     setshowprofile(!showprofile);
+    setshowlist(false);
   };
   useEffect(()=>{
     let usernameofsender=searchuser;
     console.log(usernameofsender)
     verifiesusers(setfollowingfunc,username,usernameofsender);
   },[searchuser])
-  if (showprofile) {
+ if(showlist===true)
+  {
+    return (
+      <div >
+        {fromshowbar?null:<div className={Styles.topsearchbar}>
+          <input className={Styles.searchinput}
+          placeholder="Search User Here"
+          value={searchuser}
+          onChange={(e) => {
+            setsearchuser(e.target.value);
+            searchuserhandle(e.target.value);
+          }}   
+        />
+        <button className={Styles.searchbutton} onClick={() => searchuser.length>0?setshowprofile(true):null}>Search</button>
+          </div>}
+        {loading ? <div><div className={Styles.loader}  ></div></div> : 
+        found.found ? (
+          <div
+          className={Styles.userprofile}
+            onClick={showuserprofilehandle}
+         
+          >
+            <img width="30px" height="30px" src={user.profilepic} />
+            <h4>{user.name}</h4>
+            <h6>@{user.username}</h6>
+            <button>Go to profile</button>
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
+    );
+  }
+  else if (showprofile) {
     if (username === searchuser) {
       return (
-        <>
+        <div style={{width:"100%",height:"100%",zIndex:100}}>
           <button style={{zIndex:10}}  className={Styles.backbut} onClick={showuserprofilehandle}>
             BACK
           </button>
 
-          <Profile />
-        </>
+         <Profile />
+        </div>
       );
     }
     const setshowfollowershandle = (val) => {
@@ -126,7 +161,7 @@ const getcounts=async()=>{
 
 
     return (
-      <>
+      <div style={{width:"100%",height:"100%",zIndex:100}}>
        
 
         <User
@@ -144,40 +179,11 @@ const getcounts=async()=>{
           showfollowing={showfollowing}
         />
         {showfollowers || showfollowing?null:<Container collectposts={collectposts} user={user}  />}
-      </>
+      </div>
     );
+    
   }
-  
-  return (
-    <div>
-      {fromshowbar?null:<div className={Styles.topsearchbar}>
-        <input className={Styles.searchinput}
-        placeholder="Search User Here"
-        value={searchuser}
-        onChange={(e) => {
-          setsearchuser(e.target.value);
-          searchuserhandle(e.target.value);
-        }}   
-      />
-      <button className={Styles.searchbutton} onClick={() => searchuser.length>0?setshowprofile(true):null}>Search</button>
-        </div>}
-      {loading ? <div><div className={Styles.loader}  ></div></div> : null}
-      {found.found ? (
-        <div
-        className={Styles.userprofile}
-          onClick={showuserprofilehandle}
-       
-        >
-          <img width="30px" height="30px" src={user.profilepic} />
-          <h4>{user.name}</h4>
-          <h6>@{user.username}</h6>
-          <button>Go to profile</button>
-        </div>
-      ) : (
-        <div></div>
-      )}
-    </div>
-  );
+ 
 };
 
 export default Search;

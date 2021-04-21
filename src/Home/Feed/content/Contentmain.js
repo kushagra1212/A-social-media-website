@@ -157,7 +157,7 @@ const Contentmain = () => {
    
       }
       console.log(state.feedposts.lastcount," ",state.feedposts.lastcount2)
-     setloading(false);
+ 
  setarray(state.feedposts.array);
   }, []);
  
