@@ -25,7 +25,19 @@ const Contentmain = () => {
   const [showcomments, setshowcomments] = useState(false);
   const { access } = useSelector((state) => state.signinReducer);
 
- 
+  const unique=(array)=>{
+   let isvisited={};
+   let newarray=[];
+   console.log(array,"arr")
+   array.forEach(ele=>{
+     if(!isvisited[ele.picture])
+     {
+       newarray.push(ele);
+       isvisited[ele.picture]=true;
+     }
+   });
+   return newarray;
+  }
   const state=useSelector(state=>state);
   const [array, setarray] = useState([]);
   {console.log(state.feedposts);}
@@ -71,11 +83,12 @@ const Contentmain = () => {
   };
   const getothers = (post1) => {
     let post2 = [];
-    
+    console.log("OTHERS")
     if (username) {
       getitem(username).then((item) =>
         item?.following?.map((dat) => {
-          getpostsforfeed(dat.username, state.feedposts.lastcount2)
+          let lastcount2=state.feedposts.lastcount;
+      getpostsforfeed(dat.username,lastcount2 )
             .then((post) => {
               post2 = post;
               getuser(dat.username).then((ele) =>
@@ -87,7 +100,13 @@ const Contentmain = () => {
               let newArray = [];
 
               let newpost = [...post1, ...post2];
-             
+              newpost=unique(newpost);
+              let feedpos=state.feedposts.posts;
+           
+                feedpos=unique(feedpos);
+           
+
+            
               if (newpost.length == 0) sethasmore(false);
               newpost.sort(
                 (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -99,18 +118,22 @@ const Contentmain = () => {
                   length: ele.likes.length,
                 });
               });
-              newpost = [...state.feedposts.posts, ...newpost];
+              newpost = [...feedpos, ...newpost];
+            
               let array1=[...array, ...newArray];
-              let lastcount=2,lastcount2=2;
+             
+              let lastcount=1,lastcount2=1;
+              newpost=unique(newpost);
               Feedposts(newpost,lastcount,array1,lastcount2,dispatch);
             console.log(lastcount,"y",lastcount2);
               setarray([...array, ...newArray]);
              
               console.log([...array, ...newArray], "final array");
               console.log(newpost);
+          
               setloading(false);
              
-              
+          
             })
             .catch((err) => console.log(err));
         })
@@ -123,12 +146,15 @@ const Contentmain = () => {
   const call_func = async () => {
     if (username) {
       try {
-        const res = await getpostsforfeed(username,state.feedposts.lastcount);
-        
+        let lastcount=state.feedposts.lastcount;
+        const res = await getpostsforfeed(username,lastcount);
+       
         if (res) {
           post1 = res;
          
+      
           getothers(post1);
+     
          
 
           post1.map((ele) => {
@@ -147,18 +173,21 @@ const Contentmain = () => {
   };
 
   useEffect(() => {
-   
-      if(state.feedposts.posts.length==0)
-      {
-        
-        setloading(true);
-        call_func();
-      
-   
-      }
-      console.log(state.feedposts.lastcount," ",state.feedposts.lastcount2)
- 
- setarray(state.feedposts.array);
+
+  if(state.feedposts.posts.length===0)
+  {
+
+    setloading(true);
+  
+    call_func();
+  
+
+
+  }
+  console.log(state.feedposts.lastcount," ",state.feedposts.lastcount2)
+
+setarray(state.feedposts.array);
+
   }, []);
  
 
@@ -171,7 +200,7 @@ const Contentmain = () => {
         their posts
       </div>
     );
-  } else if (array.length != undefined) {
+  } else {
     return (
       <>
      

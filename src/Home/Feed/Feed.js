@@ -1,5 +1,5 @@
 import { useEffect,useState } from 'react';
-import Content from './content/Contentmain';
+import Contentmain from './content/Contentmain';
 import Styles from './Feed.module.css'
 import Stories from './Stories/Stories';
 const Feed=()=>{
@@ -7,12 +7,12 @@ const Feed=()=>{
     useEffect(()=>{
    setTimeout(()=>{
 setgo(true);
-   },100)
+   },800)
     },[])
     return(
         <div className={Styles.maindiv}>
         <Stories/>
-        {go?<Content/>:null}
+        {go?<Contentmain/>:null}
         </div>
     )
 }

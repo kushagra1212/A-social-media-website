@@ -1,0 +1,41 @@
+
+.maindiv{
+    position: absolute;
+}
+.userprofile{
+    position: relative;
+    background: linear-gradient(#2193b0, #6dd5ed);
+    display: flex;
+    border:2px solid rgba(128, 128, 128, 0.144);
+    border-radius: 10px;
+    margin: 2%;
+  
+    justify-content: center;
+  
+
+   flex-direction: column;
+}
+.userprofile img{
+    width:20%;
+    height:100%;
+    border:2px solid rgba(255, 255, 255, 0);
+    border-radius:5px;
+    
+}
+.userprofile button{
+    background:linear-gradient(#ee9ca7 , #ffdde1) ;
+  
+    outline: none;
+    border: 2px solid rgba(128, 128, 128, 0);
+    border-radius: 5px;
+    box-shadow: 2px 2px 20px grey;
+    transition: ease-in-out;
+}
+.userprofile button:active{
+    background:linear-gradient(#ee9ca7 , #c0aaac) ;
+}
+.userprofile h4{
+    position: absolute;
+    top:20%;
+    left:50%;
+}

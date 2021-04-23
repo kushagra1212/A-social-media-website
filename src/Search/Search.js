@@ -7,7 +7,7 @@ import Profile from "../Profile/Profile";
 import Styles from "./Search.module.css";
 import verifiesusers from '../methods/verifiesusers'
 const URL = process.env.REACT_APP_URL;
-const Search = ({fromshowbar,usernameformshowbar}) => {
+const Search = ({showprofilefromshowbar,usernameformshowbar}) => {
   const [searchuser, setsearchuser] = useState("");
   const [user, setuser] = useState("");
   const [loading, setloading] = useState(false);
@@ -23,19 +23,26 @@ const Search = ({fromshowbar,usernameformshowbar}) => {
   const [showfollowing,setshowfollowing]=useState(false);
   const[showlist,setshowlist]=useState(true);
   useSelector(state=>console.log(state));
-  const dispatch=useDispatch();
+  
 
 const setfollowingfunc=(value)=>{
   setfollowing(value);
 }
 
 useEffect(()=>{
-  if(fromshowbar)
+  if(showprofilefromshowbar)
   {
-    setsearchuser(usernameformshowbar);
+    setloading(true);
+    setuser(usernameformshowbar);
+    setsearchuser(usernameformshowbar);    
+    setfound({ found: true, text: "" });
     searchuserhandle(usernameformshowbar);
+    showuserprofilehandle();
 
   }
+  setTimeout(()=>{
+    setloading(false);
+  },2000)
     },[])
 const getcounts=async()=>{
   try{
@@ -96,20 +103,55 @@ const getcounts=async()=>{
   };
 
   const showuserprofilehandle = () => {
-  
-    setshowprofile(!showprofile);
+   
+
     setshowlist(false);
+    setshowprofile(!showprofile);
+ 
   };
+  const setshowfollowershandle = (val) => {
+    setshowfollowers(val);
+  };
+  const setshowfollowinghandle = (value) => {
+    setshowfollowing(value);
+  };
+
   useEffect(()=>{
     let usernameofsender=searchuser;
     console.log(usernameofsender)
     verifiesusers(setfollowingfunc,username,usernameofsender);
   },[searchuser])
- if(showlist===true)
+if(showprofilefromshowbar && !loading)
+{
+  return (  <div style={{width:"100%",height:"100%"}}>
+       
+
+  <User
+    profpic={user.profilepic}
+    name={user.name}
+    bio={user.bio}
+    postsnumber={postcount}
+    followerscount={followerscount}
+    followingcount={followingcount}
+    username={user.username}
+    getcounts={getcounts}
+    setshowfollowershandle={setshowfollowershandle}
+    setshowfollowinghandle={setshowfollowinghandle}
+    showfollowers={showfollowers}
+    showfollowing={showfollowing}
+  />
+  {showfollowers || showfollowing?null:<Container collectposts={collectposts} user={user}  />}
+</div>)
+}
+else if(showprofilefromshowbar && loading)
+{
+  return (<div>Loading....</div>)
+}
+  else if(showlist===true)
   {
     return (
       <div >
-        {fromshowbar?null:<div className={Styles.topsearchbar}>
+        <div className={Styles.topsearchbar}>
           <input className={Styles.searchinput}
           placeholder="Search User Here"
           value={searchuser}
@@ -119,7 +161,7 @@ const getcounts=async()=>{
           }}   
         />
         <button className={Styles.searchbutton} onClick={() => searchuser.length>0?setshowprofile(true):null}>Search</button>
-          </div>}
+          </div>
         {loading ? <div><div className={Styles.loader}  ></div></div> : 
         found.found ? (
           <div
@@ -150,12 +192,6 @@ const getcounts=async()=>{
         </div>
       );
     }
-    const setshowfollowershandle = (val) => {
-      setshowfollowers(val);
-    };
-    const setshowfollowinghandle = (value) => {
-      setshowfollowing(value);
-    };
   
 
 
