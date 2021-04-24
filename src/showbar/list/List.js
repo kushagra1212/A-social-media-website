@@ -9,19 +9,36 @@ const List = ({ list }) => {
   const [loading,setloading]=useState(true);
   const [showprofile,setshowprofile]=useState(false);
   const [username,setusername]=useState(null);
+  const unique=(array)=>{
+    let newar=[];
+    let isvisited={};
+    array.forEach(ele => {
+      if(!isvisited[ele.username])
+      {
+          newar.push(ele);
+          isvisited[ele.username]=true;
+      }
+    });
+    return newar;
+  }
   const setusershandle = async() => {
-  
-    await usernames.map(async(ele) => {
+    let arr=[];
+    arr=users;
+        await usernames.map(async(ele) => {
     const {username}=ele;
      const data=await getuser(username);
      
    if(data)
    {
-     setusers(old=>[...old,data]);
+    arr.push(data);
+    arr=unique(arr);
+    setusers(arr);
+    
    }
      
      
     });
+  
     setloading(false);
     console.log(users);
   };
@@ -50,7 +67,7 @@ const List = ({ list }) => {
         <button onClick={()=>{setshowprofile(true); setusername(user.username)}}  >Go to profile</button>
       </div>)
     })}
-    Loading more....
+    <div className={Styles.loader} ></div>
     </div>
     );
   }
@@ -63,6 +80,6 @@ const List = ({ list }) => {
   }
   
 
-  return <div>loading..</div>;
+
 };
 export default List;

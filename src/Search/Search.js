@@ -145,7 +145,7 @@ if(showprofilefromshowbar && !loading)
 }
 else if(showprofilefromshowbar && loading)
 {
-  return (<div>Loading....</div>)
+  return (<div className={Styles.loader} ></div>)
 }
   else if(showlist===true)
   {
