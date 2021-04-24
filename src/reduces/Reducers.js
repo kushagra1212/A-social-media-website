@@ -7,5 +7,6 @@ import count from './count'
 import main from './main';
 import user from './user'
 import feedposts from './feedposts'
-const Reducers=combineReducers({signinReducer,main,user,userposts,count,feedposts});
+import Likeposts from './Likeposts';
+const Reducers=combineReducers({signinReducer,main,user,userposts,count,feedposts,Likeposts});
 export default Reducers;

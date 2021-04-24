@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector ,useDispatch} from "react-redux";
 import { getpostsforfeed } from "../methods/getpostsforfeed";
+import {populateLike} from '../reduces/actions/userAction';
+
 import InfiniteScroll from "react-infinite-scroll-component";
 import Styles from './Like.module.css'
 const Like = () => {
   const { username } = useSelector((state) => state.user);
-  const [posts, setposts] = useState([]);
+ 
   const [hasMore, sethasmore] = useState(true);
-  const [last, setlast] = useState(0);
+
   const [loading,setloading]=useState(true);
+  const dispatch=useDispatch();
+  const state=useSelector(state=>state.Likeposts)
   const getposts = async () => {
     setloading(true);
-    getpostsforfeed(username, last)
+    getpostsforfeed(username, state.lastcount)
       .then((res) => {
         if (res.length > 0) {
-          let arr = [...posts, ...res];
-          setposts(arr);
-          setlast(last + 2);
+          let arr = [...state.posts, ...res];
+          let lastcount=state.lastcount+2;
+          dispatch(populateLike(arr,lastcount));
+          
           setloading(false)
           console.log(res);
         } else {
@@ -26,14 +31,19 @@ const Like = () => {
       .catch((err) => console.log(err));
   };
   useEffect(() => {
+   if(state.posts.length==0)
+   {
     getposts();
+   }else{
+    setloading(false)
+   }
   }, []);
-  {console.log(posts)}
+ 
   return (
  <>
       <InfiniteScroll
         hasMore={hasMore}
-        dataLength={posts.length}
+        dataLength={state.posts.length}
         next={getposts}
         loader={loading?<div className={Styles.loader} ></div>:null}
         endMessage={
@@ -48,7 +58,7 @@ const Like = () => {
            <div
     className={Styles.maindiv}
     >
-        {posts.map((post, id) => {
+        {state.posts.map((post, id) => {
           return (
             <div className={Styles.posts} key={id}>
                   <img

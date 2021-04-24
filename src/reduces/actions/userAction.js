@@ -18,6 +18,9 @@ export const addfeedposts=(posts,lastcount,array,lastcount2)=>{
 export const addposts=(posts)=>{
 return({type:"ADD_POSTS",payload:posts})
 }
+export const populateLike=(posts,lastcount)=>{
+    return ({type:"POPULATE_IT",payload:{posts:posts,lastcount:lastcount}});
+}
 export const getuser=(id)=>{
     return async(dispatch)=>{
       
