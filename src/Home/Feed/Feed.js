@@ -8,7 +8,7 @@ const Feed=()=>{
    setTimeout(()=>{
 setgo(true);
    },800)
-    },[])
+    },[]);
     return(
         <div className={Styles.maindiv}>
         <Stories/>
