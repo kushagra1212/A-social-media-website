@@ -5,13 +5,13 @@ import {useDispatch} from 'react-redux';
 const Header=()=>{
     const dispatch=useDispatch();
     return(
-        <div>
+  
             <div className={Styles.Header}>
               <img id={Styles.cameraimg} src={cameraimg} />
                <img onClick={()=>dispatch({type:"SHOWMESSAGE",payload:true})}  src={messageimg}  />
               
             </div>
-        </div>
+    
     )
 }
 export default Header;

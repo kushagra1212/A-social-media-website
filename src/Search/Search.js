@@ -122,7 +122,15 @@ const getcounts=async()=>{
     verifiesusers(setfollowingfunc,username,usernameofsender);
   },[searchuser])
 if(showprofilefromshowbar && !loading)
-{
+{    if (username === searchuser) {
+  return (
+    <div style={{width:"100%",height:"100%",zIndex:100}}>
+  
+
+     <Profile />
+    </div>
+  );
+}
   return (  <div style={{width:"100%",height:"100%"}}>
        
 
@@ -149,6 +157,7 @@ else if(showprofilefromshowbar && loading)
 }
   else if(showlist===true)
   {
+
     return (
       <div >
         <div className={Styles.topsearchbar}>

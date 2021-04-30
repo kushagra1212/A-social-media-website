@@ -1,9 +1,11 @@
-const Stories=(state={show_user_stories:false,back:false},action)=>{
+const Stories=(state={show_user_stories:false,show_webcam:false},action)=>{
     switch(action.type)
     {
         case "SHOW_USER_STORIES":
-         state.show_user_stories=action.payload.show_user_stories;
-         return state;
+        
+         return {...state,show_user_stories:action.payload.show_user_stories};
+        case "SHOW_WEBCAM":
+            return {...state,show_webcam:action.payload.show_webcam};
          default:
              return state;
     }
