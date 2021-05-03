@@ -7,5 +7,8 @@ export const show_webcam_handle=(flag)=>{
 }
 
 export const Stories_uploaded=(data)=>{
-  return {type:"IMAGE_UPLOADED",payload:{picture:data.picture}};
+  return {type:"STORIES_UPLOADED",payload:{started:true,_id:data._id}};
+}
+export const update_stories=(data)=>{
+  return {type:"UPDATE_STORIES",payload:{picture:data.picture}};
 }
