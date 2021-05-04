@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useAlert } from "react-alert";
 import {getusername} from '../reduces/actions/countAction'
+import {uploadstories} from '../methods/uploadstories';
 import axios from "axios";
 const URL = process.env.REACT_APP_URL;
 console.log(URL);
@@ -88,7 +89,7 @@ const Signup = () => {
           username: username,
         });
         dispatch(getusername(username));
- 
+        uploadstories(username,dispatch);
         Alert.success("successfully signed up ");
         setTimeout(() => {
           dispatch({ type: "signup", payload: false });

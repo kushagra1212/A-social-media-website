@@ -1,4 +1,4 @@
-const Stories=(state={show_user_stories:false,show_webcam:false,picture:Array,started:false,_id:null},action)=>{
+const Stories=(state={show_user_stories:false,show_webcam:false,picture:[],started:false,_id:null},action)=>{
     switch(action.type)
     {
         case "SHOW_USER_STORIES":
@@ -8,8 +8,10 @@ const Stories=(state={show_user_stories:false,show_webcam:false,picture:Array,st
             return {...state,show_webcam:action.payload.show_webcam};
         case "STORIES_UPLOADED":
             return{...state,started:action.payload.started,_id:action.payload._id};
+        case "STARTED":
+            return {...state,started:action.payload.started,picture:action.payload.picture};
         case "UPDATE_STORIES":
-            state.picture.push({picturee:action.payload.picture});
+            state.picture=action.payload.picture;
             return state;
          default:
              return state;

@@ -17,10 +17,14 @@ const videoContraints={
 
 const save_button_handle=()=>{
     setloading(true);
-    //if(started==false)   uploadstories(username,dispatch);
+    if(started===false)  {uploadstories(username,dispatch);} 
+    
+        
+  
     dispatch(show_webcam_handle(false));   
      dispatch(show_user_stories_handle(false));
-    updatestories(_id,imagecaptured,dispatch);
+ 
+     updatestories(_id,imagecaptured,dispatch);
      
 }
 setTimeout(()=>{
@@ -42,7 +46,6 @@ return (
     screenshotFormat="image/jpeg"
     width="100%"
     videoConstraints={videoContraints}
-   
     />
     <button onClick={capture} className={Styles.capturebut} >Take Photo</button></div>:<div  className={Styles.webcamdiv} >
     <img className={Styles.imagecaptured}  src={imagecaptured} alt="NAN"  />
