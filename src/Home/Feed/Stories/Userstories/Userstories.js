@@ -5,11 +5,22 @@ import {
   show_webcam_handle,
 } from "../../../../reduces/actions/StoriesAction";
 import { useDispatch,useSelector } from "react-redux";
+import {useState} from 'react';
 import cameraimg from "./cameraimg.png";
 import Webcamcapture from "../Webcam/Webcamcapture";
+import Picture from '../Picture/Picture';
 const Userstories = () => {
   const dispatch = useDispatch();
   const { show_webcam } = useSelector((state) => state.Stories);
+  const {picture}=useSelector(state=>state.Stories);
+  const [showpictures,setshowpictures]=useState(true);
+
+const set_picture_handle=(ans)=>{
+ setshowpictures(ans);
+}
+
+  if(picture.length>=1 && showpictures)
+    return( <div className={Styles.stories}><Picture pictures={picture} set_picture_handle={set_picture_handle}  /></div>)
 
   if (show_webcam)
     return (

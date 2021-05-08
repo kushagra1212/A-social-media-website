@@ -14,7 +14,7 @@ const Main=()=>{
     let like=useSelector(state=>state.main.like);
     let message=useSelector(state=>state.main.message);
     
-  console.log(home,search,like,profile)
+  console.log(home,search,like,profile);
     return(
       <>
       
