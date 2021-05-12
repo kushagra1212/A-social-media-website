@@ -3,8 +3,7 @@ import {useDispatch} from 'react-redux'
 import { useState } from "react";
 import axios from "axios";
 import { getuser } from "../reduces/actions/userAction";
-import {getstarted} from '../methods/uploadstories';
-import {stories_started} from '../reduces/actions/StoriesAction';
+
 const URL = process.env.REACT_APP_URL;
 const Signin = () => {
   const dispatch = useDispatch();
@@ -32,10 +31,7 @@ const Signin = () => {
         dispatch({ type: "access", payload: success });
       dispatch(getuser(res.data.user._id));
       
-     let data=await getstarted(username);
-     
-     if(data.started) dispatch(stories_started(data.started,data.picture));
-     else dispatch(stories_started(data.started,[]));
+ 
         
       } else console.log("fail", success);
     } catch (err) {

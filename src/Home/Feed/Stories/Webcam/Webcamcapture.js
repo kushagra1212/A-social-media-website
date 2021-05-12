@@ -15,21 +15,23 @@ const videoContraints={
     facingMode:"user"
 };
 
-const save_button_handle=()=>{
+const save_button_handle=async()=>{
     setloading(true);
     if(started===false)  {uploadstories(username,dispatch);} 
-    
+    await updatestories(_id,imagecaptured,dispatch);
         
   
-    dispatch(show_webcam_handle(false));   
-     dispatch(show_user_stories_handle(false));
+    setTimeout(()=>{
+        setloading(false);
+        dispatch(show_webcam_handle(false));   
+        dispatch(show_user_stories_handle(false));
+        },3000);
  
-     updatestories(_id,imagecaptured,dispatch);
+ 
+   
      
 }
-setTimeout(()=>{
-setloading(false);
-},1000);
+
 
 const capture=useCallback(()=>{
    const image=webcamRef.current.getScreenshot();

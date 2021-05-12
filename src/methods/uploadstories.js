@@ -22,25 +22,29 @@
     }  
  }
  export const updatestories=async(_id,picture,dispatch)=>{
-     if(_id)
-     {
-         try{
-            const res=await axios.patch(`${URL}/stories/updatestories`,{
-                _id:_id,picture:picture
-            });
-            if(res.data)
-            {
-                console.log(res.data);
-                dispatch(update_stories(res.data));
+  return async dispatch=>{
    
-            }else{
-                console.log("ERROR")
-            }
-         }catch(err)
-         {
-             console.log(err);
-         }
-     }
+    if(_id)
+    {
+        
+        try{
+           const res=await axios.patch(`${URL}/stories/updatestories`,{
+               _id:_id,picture:picture
+           });
+           if(res.data)
+           {
+               console.log(res.data);
+             dispatch(update_stories(res.data));
+  
+           }else{
+               console.log("ERROR")
+           }
+        }catch(err)
+        {
+            console.log(err);
+        }
+    }
+  }
  }
  export const getstarted=async(username)=>{
      try{

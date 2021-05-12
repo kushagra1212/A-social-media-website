@@ -10,7 +10,9 @@ export const Stories_uploaded=(data)=>{
   return {type:"STORIES_UPLOADED",payload:{started:true,_id:data._id}};
 }
 export const update_stories=(data)=>{
-  return {type:"UPDATE_STORIES",payload:{picture:data.picture}};
+
+return {type:"UPDATE_STORIES",payload:{picture:data.picture}};
+
 }
 export const stories_started=(started,picture)=>{
   return {type:"STARTED",payload:{started:started,picture:picture}};

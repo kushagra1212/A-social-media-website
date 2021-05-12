@@ -31,3 +31,8 @@ export const getuser=(id)=>{
       else console.log("errr");
     }
 }
+export const access_Action=(access)=>{
+
+        return {type:'access',payload:access};
+ 
+}

@@ -5,7 +5,7 @@ const Picture=({pictures,set_picture_handle})=>{
     return (
         <div className={Styles.maindiv} >
         <button className={Styles.addMore} onClick={()=>set_picture_handle(false)}  >Add more</button>
-        {pictures.map((pic,id)=>{<img key={id} src={pic.picture} width="100px"/ >})}
+        {pictures.map((pic,id)=><img key={id} className={Styles.picture} src={pic.picture} width="100px"/ >)}
         </div>
     )
 }
