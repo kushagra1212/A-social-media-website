@@ -6,14 +6,10 @@ export const show_webcam_handle=(flag)=>{
   return {type:"SHOW_WEBCAM",payload:{show_webcam:flag}};
 }
 
-export const Stories_uploaded=(data)=>{
-  return {type:"STORIES_UPLOADED",payload:{started:true,_id:data._id}};
+export const UPLOAD_STORIES=(document)=>{
+  return {type:"UPLOAD_STORIES",payload:{document:document}};
 }
-export const update_stories=(data)=>{
 
-return {type:"UPDATE_STORIES",payload:{picture:data.picture}};
-
-}
-export const stories_started=(started,picture)=>{
-  return {type:"STARTED",payload:{started:started,picture:picture}};
+export const GET_STORIES=(documents)=>{
+  return {type:"GET_STORIES",payload:{documents:documents}};
 }

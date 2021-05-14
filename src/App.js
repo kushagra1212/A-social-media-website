@@ -6,8 +6,8 @@ import axios from 'axios';
 import {useSelector,useDispatch} from 'react-redux';
 import {getuser,access_Action} from './reduces/actions/userAction'
 import {useEffect, useState} from 'react';
-import {getstarted} from './methods/uploadstories';
-import {stories_started} from './reduces/actions/StoriesAction';
+import {getstories} from './methods/uploadstories';
+
 const URL =process.env.REACT_APP_URL;
 const App=()=>{
   const dispatch=useDispatch();
@@ -36,13 +36,8 @@ setTimeout(() => {
   setTimeout(()=>{
     if(username)
     {
-      getstarted(username).then(res=>{
-        let data=res;
-        if(data.started) {dispatch(stories_started(data.started,data.picture));console.log("HO")}
-        else dispatch(stories_started(data.started,[]));
-      });
      
-    
+      getstories(username,dispatch);
     }
    },1000)
     return (<div>

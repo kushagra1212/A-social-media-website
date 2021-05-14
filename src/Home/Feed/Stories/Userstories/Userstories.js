@@ -12,15 +12,15 @@ import Picture from '../Picture/Picture';
 const Userstories = () => {
   const dispatch = useDispatch();
   const { show_webcam } = useSelector((state) => state.Stories);
-  const {picture}=useSelector(state=>state.Stories);
+  const {documents}=useSelector(state=>state.Stories);
   const [showpictures,setshowpictures]=useState(true);
 
 const set_picture_handle=(ans)=>{
  setshowpictures(ans);
 }
 
-  if(picture.length>=1 && showpictures)
-    return( <div className={Styles.stories}><Picture pictures={picture} set_picture_handle={set_picture_handle}  /></div>)
+  if(documents.length>=1 && showpictures)
+    return( <div className={Styles.stories}><Picture documents={documents} set_picture_handle={set_picture_handle}  /></div>)
 
   if (show_webcam)
     return (

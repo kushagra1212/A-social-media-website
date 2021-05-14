@@ -3,7 +3,7 @@ import {useRef,useCallback,useState,useEffect} from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {show_user_stories_handle, show_webcam_handle} from '../../../../reduces/actions/StoriesAction';
 import Styles from './Webcamcapture.module.css';
-import {uploadstories,updatestories} from '../../../../methods/uploadstories';
+import {uploadstories} from '../../../../methods/uploadstories';
 const Webcamcapture=()=>{
     const [imagecaptured,setimagecaptured]=useState(null);
     const [loading ,setloading]=useState(false);
@@ -15,17 +15,16 @@ const videoContraints={
     facingMode:"user"
 };
 
-const save_button_handle=async()=>{
+const save_button_handle=()=>{
     setloading(true);
-    if(started===false)  {uploadstories(username,dispatch);} 
-    await updatestories(_id,imagecaptured,dispatch);
+ uploadstories(username,imagecaptured,dispatch);
         
   
     setTimeout(()=>{
         setloading(false);
         dispatch(show_webcam_handle(false));   
         dispatch(show_user_stories_handle(false));
-        },3000);
+        },2000);
  
  
    

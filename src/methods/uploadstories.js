@@ -1,60 +1,36 @@
  import axios from 'axios';
- import {Stories_uploaded,update_stories} from '../reduces/actions/StoriesAction';
+import {UPLOAD_STORIES,GET_STORIES} from '../reduces/actions/StoriesAction';
  const URL=process.env.REACT_APP_URL;
 
- export const uploadstories=async(username,dispatch)=>{
-   
+
+ export const uploadstories=(username,picture,dispatch)=>{
+ 
     if(username)
     {
-        try{
-            
-        const res=await axios.post(`${URL}/stories/uploadimage`,{
-            username:username
-        });
-        if(res.data)
-        { console.log(res.data);
-          dispatch(Stories_uploaded(res.data));
-        } 
-        }catch(err)
-        {
-            console.log(err);
-        }
-    }  
- }
- export const updatestories=async(_id,picture,dispatch)=>{
-  return async dispatch=>{
    
-    if(_id)
-    {
-        
-        try{
-           const res=await axios.patch(`${URL}/stories/updatestories`,{
-               _id:_id,picture:picture
+       axios.post(`${URL}/stories/uploadstories`,{
+               username:username,picture:picture
+           }).then(res=>{
+             
+      
+            if(res.data)
+            {
+            console.log(res.data);
+            dispatch(UPLOAD_STORIES(res.data));
+   
+            }else{
+                console.log("ERROR")
+            }
            });
-           if(res.data)
-           {
-               console.log(res.data);
-             dispatch(update_stories(res.data));
-  
-           }else{
-               console.log("ERROR")
-           }
-        }catch(err)
-        {
-            console.log(err);
-        }
     }
-  }
  }
- export const getstarted=async(username)=>{
+ export const getstories=async(username,dispatch)=>{
      try{
-        const res=await axios.get(`${URL}/stories/getstarted?username=${username}`);
+        const res=await axios.get(`${URL}/stories/getstories?username=${username}`);
         if(res.data)
         {
-            console.log("FROM GETSTARTED",res.data)
-            return res.data;
-        }else{
-            return {started:false};
+          console.log(res.data);
+          dispatch(GET_STORIES(res.data));
         }
      }catch(err)
      {

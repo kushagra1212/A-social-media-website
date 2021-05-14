@@ -1,20 +1,47 @@
 .maindiv{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  
     width:100%;
- 
+   height:500px;
   
     background-color:pink;
 }
 .addMore{
+   position: relative;
+   width:100%;
+}
+.pictures{
+    position: relative;
+    margin-top:30%;
+    background-color: aqua;
+    width:100%;
+  
 
+    background-color: blue;
 }
 .picture{
-    position: relative;
-    transform:translate(-50%,-50%);
-    
-    width:100%;
-    height:auto;
+  position: relative;
+  width:100%;
+  height:100%;
+
+}
+
+.next{
+    position: absolute;
+    right:0%;
+    top:5%;
+    height: 90%;
+    width:50px;
+    background-color: rgba(0, 255, 234, 0.644);
+    border:none;
+}
+.previous{
+    position: absolute;
+    left:0%;
+    top:5%;
+    height: 90%;
+    width:50px;
+    background-color: rgba(166, 255, 0, 0.644);
+    border:none;
 }
