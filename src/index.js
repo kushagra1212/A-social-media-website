@@ -7,8 +7,8 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import Reducers from './reduces/Reducers'
 import thunk from 'redux-thunk'
 import AlertTemplate from 'react-alert-template-basic'
-
-const store=createStore(Reducers,compose(applyMiddleware(thunk)));
+import {composeWithDevTools} from 'redux-devtools-extension';
+const store=createStore(Reducers,composeWithDevTools(compose(applyMiddleware(thunk))));
 const options = {
  
     position: positions.BOTTOM_CENTER,

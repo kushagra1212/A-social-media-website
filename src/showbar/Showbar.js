@@ -1,6 +1,7 @@
 import getitem from "../methods/getitem";
 import List from "./list/List";
 import { useEffect, useState } from "react";
+import {useDispatch} from 'react-redux';
 import Styles from "./Showbar.module.css";
 const Showbar = ({
   username,
@@ -9,6 +10,7 @@ const Showbar = ({
   showfollowers,
   showfollowing,
 }) => {
+  const dispatch=useDispatch();
   const [item, setitem] = useState(null);
   const [loading, setloading] = useState(false);
   const [noone, setnoone] = useState({
@@ -20,6 +22,8 @@ const Showbar = ({
 
     getitem(username)
       .then((res) => {
+        console.log(res.following,"TEST");
+        dispatch({type:'SET_FOLLOWING_USERS',payload:{following:res.following}});
         if (res.following.length == 0) {
           setnoone({ nofollowers: false, nofollowing: true });
         } else if (res.followers.length == 0) {

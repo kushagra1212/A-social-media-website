@@ -1,4 +1,4 @@
-let initial={_id:"",profilepic:"",email:"",username:"",name:"",postsnumber:0,bio:""}
+let initial={_id:"",profilepic:"",email:"",username:"",name:"",postsnumber:0,bio:"",following_users:new Array()}
 const user=(state=initial,action)=>{
     switch(action.type)
     {
@@ -20,6 +20,9 @@ const user=(state=initial,action)=>{
             state.username=username;
             state.bio=bio;
             state.profilepic=profilepic;
+            return state;
+        case "SET_FOLLOWING_USERS":
+            state.following_users=[...state.following_users,...action.payload.following];
             return state;
        
         

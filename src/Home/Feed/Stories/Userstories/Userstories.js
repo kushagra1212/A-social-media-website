@@ -11,10 +11,10 @@ import Webcamcapture from "../Webcam/Webcamcapture";
 import Picture from '../Picture/Picture';
 const Userstories = () => {
   const dispatch = useDispatch();
-  const { show_webcam } = useSelector((state) => state.Stories);
+  const { show_webcam,show_others_stories } = useSelector((state) => state.Stories);
   const {documents}=useSelector(state=>state.Stories);
   const [showpictures,setshowpictures]=useState(true);
-
+   
 const set_picture_handle=(ans)=>{
  setshowpictures(ans);
 }
@@ -22,6 +22,7 @@ const set_picture_handle=(ans)=>{
   if(documents.length>=1 && showpictures)
     return( <div className={Styles.stories}><Picture documents={documents} set_picture_handle={set_picture_handle}  /></div>)
 
+ 
   if (show_webcam)
     return (
       <div className={Styles.cameradiv}>

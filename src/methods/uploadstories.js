@@ -1,5 +1,5 @@
  import axios from 'axios';
-import {UPLOAD_STORIES,GET_STORIES} from '../reduces/actions/StoriesAction';
+import {UPLOAD_STORIES,GET_STORIES,GET_STORIES_FROM_OTHERS} from '../reduces/actions/StoriesAction';
  const URL=process.env.REACT_APP_URL;
 
 
@@ -37,5 +37,18 @@ import {UPLOAD_STORIES,GET_STORIES} from '../reduces/actions/StoriesAction';
          console.log(err);
      }
  }
+ export const getstoriesFromOthers=async(username,dispatch)=>{
+    try{
+       const res=await axios.get(`${URL}/stories/getstories?username=${username}`);
+       if(res.data)
+       {
+        
+         dispatch(GET_STORIES_FROM_OTHERS(username,res.data));
+       }
+    }catch(err)
+    {
+        console.log(err);
+    }
+}
 
 

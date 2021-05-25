@@ -21,7 +21,7 @@ const User = ({
 
 }) => {
   const [following, setfollowing] = useState(false);
-
+  const [loading,setloading]=useState(true);
   const dispatch = useDispatch();
   const usernameofsender = useSelector((state) => state.user.username);
 
@@ -38,6 +38,9 @@ const User = ({
   useEffect(() => {
     getcounts();
     verifiesusers(setfollowingfunc, username, usernameofsender);
+ 
+      setloading(false);
+
   }, []);
  
 
@@ -89,7 +92,7 @@ const User = ({
         <button className={Styles.followingbut}  onClick={()=>setshowfollowinghandle(true)}      >following </button> <h6>{followingcount}</h6>
         </label>
 
-        <button className={Styles.isfollowing} onClick={() => setfollowinghandle()}>
+        <button className={Styles.isfollowing} onClick={() => !loading?setfollowinghandle():null}>
           {following ? "Following" : "Follow"}{" "}
         </button>
       </div>

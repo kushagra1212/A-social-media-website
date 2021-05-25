@@ -1,6 +1,7 @@
 import axios from 'axios';
 const URL =process.env.REACT_APP_URL;
 const setuser=(user)=>{
+  
     return{
         type:"SET_USER",
         payload:user
@@ -36,3 +37,4 @@ export const access_Action=(access)=>{
         return {type:'access',payload:access};
  
 }
+

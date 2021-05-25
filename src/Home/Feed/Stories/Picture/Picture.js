@@ -5,9 +5,10 @@ import {show_user_stories_handle} from '../../../../reduces/actions/StoriesActio
 const Picture=({documents,set_picture_handle})=>{
     const [count,setcount]=useState(0);
     const dispatch=useDispatch();
+
     return (
         <div className={Styles.maindiv} >
-        <button className={Styles.addMore} onClick={()=>set_picture_handle(false)}  >Add more</button>
+       <button className={Styles.addMore} onClick={()=>set_picture_handle(false)}  >Add more</button>
        <div className={Styles.pictures}>
                <img className={Styles.picture} src={documents[count].picture} width="100px"/ ></div>
                <button  className={Styles.next}  onClick={()=>count+1<=documents.length-1?setcount(count+1):dispatch(show_user_stories_handle(false))}    > </button>
