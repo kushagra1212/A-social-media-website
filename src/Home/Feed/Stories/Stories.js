@@ -12,30 +12,36 @@ import {getstoriesFromOthers} from '../../../methods/uploadstories';
 const Stories = () => {
    const dispatch=useDispatch();
   const {username} =useSelector(state=>state.user);
+
   const {othersStories,loading} =useSelector(state=>state.Stories);
-  useEffect(()=>{
+  const [othersStory,setotherstory]=useState(null);
+ useEffect(()=>{
+   
+  if(loading && username)
+  {
+    getitem(username).then(res=>{
+   
 
-      if(loading)
-      {
-        getitem(username).then(res=>{
+      res?.following.map((ele)=>{
+        console.log("e",ele.username);
+        getstoriesFromOthers(ele.username,dispatch);
+      })
+    
+         
+    })
        
+        setotherstory(othersStories);
+  }
+ },[])
+     
  
-          res?.following.map((ele)=>{
-            console.log("e",ele.username);
-            getstoriesFromOthers(ele.username,dispatch);
-          })
-        
-              //dispatch({type:'SET_FOLLOWING_USERS',payload:{following:res.following}});
-            })
-      }
 
-  },[]);
   return (
 
 
       <div className={Styles.stories}>
         <div onClick={()=> dispatch(show_user_stories_handle(true))} className={Styles.userStories}></div>
-        {othersStories?.map((ele,id)=>
+        {othersStory?.map((ele,id)=>
      
           ele.stories.length>=1?<div key={id} onClick={()=>dispatch(show_others_stories_handle(true,id))} className={Styles.particular}></div>:null
       

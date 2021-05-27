@@ -12,6 +12,10 @@ const Othersstories=()=>{
  
       {othersStories.map((ele,id)=>{
         let documents=ele.stories;
+        console.log(ele.stories);
+          if(documents.length>=1)
+          {
+            
         return(
           <div className={Styles.maindiv} >
 <button onClick={()=>dispatch(show_others_stories_handle(false,-1))}  >BACK</button>
@@ -24,7 +28,9 @@ const Othersstories=()=>{
                   <button  className={Styles.previous}  onClick={()=>count-1>=0?setcount(count-1):dispatch(show_others_stories_handle(false,-1))}    > </button>
            </div>
         )
-      })}
+          }
+         }
+      )}
 
     </>
     )

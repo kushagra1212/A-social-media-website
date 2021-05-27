@@ -9,14 +9,25 @@ import {useState} from 'react';
 import cameraimg from "./cameraimg.png";
 import Webcamcapture from "../Webcam/Webcamcapture";
 import Picture from '../Picture/Picture';
+import {uploadstories} from '../../../../methods/uploadstories';
 const Userstories = () => {
   const dispatch = useDispatch();
   const { show_webcam,show_others_stories } = useSelector((state) => state.Stories);
+  const {username} =useSelector(state=>state.user);
   const {documents}=useSelector(state=>state.Stories);
   const [showpictures,setshowpictures]=useState(true);
-   
+
+   const [file,setfile]=useState(null);
 const set_picture_handle=(ans)=>{
  setshowpictures(ans);
+}
+const save_button_handle=()=>{
+
+setTimeout(()=>{dispatch(show_user_stories_handle(false));},400)
+uploadstories(username,file,dispatch); 
+setfile(null);
+
+
 }
 
   if(documents.length>=1 && showpictures)
@@ -44,7 +55,8 @@ const set_picture_handle=(ans)=>{
         Back
       </button>
       <div className={Styles.file}>
-        <FileBase64 />
+        <FileBase64 multiple={false} onDone={e=>setfile(e.base64)}/>
+        {file?<div><img  src={file}  width="100px" height="100px"  /><button onClick={save_button_handle}  >Add to Stories</button></div>:null}
       </div>
       <div
         className={Styles.camera}
