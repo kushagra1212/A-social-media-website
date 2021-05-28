@@ -14,10 +14,10 @@ const Stories = () => {
   const {username} =useSelector(state=>state.user);
 
   const {othersStories,loading} =useSelector(state=>state.Stories);
-  const [othersStory,setotherstory]=useState(null);
+
  useEffect(()=>{
    
-  if(loading && username)
+  if(username && loading)
   {
     getitem(username).then(res=>{
    
@@ -30,9 +30,14 @@ const Stories = () => {
          
     })
        
-        setotherstory(othersStories);
+      
   }
+
+  
+
  },[])
+
+
      
  
 
@@ -41,7 +46,7 @@ const Stories = () => {
 
       <div className={Styles.stories}>
         <div onClick={()=> dispatch(show_user_stories_handle(true))} className={Styles.userStories}></div>
-        {othersStory?.map((ele,id)=>
+        {othersStories?.map((ele,id)=>
      
           ele.stories.length>=1?<div key={id} onClick={()=>dispatch(show_others_stories_handle(true,id))} className={Styles.particular}></div>:null
       

@@ -1,5 +1,5 @@
 import Styles from "./signin.module.css";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import { getuser } from "../reduces/actions/userAction";
@@ -9,10 +9,8 @@ const Signin = () => {
   const dispatch = useDispatch();
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  
- 
-  const loginhandle = async (e) => {
 
+  const loginhandle = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
@@ -29,10 +27,7 @@ const Signin = () => {
 
       if (success) {
         dispatch({ type: "access", payload: success });
-      dispatch(getuser(res.data.user._id));
-   
- 
-        
+        dispatch(getuser(res.data.user._id));
       } else console.log("fail", success);
     } catch (err) {
       console.log(err);
@@ -41,7 +36,7 @@ const Signin = () => {
   return (
     <>
       <div className={Styles.container}>
-        <label className={Styles.instagram}>WebDil</label>
+        <label className={Styles.instagram}>Eimentum</label>
         <div className={Styles.input}>
           {" "}
           <input

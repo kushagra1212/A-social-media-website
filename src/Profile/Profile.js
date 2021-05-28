@@ -16,6 +16,7 @@ const Profile = () => {
   const { postcount } = useSelector((state) => state.count);
   const [showfollowers, setshowfollowers] = useState(false);
   const [showfollowing, setshowfollowing] = useState(false);
+  const [isUnmounted, setIsUnmounted] = useState(false);
   const { followerscount, followingcount } = useSelector(
     (state) => state.count
   );
@@ -26,13 +27,18 @@ const Profile = () => {
   };
   useEffect(
     () => {
-      setTimeout(() => {
-        getfollowing(username, dispatch);
-      }, 100);
-      setTimeout(() => {
-        getpostcount(username, dispatch);
-        getfollowers(username, dispatch);
-      }, 200);
+      if (!isUnmounted) {
+        setTimeout(() => {
+          getfollowing(username, dispatch);
+        }, 100);
+        setTimeout(() => {
+          getpostcount(username, dispatch);
+          getfollowers(username, dispatch);
+        }, 200);
+      }
+      return () => {
+        setIsUnmounted(true);
+      };
     },
     [username],
     followingcount,
