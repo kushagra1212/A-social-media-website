@@ -1,10 +1,10 @@
 .maincontent {
   position: relative;
  padding-bottom: 3%;
-  height: 100%;
+  
   width: 100%;
   scroll-behavior: smooth;
-  overflow: scroll;
+
 }
 .singlecontainer {
   position: relative;

@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgba(231, 239, 241, 0.103);
+}
 
 .backbut{
     position: absolute;
@@ -5,57 +11,52 @@
 }
 .topsearchbar{
     position: relative;
-    margin:1%;
-    background-color:rgb(246, 227, 240) ;
+    margin:3%;
+  
     display: flex;
     flex-direction: row;
-    padding:3%;
+ 
     align-items: center;
  
-    border:2px solid rgba(128, 128, 128, 0);
-    border-radius:2px;
-    box-shadow: 2px 2px 10px rgb(134, 217, 224);
-    height:30px;
+    
+    height:40px;
     justify-content: space-around;
 }
 
-.searchinput{
-    position: relative;
-    border:2px;
-    border-radius: 2px;
- 
 
-  background-color: rgb(255, 255, 255);   
-  outline: none;
-}
-.searchinput:focus{
-  box-shadow: 2px 2px 10px grey;
-}
-.searchbutton
-{
-    position: relative;
-    border:2px;
-    outline:none;
-    border-radius: 2px;
-    color: white;
-    background-color: rgb(48, 48, 175);
-    transition: ease-in-out background-color;
-}
-.searchbutton:active{
-
-background-color: rgb(28, 28, 94);
-}
 .userprofile{
-    position: relative;
-    background: linear-gradient(#2193b0, #6dd5ed);
-    display: flex;
-    border:2px solid rgba(128, 128, 128, 0.144);
-    border-radius: 10px;
-    margin: 2%;
-    justify-content: center;
-  
+  display: block;
 
-   flex-direction: column;
+  display: flex;
+    flex-direction: column;
+
+  animation-name: animateIn;
+  animation-duration: 350ms;
+  animation-delay: calc(var(--animation-order) * 100ms);
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+    position: relative;
+   
+
+    border:10px solid rgba(128, 128, 128, 0);
+    border-radius: 15px;
+    margin: 2%;
+align-items: flex-start;
+    box-shadow: 0 0 25px 0 rgba(191, 193, 230, 0.835), 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+     
+
+  
+}
+
+@keyframes animateIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(-8px);
+  }
+  
+  100% {
+    opacity: 1;
+  }
 }
 .userprofile img{
     width:20%;
@@ -65,23 +66,135 @@ background-color: rgb(28, 28, 94);
     
 }
 .userprofile button{
-    background:linear-gradient(#ee9ca7 , #ffdde1) ;
   
+    background:rgba(25, 250, 25, 0.479);
+  width:50%;
     outline: none;
     border: 2px solid rgba(128, 128, 128, 0);
-    border-radius: 5px;
-    box-shadow: 2px 2px 20px grey;
+    border-radius: 100px;
+  box-shadow: 2px 2px 5px rgba(28, 158, 49, 0.76);
+
     transition: ease-in-out;
+    
 }
 .userprofile button:active{
-    background:linear-gradient(#ee9ca7 , #c0aaac) ;
-}
-.userprofile h4{
-    position: absolute;
-    top:20%;
-    left:50%;
+  box-shadow: 2px 2px 10px rgba(118, 182, 128, 0.76);
 }
 
+
+.container {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  height: 50px;
+}
+.container .search {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background: rgb(20, 220, 110);
+  border-radius: 50%;
+  transition: all 1s;
+  z-index: 4;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
+}
+.container .search:hover {
+  cursor: pointer;
+}
+.container .search::before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: 22px;
+  right: 0;
+  bottom: 0;
+  left: 22px;
+  width: 12px;
+  height: 2px;
+  background: white;
+  transform: rotate(45deg);
+  transition: all 0.5s;
+}
+.container .search::after {
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: -5px;
+  right: 0;
+  bottom: 0;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid white;
+  transition: all 0.5s;
+}
+.container input {
+
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  outline: none;
+  border: none;
+  background: rgb(20, 220, 70);
+  color: white;
+  text-shadow: 0 0 10px rgb(20, 220, 103);
+  padding: 0 80px 0 20px;
+  border-radius: 30px;
+  box-shadow: 0 0 25px 0 rgb(20, 220, 47), 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+  transition: all 1s;
+  opacity: 0;
+  z-index: 5;
+  font-weight: bolder;
+  letter-spacing: 0.1em;
+}
+.container input:hover {
+  cursor: pointer;
+}
+.container input:focus {
+  width: 200px;
+  opacity: 1;
+  cursor: text;
+}
+.container input:focus ~ .search {
+  right: -120px;
+  background: #151515;
+  z-index: 6;
+}
+.container input:focus ~ .search::before {
+  top: 0;
+  left: 0;
+  width: 25px;
+}
+.container input:focus ~ .search::after {
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 2px;
+  border: none;
+  background: white;
+  border-radius: 0%;
+  transform: rotate(-45deg);
+}
+.container input::placeholder {
+  color: white;
+  opacity: 0.5;
+  font-weight: bolder;
+}
 .loader,
 .loader:after {
   border-radius: 50%;

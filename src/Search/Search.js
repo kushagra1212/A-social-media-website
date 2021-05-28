@@ -161,18 +161,25 @@ else if(showprofilefromshowbar && loading)
     return (
       <div >
         <div className={Styles.topsearchbar}>
-          <input className={Styles.searchinput}
-          placeholder="Search User Here"
+         <div  className={Styles.container}  >
+         <input 
+          placeholder="Search User Here..."
+          type="text"
           value={searchuser}
           onChange={(e) => {
             setsearchuser(e.target.value);
             searchuserhandle(e.target.value);
           }}   
         />
-        <button className={Styles.searchbutton} onClick={() => searchuser.length>0?setshowprofile(true):null}>Search</button>
+        <div className={Styles.search} ></div>
+
+
+         </div>
+     {/*   <button className={Styles.searchbutton} onClick={() => searchuser.length>0?setshowprofile(true):null}>Search</button>*/}
           </div>
         {loading ? <div><div className={Styles.loader}  ></div></div> : 
         found.found ? (
+          <>
           <div
           className={Styles.userprofile}
             onClick={showuserprofilehandle}
@@ -180,9 +187,11 @@ else if(showprofilefromshowbar && loading)
           >
             <img width="30px" height="30px" src={user.profilepic} />
             <h4>{user.name}</h4>
-            <h6>@{user.username}</h6>
             <button>Go to profile</button>
+            <h6>@{user.username}</h6>
+           
           </div>
+           </>
         ) : (
           <div></div>
         )}
@@ -193,9 +202,9 @@ else if(showprofilefromshowbar && loading)
     if (username === searchuser) {
       return (
         <div style={{width:"100%",height:"100%",zIndex:100}}>
-          <button style={{zIndex:10}}  className={Styles.backbut} onClick={showuserprofilehandle}>
+          {/*<button style={{zIndex:10}}  className={Styles.backbut} onClick={showuserprofilehandle}>
             BACK
-          </button>
+          </button> */}
 
          <Profile />
         </div>
