@@ -32,6 +32,18 @@ export const getuser=(id)=>{
       else console.log("errr");
     }
 }
+export const resetFeedPosts=()=>{
+    return{type:"RESET_FEED_POSTS"};
+}
+export const resetUserPosts=()=>{
+    return {type:"RESET_USER_POSTS"};
+}
+export const updateLikesArray=(username,key)=>{
+   return {type:"UPDATE_LIKES_ARRAY",payload:{username:username,postID:key}};
+}
+export const updateUnlikesArray=(unlikesArray)=>{
+    return {type:"UPDATE_UNLIKES_ARRAY",payload:{unlikesArray:unlikesArray}};
+}
 export const access_Action=(access)=>{
 
         return {type:'access',payload:access};

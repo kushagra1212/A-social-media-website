@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatecountforpost } from "../../../reduces/actions/countAction";
 import axios from "axios";
 import Styles from "./Addpost.module.css";
+import {resetUserPosts,resetFeedPosts} from "../../../reduces/actions/userAction";
 const URL = process.env.REACT_APP_URL;
 const Addpost = ({ setposthandle }) => {
   const [pic, setpic] = useState("");
@@ -22,6 +23,8 @@ const Addpost = ({ setposthandle }) => {
         desc: desc,
       });
       setloading(!loading);
+      dispatch(resetFeedPosts());
+      dispatch(resetUserPosts());
       setposthandle(false);
     } catch (err) {
       console.log(err);

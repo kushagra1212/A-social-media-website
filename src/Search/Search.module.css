@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgba(231, 239, 241, 0.103);
+  
 }
 
 .backbut{
@@ -90,7 +90,7 @@ align-items: flex-start;
   right: 0;
   bottom: 0;
   width: 200px;
-  height: 50px;
+  height: 10px;
 }
 .container .search {
   position: absolute;
@@ -155,7 +155,7 @@ align-items: flex-start;
   text-shadow: 0 0 10px rgb(20, 220, 103);
   padding: 0 80px 0 20px;
   border-radius: 30px;
-  box-shadow: 0 0 25px 0 rgb(20, 220, 47), 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px 0 rgb(20, 220, 47), 0 10px 15px 0 rgba(0, 0, 0, 0.2);
   transition: all 1s;
   opacity: 0;
   z-index: 5;

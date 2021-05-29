@@ -10,19 +10,24 @@ import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
 import Feedposts from "../../../posts/Feedposts";
 import Comments from "./comments/Comments";
+import {updateLikesArray,updateUnlikesArray} from '../../../reduces/actions/userAction';
 const Contentmain = () => {
   const dispatch = useDispatch();
   const { _id, profilepic, username } = useSelector((state) => {
     console.log(state.user.username);
     return state.user;
   });
+  const {likesArray} =useSelector(state=>{
+    console.log(state.feedposts);
+  return state.feedposts;
+  });
   const [hasMore, sethasmore] = useState(true);
   const [isUnmounted, setIsUnmounted] = useState(false);
+ let tempUserLikes=[];
 
-  const [start, setstart] = useState(false);
 
   const [showcomments, setshowcomments] = useState(false);
-  const { access } = useSelector((state) => state.signinReducer);
+
 
   const unique = (array) => {
     let isvisited = {};
@@ -45,40 +50,38 @@ const Contentmain = () => {
   const [loading, setloading] = useState(false);
 
   const likefunction = (post, key) => {
-    setstart(true);
 
-    post.liked = true;
-    let newArray = [...array];
+  tempUserLikes.push({username:username,postID:key}); 
+  dispatch(updateLikesArray(username,key));
 
     //  let index=array.findIndex(ele=>ele.key==key);
 
-    if (key >= 0) {
-      newArray[key] = {
-        ...newArray[key],
-        liked: true,
-        length: newArray[key].length + 1,
-      };
-      setarray(newArray);
-      console.log(newArray);
-    }
+   
+      
+ 
 
     updatelikes({ username: username, id: post._id });
   };
   const unlikefunction = (post, key) => {
-    setstart(false);
-    // let index=array.findIndex(ele=>ele.key==key);
-    let newArray = [...array];
 
-    if (key >= 0) {
-      newArray[key] = {
-        ...newArray[key],
-        liked: false,
-        length: newArray[key].length - 1,
-      };
-
-      setarray(newArray);
-      console.log(newArray);
+   //temp section
+    let indexTemp=tempUserLikes.findIndex(ele=>ele.username===username && ele.postID===key);
+    if(indexTemp>=0)
+    {
+       tempUserLikes.splice(indexTemp,1);
     }
+
+
+
+    let likesArrayTemp=likesArray;
+    let ind=likesArrayTemp.findIndex(ele=>ele.username===username && ele.postID===key);
+    if(ind>=0)
+    {
+      likesArrayTemp.splice(ind,1);
+      dispatch(updateUnlikesArray(likesArrayTemp));
+    }
+    // let index=array.findIndex(ele=>ele.key==key);
+
     deletelike({ username: username, id: post._id });
   };
   const getothers = (post1) => {
@@ -123,6 +126,11 @@ const Contentmain = () => {
               let lastcount = 1,
                 lastcount2 = 1;
               newpost = unique(newpost);
+              newpost.forEach(ele=>{
+                ele.likes.forEach(ele2=>{
+                  dispatch(updateLikesArray(ele2.username,ele._id));
+                })
+              })
               Feedposts(newpost, lastcount, array1, lastcount2, dispatch);
               console.log(lastcount, "y", lastcount2);
               setarray([...array, ...newArray]);
@@ -224,7 +232,7 @@ const Contentmain = () => {
               }
             >
               {state.feedposts.posts.map((post, key) => (
-                <div key={key} className={Styles.singlecontainer}>
+                <div key={post._id} className={Styles.singlecontainer}>
                   <div className={Styles.topdiv}>
                     <img src={post.pic} />
 
@@ -237,18 +245,16 @@ const Contentmain = () => {
                     <img src={post.picture} width="100%" height="200px" />
                   </button>
                   <div className={Styles.bottomdiv}>
-                    {console.log(array[key]?.liked, "checker")}
-                    {(post.likes.find((ele) => ele.username == username) &&
-                      array[key]?.liked) ||
-                    array[key]?.liked ? (
-                      <span onClick={() => unlikefunction(post, key)}>
-                        💖 {array[key]?.length}
+        
+                    {likesArray.findIndex(ele=>ele.username==username && ele.postID==post._id)>=0 ? (
+                      <span onClick={() => unlikefunction(post, post._id)}>
+                        💖 { tempUserLikes.findIndex(ele=>ele.username===username && ele.postID===post._id)>=0?post.likes.length+1:post.likes.length + 0}
                       </span>
-                    ) : (
-                      <span onClick={() => likefunction(post, key)}>
-                        🤍 {array[key]?.length}
+                    ) : 
+                      <span onClick={() => likefunction(post, post._id)}>
+                        🤍 {tempUserLikes.findIndex(ele=>ele.username===username && ele.postID===post._id)>=0?post.likes.length + 1:(post.likes.length -1)<0?0:post.likes.length -1}
                       </span>
-                    )}
+                    }
                     <span
                       onClick={() => setcommentsfunc({ val: true, post: post })}
                     >
