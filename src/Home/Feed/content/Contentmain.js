@@ -10,26 +10,27 @@ import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
 import Feedposts from "../../../posts/Feedposts";
 import Comments from "./comments/Comments";
-import {updateLikesArray,updateUnlikesArray} from '../../../reduces/actions/userAction';
-let likeCountArray=[];
+import {
+  updateLikesArray,
+  updateUnlikesArray,
+} from "../../../reduces/actions/userAction";
+let likeCountArray = [];
 const Contentmain = () => {
   const dispatch = useDispatch();
   const { _id, profilepic, username } = useSelector((state) => {
     console.log(state.user.username);
     return state.user;
   });
-  const {likesArray} =useSelector(state=>{
+  const { likesArray } = useSelector((state) => {
     console.log(state.feedposts);
-  return state.feedposts;
+    return state.feedposts;
   });
   const [hasMore, sethasmore] = useState(true);
   const [isUnmounted, setIsUnmounted] = useState(false);
- let tempUserLikes=[];
-
+  let tempUserLikes = [];
 
   const [showcomments, setshowcomments] = useState(false);
-  const [likeLoading,setlikeLoading]=useState(false);
-
+  const [likeLoading, setlikeLoading] = useState(false);
 
   const unique = (array) => {
     let isvisited = {};
@@ -52,67 +53,63 @@ const Contentmain = () => {
   const [loading, setloading] = useState(false);
 
   const likefunction = (post, key) => {
-  if(!likeLoading)
-  {
-    setlikeLoading(true);
-    
-  tempUserLikes.push({username:username,postID:key}); 
-  dispatch(updateLikesArray(username,key));
-  let indexOflkesArray=likeCountArray.findIndex(ele=>ele.username===username && ele.postID===post._id);
-  if(indexOflkesArray<0)
-  {
-    likeCountArray.push({username:username,postID:post._id});
-  }else{
-    likeCountArray.splice(indexOflkesArray,1);
-  }
+    if (!likeLoading) {
+      setlikeLoading(true);
 
-    //  let index=array.findIndex(ele=>ele.key==key);
+      tempUserLikes.push({ username: username, postID: key });
+      dispatch(updateLikesArray(username, key));
+      let indexOflkesArray = likeCountArray.findIndex(
+        (ele) => ele.username === username && ele.postID === post._id
+      );
+      if (indexOflkesArray < 0) {
+        likeCountArray.push({ username: username, postID: post._id });
+      } else {
+        likeCountArray.splice(indexOflkesArray, 1);
+      }
 
-   
-      
- 
+      //  let index=array.findIndex(ele=>ele.key==key);
 
-    updatelikes({ username: username, id: post._id });
-    setTimeout(()=>{
-      setlikeLoading(false);
-        },400)
-  }
+      updatelikes({ username: username, id: post._id });
+      setTimeout(() => {
+        setlikeLoading(false);
+      }, 400);
+    }
   };
   const unlikefunction = (post, key) => {
-  if(!likeLoading)
-  {
-    setlikeLoading(true);
-    let indexTemp=tempUserLikes.findIndex(ele=>ele.username===username && ele.postID===key);
-    if(indexTemp>=0)
-    {
-       tempUserLikes.splice(indexTemp,1);
-    }
+    if (!likeLoading) {
+      setlikeLoading(true);
+      let indexTemp = tempUserLikes.findIndex(
+        (ele) => ele.username === username && ele.postID === key
+      );
+      if (indexTemp >= 0) {
+        tempUserLikes.splice(indexTemp, 1);
+      }
 
-    let indexOflkesArray=likeCountArray.findIndex(ele=>ele.username===username && ele.postID===post._id);
-    if(indexOflkesArray<0)
-    {
-      likeCountArray.push({username:username,postID:post._id});
-    }else{
-      likeCountArray.splice(indexOflkesArray,1);
-    }
-     
+      let indexOflkesArray = likeCountArray.findIndex(
+        (ele) => ele.username === username && ele.postID === post._id
+      );
+      if (indexOflkesArray < 0) {
+        likeCountArray.push({ username: username, postID: post._id });
+      } else {
+        likeCountArray.splice(indexOflkesArray, 1);
+      }
 
-    let likesArrayTemp=likesArray;
-    let ind=likesArrayTemp.findIndex(ele=>ele.username===username && ele.postID===key);
-    if(ind>=0)
-    {
-      likesArrayTemp.splice(ind,1);
-      dispatch(updateUnlikesArray(likesArrayTemp));
-    }
-    // let index=array.findIndex(ele=>ele.key==key);
+      let likesArrayTemp = likesArray;
+      let ind = likesArrayTemp.findIndex(
+        (ele) => ele.username === username && ele.postID === key
+      );
+      if (ind >= 0) {
+        likesArrayTemp.splice(ind, 1);
+        dispatch(updateUnlikesArray(likesArrayTemp));
+      }
+      // let index=array.findIndex(ele=>ele.key==key);
 
-    deletelike({ username: username, id: post._id });
-    setTimeout(()=>{
-  setlikeLoading(false);
-    },400)
-  }
-   //temp section
-    
+      deletelike({ username: username, id: post._id });
+      setTimeout(() => {
+        setlikeLoading(false);
+      }, 400);
+    }
+    //temp section
   };
   const getothers = (post1) => {
     let post2 = [];
@@ -156,11 +153,11 @@ const Contentmain = () => {
               let lastcount = 1,
                 lastcount2 = 1;
               newpost = unique(newpost);
-              newpost.forEach(ele=>{
-                ele.likes.forEach(ele2=>{
-                  dispatch(updateLikesArray(ele2.username,ele._id));
-                })
-              })
+              newpost.forEach((ele) => {
+                ele.likes.forEach((ele2) => {
+                  dispatch(updateLikesArray(ele2.username, ele._id));
+                });
+              });
               Feedposts(newpost, lastcount, array1, lastcount2, dispatch);
               console.log(lastcount, "y", lastcount2);
               setarray([...array, ...newArray]);
@@ -192,12 +189,17 @@ const Contentmain = () => {
           post1.map((ele) => {
             ele["pic"] = profilepic;
           });
-
+       if(post1.length==0)
+       {
+         setloading(false);
+       }
           console.log(post1, "own");
         }
       } catch (err) {
         console.log(err);
       }
+    }else{
+      setloading(false);
     }
   };
   const setcommentsfunc = ({ val, post }) => {
@@ -215,6 +217,7 @@ const Contentmain = () => {
 
       setarray(state.feedposts.array);
     }
+
     return () => setIsUnmounted(true);
   }, []);
 
@@ -275,16 +278,30 @@ const Contentmain = () => {
                     <img src={post.picture} width="100%" height="200px" />
                   </button>
                   <div className={Styles.bottomdiv}>
-        
-                    {likesArray.findIndex(ele=>ele.username==username && ele.postID==post._id)>=0 ? (
+                    {likesArray.findIndex(
+                      (ele) =>
+                        ele.username == username && ele.postID == post._id
+                    ) >= 0 ? (
                       <span onClick={() => unlikefunction(post, post._id)}>
-                        💖 {likeCountArray.findIndex(ele=>ele.username===username && ele.postID===post._id)>=0?post.likes.length+1:post.likes.length}
+                        💖{" "}
+                        {likeCountArray.findIndex(
+                          (ele) =>
+                            ele.username === username && ele.postID === post._id
+                        ) >= 0
+                          ? post.likes.length + 1
+                          : post.likes.length}
                       </span>
-                    ) :     
+                    ) : (
                       <span onClick={() => likefunction(post, post._id)}>
-                        🤍 {likeCountArray.findIndex(ele=>ele.username===username && ele.postID===post._id)>=0?post.likes.length-1:post.likes.length}
+                        🤍{" "}
+                        {likeCountArray.findIndex(
+                          (ele) =>
+                            ele.username === username && ele.postID === post._id
+                        ) >= 0
+                          ? post.likes.length - 1
+                          : post.likes.length}
                       </span>
-                    } 
+                    )}
                     <span
                       onClick={() => setcommentsfunc({ val: true, post: post })}
                     >

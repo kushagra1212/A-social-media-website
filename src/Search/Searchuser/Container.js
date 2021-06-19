@@ -3,13 +3,15 @@ import Styles from './Container.module.css'
 const Container=({collectposts,user})=>{
   const [posts,setposts]=useState(null);
   const [loading,setloading]=useState(true);
+  const [isUnmounted,setUnmounted]=useState(false);
    useEffect(()=>{
-     setloading(true);
-    collectposts(user._id).then(res=>{setposts(res);setloading(false)}).catch(err=>console.log(err))
-    setTimeout(()=>{
-setloading(false);
-    },2000)
-
+    if(!isUnmounted)
+    {
+      setloading(true);
+      collectposts(user._id).then(res=>{setposts(res);setloading(false)}).catch(err=>console.log(err));
+   
+    }
+return ()=>setUnmounted(true);
    },[]);
  
     if(loading)

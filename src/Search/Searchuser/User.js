@@ -24,7 +24,7 @@ const User = ({
   const [loading,setloading]=useState(true);
   const dispatch = useDispatch();
   const usernameofsender = useSelector((state) => state.user.username);
-
+  const [isUnmounted,setUnmounted]=useState(false);
   const setfollowinghandle = (e) => {
     if (following == false) {
       setfollowers(username, usernameofsender, dispatch);
@@ -36,10 +36,15 @@ const User = ({
   };
 
   useEffect(() => {
+    if(!isUnmounted)
+    {
+      
     getcounts();
     verifiesusers(setfollowingfunc, username, usernameofsender);
  
       setloading(false);
+    }
+    return ()=> setUnmounted(true);
 
   }, []);
  

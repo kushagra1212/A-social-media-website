@@ -13,11 +13,15 @@ const Showbar = ({
   const dispatch=useDispatch();
   const [item, setitem] = useState(null);
   const [loading, setloading] = useState(false);
+  const [isUnmounted,setUnmounted]=useState(false);
   const [noone, setnoone] = useState({
     nofollowers: false,
     nofollowing: false,
   });
   useEffect(() => {
+    if(!isUnmounted)
+    {
+      
     setloading(true);
 
     getitem(username)
@@ -41,6 +45,9 @@ const Showbar = ({
         }
       })
       .catch((err) => console.log(err));
+    }
+
+    return()=> setUnmounted(true);
   }, []);
 if(item)
 {

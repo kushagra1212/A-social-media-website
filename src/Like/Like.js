@@ -9,7 +9,7 @@ const Like = () => {
   const { username } = useSelector((state) => state.user);
  
   const [hasMore, sethasmore] = useState(true);
-
+  const [isUnmounted,setunmounted]=useState(false);
   const [loading,setloading]=useState(true);
   const dispatch=useDispatch();
   const state=useSelector(state=>state.Likeposts)
@@ -31,12 +31,16 @@ const Like = () => {
       .catch((err) => console.log(err));
   };
   useEffect(() => {
-   if(state.posts.length==0)
+   if(!isUnmounted)
    {
-    getposts();
-   }else{
-    setloading(false)
+    if(state.posts.length==0)
+    {
+     getposts();
+    }else{
+     setloading(false)
+    }
    }
+   return ()=> setunmounted(true);
   }, []);
  
   return (
@@ -81,7 +85,7 @@ const Like = () => {
           );
         })}
        <button className={Styles.loadmorebut} onClick={()=>getposts()}>
-          MORE
+          SEE MORE
         </button>
         </div>
        

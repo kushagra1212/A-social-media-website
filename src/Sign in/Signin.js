@@ -24,10 +24,14 @@ const Signin = () => {
         }
       );
       const success = res.data.success;
-
+   
       if (success) {
         dispatch({ type: "access", payload: success });
-        dispatch(getuser(res.data.user._id));
+        console.log("THis is from sign in",username);
+      
+          dispatch(getuser(res.data.user._id));
+    
+        
       } else console.log("fail", success);
     } catch (err) {
       console.log(err);

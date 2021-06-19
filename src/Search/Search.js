@@ -22,6 +22,7 @@ const Search = ({showprofilefromshowbar,usernameformshowbar}) => {
   const [showfollowers,setshowfollowers]=useState(false);
   const [showfollowing,setshowfollowing]=useState(false);
   const[showlist,setshowlist]=useState(true);
+  const [isUnmounted,setUnmounted]=useState(false);
   useSelector(state=>console.log(state));
   
 
@@ -117,9 +118,14 @@ const getcounts=async()=>{
   };
 
   useEffect(()=>{
+    if(!isUnmounted)
+    {
+      
     let usernameofsender=searchuser;
     console.log(usernameofsender)
     verifiesusers(setfollowingfunc,username,usernameofsender);
+    }
+    return ()=> setUnmounted(true);
   },[searchuser])
 if(showprofilefromshowbar && !loading)
 {    if (username === searchuser) {

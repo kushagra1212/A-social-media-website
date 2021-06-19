@@ -12,12 +12,12 @@ import {getstoriesFromOthers} from '../../../methods/uploadstories';
 const Stories = () => {
    const dispatch=useDispatch();
   const {username} =useSelector(state=>state.user);
-
+  const [isUnmounted,setUnmounted]=useState(false);
   const {othersStories,loading} =useSelector(state=>state.Stories);
 
  useEffect(()=>{
    
-  if(username && loading)
+  if(username && loading && isUnmounted)
   {
     getitem(username).then(res=>{
    
@@ -32,7 +32,7 @@ const Stories = () => {
        
       
   }
-
+return ()=>setUnmounted(true);
   
 
  },[])

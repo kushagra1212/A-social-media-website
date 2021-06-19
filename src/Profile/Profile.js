@@ -30,11 +30,11 @@ const Profile = () => {
       if (!isUnmounted) {
         setTimeout(() => {
           getfollowing(username, dispatch);
-        }, 100);
+        }, 0);
         setTimeout(() => {
           getpostcount(username, dispatch);
           getfollowers(username, dispatch);
-        }, 200);
+        }, 0);
       }
       return () => {
         setIsUnmounted(true);
@@ -45,10 +45,16 @@ const Profile = () => {
     followerscount
   );
   useEffect(() => {
-    setTimeout(() => {
+  if(posts.length>=1)
+  {
       setstart(false);
-    }, 5000);
-  }, []);
+  }
+  setTimeout(()=>{
+    if(posts.length==0) {setstart(false);}
+     },10000);
+
+  }, [posts]);
+
   const setshowfollowershandle = (val) => {
     setshowfollowers(val);
   };
