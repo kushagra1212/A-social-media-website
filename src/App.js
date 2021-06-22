@@ -20,22 +20,25 @@ const App = () => {
         .get(`${URL}/auth/verify`, { withCredentials: true })
         .then(async (res) => {
           console.log(res.data);
+        
+  
+          setTimeout(()=>{
+            dispatch(getuser(res.data.id));
+            getstories(username, dispatch);
+          },0)
+        
           setTimeout(() => {
             dispatch(access_Action(res.data.access));
-          }, 0);
-
-          setTimeout(() => {
-            dispatch(getuser(res.data.id));
-            if (username) {
-              getstories(username, dispatch);
-            }
-          }, 0);
+           
+          }, 1000);
+         
+      
         })
         .catch((err) => console.log(err));
     }
-    return () => setUnmounted(true);
+    return () => {  setUnmounted(true);    };
   }, []);
-
+ 
   return <div>{access ? <Main /> : issignup ? <Signup /> : <Signin />}</div>;
 };
 export default App;

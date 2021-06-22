@@ -6,6 +6,7 @@ import {
   show_webcam_handle,
 } from "../../../../reduces/actions/StoriesAction";
 import Styles from "./Webcamcapture.module.css";
+import {animated, useSpring} from 'react-spring';
 import { uploadstories } from "../../../../methods/uploadstories";
 const Webcamcapture = () => {
   const [imagecaptured, setimagecaptured] = useState(null);
@@ -17,6 +18,15 @@ const Webcamcapture = () => {
   const videoContraints = {
     facingMode: "user",
   };
+
+  const takePhotoButStyle=useSpring({
+    transform:imagecaptured?"scale(1.2,1.2)":"scale(1,1)"
+
+  })
+  const savePhotoButStyle=useSpring({
+    transform:loading==false?"scale(1.2,1.2)":"scale(1,1)"
+  })
+
 
   const save_button_handle = () => {
     setloading(true);
@@ -46,9 +56,9 @@ const Webcamcapture = () => {
             width="100%"
             videoConstraints={videoContraints}
           />
-          <button onClick={capture} className={Styles.capturebut}>
+          <animated.button onClick={capture} style={takePhotoButStyle}  className={Styles.capturebut}>
             Take Photo
-          </button>
+          </animated.button>
         </div>
       ) : (
         <div className={Styles.webcamdiv}>
@@ -59,7 +69,7 @@ const Webcamcapture = () => {
           >
             Retake
           </button>
-          <button onClick={save_button_handle}>Save</button>
+          <animated.button style={savePhotoButStyle} className={Styles.savebut}  onClick={save_button_handle}>Save</animated.button>
         </div>
       )}
     </div>

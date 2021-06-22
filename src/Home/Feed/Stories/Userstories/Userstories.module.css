@@ -1,5 +1,8 @@
 
 .maindiv{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
     width:100%;
     height:100%;
 
@@ -12,13 +15,59 @@
     align-items: center;
     justify-content: space-around;
 }
-.backbut{
-    margin:2%;
-   width:50px;
-   height:20px;
-   margin-right: 80%;
-   margin-top:-15%;
-}
+
+.backbut {
+  border: none;
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 5%;
+  margin-left: 5%;
+  /* height: 15px; */
+  /* margin-right: 80%; */
+  /* margin-top: -15%;
+  }
+  .back {
+    display: block;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    padding: 2px 7px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    background: hsl(345deg 100% 47%);
+    color: white;
+    transform: translateY(-4px);
+  }
+  
+  .backbut:active .back {
+    transform: translateY(-2px);
+  }
+  
+  .backbut:focus:not(:focus-visible) {
+    outline: none;
+  }
+  .back {
+    transition:
+      transform
+      600ms
+      cubic-bezier(.3, .7, .4, 1);
+  }
+
+  .backbut:hover .back {
+    transform: translateY(-6px);
+    transition:
+      transform
+      250ms
+      cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .backbut:active .back {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+  }
 .camera{
    position: relative;
    width: 100px;
@@ -33,7 +82,6 @@
     height:100px;
 }
 .cameradiv{
-    width:100%;
-    height:100%;
-    
+ 
+
 }
