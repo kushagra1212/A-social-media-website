@@ -43,12 +43,12 @@ const Userstories = () => {
 
   if (documents.length >= 1 && showpictures)
     return (
-      <div className={Styles.stories}>
+    
         <Picture
           documents={documents}
           set_picture_handle={set_picture_handle}
         />
-      </div>
+   
     );
 
   if (show_webcam)
