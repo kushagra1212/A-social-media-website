@@ -189,16 +189,15 @@ const Contentmain = () => {
           post1.map((ele) => {
             ele["pic"] = profilepic;
           });
-       if(post1.length==0)
-       {
-         setloading(false);
-       }
+          if (post1.length == 0) {
+            setloading(false);
+          }
           console.log(post1, "own");
         }
       } catch (err) {
         console.log(err);
       }
-    }else{
+    } else {
       setloading(false);
     }
   };
@@ -275,7 +274,7 @@ const Contentmain = () => {
                     onDoubleClick={likefunction}
                     className={Styles.imgdiv}
                   >
-                    <img src={post.picture} width="100%" height="200px" />
+                    <img src={post.picture} width="100%"  />
                   </button>
                   <div className={Styles.bottomdiv}>
                     {likesArray.findIndex(

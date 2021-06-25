@@ -1,20 +1,53 @@
 .maindiv{
     position: relative;
-    width:100%;
-   
+    /* width: 100%; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     overflow-y: scroll;
-    background-color: rgba(222, 248, 230, 0.616);
+    /* height: 100vh; */
+    margin-bottom: 10vh;
+    /* margin-top: 1%; */
+    /* z-index: 10; */
+    /* background-color: rgb(255 255 255); */
    
 }
 .maindiv img{
-position: relative;
-height: 100px;
-width:33%;
-margin: 2%;
+    position: relative;
+  
+    width: 40%;
+    margin: 2%; 
+    border:2px solid rgba(182, 22, 22, 0);
+    border-radius:5px;
 
 
 
+}
+.topButtons{
+    position: relative;
+    /* margin-bottom: 2%; */
+    margin-top: 1%;
+    width: 100vw;
+    padding: 0%;
+    /* z-index: 3; */
+    /* height: 2vh; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: space-around;
+}
+.topButtons button{
+    width: 30%;
+    background: #ffffff00;
+    border: 2px solid #80808000;
+    border-radius: 10px;
+    box-shadow: 1px 0px 12px 0px grey;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition-property: box-shadow;
+    transition-duration: 10ms;
+  
+}
+.topButtons button:active{
+  box-shadow: 1px 1px 4px 1px grey;
 }

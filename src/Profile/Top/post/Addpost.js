@@ -15,6 +15,8 @@ const Addpost = ({ setposthandle }) => {
   const dispatch = useDispatch();
   const { postcount } = useSelector((state) => state.count);
   const savehandle = async () => {
+    if(pic==="")
+     return alert("Please first choose a Pic ! 😜");
     setloading(!loading);
     try {
       const res = await axios.post(`${URL}/post/uploadpost`, {
