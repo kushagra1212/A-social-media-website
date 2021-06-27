@@ -16,7 +16,7 @@ const Addpost = ({ setposthandle }) => {
   const { postcount } = useSelector((state) => state.count);
   const savehandle = async () => {
     if(pic==="")
-     return alert("Please first choose a Pic ! 😜");
+     return alert("Oops ! 😜");
     setloading(!loading);
     try {
       const res = await axios.post(`${URL}/post/uploadpost`, {
@@ -43,7 +43,7 @@ const Addpost = ({ setposthandle }) => {
   return (
     <div className={Styles.maindiv}>
       <button onClick={() => setposthandle(false)}>Back</button>
-      <img src={pic} width="100px" height="100px" alt="Please choose" />
+      <img src={pic}  alt="Please choose" />
       <div className={Styles.choosebut}><FileBase64  multiple={false} onDone={(e) => setpic(e.base64)} /></div>
       <textarea
         type="name"
