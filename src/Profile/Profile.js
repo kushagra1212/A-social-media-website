@@ -51,7 +51,7 @@ const Profile = () => {
   }
   setTimeout(()=>{
     if(posts.length==0) {setstart(false);}
-     },10000);
+     },30000);
 
   }, [posts]);
 

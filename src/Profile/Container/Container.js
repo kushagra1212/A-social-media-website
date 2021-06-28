@@ -2,6 +2,7 @@
 import Styles from "./Container.module.css";
 import {useEffect,useState} from 'react'
 
+
 const Container = ({ posts }) => {
   const [grid,setGrid]=useState(true);
   useEffect(()=>{
@@ -16,7 +17,7 @@ const Container = ({ posts }) => {
   const gridHandler=(bool)=>{
     setGrid(bool);
   }
-
+ 
   return (
    <>   
     <div className={Styles.topButtons}       >

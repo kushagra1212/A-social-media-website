@@ -1,15 +1,22 @@
 .editprofile
 {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    
-    background-color: rgb(112, 112, 112);
-  z-index: 110;
- 
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(189 224 247);
+  z-index: 200;
+  top: 50%;
+  left: 50%;
+  border: 2px solid #80808000;
+  border-radius: 10px;
+  box-shadow: 10px 10px 60px 0px #808080;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
 }
 .editbut
 {
@@ -39,14 +46,14 @@ margin-top: 5%;
   top:0%;
   left:2%;
   z-index: 10;
-  width: 70px;
+  width: 55px;
   font-size: 0.9em;
   color: white;
   background-color: rgb(21, 21, 221);
   outline: none;
   border:2px solid rgba(128, 128, 128, 0);
   border-radius: 10px;
-  box-shadow: 1px 1px 10px 1px grey;
+  box-shadow: 1px 1px 5px 1px grey;
  transform-origin:center;
 }
 .backbut:active{
@@ -56,16 +63,15 @@ margin-top: 5%;
 }
 .editimg
 { 
-    width: 50%;
-    height: 50%;
-    font-size: 0.9em;
-    color: white;
-    background-color: rgba(158, 21, 221, 0.246);
-    outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 1px grey;
-   transform-origin:center;
+  position: relative;
+  margin-left: 40%;
+  margin-bottom: 10%;
+  background-color: rgba(158, 21, 221, 0.246);
+  outline: none;
+  /* border: 2px solid rgba(128, 128, 128, 0); */
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px grey;
+  transform-origin: center;
 }
 .editprofile input
 {
