@@ -30,12 +30,20 @@ useEffect(async() => {
 }, []);
   if(show_others_stories.flag)
   {
-      return (<div  className={Styles.maindiv} >
+      return (<div  className={Styles.maindiv} style={{  height:"100vh",
+      backgroundColor: "white",
+      position: "absolute",
+      width: "100vw",
+      zIndex: 10}}>
         <animated.div style={fade}  >  <Othersstories/></animated.div>
          
       </div>)
   }else{
-    return(<div className={Styles.maindiv}>
+    return(<div className={Styles.maindiv}   style={show_user_stories?{  height:"100vh",
+      backgroundColor: "white",
+      position: "absolute",
+      width: "100vw",
+      zIndex: 10}:{}}>
    
        
     

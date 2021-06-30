@@ -1,23 +1,35 @@
 
 import Styles from "./Container.module.css";
 import {useEffect,useState} from 'react'
-
+import Showdetailedpost from "./Showdetailedpost/Showdetailedpost";
 
 const Container = ({ posts }) => {
   const [grid,setGrid]=useState(true);
+  const [showDetailedPost,setShowDetailedPost]=useState(false);
+  const [post,setPost]=useState(null);
+ // const [isUnmounted,setIsUnmounted]=useState(false);
   useEffect(()=>{
-    console.log(posts);
+ 
     posts.sort((a,b)=>{
     
       return(new Date(a.createdAt)-new Date(b.createdAt));
     });
-    console.log(posts);
+
   },[posts])
   
   const gridHandler=(bool)=>{
     setGrid(bool);
   }
- 
+  const setShowDetailedPostHandler=(bool)=>{
+    setShowDetailedPost(bool);
+  }
+  const setPostHandler=(post)=>{
+    setPost(post);
+    setShowDetailedPostHandler(true);
+  }  
+  if(showDetailedPost)
+    return(<Showdetailedpost setShowDetailedPostHandler={setShowDetailedPostHandler} post={post}  />);
+  
   return (
    <>   
     <div className={Styles.topButtons}       >
@@ -27,8 +39,8 @@ const Container = ({ posts }) => {
     <div style={grid?{}:{flexDirection:"column",alignItems:"center"}}  className={Styles.maindiv}>
    
       {posts.length > 0
-        ? posts.map((dat, id) => {
-            return <img className={Styles.post}       key={id} src={dat.picture} />;
+        ? posts.map((post) => {
+            return <img onClick={()=>setPostHandler(post)} className={Styles.post}       key={post._id} src={post.picture} />;
           })
         : null}
    

@@ -271,7 +271,7 @@ const Contentmain = () => {
                     <h5>{post.username}</h5>
                   </div>
                   <button
-                    onDoubleClick={likefunction}
+                    onDoubleClick={()=>likefunction(post, post._id)}
                     className={Styles.imgdiv}
                   >
                     <img src={post.picture} width="100%"  />

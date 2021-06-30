@@ -1,3 +1,6 @@
+.topdiv{
+    height:100vh;
+}
 .maindiv{
     position: relative;
     /* width: 100%; */
