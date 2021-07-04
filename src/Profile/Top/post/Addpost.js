@@ -8,22 +8,24 @@ import { useSpring,animated } from "react-spring";
 import {resetUserPosts,resetFeedPosts} from "../../../reduces/actions/userAction";
 const URL = process.env.REACT_APP_URL;
 const Addpost = ({ setposthandle }) => {
-  const [pic, setpic] = useState("");
+  const [pic, setpic] = useState(null);
   const [desc, setdesc] = useState("");
 
   const { username, proffilepic } = useSelector((state) => state.user);
   const [loading, setloading] = useState(false);
+  const [selectedFile,setSelectedFile]=useState(null);
   const dispatch = useDispatch();
   const { postcount } = useSelector((state) => state.count);
-  const savehandle = async () => {
-    if(pic==="")
+  const savehandle = async (e) => {
+    if(selectedFile==null)
      return alert("Oops ! 😜");
     setloading(!loading);
+    const data=new FormData(e.target);
+    data.append('file',selectedFile);
+    
     try {
-      const res = await axios.post(`${URL}/post/uploadpost`, {
-        username: username,
-        picture: pic,
-        desc: desc,
+      const res = await axios.post(`${URL}/post/uploadpost`,data,{
+        params:{username:username,desc:desc}
       });
       setloading(!loading);
       dispatch(resetFeedPosts());
@@ -34,6 +36,16 @@ const Addpost = ({ setposthandle }) => {
     }
     dispatch(updatecountforpost(username, postcount));
   };
+  
+  const handleSelectedFile=(e)=>{
+   e.preventDefault();
+ 
+   console.log(e.target.files[0]);
+   setSelectedFile(e.target.files[0]);
+   setpic(global.URL.createObjectURL(e.target.files[0]));
+  }
+
+
   const Popup = useSpring({
     
     from: { y:"-70%",x:"5%" ,transform:"scale(0.2)"},
@@ -49,18 +61,20 @@ const Addpost = ({ setposthandle }) => {
     );
   }
   return (
-    <animated.div className={Styles.maindiv} style={Popup}>
-      <button onClick={() => setposthandle(false)}>Back</button>
+<>
+     <animated.form className={Styles.maindiv} style={Popup} onSubmit={savehandle}>
+     <button onClick={() => setposthandle(false)}>Back</button>
       <img src={pic}  alt="Please choose" />
-      <div className={Styles.choosebut}><FileBase64  multiple={false} onDone={(e) => setpic(e.base64)} /></div>
+      <div className={Styles.choosebut}><input type="file" onChange={(e)=>handleSelectedFile(e)} /></div>
       <textarea
         type="name"
         value={desc}
         onChange={(e) => setdesc(e.target.value.substr(0, 100))}
         placeholder="    Write Something 😜   "
       />
-      <button onClick={savehandle}>save</button>
-    </animated.div>
+      <button type="submit">save</button>
+     </animated.form></>
+ 
   );
 };
 

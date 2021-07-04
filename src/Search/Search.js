@@ -83,6 +83,7 @@ const getcounts=async()=>{
   };
 
   const searchuserhandle = async (username) => {
+    if(username==null) return;
     try {
       setloading(true);
       const res = await axios.get(`${URL}/users/getuser?username=${username}`);

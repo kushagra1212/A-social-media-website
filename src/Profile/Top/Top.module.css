@@ -1,13 +1,15 @@
 .maindiv{
-    position: relative;
-    height:30%;
-    width:100%;
-background-color: rgb(255, 255, 255);
-border: 2px solid rgba(128, 128, 128, 0);
-border-radius: 5%;
-box-shadow: 2px 2px 20px 2px rgb(128, 128, 128);
-padding-bottom: 2%;
-z-index: 1  ;
+ 
+
+position: relative;
+    height: 30%;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgba(128, 128, 128, 0);
+    border-radius: 5%;
+    box-shadow: 2px 2px 20px 2px rgb(128 128 128);
+    padding-bottom: 2%;
+    z-index: 1;
 }
 .firstdiv{
     position: relative;

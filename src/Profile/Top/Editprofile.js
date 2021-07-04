@@ -12,25 +12,29 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   const { username, email, profilepic, _id, bio } = useSelector(
     (state) => state.user
   );
-  const [file, setfile] = useState(profilepic);
+
   const [newemail, setnewemail] = useState(email);
   const [newusername, setnewusername] = useState(username);
   const [loading, setloading] = useState(false);
-
+  const [selectedFile,setSelectedFile]=useState(null);
+  const [pic,setPic]=useState(profilepic);
   const [newbio, setnewbio] = useState(bio);
-  const save_it = async () => {
+  const save_it = async (e) => {
     setloading(true);
     try {
-      const res = await axios.patch(`${URL}/upload/updateuser`, {
+      const data=new FormData(e.target);
+      data.append('file',selectedFile);
+      const res = await axios.patch(`${URL}/upload/updateuser`,data, 
+    { params:{
         email: newemail,
         username: newusername,
         _id: _id,
-        profilepic: file,
+        profilepic: pic,
         bio: newbio,
-      });
+      }});
       if (res) {
         console.log("fromclient");
-        setprofpichandle(file);
+        setprofpichandle(pic);
         setloading(false);
 
         dispatch({
@@ -38,7 +42,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
           payload: {
             email: newemail,
             username: newusername,
-            profilepic: file,
+            profilepic: pic,
             bio: newbio,
           },
         });
@@ -55,7 +59,12 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
         edit_it();
       }, 50);
     }
-  };
+  }
+  const selectedFileHandle=(e)=>{
+    e.preventDefault();
+    setSelectedFile(e.target.files[0]);
+    setPic(global.URL.createObjectURL(e.target.files[0]));
+  }
   const floatDown = useSpring({
     
     from: { y:"-100%"},
@@ -71,28 +80,24 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     );
   } else {
     return (
-      <animated.div className={Styles.editprofile} style={floatDown}>
+  <>
+      <animated.form onSubmit={(e)=>save_it(e)} className={Styles.editprofile} style={floatDown}>
         <button className={Styles.backbut} onClick={edit_it}>
           BACK
         </button>
-        <img className={Styles.editimg} width="50px" height="50px" src={file} />
-        <FileBase64
-          multiple={false}
-          onDone={(e) => {
-            setfile(e.base64);
-            console.log(e);
-          }}
-        />
+        <img className={Styles.editimg} width="50px" height="50px" src={pic} />
+         <input  type="file" onChange={(e)=>selectedFileHandle(e)}  />
         <input onChange={(e) => setnewemail(e.target.value)} value={newemail} />
         <input
           onChange={(e) => setnewusername(e.target.value)}
           value={newusername}
         />
         <input onChange={(e) => setnewbio(e.target.value)} value={newbio} />
-        <button className={Styles.savebut} onClick={save_it}>
+        <button type="submit" className={Styles.savebut} >
           save
         </button>
-      </animated.div>
+      </animated.form>
+      </>
     );
   }
 };
