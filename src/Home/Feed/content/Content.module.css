@@ -11,7 +11,7 @@
 
   display: flex;
     flex-direction: column;
-
+   
   animation-name: animateIn;
   animation-duration: 350ms;
   animation-delay: calc(var(--animation-order) * 100ms);

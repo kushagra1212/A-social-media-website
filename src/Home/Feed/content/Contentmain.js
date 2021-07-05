@@ -2,7 +2,7 @@ import Styles from "./Content.module.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getpostsforfeed } from "../../../methods/getpostsforfeed";
 import sharepic from "./images/share.png";
-import { useEffect, useState } from "react";
+import { Suspense,useEffect, useState } from "react";
 import getuser from "../../../methods/getuser";
 import { useDispatch, useSelector } from "react-redux";
 import getitem from "../../../methods/getitem";
@@ -10,6 +10,8 @@ import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
 import Feedposts from "../../../posts/Feedposts";
 import Comments from "./comments/Comments";
+import Loader from "../../../Animation/Loader/Loader";
+import { SuspenseImg } from "./SuspenceImage/SuspenceImg";
 import {
   updateLikesArray,
   updateUnlikesArray,
@@ -232,6 +234,7 @@ const Contentmain = () => {
   } else {
     return (
       <>
+         
         {showcomments.val ? (
           <Comments
             username={username}
@@ -263,8 +266,11 @@ const Contentmain = () => {
                 </p>
               }
             >
+                
               {state.feedposts.posts.map((post, key) => (
-                <div key={post._id} className={Styles.singlecontainer}>
+             
+                <div key={post._id} className={Styles.singlecontainer}  >
+                   
                   <div className={Styles.topdiv}>
                     <img src={post.pic} />
 
@@ -274,7 +280,10 @@ const Contentmain = () => {
                     onDoubleClick={()=>likefunction(post, post._id)}
                     className={Styles.imgdiv}
                   >
-                    <img src={post.picture} width="100%"  />
+              
+              <Suspense fallback={<Loader  />} >
+                      <SuspenseImg alt="" src={post.picture}    />
+                      </Suspense>
                   </button>
                   <div className={Styles.bottomdiv}>
                     {likesArray.findIndex(
@@ -310,11 +319,14 @@ const Contentmain = () => {
                     <img src={sharepic} width="4.5%" height="2%" />
                   </div>
                   <div className={Styles.caption}>{post.desc}</div>
-                </div>
+            
+                </div>    
               ))}
+            
             </InfiniteScroll>
           </div>
         )}
+     
       </>
     );
   }

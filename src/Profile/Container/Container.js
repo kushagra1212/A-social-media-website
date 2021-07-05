@@ -1,8 +1,9 @@
 
 import Styles from "./Container.module.css";
-import {useEffect,useState} from 'react'
+import {useEffect,useState,Suspense} from 'react'
 import Showdetailedpost from "./Showdetailedpost/Showdetailedpost";
-
+import Loader from "../../Animation/Loader/Loader";
+import { SuspenseImg } from "../../Home/Feed/content/SuspenceImage/SuspenceImg";
 const Container = ({ posts }) => {
   const [grid,setGrid]=useState(true);
   const [showDetailedPost,setShowDetailedPost]=useState(false);
@@ -40,7 +41,14 @@ const Container = ({ posts }) => {
    
       {posts.length > 0
         ? posts.map((post) => {
-            return <img onClick={()=>setPostHandler(post)} className={Styles.post}       key={post._id} src={post.picture} />;
+            return (
+         
+                <Suspense fallback={<Loader/>} >
+                  <SuspenseImg className={Styles.post}     key={post._id} onClick={()=>setPostHandler(post)}  src={post.picture}  />
+                </Suspense>
+              
+            
+            )
           })
         : null}
    
