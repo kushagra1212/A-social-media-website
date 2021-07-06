@@ -8,13 +8,17 @@ import sharepic from "../../../Home/Feed/content/images/share.png";
 
 import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
+
+import deletePost from "../../../methods/deletePost";
 import {useDispatch,useSelector} from "react-redux";
+
 let likeCountArray = [];
 const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
    
     const dispatch=useDispatch();
     const [showcomments, setshowcomments] = useState(false);
     const [likeLoading,setlikeLoading]=useState(false);
+    const [setting,setSetting]=useState(false);
     const { likesArray } = useSelector((state) => {
         console.log(state.feedposts);
         return state.feedposts;
@@ -88,7 +92,10 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
     const setcommentsfunc = ({ val, post }) => {
         setshowcomments({ val: val, post: post });
     }
-    
+    const deletePostHandle=async(id,picture)=>{
+  
+        await deletePost(id,picture);
+    }
     return(
     <div className={Styles.maincontent}  >
         <img src={backIcon} onClick={()=>setShowDetailedPostHandler(false)} width="30px" height="30px"  />
@@ -138,7 +145,12 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
                     >
                       💬 {post?.comments?.length}
                     </span>
-
+                
+                   
+                    
+                     {setting?<option value="delete" className={Styles.delete} onClick={()=>deletePostHandle(post._id,post.picture)} > ❌Delete </option>:<button onClick={()=>setSetting(true)}>⚙️</button>} 
+                    
+            
                     <img src={sharepic} width="4.5%" height="2%" />
                   </div>
                   <div className={Styles.caption}>{post.desc}</div>

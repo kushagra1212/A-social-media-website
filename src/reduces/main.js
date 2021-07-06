@@ -4,40 +4,17 @@ const main=(state=initialstate,action)=>{
 switch(action.type)
 {
     case "SHOWPROFILE":
-       state.home=false;
-       state.like=false;
-       state.profile=false;
-       state.message=false;
-        state.profile=action.payload;
-        return(state);
+        return {...state,home:false,like:false,search:false,message:false,profile:action.payload};
     case "SHOWHOME":
-        state.like=false;
-        state.profile=false;
-         state.search=false;
-         state.message=false;
-        state.home=action.payload;
-        return(state);
+        return {...state,like:false,profile:false,search:false,message:false,home:action.payload};
     case "SHOWLIKE":
-        state.profile=false;
-        state.search=false;
-        state.message=false;
-       state.home=false;
-        state.like=action.payload;
-        return(state);
+      
+        return {...state,profile:false,search:false,message:false,home:false,like:action.payload};
     case "SHOWSEARCH":
-        state.profile=false;
-        state.like=false;
-       state.home=false;
-       state.message=false;
-        state.search=action.payload;
-        return(state);
+        return {...state,profile:false,like:false,home:false,message:false,search:action.payload};
     case "SHOWMESSAGE":
-        state.profile=false;
-        state.like=false;
-       state.home=false;
-       state.search=false;
-       state.message=action.payload;
-       return(state)
+        
+       return {...state,profile:false,like:false,home:false,search:false,message:action.payload}
 
     default:
         return(state)

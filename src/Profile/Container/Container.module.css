@@ -8,11 +8,12 @@
     flex-wrap: wrap;
     justify-content: space-around;
     overflow-y: scroll;
-    /* height: 100vh; */
+    /* min-height: 100vh; */
     margin-bottom: 10vh;
     /* margin-top: 1%; */
     /* z-index: 10; */
     /* background-color: rgb(255 255 255); */
+    align-items: center;
    
 }
 .maindiv img{
@@ -25,6 +26,9 @@
 
     
 
+}
+.image{
+    box-shadow: 1px 1px 8px grey;
 }
 .topButtons{
     position: relative;

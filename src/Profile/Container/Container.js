@@ -40,11 +40,11 @@ const Container = ({ posts }) => {
     <div style={grid?{}:{flexDirection:"column",alignItems:"center"}}  className={Styles.maindiv}>
    
       {posts.length > 0
-        ? posts.map((post) => {
+        ? posts.map((post,id) => {
             return (
          
-                <Suspense fallback={<Loader/>} >
-                  <SuspenseImg className={Styles.post}     key={post._id} onClick={()=>setPostHandler(post)}  src={post.picture}  />
+                <Suspense key={id} fallback={<Loader/>} >
+                  <SuspenseImg className={Styles.post} className={Styles.image}     key={post._id} onClick={()=>setPostHandler(post)}  src={post.picture}  />
                 </Suspense>
               
             
