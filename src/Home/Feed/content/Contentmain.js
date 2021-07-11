@@ -2,7 +2,7 @@ import Styles from "./Content.module.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getpostsforfeed } from "../../../methods/getpostsforfeed";
 import sharepic from "./images/share.png";
-import { Suspense,useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import getuser from "../../../methods/getuser";
 import { useDispatch, useSelector } from "react-redux";
 import getitem from "../../../methods/getitem";
@@ -11,12 +11,14 @@ import deletelike from "../../../methods/deletelike";
 import Feedposts from "../../../posts/Feedposts";
 import Comments from "./comments/Comments";
 import Loader from "../../../Animation/Loader/Loader";
+import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
 import { SuspenseImg } from "./SuspenceImage/SuspenceImg";
 import {
   updateLikesArray,
   updateUnlikesArray,
 } from "../../../reduces/actions/userAction";
 let likeCountArray = [];
+let element = null;
 const Contentmain = () => {
   const dispatch = useDispatch();
   const { _id, profilepic, username } = useSelector((state) => {
@@ -204,6 +206,7 @@ const Contentmain = () => {
     }
   };
   const setcommentsfunc = ({ val, post }) => {
+    element = document.querySelector("#infiniteScroll");
     setshowcomments({ val: val, post: post });
   };
 
@@ -221,6 +224,8 @@ const Contentmain = () => {
 
     return () => setIsUnmounted(true);
   }, []);
+  if (showcomments.val) disableBodyScroll(element);
+  else if (element != null) enableBodyScroll(element);
 
   if (loading == true) {
     return <div className={Styles.loader}></div>;
@@ -233,101 +238,89 @@ const Contentmain = () => {
     );
   } else {
     return (
-      <>
-         
+      <div className={Styles.maincontent} id="infiniteScroll">
         {showcomments.val ? (
           <Comments
             username={username}
             showcomments={showcomments}
             setcommentsfunc={setcommentsfunc}
           />
-        ) : (
-          <div className={Styles.maincontent}>
-            <InfiniteScroll
-              className={Styles.infi}
-              dataLength={state.feedposts.posts.length}
-              next={call_func}
-              hasMore={hasMore}
-              loader={<div className={Styles.loader}></div>}
-              endMessage={
-                <p
-                  style={{
-                    textAlign: "center",
-                    backgroundColor: "black",
-                    color: "white",
-                    width: "100%",
-                    height: "30px",
-                    marginTop: "1%",
-                    marginBottom: "5%",
-                    position: "relative",
-                  }}
-                >
-                  <b>Yay! You have seen it all</b>
-                </p>
-              }
+        ) : null}
+        <InfiniteScroll
+          className={Styles.infi}
+          dataLength={state.feedposts.posts.length}
+          next={call_func}
+          hasMore={hasMore}
+          loader={<div className={Styles.loader}></div>}
+          endMessage={
+            <p
+              style={{
+                textAlign: "center",
+                backgroundColor: "black",
+                color: "white",
+                width: "100%",
+                height: "30px",
+                marginTop: "1%",
+                marginBottom: "5%",
+                position: "relative",
+              }}
             >
-                
-              {state.feedposts.posts.map((post, key) => (
-             
-                <div key={post._id} className={Styles.singlecontainer}  >
-                   
-                  <div className={Styles.topdiv}>
-                    <img src={post.pic} />
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          {state.feedposts.posts.map((post, key) => (
+            <div key={post._id} className={Styles.singlecontainer}>
+              <div className={Styles.topdiv}>
+                <img src={post.pic} />
 
-                    <h5>{post.username}</h5>
-                  </div>
-                  <button
-                    onDoubleClick={()=>likefunction(post, post._id)}
-                    className={Styles.imgdiv}
-                  >
-              
-              <Suspense fallback={<Loader  />} >
-                      <SuspenseImg alt="" src={post.picture}    />
-                      </Suspense>
-                  </button>
-                  <div className={Styles.bottomdiv}>
-                    {likesArray.findIndex(
+                <h5>{post.username}</h5>
+              </div>
+              <button
+                onDoubleClick={() => likefunction(post, post._id)}
+                className={Styles.imgdiv}
+              >
+                <Suspense fallback={<Loader />}>
+                  <SuspenseImg alt="" src={post.picture} />
+                </Suspense>
+              </button>
+              <div className={Styles.bottomdiv}>
+                {likesArray.findIndex(
+                  (ele) => ele.username == username && ele.postID == post._id
+                ) >= 0 ? (
+                  <span onClick={() => unlikefunction(post, post._id)}>
+                    💖{" "}
+                    {likeCountArray.findIndex(
                       (ele) =>
-                        ele.username == username && ele.postID == post._id
-                    ) >= 0 ? (
-                      <span onClick={() => unlikefunction(post, post._id)}>
-                        💖{" "}
-                        {likeCountArray.findIndex(
-                          (ele) =>
-                            ele.username === username && ele.postID === post._id
-                        ) >= 0
-                          ? post.likes.length + 1
-                          : post.likes.length}
-                      </span>
-                    ) : (
-                      <span onClick={() => likefunction(post, post._id)}>
-                        🤍{" "}
-                        {likeCountArray.findIndex(
-                          (ele) =>
-                            ele.username === username && ele.postID === post._id
-                        ) >= 0
-                          ? post.likes.length - 1
-                          : post.likes.length}
-                      </span>
-                    )}
-                    <span
-                      onClick={() => setcommentsfunc({ val: true, post: post })}
-                    >
-                      💬 {post?.comments?.length}
-                    </span>
+                        ele.username === username && ele.postID === post._id
+                    ) >= 0
+                      ? post.likes.length + 1
+                      : post.likes.length}
+                  </span>
+                ) : (
+                  <span onClick={() => likefunction(post, post._id)}>
+                    🤍{" "}
+                    {likeCountArray.findIndex(
+                      (ele) =>
+                        ele.username === username && ele.postID === post._id
+                    ) >= 0
+                      ? post.likes.length - 1
+                      : post.likes.length}
+                  </span>
+                )}
+                <span
+                  onClick={() => setcommentsfunc({ val: true, post: post })}
+                >
+                  💬 {post?.comments?.length}
+                </span>
 
-                    <img src={sharepic} width="4.5%" height="2%" />
-                  </div>
-                  <div className={Styles.caption}>{post.desc}</div>
-            
-                </div>    
-              ))}
-            
-            </InfiniteScroll>
-          </div>
-        )}
-     
-      </>
+                <img src={sharepic} width="4.5%" height="2%" />
+              </div>
+              <div className={Styles.caption}>{post.desc}</div>
+            </div>
+          ))}
+        </InfiniteScroll>
+      </div>
     );
   }
 };

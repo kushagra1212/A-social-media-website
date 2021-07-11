@@ -1,9 +1,13 @@
 import axios from 'axios';
 const URL=process.env.REACT_APP_URL;
-const addcomment=async(id,username,comment)=>{
+const addcomment=async(id,username,comment,profilePicture)=>{
  try{
-    const res=await axios.patch(`${URL}/post/addcomment?id=${id}&username=${username}&comment=${comment}`,{
-      
+    const res=await axios.patch(`${URL}/post/addcomment`,{
+     id:id,
+     username:username,
+     comment:comment,
+     profilePicture:profilePicture
+   
     });
     if(res.data)
     {

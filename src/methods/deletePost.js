@@ -7,7 +7,7 @@ const deletePost=async(id,picture)=>{
     const res=await axios.delete(`${URL}/post/deleteuserpost`,{
         data:{
             id,picture
-        }
+        }   
     });
    console.log(res.data);
     }catch(err)

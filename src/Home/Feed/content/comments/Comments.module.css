@@ -1,13 +1,43 @@
 .maindiv{
     display: flex;
+    position: fixed;
     flex-direction: column;
     overflow: scroll;
-    min-height: 510px;
+    height: 90vh;
+    width: 90vw;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    /* min-height: 510px; */
+    border: 5px solid #80808000;
+    border-radius: 10px;
+    box-shadow: 8px 9px 15px 0px #505050;
+    background-color: aliceblue;
+    z-index: 2;
 }
 .main{
     display: flex;
     flex-direction: column;
     overflow: scroll;
+}
+.topdiv{
+    position: relative;
+    display: flex;
+    z-index: 10;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 2px solid #f0282800;
+    box-shadow: 3px 5px 10px 0px grey;
+    border: 2px solid #ffffff00;
+    border-radius: 7px;
+
+}
+.profileimage{
+    position: absolute;
+    left: 1%;
+    border: 1px solid grey;
+    top: 1%;
+    border-radius: 10px;
 }
 .commentdiv{
     position: relative;
@@ -23,10 +53,23 @@
 }
 .username{
    
-    margin-bottom: 1%;
-  font-size: 1em;
+    position: relative;
+    margin-left: 10%;
+    margin-top: -3%;
  
 }
 .comment{
-   font-size: 0.8em;
+    font-size: 0.8em;
+    scroll-behavior: smooth;
+    overflow-wrap: break-word;
+    position: relative;
+    margin-left: 10%;
+    margin-top: 1%;
+
+}
+.backbut{
+    background-color: rgb(51 37 37);
+    color: beige;
+    border: 2px solid #80808000;
+    border-radius: 10px;
 }

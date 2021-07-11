@@ -8,13 +8,13 @@ import sharepic from "../../../Home/Feed/content/images/share.png";
 
 import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
-
+import { useAlert } from "react-alert";
 import deletePost from "../../../methods/deletePost";
 import {useDispatch,useSelector} from "react-redux";
 
 let likeCountArray = [];
 const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
-   
+    const Alert=useAlert();
     const dispatch=useDispatch();
     const [showcomments, setshowcomments] = useState(false);
     const [likeLoading,setlikeLoading]=useState(false);
@@ -93,7 +93,8 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
         setshowcomments({ val: val, post: post });
     }
     const deletePostHandle=async(id,picture)=>{
-  
+       Alert.error("Post can not be deleted ! ");
+        return;
         await deletePost(id,picture);
     }
     return(

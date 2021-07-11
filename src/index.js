@@ -12,7 +12,7 @@ const store=createStore(Reducers,composeWithDevTools(compose(applyMiddleware(thu
 const options = {
  
     position: positions.BOTTOM_CENTER,
-    timeout: 5000,
+    timeout: 500,
     offset: '30px',
   
     transition: transitions.SCALE
