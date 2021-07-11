@@ -7,14 +7,18 @@ import { useSelector } from "react-redux";
 const Comment = ({ username, showcomments, setcommentsfunc }) => {
   const [post, setpost] = useState(showcomments.post);
   const profilepic= useSelector((state)=> state.user.profilepic );
+  
   const addCommentFunc = async (comment) => {
     let id = showcomments.post._id;
     let profilePicture = post.pic;
   
     let com = await addcomment(id, username, comment, profilePicture);
+
+  
+    com.comments.sort((a,b)=>new Date(b.date)-new Date(a.date));
     setpost(com);
   };
-
+ 
   return (
     <div className={Styles.maindiv}>
       <button
