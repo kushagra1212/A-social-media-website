@@ -11,6 +11,7 @@ import deletelike from "../../../methods/deletelike";
 import Feedposts from "../../../posts/Feedposts";
 import Comments from "./comments/Comments";
 import Loader from "../../../Animation/Loader/Loader";
+import VerticalLoader from "../../../Animation/Loader/loader/VerticalLoader";
 import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
 import { SuspenseImg } from "./SuspenceImage/SuspenceImg";
 import {
@@ -280,7 +281,7 @@ const Contentmain = () => {
                 onDoubleClick={() => likefunction(post, post._id)}
                 className={Styles.imgdiv}
               >
-                <Suspense fallback={<Loader />}>
+                <Suspense fallback={<VerticalLoader />}>
                   <SuspenseImg alt="" src={post.picture} />
                 </Suspense>
               </button>

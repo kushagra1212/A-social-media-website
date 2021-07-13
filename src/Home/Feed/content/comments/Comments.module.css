@@ -14,11 +14,15 @@
     box-shadow: 8px 9px 15px 0px #505050;
     background-color: aliceblue;
     z-index: 2;
+
+    overflow: hidden;
 }
 .main{
     display: flex;
     flex-direction: column;
     overflow: scroll;
+    overflow-x: hidden;
+
 }
 .topdiv{
     position: relative;

@@ -6,7 +6,7 @@ import Styles from './Top.module.css'
 
 const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,bio,postsnumber,setshowfollowershandle,setshowfollowinghandle})=>{
     const {followerscount,followingcount}=useSelector(state=>state.count);
-   console.log("from topprof",followerscount)
+
     return(
         <div className={Styles.maindiv}  >
         <div className={Styles.firstdiv} >

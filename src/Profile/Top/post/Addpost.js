@@ -1,16 +1,16 @@
-import FileBase64 from "react-file-base64";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatecountforpost } from "../../../reduces/actions/countAction";
 import axios from "axios";
 import Styles from "./Addpost.module.css";
 import { useSpring,animated } from "react-spring";
+import { useAlert } from "react-alert";
 import {resetUserPosts,resetFeedPosts} from "../../../reduces/actions/userAction";
 const URL = process.env.REACT_APP_URL;
 const Addpost = ({ setposthandle }) => {
   const [pic, setpic] = useState(null);
   const [desc, setdesc] = useState("");
-
+  const ALert=useAlert();
   const { username, proffilepic } = useSelector((state) => state.user);
   const [loading, setloading] = useState(false);
   const [selectedFile,setSelectedFile]=useState(null);
@@ -18,7 +18,7 @@ const Addpost = ({ setposthandle }) => {
   const { postcount } = useSelector((state) => state.count);
   const savehandle = async (e) => {
     if(selectedFile==null)
-     return alert("Oops ! 😜");
+     return ALert.error("Oops ! 😜");
     setloading(!loading);
     const data=new FormData(e.target);
     data.append('file',selectedFile);

@@ -11,7 +11,7 @@ import getitem from '../../../methods/getitem';
 import {getstoriesFromOthers} from '../../../methods/uploadstories';
 const Stories = () => {
    const dispatch=useDispatch();
-  const {username} =useSelector(state=>state.user);
+  const {username,profilepic} =useSelector(state=>state.user);
   const [isUnmounted,setUnmounted]=useState(false);
   const {othersStories,loading} =useSelector(state=>state.Stories);
 
@@ -40,12 +40,12 @@ return ()=>setUnmounted(true);
 
      
  
-
+console.log("URL",profilepic);
   return (
 
 
       <div className={Styles.stories}>
-        <div onClick={()=> dispatch(show_user_stories_handle(true))} className={Styles.userStories}></div>
+        <div onClick={()=> dispatch(show_user_stories_handle(true))} className={Styles.userStories} ><img src={profilepic} alt="" width="100%" height="100%" /></div>
         {othersStories?.map((ele,id)=>
      
           ele.stories.length>=1?<div key={id} onClick={()=>dispatch(show_others_stories_handle(true,id))} className={Styles.particular}></div>:null
