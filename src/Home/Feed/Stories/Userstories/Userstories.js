@@ -45,6 +45,7 @@ const Userstories = () => {
     return (
     
         <Picture
+        other={false}
           documents={documents}
           set_picture_handle={set_picture_handle}
         />

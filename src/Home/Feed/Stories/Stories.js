@@ -17,13 +17,12 @@ const Stories = () => {
 
  useEffect(()=>{
    
-  if(username && loading && isUnmounted)
-  {
+
     getitem(username).then(res=>{
    
-
+   console.log(res,"GETITEM")
       res?.following.map((ele)=>{
-        console.log("e",ele.username);
+        console.log("is this working",ele.username);
         getstoriesFromOthers(ele.username,dispatch);
       })
     
@@ -31,7 +30,6 @@ const Stories = () => {
     })
        
       
-  }
 return ()=>setUnmounted(true);
   
 
@@ -40,12 +38,13 @@ return ()=>setUnmounted(true);
 
      
  
-console.log("URL",profilepic);
+
   return (
 
 
       <div className={Styles.stories}>
         <div onClick={()=> dispatch(show_user_stories_handle(true))} className={Styles.userStories} ><img src={profilepic} alt="" width="100%" height="100%" /></div>
+     
         {othersStories?.map((ele,id)=>
      
           ele.stories.length>=1?<div key={id} onClick={()=>dispatch(show_others_stories_handle(true,id))} className={Styles.particular}></div>:null

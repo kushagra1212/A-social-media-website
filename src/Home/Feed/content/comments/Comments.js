@@ -2,13 +2,16 @@ import { useState } from "react";
 import Addcomment from "./Addcomment";
 import addcomment from "../../../../methods/addcomments";
 import Styles from "./Comments.module.css";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { useSpring,animated } from "react-spring";
 import userImage from "./icons/userImage.png";
+import { updatepost } from "../../../../reduces/actions/userAction";
 const Comment = ({ username, showcomments, setcommentsfunc }) => {
-  const [post, setpost] = useState(showcomments.post);
+  const [post, setpost] = useState();
   const profilepic = useSelector((state) => state.user.profilepic);
-
+  const [comments,setcomments]=useState(null);
+  const dispatch=useDispatch();
   const addCommentFunc = async (comment) => {
     let id = showcomments.post._id;
     let profilePicture = post.pic;
@@ -17,7 +20,14 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
 
     com.comments.sort((a, b) => new Date(b.date) - new Date(a.date));
     setpost(com);
+
+    dispatch(updatepost(com));
   };
+  useEffect(()=>{
+    let com=showcomments.post;
+    com.comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+  setpost(com);
+  },[]);
   const Popup = useSpring({
     from: { y: "100%", x: "-50%", transform: "scale(0.1)" },
     y: "-50%",
@@ -47,7 +57,6 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
         <Addcomment addCommentFunc={addCommentFunc} />
       </div>
       <div className={Styles.main}>
-        {console.log(post.comments)}
         {post?.comments.map((ele, id) => {
           return (
             <div className={Styles.commentdiv} key={id}>

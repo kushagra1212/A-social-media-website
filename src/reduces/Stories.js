@@ -15,15 +15,14 @@ const Stories = (
     case "SHOW_WEBCAM":
       return { ...state, show_webcam: action.payload.show_webcam };
     case "UPLOAD_STORIES":
-      state.documents.push(action.payload.document);
-      return state;
+
+      return {...state,documents:[...state.documents,action.payload.document]};
     case "GET_STORIES":
-      state.documents = action.payload.documents;
-      return state;
+
+      return {...state,documents:action.payload.documents};
     case "GET_STORIES_FROM_OTHERS":
-      state.othersStories.push(action.payload.story);
-      state.loading = false;
-      return state;
+
+      return {...state,othersStories:[...state.othersStories,action.payload.story],loading:false};
     case "SHOW_OTHERS_STORIES":
       let flag = action.payload.show_others_stories;
       let key = action.payload.key;

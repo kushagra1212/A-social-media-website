@@ -18,7 +18,7 @@ const Home=()=>{
            });
 const fade=useSpring({
 
-  opacity:show_user_stories?1:0,
+  opacity:show_user_stories?1:1,
   config:{duration:250}
 
 });

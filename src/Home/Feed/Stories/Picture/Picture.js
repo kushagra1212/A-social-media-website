@@ -4,7 +4,8 @@ import {useDispatch} from 'react-redux';
 import {useTransition,useSpringRef,animated} from 'react-spring';
 import {show_user_stories_handle} from '../../../../reduces/actions/StoriesAction';
 import { backgroundImages } from './backgroundImages';
-const Picture=({documents,set_picture_handle})=>{
+import { show_others_stories_handle } from '../../../../reduces/actions/StoriesAction';
+const Picture=({documents,set_picture_handle,other})=>{
 
     const [count,setcount]=useState(0);
     const [backgroundCount,setbackgroundCount]=useState(Math.floor(Math.random()*backgroundImages.length));
@@ -43,7 +44,7 @@ const Picture=({documents,set_picture_handle})=>{
 
     return (
         <div className={Styles.maindiv} >
-       <button className={Styles.addMore} onClick={()=>set_picture_handle(false)}  >Add more</button>
+       {other==true?null:<button className={Styles.addMore} onClick={()=>set_picture_handle(false)}  >Add more</button>}
       
               {Transition((style,i)=>{
                   return (
@@ -56,8 +57,8 @@ const Picture=({documents,set_picture_handle})=>{
               })}
                
       
-               <button  className={Styles.next}  onClick={()=>count+1<=documents.length-1?increaseCount():dispatch(show_user_stories_handle(false))}    > </button>
-               <button  className={Styles.previous}  onClick={()=>count-1>=0?decreaseCount():dispatch(show_user_stories_handle(false))}    > </button>
+               <button  className={Styles.next}  onClick={()=>count+1<=documents.length-1?increaseCount():other==true?show_others_stories_handle(false,-1):dispatch(show_user_stories_handle(false))}    > </button>
+               <button  className={Styles.previous}  onClick={()=>count-1>=0?decreaseCount():other==true?show_others_stories_handle(false,-1):dispatch(show_user_stories_handle(false))}    > </button>
         </div>
       
     )

@@ -270,11 +270,13 @@ const Contentmain = () => {
             </p>
           }
         >
-          {state.feedposts.posts.map((post, key) => (
+          {state?.feedposts.posts.map((post, key) => (
             <div key={post._id} className={Styles.singlecontainer}>
               <div className={Styles.topdiv}>
+              <Suspense fallback={<VerticalLoader />}>
+           
                 <img src={post.pic} />
-
+                </Suspense>
                 <h5>{post.username}</h5>
               </div>
               <button

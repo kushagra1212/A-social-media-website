@@ -43,7 +43,7 @@ import {UPLOAD_STORIES,GET_STORIES,GET_STORIES_FROM_OTHERS} from '../reduces/act
        if(res.data)
        {
         
-         dispatch(GET_STORIES_FROM_OTHERS(username,res.data));
+        if(res.data.length>=1)   await dispatch(GET_STORIES_FROM_OTHERS(username,res.data));
        }
     }catch(err)
     {
