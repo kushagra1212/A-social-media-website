@@ -7,6 +7,7 @@ const Othersstories=()=>{
   const dispatch=useDispatch();
   const { show_others_stories,othersStories } = useSelector((state) => state.Stories);
   const [count,setcount]=useState(0);
+  const {username}=useSelector(state=>state.user);
   const [showpictures, setshowpictures] = useState(true);
   const set_picture_handle = (ans) => {
     setshowpictures(ans);
@@ -14,11 +15,19 @@ const Othersstories=()=>{
   return(
     <>
     {othersStories.map((element,id)=>
-      <Picture
-      other={false}
-        documents={element.stories}
-        set_picture_handle={set_picture_handle}
-      />
+    {
+      if(element.username!=username)
+      {
+        return (<Picture
+          other={true }
+          key={id}
+            documents={element.stories}
+            set_picture_handle={set_picture_handle}
+          />);
+      }else{
+        return null;
+      }
+    }
     )}
     
     </>

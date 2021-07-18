@@ -18,16 +18,7 @@ const Stories = () => {
  useEffect(()=>{
    
 
-    getitem(username).then(res=>{
-   
-   console.log(res,"GETITEM")
-      res?.following.map((ele)=>{
-        console.log("is this working",ele.username);
-        getstoriesFromOthers(ele.username,dispatch);
-      })
-    
-         
-    })
+
        
       
 return ()=>setUnmounted(true);

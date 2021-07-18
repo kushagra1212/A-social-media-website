@@ -14,6 +14,7 @@ const Webcamcapture = () => {
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.user);
   const { picture, started, _id } = useSelector((state) => state.Stories);
+  const [isUnmounted,setIsUnmounted]=useState(false);
   const webcamRef = useRef(null);
   const videoContraints = {
     facingMode: "user",
@@ -40,8 +41,14 @@ const Webcamcapture = () => {
   };
 
   const capture = useCallback(() => {
-    const image = webcamRef.current.getScreenshot();
-    setimagecaptured(image);
+     if(!isUnmounted)
+     {
+      const image = webcamRef.current.getScreenshot();
+      setimagecaptured(image);
+     }
+
+     return ()=>setIsUnmounted(true);
+
   }, [webcamRef]);
 
   return (

@@ -33,8 +33,8 @@ useEffect(async() => {
       return (<div  className={Styles.maindiv} style={{  height:"100vh",
       backgroundColor: "white",
       position: "absolute",
-      width: "100vw",
-      zIndex: 10}}>
+      width: "100vw"
+     }}>
         <animated.div style={fade}  >  <Othersstories/></animated.div>
          
       </div>)

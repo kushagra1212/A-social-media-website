@@ -11,9 +11,11 @@ import deletelike from "../../../methods/deletelike";
 import Feedposts from "../../../posts/Feedposts";
 import Comments from "./comments/Comments";
 import Loader from "../../../Animation/Loader/Loader";
+import { getstoriesFromOthers } from "../../../methods/uploadstories";
 import VerticalLoader from "../../../Animation/Loader/loader/VerticalLoader";
 import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
 import { SuspenseImg } from "./SuspenceImage/SuspenceImg";
+import { getstories } from "../../../methods/uploadstories";
 import {
   updateLikesArray,
   updateUnlikesArray,
@@ -123,6 +125,18 @@ const Contentmain = () => {
       getitem(username).then((item) =>
         item?.following?.map((dat) => {
           let lastcount2 = state.feedposts.lastcount;
+
+      
+            item?.following.map((ele)=>{
+           
+              getstoriesFromOthers(ele.username,dispatch);
+            })
+          
+            getstories(username, dispatch);
+    
+
+
+
           getpostsforfeed(dat.username, lastcount2)
             .then((post) => {
               post2 = post;

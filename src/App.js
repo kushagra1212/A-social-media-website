@@ -12,7 +12,7 @@ const App = () => {
   const dispatch = useDispatch();
   let access = useSelector((state) => state.signinReducer.access);
   const issignup = useSelector((state) => state.signinReducer.signup);
-  const { username } = useSelector((state) => state.user);
+
   const [isUnmounted, setUnmounted] = useState(false);
   useEffect(() => {
     if (!isUnmounted) {
@@ -24,7 +24,10 @@ const App = () => {
   
           setTimeout(()=>{
             dispatch(getuser(res.data.id));
-            getstories(username, dispatch);
+         
+
+
+            
           },0)
         
           setTimeout(() => {

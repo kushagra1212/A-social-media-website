@@ -44,7 +44,7 @@ const Picture=({documents,set_picture_handle,other})=>{
 
     return (
         <div className={Styles.maindiv} >
-       {other==true?null:<button className={Styles.addMore} onClick={()=>set_picture_handle(false)}  >Add more</button>}
+       {other===true?null:<button className={Styles.addMore} onClick={()=>set_picture_handle(false)}  >Add more</button>}
       
               {Transition((style,i)=>{
                   return (
@@ -57,8 +57,8 @@ const Picture=({documents,set_picture_handle,other})=>{
               })}
                
       
-               <button  className={Styles.next}  onClick={()=>count+1<=documents.length-1?increaseCount():other==true?show_others_stories_handle(false,-1):dispatch(show_user_stories_handle(false))}    > </button>
-               <button  className={Styles.previous}  onClick={()=>count-1>=0?decreaseCount():other==true?show_others_stories_handle(false,-1):dispatch(show_user_stories_handle(false))}    > </button>
+               <button  className={Styles.next}  onClick={()=>count+1<=documents.length-1?increaseCount():other==true?dispatch(show_others_stories_handle(false,-1)):dispatch(show_user_stories_handle(false))}    > </button>
+               <button  className={Styles.previous}  onClick={()=>count-1>=0?decreaseCount():other==true?dispatch(show_others_stories_handle(false,-1)):dispatch(show_user_stories_handle(false))}    > </button>
         </div>
       
     )

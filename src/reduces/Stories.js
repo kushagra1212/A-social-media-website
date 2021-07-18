@@ -21,10 +21,19 @@ const Stories = (
 
       return {...state,documents:action.payload.documents};
     case "GET_STORIES_FROM_OTHERS":
+    
+    let otherstoriesTemp=state.othersStories;
 
+    let found=otherstoriesTemp.some(element=>element.username===action.payload.story.username);
+     if(found)
+     {
+       return {...state,loading:false};
+     }
+
+      
       return {...state,othersStories:[...state.othersStories,action.payload.story],loading:false};
     case "SHOW_OTHERS_STORIES":
-      let flag = action.payload.show_others_stories;
+      let flag = action.payload.flag;
       let key = action.payload.key;
 
       return { ...state, show_others_stories: { flag: flag, key: key } };
