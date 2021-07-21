@@ -7,7 +7,7 @@ import Profile from "../Profile/Profile";
 import Styles from "./Search.module.css";
 import verifiesusers from '../methods/verifiesusers'
 const URL = process.env.REACT_APP_URL;
-const Search = ({showprofilefromshowbar,usernameformshowbar}) => {
+const Search = ({showprofilefromshowbar,usernameformshowbar,view}) => {
   const [searchuser, setsearchuser] = useState("");
   const [user, setuser] = useState("");
   const [loading, setloading] = useState(false);
@@ -168,7 +168,7 @@ else if(showprofilefromshowbar && loading)
     return (
       <div >
         <div className={Styles.topsearchbar}>
-         <div  className={Styles.container}  >
+         {view?<div  className={Styles.container}  >
          <input 
           placeholder="Search User Here..."
           type="text"
@@ -181,7 +181,7 @@ else if(showprofilefromshowbar && loading)
         <div className={Styles.search} ></div>
 
 
-         </div>
+         </div>:null}
      {/*   <button className={Styles.searchbutton} onClick={() => searchuser.length>0?setshowprofile(true):null}>Search</button>*/}
           </div>
         {loading ? <div><div className={Styles.loader}  ></div></div> : 

@@ -18,7 +18,7 @@ const Footer=()=>{
            <img  src={home?homeblackimg:homeimg} onClick={()=>dispatch({type:"SHOWHOME",payload:true})}      />
            <img src={search?searchblackimg:searchimg}   onClick={()=>dispatch({type:"SHOWSEARCH",payload:true})}   />
            <img  src={like?likeblackimg:likeimg}    onClick={()=>dispatch({type:"SHOWLIKE",payload:true})}  />
-           <img  src={profile?profilepic:profilepic}    className={Styles.profile}  onClick={()=>dispatch({type:"SHOWPROFILE",payload:true})}   />
+           <img  src={profile?profilepic?profilepic:process.env.PUBLIC_URL+'/userImage.png':profilepic?profilepic:process.env.PUBLIC_URL+'/userImage.png'}    className={Styles.profile}  onClick={()=>dispatch({type:"SHOWPROFILE",payload:true})}   />
           
         </div>
       </>

@@ -26,7 +26,7 @@ const Showbar = ({
 
     getitem(username)
       .then((res) => {
-        console.log(res.following,"TEST");
+      
         dispatch({type:'SET_FOLLOWING_USERS',payload:{following:res.following}});
         if (res.following.length == 0) {
           setnoone({ nofollowers: false, nofollowing: true });

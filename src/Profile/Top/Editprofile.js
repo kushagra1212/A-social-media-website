@@ -85,7 +85,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
         <button className={Styles.backbut} onClick={edit_it}>
           BACK
         </button>
-        <img className={Styles.editimg} width="50px" height="50px" src={pic} />
+        <img className={Styles.editimg} width="50px" height="50px" src={pic?pic:process.env.PUBLIC_URL+'/userImage.png'} />
          <input  type="file" onChange={(e)=>selectedFileHandle(e)}  />
         <input onChange={(e) => setnewemail(e.target.value)} value={newemail} />
         <input

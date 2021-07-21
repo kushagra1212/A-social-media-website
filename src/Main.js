@@ -25,7 +25,7 @@ const Main = () => {
       ) : profile ? (
         <Profile />
       ) : search ? (
-        <Search fromshowbar={false} usernameformshowbar={null} />
+        <Search fromshowbar={false} usernameformshowbar={null} view={true} />
       ) : message ? (
         <Message />
       ) : null}

@@ -10,14 +10,14 @@ const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,
     return(
         <div className={Styles.maindiv}  >
         <div className={Styles.firstdiv} >
-        <img src={profpic}  />
+        <img src={profpic?profpic:process.env.PUBLIC_URL+'/userImage.png'}  />
         <button onClick={()=>edit_it()} className={Styles.editbut}>Edit Profile</button>
         <button className={Styles.logoutbut} onClick={logouthandle}>Log out</button>
 
         </div>
         <div className={Styles.seconddiv}  >
         <h3>{name}</h3>
-        <img src={img}/>
+        <img src={img} />
         <h6>@{username}</h6>
         <h5>{bio}</h5>
         

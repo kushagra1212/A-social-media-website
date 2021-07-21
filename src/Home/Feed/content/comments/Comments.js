@@ -5,7 +5,7 @@ import Styles from "./Comments.module.css";
 import { useSelector,useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSpring,animated } from "react-spring";
-import userImage from "./icons/userImage.png";
+
 import { updatepost } from "../../../../reduces/actions/userAction";
 const Comment = ({ username, showcomments, setcommentsfunc }) => {
   const [post, setpost] = useState();
@@ -50,7 +50,7 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
         <img
           alt=""
           className={Styles.profileimage}
-          src={profilepic}
+          src={profilepic?profilepic:process.env.PUBLIC_URL+'/userImage.png'}
           width="30px"
           height="30px"
         />
@@ -63,7 +63,7 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
               <img
                 alt=""
                 className={Styles.profileimage}
-                src={userImage}
+                src={process.env.PUBLIC_URL+'/userImage.png'}
                 width="20px"
                 height="20px"
               />
