@@ -39,6 +39,7 @@ const Showbar = ({
         }
 
         if (showfollowers) {
+          
           setitem(res.followers);
         } else if (showfollowing) {
           setitem(res.following);

@@ -74,7 +74,7 @@ const User = ({
   return (
     <div className={Styles.maindiv}>
       <div className={Styles.firstdiv}>
-        <img src={profpic} />
+        <img src={profpic?profpic:process.env.PUBLIC_URL+'userImage.png'} />
       </div>
       <div className={Styles.seconddiv}>
         <h3>{name}</h3>

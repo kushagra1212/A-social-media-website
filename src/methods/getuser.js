@@ -6,7 +6,7 @@ try{
     const res=await axios.get(`${URL}/users/getuser?username=${username}`);
      if(res.data)
      {
-    
+       console.log(res,"RES");
          return res.data;
      }else{
          return({msg:"NOt Found"});

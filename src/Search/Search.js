@@ -160,7 +160,7 @@ if(showprofilefromshowbar && !loading)
 }
 else if(showprofilefromshowbar && loading)
 {
-  return (<div className={Styles.loader} ></div>)
+  return (<div className={Styles.loader} >Loadig,,,,,sac</div>)
 }
   else if(showlist===true)
   {
@@ -192,7 +192,7 @@ else if(showprofilefromshowbar && loading)
             onClick={showuserprofilehandle}
          
           >
-            <img width="30px" height="30px" src={user.profilepic} />
+            <img width="30px" height="30px" src={user.profilepic?user.profilepic:process.env.PUBLIC_URL+'/userImage.png'} />
             <h4>{user.name}</h4>
             <button>Go to profile</button>
             <h6>@{user.username}</h6>

@@ -29,7 +29,7 @@ const Top = ({
   const [img, setimg] = useState(null);
   const [edit, setedit] = useState(false);
   const [post, setpost] = useState(false);
-  const [isUnmounted,setIsUnmounted]=useState(false);
+  const [isUnmounted, setIsUnmounted] = useState(false);
   const [profpic, setprofpic] = useState(profilepic);
   const dispatch = useDispatch();
 
@@ -37,14 +37,12 @@ const Top = ({
     setedit(!edit);
   };
   useEffect(() => {
-    if(!isUnmounted)
-    {
-
+    if (!isUnmounted) {
     }
     return () => {
       setIsUnmounted(true);
-    }
-  }, [edit])
+    };
+  }, [edit]);
   const logouthandle = () => {
     axios
       .get(`${URL}/auth/logout`, { withCredentials: true })
@@ -61,13 +59,11 @@ const Top = ({
     setposthand(true);
   };
 
-
   return (
     <>
       {!post ? (
         edit ? (
-         <Editprofile  setprofpichandle={setprofpichandle} edit_it={edit_it} />
-         
+          <Editprofile setprofpichandle={setprofpichandle} edit_it={edit_it} />
         ) : (
           <Topprofile
             name={name}

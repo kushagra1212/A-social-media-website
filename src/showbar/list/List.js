@@ -9,8 +9,9 @@ const List = ({ list }) => {
   const [usernames, setusernames] = useState(list);
   const [loading,setloading]=useState(true);
   const [showprofile,setshowprofile]=useState(false);
-  const [username,setusername]=useState(null);
+  const [username,setusername]=useState([]);
   const [isUnmounted,setIsUnmounted]=useState(false);
+ 
   const unique=(array)=>{
     let newar=[];
     let isvisited={};
@@ -24,35 +25,36 @@ const List = ({ list }) => {
     return newar;
   }
   const setusershandle = async() => {
-    let arr=[];
-    arr=users;
+  
     console.log(usernames);
-        await usernames.map(async(ele) => {
+        usernames.map(async(ele) => {
     const {username}=ele;
      const data=await getuser(username);
      
         try{
           if(data)
           {
-           arr.push(data);
-           arr=unique(arr);
-           setusers(arr);
+          
+           setusers((prev)=>[...prev,data]);
            
           }
             
         }catch(err)
       {
+        console.log(err);
      
       }
-      setloading(false);
+     
     });
-  
+    setloading(false);
 
     console.log(users);
   };
   useEffect(() => {
 
-    setusershandle();
+  
+  setusershandle();
+
 
     return ()=>setIsUnmounted(true);
   }, []);
@@ -78,7 +80,7 @@ const List = ({ list }) => {
         <button onClick={()=>{setshowprofile(true); setusername(user.username)}}  >Go to profile</button>
       </div>)
     })}
-    <Loader width={1} height={1} fontSize={10}/>
+    {list.length==users.length?null:<Loader width={1} height={1} fontSize={10}/>}
     </div>
     );
   }
