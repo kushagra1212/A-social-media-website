@@ -23,6 +23,11 @@
 
 
 }
+.nopost{
+  position: relative;
+  display: flex;
+  margin-top:25%;
+}
 .topButtons{
   position: relative;
   /* margin-bottom: 2%; */

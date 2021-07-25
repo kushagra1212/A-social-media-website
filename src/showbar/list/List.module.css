@@ -1,19 +1,49 @@
 
 .maindiv{
-      
+  display: flex;
+  /* flex-direction: row; */
+  flex-direction: column;
+  /* justify-content: flex-end; */
+  /* align-content: center; */
+  /* align-items: baseline; */
+  /* flex-wrap: wrap; */
+  top: 20px;
+  position: absolute;
 }
-.userprofile{
-    position: relative;
-    background: linear-gradient(#2193b0, #6dd5ed);
-    display: flex;
-    border:2px solid rgba(128, 128, 128, 0.144);
-    border-radius: 10px;
-    margin: 2%;
-  
-    justify-content: center;
-  
 
-   flex-direction: column;
+.userprofile{
+  display: flex;
+  flex-direction: row;
+  animation-name: List_Search_animateIn__2ZQDQ__2-lAF;
+  animation-duration: 350ms;
+  animation-delay: calc(var(--animation-order) * 100ms);
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  position: relative;
+  border: 10px solid rgba(128, 128, 128, 0);
+  border-radius: 15px;
+  margin: 2%;
+  align-items: center;
+  box-shadow: 0 0 25px 0 rgb(191 193 230 / 84%), 0 20px 25px 0 rgb(0 0 0 / 20%);
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: space-around;
+
+
+
+
+  
+}
+
+@keyframes animateIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(-8px);
+  }
+  
+  100% {
+    opacity: 1;
+  }
 }
 .userprofile img{
     width:20%;
@@ -23,22 +53,21 @@
     
 }
 .userprofile button{
-    background:linear-gradient(#ee9ca7 , #ffdde1) ;
   
+    background:rgba(25, 250, 25, 0.479);
+  width:50%;
     outline: none;
     border: 2px solid rgba(128, 128, 128, 0);
-    border-radius: 5px;
-    box-shadow: 2px 2px 20px grey;
+    border-radius: 100px;
+  box-shadow: 2px 2px 5px rgba(28, 158, 49, 0.76);
+
     transition: ease-in-out;
+    
 }
 .userprofile button:active{
-    background:linear-gradient(#ee9ca7 , #c0aaac) ;
+  box-shadow: 2px 2px 10px rgba(118, 182, 128, 0.76);
 }
-.userprofile h4{
-    position: absolute;
-    top:20%;
-    left:50%;
-}
+
 
 .loader,
 .loader:after {

@@ -50,7 +50,7 @@ const Container = ({ posts }) => {
             
             )
           })
-        : null}
+        : <h3>NOTHING POSTED YET</h3>}
    
     </div></>
   );

@@ -25,25 +25,25 @@
 
 
 .userprofile{
-  display: block;
-
   display: flex;
-    flex-direction: column;
-
-  animation-name: animateIn;
+  flex-direction: row;
+  animation-name: List_Search_animateIn__2ZQDQ__2-lAF;
   animation-duration: 350ms;
   animation-delay: calc(var(--animation-order) * 100ms);
   animation-fill-mode: both;
   animation-timing-function: ease-in-out;
-    position: relative;
-   
+  position: relative;
+  border: 10px solid rgba(128, 128, 128, 0);
+  border-radius: 15px;
+  margin: 2%;
+  align-items: center;
+  box-shadow: 0 0 25px 0 rgb(191 193 230 / 84%), 0 20px 25px 0 rgb(0 0 0 / 20%);
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: space-around;
 
-    border:10px solid rgba(128, 128, 128, 0);
-    border-radius: 15px;
-    margin: 2%;
-align-items: flex-start;
-    box-shadow: 0 0 25px 0 rgba(191, 193, 230, 0.835), 0 20px 25px 0 rgba(0, 0, 0, 0.2);
-     
+
+
 
   
 }
@@ -210,7 +210,7 @@ align-items: flex-start;
   border-top: 1.1em solid rgba(255, 255, 255, 0.2);
   border-right: 1.1em solid rgba(255, 255, 255, 0.2);
   border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
-  border-left: 1.1em solid #94c71e;
+  border-left: 1.1em solid #1e2fc7;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);

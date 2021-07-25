@@ -21,7 +21,7 @@ return ()=>setUnmounted(true);
 
     if(loading)
     {
-        return (<div  ><div className={Styles.loader}></div></div>);
+        return (<div className={Styles.loader}></div>);
         
     }else{
       return(
@@ -37,7 +37,7 @@ return ()=>setUnmounted(true);
           ? posts.map((dat, id) => {
               return <img  key={id} src={dat.picture} />;
             })
-          : null}
+          :<div className={Styles.nopost}  ><h3 >NO POSTS YET !</h3></div>  }
       </div>
       </>
       )

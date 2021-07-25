@@ -50,13 +50,14 @@ const Signin = () => {
             type="text"
           />
           <input
+          onKeyDown={event=>event.key=="Enter"?loginhandle(event):null}
             onChange={(e) => setpassword(e.target.value)}
             value={password}
             placeholder="Password"
             type="password"
           />
         </div>
-        <button onClick={loginhandle} className={Styles.loginbut}>
+        <button  onClick={loginhandle} className={Styles.loginbut}>
           Log in
         </button>
 

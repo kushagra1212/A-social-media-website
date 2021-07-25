@@ -18,6 +18,9 @@
    transform-origin:center;
   
 }
+.listmain button{
+z-index: 1000;
+}
 .backbut:active{
     font-size: 0.5em;
     width:50px;

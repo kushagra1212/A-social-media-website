@@ -51,7 +51,7 @@ const Profile = () => {
   }
   setTimeout(()=>{
     if(posts.length==0) {setstart(false);}
-     },30000);
+     },1000);
 
   }, [posts]);
 
@@ -100,6 +100,7 @@ const Profile = () => {
             ) : (
               <div>NOTHING POSTED YET</div>
             )}
+           
             <Userposts />
           </div>
         ) : (

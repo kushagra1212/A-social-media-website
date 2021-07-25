@@ -52,21 +52,21 @@ const Showbar = ({
   }, []);
 if(item)
 {
-  return (<>  <List list={item} /></>);
+  return (<div  className={Styles.maindiv}> <button
+    className={Styles.backbut}
+    onClick={() => {
+      setshowfollowershandle(false);
+      setshowfollowinghandle(false);
+    }}
+  >
+
+    Back
+  </button>  <List list={item} /></div>);
 }
   if (item) {
     return (
       <div className={Styles.maindiv}  >
-        <button
-          className={Styles.backbut}
-          onClick={() => {
-            setshowfollowershandle(false);
-            setshowfollowinghandle(false);
-          }}
-        >
-          {" "}
-          Back{" "}
-        </button>
+       
         <div className={Styles.maindiv}>
           <div className={Styles.list}>
         
