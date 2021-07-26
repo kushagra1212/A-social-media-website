@@ -88,9 +88,10 @@ const List = ({ list }) => {
         {list.length == users.length ? null : (
           <Loader width={1} height={1} fontSize={10} />
         )}
+      
       </div>
     );
-  } else {
+  }else {
     return (
       <div>
         <Search

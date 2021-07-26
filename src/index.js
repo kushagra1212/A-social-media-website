@@ -12,9 +12,9 @@ const store=createStore(Reducers,composeWithDevTools(compose(applyMiddleware(thu
 const options = {
  
     position: positions.BOTTOM_CENTER,
-    timeout: 500,
+    timeout: 5000,
     offset: '30px',
-  
+    
     transition: transitions.SCALE
   }
 ReactDOM.render(<Provider store={store}  > 

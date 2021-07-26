@@ -1,5 +1,5 @@
 import Styles from "./Stories.module.css";
-
+import { backgroundImages } from "./Picture/backgroundImages";
 import {useEffect,useState} from 'react'
 import {useDispatch,useSelector} from 'react-redux';
 import {show_user_stories_handle,show_others_stories_handle} from '../../../reduces/actions/StoriesAction';
@@ -18,7 +18,7 @@ const Stories = () => {
      
         {othersStories?.map((ele,id)=>
      
-          ele.stories.length>=1?<div key={id} onClick={()=>dispatch(show_others_stories_handle(true,id))} className={Styles.particular}></div>:null
+          ele.stories.length>=1?<div key={id} onClick={()=>dispatch(show_others_stories_handle(true,id))} className={Styles.particular} style={{backgroundImage:backgroundImages[Math.floor(Math.random()*backgroundImages.length)]}} ></div>:null
       
        )}
        

@@ -3,10 +3,25 @@ import { useState } from 'react';
 import FileBase64 from 'react-file-base64';
 import { useSelector } from 'react-redux';
 import Styles from './Top.module.css'
-
+import { useAlert } from 'react-alert';
 const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,bio,postsnumber,setshowfollowershandle,setshowfollowinghandle})=>{
+    const Alert=useAlert();
+    const [showAlert,setShowAlert]=useState(true);
     const {followerscount,followingcount}=useSelector(state=>state.count);
-
+    const showAlertHandle=()=>{
+      
+        Alert.info("Not Available",{
+            onOpen:()=>{
+                 setShowAlert(false);
+            },
+            
+            onClose:()=>{
+            setShowAlert(true);
+        }
+    
+    });
+       
+      }
     return(
         <div className={Styles.maindiv}  >
         <div className={Styles.firstdiv} >
@@ -29,9 +44,9 @@ const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,
 
             </div>
 
-<label> <button  className={Styles.followersbut} onClick={()=>setshowfollowershandle(true)}      >followers </button> <h6>{followerscount}</h6>  </label>
+<label> <button  className={Styles.followersbut} onClick={()=>followerscount>=1?setshowfollowershandle(true):showAlert? showAlertHandle():null}      >followers </button> <h6>{followerscount}</h6>  </label>
 
-<label> <button className={Styles.followingbut}   onClick={()=>setshowfollowinghandle(true)}      >following </button> <h6>{followingcount}</h6></label>
+<label> <button className={Styles.followingbut}   onClick={()=>followingcount?setshowfollowinghandle(true): showAlert? showAlertHandle():null}      >following </button> <h6>{followingcount}</h6></label>
 
 <button className={Styles.addapost} onClick={setposthandle}   >Add a Post </button>
         </div>

@@ -144,7 +144,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       </div>
     );
   } else if (showprofilefromshowbar && loading) {
-    return <div className={Styles.loader}></div>;
+    return <div></div>;
   } else if (showlist === true) {
     return (
       <div>
@@ -166,9 +166,9 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
           {/*   <button className={Styles.searchbutton} onClick={() => searchuser.length>0?setshowprofile(true):null}>Search</button>*/}
         </div>
         {loading ? (
-          <div>
+      
             <div className={Styles.loader}></div>
-          </div>
+     
         ) : found.found ? (
           <>
             <div className={Styles.userprofile} onClick={showuserprofilehandle}>

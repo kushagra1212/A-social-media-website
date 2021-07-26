@@ -61,7 +61,8 @@ if(item)
   >
 
     Back
-  </button>  <List list={item} /></div>);
+
+  </button><List list={item} /></div>);
 }
   if (item) {
     return (

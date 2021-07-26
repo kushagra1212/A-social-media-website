@@ -4,6 +4,7 @@ import Styles from "./User.module.css";
 import { setfollowers } from "../../methods/setfollowers";
 import verifiesusers from "../../methods/verifiesusers";
 import Showbar from '../../showbar/Showbar'
+import { useAlert } from "react-alert";
 const URL = process.env.REACT_APP_URL;
 const User = ({
   profpic,
@@ -25,6 +26,8 @@ const User = ({
   const dispatch = useDispatch();
   const usernameofsender = useSelector((state) => state.user.username);
   const [isUnmounted,setUnmounted]=useState(false);
+  const [showAlert,setShowAlert]=useState(true);
+  const Alert=useAlert();
   const setfollowinghandle = (e) => {
     if (following == false) {
       setfollowers(username, usernameofsender, dispatch);
@@ -47,7 +50,20 @@ const User = ({
     return ()=> setUnmounted(true);
 
   }, []);
- 
+  const showAlertHandle=()=>{
+      
+    Alert.info("Not Available",{
+        onOpen:()=>{
+             setShowAlert(false);
+        },
+        
+        onClose:()=>{
+        setShowAlert(true);
+    }
+
+});
+   
+  }
 
   if (showfollowers) {
     return (
@@ -90,11 +106,11 @@ const User = ({
             </div>
 
         <label>
-        <button className={Styles.followersbut}   onClick={()=>setshowfollowershandle(true)}      >followers </button> <h6>{followerscount}</h6>
+        <button className={Styles.followersbut}  onClick={()=>followerscount>=1?setshowfollowershandle(true):showAlert? showAlertHandle():null}    >followers </button> <h6>{followerscount}</h6>
         </label>
 
         <label>
-        <button className={Styles.followingbut}  onClick={()=>setshowfollowinghandle(true)}      >following </button> <h6>{followingcount}</h6>
+        <button className={Styles.followingbut}  onClick={()=>followingcount?setshowfollowinghandle(true): showAlert? showAlertHandle():null}     >following </button> <h6>{followingcount}</h6>
         </label>
 
         <button className={Styles.isfollowing} onClick={() => !loading?setfollowinghandle():null}>
