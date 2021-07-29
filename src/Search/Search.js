@@ -23,7 +23,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
   const [showfollowing, setshowfollowing] = useState(false);
   const [showlist, setshowlist] = useState(true);
   const [isUnmounted, setUnmounted] = useState(false);
-  useSelector((state) => console.log(state));
+
 
   const setfollowingfunc = (value) => {
     setfollowing(value);
@@ -51,7 +51,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
         username: searchuser,
       });
       if (res2.data) {
-        console.log(res2.data, "cc");
+    
         setpostcount(res2.data.postcount);
         setfollowerscount(res2.data.followerscount);
         setfollowingcount(res2.data.followingcount);
@@ -84,7 +84,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       if (res) {
         setuser(res.data);
         setfound({ found: true, text: "" });
-        console.log(res.data);
+   
       } else {
         setfound({ found: false, text: "user not found" });
       }
@@ -109,7 +109,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
   useEffect(() => {
     if (!isUnmounted) {
       let usernameofsender = searchuser;
-      console.log(usernameofsender);
+
       verifiesusers(setfollowingfunc, username, usernameofsender);
     }
     return () => setUnmounted(true);
@@ -150,7 +150,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       <div>
         <div className={Styles.topsearchbar}>
           {view ? (
-            <div className={Styles.container}>
+            <div className={Styles.searchbar}>
               <input
                 placeholder="Search User Here..."
                 type="text"
@@ -159,11 +159,12 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
                   setsearchuser(e.target.value);
                   searchuserhandle(e.target.value);
                 }}
+                required
               />
-              <div className={Styles.search}></div>
+                 <button className={Styles.searchbtn} onClick={() => searchuser.length>0?setshowprofile(true):null}></button>
             </div>
           ) : null}
-          {/*   <button className={Styles.searchbutton} onClick={() => searchuser.length>0?setshowprofile(true):null}>Search</button>*/}
+       
         </div>
         {loading ? (
       

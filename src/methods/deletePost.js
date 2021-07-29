@@ -9,7 +9,7 @@ const deletePost=async(id,picture)=>{
             id,picture
         }   
     });
-   console.log(res.data);
+
     }catch(err)
     {
         console.log(err);

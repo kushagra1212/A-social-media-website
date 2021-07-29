@@ -77,7 +77,7 @@ export const updatefollowerandfollowing=(username,usernameofsender)=>{
                 username:username,
                 usernameofsender:usernameofsender
             });
-            console.log(res)
+          
             if(res.data)
             {
                 
@@ -95,7 +95,7 @@ export const getfollowingcount=(username)=>{
             const res=await axios.patch(`${URL}/count/updatefollowingcount`,{
                 username:username
             })
-            console.log(res);
+      
             if(res.data)
             {
                 dispatch(updatefollowingcount(res.data.followingcount));

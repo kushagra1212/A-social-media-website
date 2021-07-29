@@ -20,11 +20,11 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
     const [likeLoading,setlikeLoading]=useState(false);
     const [setting,setSetting]=useState(false);
     const { likesArray } = useSelector((state) => {
-        console.log(state.feedposts);
+    
         return state.feedposts;
       });
     const { _id, profilepic, username } = useSelector((state) => {
-        console.log(state.user.username);
+ 
         return state.user;
     });
     let tempUserLikes = [];

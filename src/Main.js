@@ -14,7 +14,7 @@ const Main = () => {
   let like = useSelector((state) => state.main.like);
   let message = useSelector((state) => state.main.message);
   const { show_others_stories } = useSelector((state) => state.Stories);
-  console.log(home, search, like, profile);
+
   useEffect(() => {}, [show_others_stories.flag]);
   return (
     <>

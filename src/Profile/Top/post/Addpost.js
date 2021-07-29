@@ -40,7 +40,7 @@ const Addpost = ({ setposthandle }) => {
   const handleSelectedFile=(e)=>{
    e.preventDefault();
  
-   console.log(e.target.files[0]);
+
    setSelectedFile(e.target.files[0]);
    setpic(global.URL.createObjectURL(e.target.files[0]));
   }

@@ -5,7 +5,7 @@ const deletelike=async({username,id})=>{
         const res=await axios.delete(`${URL}/post/deletelike?username=${username}&id=${id}`);
         if(res.data)
         {
-            console.log(res.data);
+            
         }
      
    }catch(err)

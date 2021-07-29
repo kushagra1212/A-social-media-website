@@ -21,7 +21,7 @@ const Top = ({
 
     bio,
   } = useSelector((state) => {
-    console.log(state);
+   
     return state.user;
   });
   const { postcount } = useSelector((state) => state.count);

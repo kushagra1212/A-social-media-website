@@ -15,7 +15,7 @@ import {UPLOAD_STORIES,GET_STORIES,GET_STORIES_FROM_OTHERS} from '../reduces/act
       
             if(res.data)
             {
-            console.log(res.data);
+      
             dispatch(UPLOAD_STORIES(res.data));
    
             }else{
@@ -29,7 +29,7 @@ import {UPLOAD_STORIES,GET_STORIES,GET_STORIES_FROM_OTHERS} from '../reduces/act
         const res=await axios.get(`${URL}/stories/getstories?username=${username}`);
         if(res.data)
         {
-          console.log(res.data);
+       
           dispatch(GET_STORIES(res.data));
         }
      }catch(err)

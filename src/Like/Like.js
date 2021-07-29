@@ -23,7 +23,7 @@ const Like = () => {
           dispatch(populateLike(arr,lastcount));
           
           setloading(false)
-          console.log(res);
+     
         } else {
           sethasmore(false);
         }

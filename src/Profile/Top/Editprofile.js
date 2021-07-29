@@ -33,7 +33,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
         bio: newbio,
       }});
       if (res) {
-        console.log("fromclient");
+  
         setprofpichandle(pic);
         setloading(false);
 
@@ -52,7 +52,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     } catch (err) {
       console.log(err);
 
-      console.log("H");
+  
       Alert.show("Bio word limit 80 ");
       setTimeout(() => {
         setloading(false);

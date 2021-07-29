@@ -11,7 +11,7 @@ const addcomment=async(id,username,comment,profilePicture)=>{
     });
     if(res.data)
     {
-        console.log(res.data);
+
         return res.data;
     }else{
         console.log("error in getting post after adding comments")

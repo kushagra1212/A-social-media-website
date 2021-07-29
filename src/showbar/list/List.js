@@ -24,7 +24,7 @@ const List = ({ list }) => {
     return newar;
   };
   const setusershandle = async () => {
-    console.log(usernames);
+ 
     usernames.map(async (ele) => {
       const { username } = ele;
       const data = await getuser(username);
@@ -39,25 +39,21 @@ const List = ({ list }) => {
     });
     setloading(false);
 
-    console.log(users);
+ 
   };
   useEffect(() => {
     setusershandle();
 
     return () => setIsUnmounted(true);
   }, []);
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
+ 
 
   if (loading) return <Loader width={1} height={1} />;
   if (users.length > 0 && showprofile == false) {
     return (
       <div className={Styles.maindiv}>
         {users.map((user, id) => {
-          {
-            console.log(user);
-          }
+         
           return (
             <div className={Styles.userprofile} key={id}>
               <img

@@ -25,11 +25,11 @@ let element = null;
 const Contentmain = () => {
   const dispatch = useDispatch();
   const { _id, profilepic, username } = useSelector((state) => {
-    console.log(state.user.username);
+ 
     return state.user;
   });
   const { likesArray } = useSelector((state) => {
-    console.log(state.feedposts);
+  
     return state.feedposts;
   });
   const [hasMore, sethasmore] = useState(true);
@@ -42,7 +42,7 @@ const Contentmain = () => {
   const unique = (array) => {
     let isvisited = {};
     let newarray = [];
-    console.log(array, "arr");
+ 
     array.forEach((ele) => {
       if (!isvisited[ele.picture]) {
         newarray.push(ele);
@@ -53,9 +53,7 @@ const Contentmain = () => {
   };
   const state = useSelector((state) => state);
   const [array, setarray] = useState([]);
-  {
-    console.log(state.feedposts);
-  }
+
 
   const [loading, setloading] = useState(false);
 
@@ -120,7 +118,7 @@ const Contentmain = () => {
   };
   const getothers = (post1) => {
     let post2 = [];
-    console.log("OTHERS");
+    
     if (username) {
       getitem(username).then((item) =>
         item?.following?.map((dat) => {
@@ -178,11 +176,11 @@ const Contentmain = () => {
                 });
               });
               Feedposts(newpost, lastcount, array1, lastcount2, dispatch);
-              console.log(lastcount, "y", lastcount2);
+             
               setarray([...array, ...newArray]);
 
-              console.log([...array, ...newArray], "final array");
-              console.log(newpost);
+            
+           
 
               setloading(false);
             })
@@ -190,7 +188,7 @@ const Contentmain = () => {
         })
       );
     } else {
-      console.log("");
+  
     }
   };
   let post1 = [];
@@ -211,10 +209,10 @@ const Contentmain = () => {
           if (post1.length == 0) {
             setloading(false);
           }
-          console.log(post1, "own");
+        
         }
       } catch (err) {
-        console.log(err);
+      
       }
     } else {
       setloading(false);
@@ -232,7 +230,7 @@ const Contentmain = () => {
 
         call_func();
       }
-      console.log(state.feedposts.lastcount, " ", state.feedposts.lastcount2);
+  
 
       setarray(state.feedposts.array);
     }

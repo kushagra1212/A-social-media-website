@@ -6,7 +6,6 @@ import {getusername} from '../reduces/actions/countAction'
 import {uploadstories} from '../methods/uploadstories';
 import axios from "axios";
 const URL = process.env.REACT_APP_URL;
-console.log(URL);
 const Signup = () => {
   const Alert = useAlert();
   const dispatch = useDispatch();

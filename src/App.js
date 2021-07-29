@@ -19,7 +19,7 @@ const App = () => {
       axios
         .get(`${URL}/auth/verify`, { withCredentials: true })
         .then(async (res) => {
-          console.log(res.data);
+        
         
   
           setTimeout(()=>{

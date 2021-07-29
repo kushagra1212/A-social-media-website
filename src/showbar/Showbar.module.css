@@ -19,7 +19,7 @@
   
 }
 .listmain button{
-z-index: 1000;
+z-index: 1000 ; 
 }
 .backbut:active{
     font-size: 0.5em;
