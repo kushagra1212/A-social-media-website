@@ -16,6 +16,7 @@ import VerticalLoader from "../../../Animation/Loader/loader/VerticalLoader";
 import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
 import { SuspenseImg } from "./SuspenceImage/SuspenceImg";
 import { getstories } from "../../../methods/uploadstories";
+import ContentMainAnimate from "./ContentMainAnimate/ContentMainAnimate";
 import {
   updateLikesArray,
   updateUnlikesArray,
@@ -241,7 +242,7 @@ const Contentmain = () => {
   else if (element != null) enableBodyScroll(element);
 
   if (loading == true) {
-    return <div className={Styles.loader}></div>;
+    return <ContentMainAnimate/>;
   } else if (state.feedposts.posts.length == 0) {
     return (
       <div className={Styles.maincontent}>

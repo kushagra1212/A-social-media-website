@@ -10,7 +10,7 @@ const Addcomment = ({ addCommentFunc }) => {
   };
   return (
     <div className={Styles.maindiv}>
-      <input
+      <input className={Styles.comment_input}
         onKeyDown={(event) =>
           event.key == "Enter" ? add_comment_handle() : null
         }

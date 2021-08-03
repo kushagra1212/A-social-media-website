@@ -356,11 +356,10 @@
 }
 
 @media screen and (prefers-color-scheme: dark) {
-input {
-		color: #f1f1f1;
-	}
+
 
 	.searchbar input {
+    color: #f1f1f1;
 		box-shadow: 0 0 0 0.4em #f1f1f1 inset;
 	}
 	.searchbar input:focus,

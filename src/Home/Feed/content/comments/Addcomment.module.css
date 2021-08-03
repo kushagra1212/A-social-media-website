@@ -4,13 +4,14 @@
     justify-content: center;
     align-items: center;
 }
-.maindiv input{
+.comment_input{
     min-height: 30px;
     margin: 2%;
     outline: none;
     width: 100%;
     text-align: center;
     z-index: 10;
+    color:black;
     background-color: rgb(140 247 255 / 0%);
     /* border: 2px solid rgba(0, 0, 0, 0.452); */
     border-radius: 10px;
@@ -18,7 +19,7 @@
     box-shadow: 1px 1px 10px grey;
     transition: 500ms ease-in-out box-shadow;
 }
-.maindiv input:focus{
+.comment_input:focus{
     box-shadow: 2px 2px 50px grey;
 
 }
