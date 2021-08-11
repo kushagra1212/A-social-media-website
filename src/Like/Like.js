@@ -69,6 +69,7 @@ const Like = () => {
              src={post.picture}
              width="60px"
              height="60px"
+             alt=""
               />
               {post?.likes.length>0?post?.likes?.map((like, id) => {
                 return (
@@ -76,11 +77,11 @@ const Like = () => {
                     key={id}
                   className={Styles.likes}
                   >
-                {like.username==username? <h3>You liked your post</h3>: <h3>{like.username} liked your post</h3>} 
+                {like.username===username? <h3> ❤️  You liked your post</h3>: <h3>{like.username}❤️ liked your post</h3>} 
                   
                   </div>
                 );
-              }):<div   className={Styles.likes}><h3>Not liked yet</h3></div>}
+              }):<div   className={Styles.likes}><h>💛</h></div>}
             </div>
           );
         })}

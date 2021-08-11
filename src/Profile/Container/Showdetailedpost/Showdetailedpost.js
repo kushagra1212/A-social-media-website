@@ -93,20 +93,20 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
         setshowcomments({ val: val, post: post });
     }
     const deletePostHandle=async(id,picture)=>{
-       Alert.error("Post can not be deleted ! ");
+       Alert.error("Post can not be deleted ! 😉");
         return;
         await deletePost(id,picture);
     }
     return(
     <div className={Styles.maincontent}  >
-        <img src={backIcon} onClick={()=>setShowDetailedPostHandler(false)} width="30px" height="30px"  />
+        <img src={backIcon} onClick={()=>setShowDetailedPostHandler(false)} width="30px" height="30px" alt="😉" />
         {showcomments.val? <Comments
             username={username}
             showcomments={showcomments}
             setcommentsfunc={setcommentsfunc}
           />:<div key={post._id} className={Styles.singlecontainer}>
                   <div className={Styles.topdiv}>
-                    <img src={post.pic} />
+                    <img src={post.pic?post.pic:process.env.PUBLIC_URL+'/userImage.png'} alt=" " />
 
                     <h5>{post.username}</h5>
                   </div>
@@ -114,12 +114,12 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
                     onDoubleClick={()=>likefunction(post, post._id)}
                     className={Styles.imgdiv}
                   >
-                    <img src={post.picture} width="100%"  />
+                    <img src={post.picture?post.picture:process.env.PUBLIC_URL+'/userImage.png'} width="100%" alt=" "  />
                   </button>
                   <div className={Styles.bottomdiv}>
                   {likesArray.findIndex(
                       (ele) =>
-                        ele.username == username && ele.postID == post._id
+                        ele.username === username && ele.postID === post._id
                     ) >= 0 ? (
                       <span onClick={() => unlikefunction(post, post._id)}>
                         💖{" "}
@@ -152,7 +152,7 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
                      {setting?<option value="delete" className={Styles.delete} onClick={()=>deletePostHandle(post._id,post.picture)} > ❌Delete </option>:<button onClick={()=>setSetting(true)}>⚙️</button>} 
                     
             
-                    <img src={sharepic} width="4.5%" height="2%" />
+                    <img src={sharepic?sharepic:process.env.PUBLIC_URL+'/userImage.png'} width="4.5%" height="2%" alt=" " />
                   </div>
                   <div className={Styles.caption}>{post.desc}</div>
                 </div>}

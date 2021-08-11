@@ -53,7 +53,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
       console.log(err);
 
   
-      Alert.show("Bio word limit 80 ");
+      Alert.show("Bio word limit 80 😀 ");
       setTimeout(() => {
         setloading(false);
         edit_it();

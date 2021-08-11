@@ -10,7 +10,7 @@ const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,
     const {followerscount,followingcount}=useSelector(state=>state.count);
     const showAlertHandle=()=>{
       
-        Alert.info("Not Available",{
+        Alert.info("Not Available 😛",{
             onOpen:()=>{
                  setShowAlert(false);
             },
@@ -25,14 +25,14 @@ const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,
     return(
         <div className={Styles.maindiv}  >
         <div className={Styles.firstdiv} >
-        <img src={profpic?profpic:process.env.PUBLIC_URL+'/userImage.png'}  />
+        <img src={profpic?profpic:process.env.PUBLIC_URL+'/userImage.png'} alt=""  />
         <button onClick={()=>edit_it()} className={Styles.editbut}>Edit Profile</button>
         <button className={Styles.logoutbut} onClick={logouthandle}>Log out</button>
 
         </div>
         <div className={Styles.seconddiv}  >
         <h3>{name}</h3>
-        <img src={img} />
+        <img src={img} alt="" />
         <h6>@{username}</h6>
         <h5>{bio}</h5>
         

@@ -1,34 +1,44 @@
 .maindiv{
-    position: absolute;
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-    overflow: scroll;
-    padding: 1%;
-    height: 94%;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: stretch;
+  overflow: scroll;
+  padding: 1%;
+  height: 94%;
+  flex-wrap: nowrap;
 }
 .posts{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width:95%;
-    background-color: rgba(248, 248, 248, 0.219);
-    margin-top: 1%;
-    border: 2px solid rgba(255, 255, 255, 0);
-    border-radius: 10px;
-    box-shadow: 2px 2px 20px rgb(73, 73, 80);
-margin: 2%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  background-color: rgba(248, 248, 248, 0.219);
+  margin-top: 1%;
+  border: 2px solid rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px rgb(73 73 80);
+  margin: 2%;
+  justify-content: space-around;
+  align-items: center;
 }
 .likes{
-    background-color: aqua;
+  position: relative;
+  background-color: #ec407a;
+  color: white;
+  /* height: 1em; */
+  border: 0.3em solid #80808000;
+  border-radius: 0.6em;
    
 }
 .posts img{
    position: relative;
    display: flex;
    flex-direction: row;
+   border:2px soild greenyellow;
+   border-radius: 10px;
 }
 .loadmorebut{
     position: relative;
@@ -45,6 +55,11 @@ zoom: 110%;
 }
 .endmessage{
     background-color: violet;
+    position: absolute;
+    border:2px solid rgba(128, 128, 128, 0);
+    box-shadow:2px 2px 10px grey; 
+    border-radius: 10px;
+  left:25vw;
 }
 
 .loader,

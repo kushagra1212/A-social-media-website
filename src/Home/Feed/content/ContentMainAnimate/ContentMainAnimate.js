@@ -4,11 +4,11 @@ const ContentMainAnimate = () => {
   return (
     <div className={Styles.maincontent} id="infiniteScroll">
       <>
-        {posts.map((post) => (
-          <div className={Styles.singlecontainer}>
+        {posts.map((post,id) => (
+          <div key={id} className={Styles.singlecontainer}>
             <div className={Styles.topdiv}>
             
-                <img />
+                <img alt="" />
            
               <div className={Styles.topcap}> </div>
             </div>

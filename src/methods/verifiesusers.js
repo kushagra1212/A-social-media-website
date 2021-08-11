@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { setfollowers } from './setfollowers';
+
 const URL=process.env.REACT_APP_URL;
 const verifiesusers=async(setfollowingfunc,username,usernameofsender)=>{
     try{

@@ -11,7 +11,7 @@ const Picture=({documents,set_picture_handle,other})=>{
     const [backgroundCount,setbackgroundCount]=useState(Math.floor(Math.random()*backgroundImages.length));
     const dispatch=useDispatch();
     const transForRef=useSpringRef();
-    const tranBacref=useSpringRef();
+ 
     const [increased,setIncreased]=useState(true);
     const Transition=useTransition(count,{
       ref:transForRef,
@@ -50,15 +50,15 @@ const Picture=({documents,set_picture_handle,other})=>{
                   return (
                     <animated.div  className={Styles.picture} style={{backgroundImage:backgroundImages[backgroundCount],...style}}  >
                         
-                    <img src={documents[i].picture}  width="100%"     />
+                    <img src={documents[i].picture}  width="100%"  alt=""   />
                     </animated.div>
                     
                   )
               })}
                
       
-               <button  className={Styles.next}  onClick={()=>count+1<=documents.length-1?increaseCount():other==true?dispatch(show_others_stories_handle(false,-1)):dispatch(show_user_stories_handle(false))}    > </button>
-               <button  className={Styles.previous}  onClick={()=>count-1>=0?decreaseCount():other==true?dispatch(show_others_stories_handle(false,-1)):dispatch(show_user_stories_handle(false))}    > </button>
+               <button  className={Styles.next}  onClick={()=>count+1<=documents.length-1?increaseCount():other===true?dispatch(show_others_stories_handle(false,-1)):dispatch(show_user_stories_handle(false))}    > </button>
+               <button  className={Styles.previous}  onClick={()=>count-1>=0?decreaseCount():other===true?dispatch(show_others_stories_handle(false,-1)):dispatch(show_user_stories_handle(false))}    > </button>
         </div>
       
     )

@@ -3,13 +3,15 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import { getuser } from "../reduces/actions/userAction";
+import { useAlert } from "react-alert";
 
 const URL = process.env.REACT_APP_URL;
 const Signin = () => {
   const dispatch = useDispatch();
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-
+  const [showAlert,setShowAlert]=useState(true);
+  const Alert=useAlert();
   const loginhandle = async (e) => {
     e.preventDefault();
     try {
@@ -32,7 +34,19 @@ const Signin = () => {
           dispatch(getuser(res.data.user._id));
     
         
-      } else console.log("fail", success);
+      } else {
+
+        console.log(res.data);
+        if(showAlert) {
+          Alert.error(res.data.message,{
+            onOpen:()=>{
+               setShowAlert(false);
+            },onClose:()=>{
+                setShowAlert(true);
+            }
+          });
+        }
+      }
     } catch (err) {
       console.log(err);
     }
@@ -50,7 +64,7 @@ const Signin = () => {
             type="text"
           />
           <input
-          onKeyDown={event=>event.key=="Enter"?loginhandle(event):null}
+          onKeyDown={event=>event.key==="Enter"?loginhandle(event):null}
             onChange={(e) => setpassword(e.target.value)}
             value={password}
             placeholder="Password"
@@ -62,14 +76,14 @@ const Signin = () => {
         </button>
 
         <div className={Styles.account}>
-          <label>Don't have an account?</label>
-          <a
+          <label>Don't have an account ?</label>
+          <button
             href="#"
             onClick={() => dispatch({ type: "signup", payload: true })}
           >
             {" "}
             Sign up
-          </a>
+          </button>
         </div>
       </div>
     </>

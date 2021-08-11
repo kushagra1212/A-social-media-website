@@ -52,7 +52,7 @@ const User = ({
   }, []);
   const showAlertHandle=()=>{
       
-    Alert.info("Not Available",{
+    Alert.info("Not Available 😛",{
         onOpen:()=>{
              setShowAlert(false);
         },

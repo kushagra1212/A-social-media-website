@@ -113,17 +113,13 @@ padding-bottom:0% ;
 }
 .posts label
 {
-    
     font-size: 0.9em;
-  
-  text-decoration: aliceblue;   
-    background-color: rgb(207, 159, 25);
+    text-decoration: aliceblue;
+    background-color: #ab47bc;
     outline: none;
-    border-radius: 2px;
-    border:2px solid rgba(128, 128, 128, 0.466);
-  
-
-   transform-origin:center;
+    border-radius: 5px;
+    border: 2px solid rgba(128, 128, 128, 0.466);
+    transform-origin: center;
 
 }
 .logoutbut

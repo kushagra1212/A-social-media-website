@@ -5,6 +5,7 @@ import { useAlert } from "react-alert";
 import {getusername} from '../reduces/actions/countAction'
 import {uploadstories} from '../methods/uploadstories';
 import axios from "axios";
+
 const URL = process.env.REACT_APP_URL;
 const Signup = () => {
   const Alert = useAlert();
@@ -13,7 +14,7 @@ const Signup = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [username, setusername] = useState("");
-
+  const [showAlert,setShowAlert]=useState(true);
   const [error, seterror] = useState({
     emailerr: false,
     nameerr: {
@@ -71,7 +72,15 @@ const Signup = () => {
   const submithandle = async (e) => {
     e.preventDefault();
     if (!password || !email || !name || !username) {
-      Alert.show("Enter the Details");
+       if(showAlert){
+        Alert.show("🤔 Enter the Details ",{
+          onOpen:()=>{
+            setShowAlert(false);
+          },onClose:()=>{
+            setShowAlert(true);
+          }
+        });
+       }
       return;
     }
     try {
@@ -81,15 +90,21 @@ const Signup = () => {
         email: email,
         username: username,
       });
-      if (data.data.properties) {
-        Alert.show(data.data.properties.message);
+      if (data.data.properties && showAlert) {
+        Alert.show(data.data.properties.message,{
+          onOpen:()=>{
+            setShowAlert(false);
+          },onClose:()=>{
+            setShowAlert(true);
+          }
+        });
       } else {
         await axios.post(`${URL}/item/setstart`, {
           username: username,
         });
         dispatch(getusername(username));
         uploadstories(username,dispatch);
-        Alert.success("successfully signed up ");
+        Alert.success("successfully signed up 🤗 ");
         setTimeout(() => {
           dispatch({ type: "signup", payload: false });
         }, 2200);
@@ -101,7 +116,7 @@ const Signup = () => {
   return (
     <>
       <div className={Styles.container}>
-        <label className={Styles.instagram}>WebDil</label>
+        <label className={Styles.instagram}>Eimentum</label>
         <div className={Styles.input}>
           <input
             value={email}

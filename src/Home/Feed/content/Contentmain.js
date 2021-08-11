@@ -10,7 +10,6 @@ import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
 import Feedposts from "../../../posts/Feedposts";
 import Comments from "./comments/Comments";
-import Loader from "../../../Animation/Loader/Loader";
 import { getstoriesFromOthers } from "../../../methods/uploadstories";
 import VerticalLoader from "../../../Animation/Loader/loader/VerticalLoader";
 import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
@@ -25,7 +24,7 @@ let likeCountArray = [];
 let element = null;
 const Contentmain = () => {
   const dispatch = useDispatch();
-  const { _id, profilepic, username } = useSelector((state) => {
+  const { profilepic, username } = useSelector((state) => {
  
     return state.user;
   });
@@ -128,7 +127,7 @@ const Contentmain = () => {
       
             item?.following.map((ele)=>{
            
-              getstoriesFromOthers(ele.username,dispatch);
+              return getstoriesFromOthers(ele.username,dispatch);
             })
           
             getstories(username, dispatch);
@@ -141,7 +140,7 @@ const Contentmain = () => {
               post2 = post;
               getuser(dat.username).then((ele) =>
                 post2.map((elee) => {
-                  elee["pic"] = ele.profilepic;
+                 return  elee["pic"] = ele.profilepic;
                 })
               );
 
@@ -153,14 +152,14 @@ const Contentmain = () => {
 
               feedpos = unique(feedpos);
 
-              if (newpost.length == 0) sethasmore(false);
+              if (newpost.length === 0) sethasmore(false);
               newpost.sort(
                 (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
               );
 
               newpost.forEach((ele) => {
                 newArray.push({
-                  liked: ele.likes.find((elee) => elee.username == username),
+                  liked: ele.likes.find((elee) => elee.username === username),
                   length: ele.likes.length,
                 });
               });
@@ -186,6 +185,7 @@ const Contentmain = () => {
               setloading(false);
             })
             .catch((err) => console.log(err));
+            return 0;
         })
       );
     } else {
@@ -205,9 +205,9 @@ const Contentmain = () => {
           getothers(post1);
 
           post1.map((ele) => {
-            ele["pic"] = profilepic;
+            return ele["pic"] = profilepic;
           });
-          if (post1.length == 0) {
+          if (post1.length === 0) {
             setloading(false);
           }
         
@@ -241,9 +241,9 @@ const Contentmain = () => {
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);
 
-  if (loading == true) {
+  if (loading === true) {
     return <ContentMainAnimate/>;
-  } else if (state.feedposts.posts.length == 0) {
+  } else if (state.feedposts.posts.length === 0) {
     return (
       <div className={Styles.maincontent}>
         Seems like you are not following any one , please follow others to see
@@ -284,25 +284,27 @@ const Contentmain = () => {
           }
         >
           {state?.feedposts.posts.map((post, key) => (
-            <div key={post._id} className={Styles.singlecontainer}>
+            <div key={post._id} className={Styles.singlecontainer} >
               <div className={Styles.topdiv}>
               <Suspense fallback={<VerticalLoader />}>
            
-                <img src={post.pic} />
+                <img src={post.pic?post.pic:process.env.PUBLIC_URL+'/userImage.png'} alt="" />
                 </Suspense>
                 <h5>{post.username}</h5>
               </div>
               <button
-                onDoubleClick={() => likefunction(post, post._id)}
+                
                 className={Styles.imgdiv}
               >
-                <Suspense fallback={<VerticalLoader />}>
+             
+               <Suspense fallback={<VerticalLoader />}>
                   <SuspenseImg alt="" src={post.picture} />
                 </Suspense>
+        
               </button>
               <div className={Styles.bottomdiv}>
                 {likesArray.findIndex(
-                  (ele) => ele.username == username && ele.postID == post._id
+                  (ele) => ele.username === username && ele.postID === post._id
                 ) >= 0 ? (
                   <span onClick={() => unlikefunction(post, post._id)}>
                     💖{" "}
@@ -330,7 +332,7 @@ const Contentmain = () => {
                   💬 {post?.comments?.length}
                 </span>
 
-                <img src={sharepic} width="4.5%" height="2%" />
+                <img  src={sharepic?sharepic:process.env.PUBLIC_URL+'/userImage.png'} width="4.5%" height="2%" alt="" />
               </div>
               <div className={Styles.caption}>{post.desc}</div>
             </div>

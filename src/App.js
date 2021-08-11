@@ -5,7 +5,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { getuser, access_Action } from "./reduces/actions/userAction";
 import { useEffect, useState } from "react";
-import { getstories } from "./methods/uploadstories";
+
 
 const URL = process.env.REACT_APP_URL;
 const App = () => {

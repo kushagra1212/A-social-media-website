@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import User from "./Searchuser/User";
 import Container from "./Searchuser/Container";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import Profile from "../Profile/Profile";
 import Styles from "./Search.module.css";
-
+import searchImg from "./icons/search-icon.png"
 import verifiesusers from "../methods/verifiesusers";
-import App from "../App";
+
 
 const URL = process.env.REACT_APP_URL;
 let  count=0;
@@ -116,7 +116,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       verifiesusers(setfollowingfunc, username, usernameofsender);
     }
     return () => setUnmounted(true);
-  }, [searchuser]);
+  }, [searchuser,isUnmounted,username]);
   if (showprofilefromshowbar && !loading) {
     if (username === searchuser) {
     
@@ -174,12 +174,15 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
                 }}
                 required
               />
-              <button
+              <img
                 className={Styles.searchbtn}
                 onClick={() =>
                   searchuser.length > 0 ? setshowprofile(true) : null
                 }
-              ></button>
+                src={searchImg}
+              
+                alt=""
+             / >
             </div>
           ) : null}
         </div>
@@ -191,6 +194,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
               <img
                 width="30px"
                 height="30px"
+                alt=""
                 src={
                   user.profilepic
                     ? user.profilepic
@@ -211,7 +215,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       </div>
     );
   } else if (showprofile) {
-    if (username === searchuser && showprofilefromshowbar==false) {
+    if (username === searchuser && showprofilefromshowbar===false) {
       if(count>=30)
       {
         window.location.reload();

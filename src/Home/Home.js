@@ -3,7 +3,7 @@ import Header from './Top Bar/Header'
 import Styles from './Home.module.css'
 import {useSelector,useDispatch} from 'react-redux';
 import { useEffect } from 'react';
-import {animated, useSpring, useTransition} from 'react-spring';
+import {animated, useSpring} from 'react-spring';
 import Userstories from '../Home/Feed/Stories/Userstories/Userstories'
 import Othersstories from '../Home/Feed/Stories/Othersstories/Othersstories';
 import { getstories } from '../methods/uploadstories';
@@ -22,9 +22,12 @@ const fade=useSpring({
   config:{duration:250}
 
 });
-useEffect(async() => {
+const func=async()=>{
+ return getstories(username, dispatch);
+}
+useEffect(() => {
  
-    await getstories(username, dispatch);
+   func();
   
  
 }, []);

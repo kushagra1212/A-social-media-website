@@ -11,14 +11,19 @@ const Addpost = ({ setposthandle }) => {
   const [pic, setpic] = useState(null);
   const [desc, setdesc] = useState("");
   const ALert=useAlert();
-  const { username, proffilepic } = useSelector((state) => state.user);
+  const { username } = useSelector((state) => state.user);
   const [loading, setloading] = useState(false);
   const [selectedFile,setSelectedFile]=useState(null);
   const dispatch = useDispatch();
   const { postcount } = useSelector((state) => state.count);
   const savehandle = async (e) => {
+    e.preventDefault();
     if(selectedFile==null)
-     return ALert.error("Oops ! 😜");
+    {
+     
+      ALert.error("Oops ! 😜");
+      return;
+    }
     setloading(!loading);
     const data=new FormData(e.target);
     data.append('file',selectedFile);
