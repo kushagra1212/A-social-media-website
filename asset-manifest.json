@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/Eimentum/static/css/main.58a7330e.chunk.css",
+    "main.js": "/Eimentum/static/js/main.26b5b3a5.chunk.js",
+    "main.js.map": "/Eimentum/static/js/main.26b5b3a5.chunk.js.map",
+    "runtime-main.js": "/Eimentum/static/js/runtime-main.3b2f669d.js",
+    "runtime-main.js.map": "/Eimentum/static/js/runtime-main.3b2f669d.js.map",
+    "static/js/2.20be2bea.chunk.js": "/Eimentum/static/js/2.20be2bea.chunk.js",
+    "static/js/2.20be2bea.chunk.js.map": "/Eimentum/static/js/2.20be2bea.chunk.js.map",
+    "index.html": "/Eimentum/index.html",
+    "static/css/main.58a7330e.chunk.css.map": "/Eimentum/static/css/main.58a7330e.chunk.css.map",
+    "static/js/2.20be2bea.chunk.js.LICENSE.txt": "/Eimentum/static/js/2.20be2bea.chunk.js.LICENSE.txt",
+    "static/media/camera.f8234a47.png": "/Eimentum/static/media/camera.f8234a47.png",
+    "static/media/cameraimg.b27c35b6.png": "/Eimentum/static/media/cameraimg.b27c35b6.png",
+    "static/media/heart.c412cbae.png": "/Eimentum/static/media/heart.c412cbae.png",
+    "static/media/home.07df57e7.png": "/Eimentum/static/media/home.07df57e7.png",
+    "static/media/homeblack.110e5535.png": "/Eimentum/static/media/homeblack.110e5535.png",
+    "static/media/search.2550c90b.png": "/Eimentum/static/media/search.2550c90b.png",
+    "static/media/share.a767f6af.png": "/Eimentum/static/media/share.a767f6af.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3b2f669d.js",
+    "static/js/2.20be2bea.chunk.js",
+    "static/css/main.58a7330e.chunk.css",
+    "static/js/main.26b5b3a5.chunk.js"
+  ]
+}
