@@ -1,4 +1,0 @@
-Bugs         Details                        				 Resolved 
-
-Like issue  Likes are not updating Only after Refresh they are	         No
-
