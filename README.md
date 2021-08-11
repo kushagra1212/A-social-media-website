@@ -1,5 +1,5 @@
 #  Eimentum - A social Media website
-using react and react redux 
+Tech Stack Used --> React || Redux
 
 
 Client Side
