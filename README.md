@@ -1,4 +1,4 @@
-# A social Media website
+#  Eimentum - A social Media website
 using react and react redux 
 
 
