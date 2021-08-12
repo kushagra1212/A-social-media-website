@@ -18,8 +18,8 @@ const Webcamcapture = () => {
   const webcamRef = useRef(null);
   const videoContraints = {
     facingMode: "user",
-    height: 400,
-    width:400
+    height: 100,
+    width:100
   };
 
   const takePhotoButStyle=useSpring({
