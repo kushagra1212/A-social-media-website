@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Eimentum/static/css/main.56085e3e.chunk.css",
+    "main.css": "/Eimentum/static/css/main.afc53efd.chunk.css",
     "main.js": "/Eimentum/static/js/main.6576cb76.chunk.js",
     "main.js.map": "/Eimentum/static/js/main.6576cb76.chunk.js.map",
     "runtime-main.js": "/Eimentum/static/js/runtime-main.3b2f669d.js",
@@ -8,7 +8,7 @@
     "static/js/2.9d6fc1ea.chunk.js": "/Eimentum/static/js/2.9d6fc1ea.chunk.js",
     "static/js/2.9d6fc1ea.chunk.js.map": "/Eimentum/static/js/2.9d6fc1ea.chunk.js.map",
     "index.html": "/Eimentum/index.html",
-    "static/css/main.56085e3e.chunk.css.map": "/Eimentum/static/css/main.56085e3e.chunk.css.map",
+    "static/css/main.afc53efd.chunk.css.map": "/Eimentum/static/css/main.afc53efd.chunk.css.map",
     "static/js/2.9d6fc1ea.chunk.js.LICENSE.txt": "/Eimentum/static/js/2.9d6fc1ea.chunk.js.LICENSE.txt",
     "static/media/camera.f8234a47.png": "/Eimentum/static/media/camera.f8234a47.png",
     "static/media/cameraimg.b27c35b6.png": "/Eimentum/static/media/cameraimg.b27c35b6.png",
@@ -21,7 +21,7 @@
   "entrypoints": [
     "static/js/runtime-main.3b2f669d.js",
     "static/js/2.9d6fc1ea.chunk.js",
-    "static/css/main.56085e3e.chunk.css",
+    "static/css/main.afc53efd.chunk.css",
     "static/js/main.6576cb76.chunk.js"
   ]
 }
