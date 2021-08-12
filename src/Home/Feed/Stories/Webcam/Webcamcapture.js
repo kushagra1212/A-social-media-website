@@ -18,8 +18,8 @@ const Webcamcapture = () => {
   const webcamRef = useRef(null);
   const videoContraints = {
     facingMode: "user",
-    height: 100,
-    width:100
+    height: 300,
+    width:300
   };
 
   const takePhotoButStyle=useSpring({
@@ -65,9 +65,9 @@ const Webcamcapture = () => {
             width="100%"
             videoConstraints={videoContraints}
           />
-          <animated.button onClick={capture} style={takePhotoButStyle}  className={Styles.capturebut}>
+          <button onClick={capture}   className={Styles.capturebut}>
             Take Photo
-          </animated.button>
+          </button>
         </div>
       ) : (
         <div className={Styles.webcamdiv}>
