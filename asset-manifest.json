@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Eimentum/static/css/main.afc53efd.chunk.css",
-    "main.js": "/Eimentum/static/js/main.865703df.chunk.js",
-    "main.js.map": "/Eimentum/static/js/main.865703df.chunk.js.map",
+    "main.js": "/Eimentum/static/js/main.4b454fb5.chunk.js",
+    "main.js.map": "/Eimentum/static/js/main.4b454fb5.chunk.js.map",
     "runtime-main.js": "/Eimentum/static/js/runtime-main.3b2f669d.js",
     "runtime-main.js.map": "/Eimentum/static/js/runtime-main.3b2f669d.js.map",
     "static/js/2.9d6fc1ea.chunk.js": "/Eimentum/static/js/2.9d6fc1ea.chunk.js",
@@ -22,6 +22,6 @@
     "static/js/runtime-main.3b2f669d.js",
     "static/js/2.9d6fc1ea.chunk.js",
     "static/css/main.afc53efd.chunk.css",
-    "static/js/main.865703df.chunk.js"
+    "static/js/main.4b454fb5.chunk.js"
   ]
 }
