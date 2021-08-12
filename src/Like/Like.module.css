@@ -22,7 +22,7 @@
   box-shadow: 2px 2px 20px rgb(73 73 80);
   margin: 2%;
   justify-content: space-around;
-  align-items: center;
+  align-items: stretch;
 }
 .likes{
   position: relative;

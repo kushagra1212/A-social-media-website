@@ -42,6 +42,7 @@
     border-radius: 10px;
     outline: none;
     padding: 8%;
+    font-size: medium;
     /* align-items: center; */
     box-shadow: -1px -1px 14px 5px #5c6bc06e;
 }

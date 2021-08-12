@@ -31,7 +31,7 @@ const Userstories = () => {
   useEffect(()=>{
     animateOne.start({x:0,y:0});
     animateTwo.start({y:0,x:0});
-  },[,showpictures,show_webcam])
+  },[showpictures,show_webcam])
 
   const save_button_handle = () => {
     setTimeout(() => {
@@ -83,7 +83,7 @@ const Userstories = () => {
         <FileBase64 multiple={false} onDone={(e) => setfile(e.base64)} />
         {file ? (
           <div>
-            <img src={file} width="100px" height="100px" />
+            <img src={file} width="100px" height="100px" alt="" />
             <button onClick={save_button_handle}>Add to Stories</button>
           </div>
         ) : null}
