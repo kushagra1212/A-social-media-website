@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Eimentum/static/css/main.1e74cbe2.chunk.css",
-    "main.js": "/Eimentum/static/js/main.26b5b3a5.chunk.js",
-    "main.js.map": "/Eimentum/static/js/main.26b5b3a5.chunk.js.map",
+    "main.js": "/Eimentum/static/js/main.6f8f756f.chunk.js",
+    "main.js.map": "/Eimentum/static/js/main.6f8f756f.chunk.js.map",
     "runtime-main.js": "/Eimentum/static/js/runtime-main.3b2f669d.js",
     "runtime-main.js.map": "/Eimentum/static/js/runtime-main.3b2f669d.js.map",
-    "static/js/2.20be2bea.chunk.js": "/Eimentum/static/js/2.20be2bea.chunk.js",
-    "static/js/2.20be2bea.chunk.js.map": "/Eimentum/static/js/2.20be2bea.chunk.js.map",
+    "static/js/2.9d6fc1ea.chunk.js": "/Eimentum/static/js/2.9d6fc1ea.chunk.js",
+    "static/js/2.9d6fc1ea.chunk.js.map": "/Eimentum/static/js/2.9d6fc1ea.chunk.js.map",
     "index.html": "/Eimentum/index.html",
     "static/css/main.1e74cbe2.chunk.css.map": "/Eimentum/static/css/main.1e74cbe2.chunk.css.map",
-    "static/js/2.20be2bea.chunk.js.LICENSE.txt": "/Eimentum/static/js/2.20be2bea.chunk.js.LICENSE.txt",
+    "static/js/2.9d6fc1ea.chunk.js.LICENSE.txt": "/Eimentum/static/js/2.9d6fc1ea.chunk.js.LICENSE.txt",
     "static/media/camera.f8234a47.png": "/Eimentum/static/media/camera.f8234a47.png",
     "static/media/cameraimg.b27c35b6.png": "/Eimentum/static/media/cameraimg.b27c35b6.png",
     "static/media/heart.c412cbae.png": "/Eimentum/static/media/heart.c412cbae.png",
@@ -20,8 +20,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.3b2f669d.js",
-    "static/js/2.20be2bea.chunk.js",
+    "static/js/2.9d6fc1ea.chunk.js",
     "static/css/main.1e74cbe2.chunk.css",
-    "static/js/main.26b5b3a5.chunk.js"
+    "static/js/main.6f8f756f.chunk.js"
   ]
 }
