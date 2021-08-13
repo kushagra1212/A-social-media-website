@@ -180,9 +180,10 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
                   searchuser.length > 0 ? setshowprofile(true) : null
                 }
                 src={searchImg}
-              
+                width="40px"
+                height="40px"
                 alt=""
-             / >
+              / >
             </div>
           ) : null}
         </div>

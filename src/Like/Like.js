@@ -81,7 +81,7 @@ const Like = () => {
                   
                   </div>
                 );
-              }):<div   className={Styles.likes}><h>💛</h></div>}
+              }):<div   className={Styles.likes}><h1>💛</h1></div>}
             </div>
           );
         })}
