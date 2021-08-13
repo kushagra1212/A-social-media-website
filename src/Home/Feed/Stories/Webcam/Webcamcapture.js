@@ -36,9 +36,9 @@ const Webcamcapture = () => {
   
   function handleTakePhoto (dataUri) {
     // Do stuff with the photo...
-    
-    setimagecaptured(dataUri);
     setRetake(false);
+    setimagecaptured(dataUri);
+  
     console.log('takePhoto');
   }
 
@@ -120,10 +120,10 @@ const Webcamcapture = () => {
     onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
     onTakePhotoAnimationDone = { (dataUri) => { handleTakePhotoAnimationDone(dataUri); } }
     onCameraError = { (error) => { handleCameraError(error); } }
-    idealFacingMode = {FACING_MODES.ENVIRONMENT}
+    idealFacingMode = {FACING_MODES.USER}
     idealResolution = {{width: 640, height: 480}}
     imageType = {IMAGE_TYPES.JPG}
-    imageCompression = {0.40}
+    imageCompression = {0.20}
     isMaxResolution = {true}
     isImageMirror = {false}
     isSilentMode = {false}
