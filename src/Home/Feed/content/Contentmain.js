@@ -116,15 +116,60 @@ const Contentmain = () => {
     }
     //temp section
   };
+  const PostsWraper=(post1,post2)=>{
+    let newArray = [];
+
+    let newpost = [...post1, ...post2];
+    newpost = unique(newpost);
+    let feedpos = state.feedposts.posts;
+
+    feedpos = unique(feedpos);
+
+    if (newpost.length === 0) sethasmore(false);
+    newpost.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+
+    newpost.forEach((ele) => {
+      newArray.push({
+        liked: ele.likes.find((elee) => elee.username === username),
+        length: ele.likes.length,
+      });
+    });
+    newpost = [...feedpos, ...newpost];
+
+    let array1 = [...array, ...newArray];
+
+    let lastcount = 1,
+      lastcount2 = 1;
+    newpost = unique(newpost);
+    newpost.forEach((ele) => {
+      ele.likes.forEach((ele2) => {
+        dispatch(updateLikesArray(ele2.username, ele._id));
+      });
+    });
+    Feedposts(newpost, lastcount, array1, lastcount2, dispatch);
+   
+    setarray([...array, ...newArray]);
+
+  
+ 
+
+    setloading(false);
+  }
   const getothers = (post1) => {
     let post2 = [];
     
     if (username) {
       getitem(username).then((item) =>
+       {
+         if(item.followers.length===0 && item.following.length===0){
+          PostsWraper(post1,[]);
+           return;
+         }
         item?.following?.map((dat) => {
           let lastcount2 = state.feedposts.lastcount;
-
-      
+             
             item?.following.map((ele)=>{
            
               return getstoriesFromOthers(ele.username,dispatch);
@@ -143,50 +188,13 @@ const Contentmain = () => {
                  return  elee["pic"] = ele.profilepic;
                 })
               );
-
-              let newArray = [];
-
-              let newpost = [...post1, ...post2];
-              newpost = unique(newpost);
-              let feedpos = state.feedposts.posts;
-
-              feedpos = unique(feedpos);
-
-              if (newpost.length === 0) sethasmore(false);
-              newpost.sort(
-                (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-              );
-
-              newpost.forEach((ele) => {
-                newArray.push({
-                  liked: ele.likes.find((elee) => elee.username === username),
-                  length: ele.likes.length,
-                });
-              });
-              newpost = [...feedpos, ...newpost];
-
-              let array1 = [...array, ...newArray];
-
-              let lastcount = 1,
-                lastcount2 = 1;
-              newpost = unique(newpost);
-              newpost.forEach((ele) => {
-                ele.likes.forEach((ele2) => {
-                  dispatch(updateLikesArray(ele2.username, ele._id));
-                });
-              });
-              Feedposts(newpost, lastcount, array1, lastcount2, dispatch);
-             
-              setarray([...array, ...newArray]);
-
+            PostsWraper(post1,post2);
             
-           
-
-              setloading(false);
             })
             .catch((err) => console.log(err));
             return 0;
         })
+       }
       );
     } else {
   
@@ -201,7 +209,7 @@ const Contentmain = () => {
 
         if (res) {
           post1 = res;
-
+        
           getothers(post1);
 
           post1.map((ele) => {
@@ -245,7 +253,7 @@ const Contentmain = () => {
     return <ContentMainAnimate/>;
   } else if (state.feedposts.posts.length === 0) {
     return (
-      <div className={Styles.maincontent}>
+      <div className={Styles.maincontentstart}>
         Seems like you are not following any one , please follow others to see
         their posts
       </div>

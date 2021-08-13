@@ -239,9 +239,8 @@
 }
 .searchbar{
   position: relative;
-  width: 100vw;
+  /* width: 100vw; */
   height: 7vh;
-
   display: flex;
 
 }
