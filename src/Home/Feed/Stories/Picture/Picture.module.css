@@ -36,7 +36,9 @@
 }
 .picture img{
     position: relative;
-    margin-top:40%;
+    /* width: 50%; */
+    height: 100vh;
+ 
 
 }
 
@@ -48,6 +50,7 @@
     width: 50%;
     background-color: rgb(0 255 234 / 0%);
     border: none;
+    outline: none;
 }
 .previous{
     position: absolute;
@@ -57,4 +60,5 @@
     width: 50%;
     background-color: rgb(166 255 0 / 0%);
     border: none;
+    outline: none;
 }

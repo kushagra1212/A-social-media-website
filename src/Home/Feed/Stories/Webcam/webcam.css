@@ -21,6 +21,6 @@
         top: 100%;
       }
       .react-html5-camera-photo-fullscreen>img, .react-html5-camera-photo-fullscreen>video {
-        width: 100vw;
+        width: 90vw;
         height: 80vh;
       }
