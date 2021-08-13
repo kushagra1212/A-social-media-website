@@ -1,0 +1,26 @@
+#inner-circle {
+        left: 50%;
+        top: 38px;
+        height: 44px;
+        width: 44px;
+        background: #388e3c;
+        margin: -22px 0 0 -22px;
+        z-index: 2;
+      }
+      #outer-circle {
+        left: -37px;
+        height: 75px;
+        width: 75px;
+        background-color: #c5e1a5;
+        z-index: 1;
+      }
+      #container-circles {
+        position: absolute;
+        left: 50%;
+        bottom: 90px;
+        top: 100%;
+      }
+      .react-html5-camera-photo-fullscreen>img, .react-html5-camera-photo-fullscreen>video {
+        width: 100vw;
+        height: 80vh;
+      }

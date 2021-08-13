@@ -17,6 +17,7 @@
 }
 
 .backbut {
+  position: relative;
   border: none;
   -webkit-user-select: none;
   user-select: none;
@@ -24,22 +25,17 @@
   border-radius: 12px;
   cursor: pointer;
   margin-top: 5%;
-  margin-left: 5%;
+  width: 100%;
+  /* margin-left: 5%; */
   /* height: 15px; */
   /* margin-right: 80%; */
-  /* margin-top: -15%;
-  }
-  .back {
-    display: block;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-    padding: 2px 7px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    background: hsl(345deg 100% 47%);
-    color: white;
-    transform: translateY(-4px);
+  user-select: none;
+  padding: 2px 7px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  background: hsl(345deg 100% 47%);
+  color: white;
+  transform: translateY(-4px);
   }
   
   .backbut:active .back {
@@ -82,6 +78,13 @@
     height:100px;
 }
 .cameradiv{
- 
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  /* height: 100vh; */
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 
 }

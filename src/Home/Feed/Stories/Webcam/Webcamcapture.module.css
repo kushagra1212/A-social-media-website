@@ -7,6 +7,7 @@
   background-color: #ffff00ba;
   border: 2px solid #ffffff00;
   border-radius: 5px;
+  width: 80%;
   box-shadow: 1px 1px 10px 1px grey;
 }
 .webcamdiv{
@@ -17,13 +18,16 @@
 }
 .savebut{
   position: relative;
-  margin-left: 5%;
-  background-color: #00ff08b8;
-  color: black;
-  /* border: none; */
-  border: 2px solid #80808000;
-  border-radius: 10px;
-  box-shadow: 1px 1px 10px 1px grey;
+    /* margin-left: 5%; */
+    /* margin: 10%; */
+    margin: 2%;
+    background-color: #00ff08b8;
+    color: black;
+    /* border: none; */
+    width: 80%;
+    border: 2px solid #80808000;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 1px grey;
 }
 .loader,
 .loader:after {
@@ -67,4 +71,8 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+.imagecaptured{
+  height: 80vh;
+  width: 100%;
 }
