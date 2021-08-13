@@ -271,11 +271,11 @@
 
 .searchbtn{
   position: relative;
-  margin-left: 1em;
+  margin-left: 10%;
   outline: none;
-  border: 0.2em solid #80808030;
+  border: 5px solid #80808030;
   box-shadow: 1px 1px 15px grey;
   background: blueviolet;
   border-radius: 20px;
-  animation: Search_boxAni__1z34p 1s ease-in-out alternate-reverse;
+  animation: Search_Search_boxAni__1z34p__2w5A8 1s ease-in-out alternate-reverse;
 }

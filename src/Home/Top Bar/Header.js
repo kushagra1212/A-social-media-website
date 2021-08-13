@@ -12,8 +12,8 @@ const Header=()=>{
     return(
   
             <div className={Styles.Header}>
-              <img onClick={()=>{dispatch(show_user_stories_handle(true))}}  id={Styles.cameraimg} src={cameraimg} />
-               <img onClick={()=>dispatch({type:"SHOWMESSAGE",payload:true})}  src={messageimg}  />
+              <img onClick={()=>{dispatch(show_user_stories_handle(true))}}  id={Styles.cameraimg} src={cameraimg} alt="" />
+               <img onClick={()=>dispatch({type:"SHOWMESSAGE",payload:true})}  src={messageimg} alt="" />
               
             </div>
     

@@ -36,8 +36,13 @@
 }
 .picture img{
     position: relative;
-    /* width: 50%; */
-    height: 100vh;
+    /* transform: translate(-50vw, -50vw); */
+    width: 90vw;
+    margin-left: 5vw;
+    margin-top: 5vh;
+    height: 90vh;
+    border: 2px solid #80808000;
+    border-radius: 10px;
  
 
 }
