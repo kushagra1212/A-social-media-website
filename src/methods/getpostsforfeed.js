@@ -1,9 +1,11 @@
 import axios from 'axios'
 const URL=process.env.REACT_APP_URL;
-export const getpostsforfeed=async(username,lastcount)=>{
-
+export const getpostsforfeed=async(username,lastcount,limit)=>{
+  if(limit===0)
+    limit=2;
+  
   try{
-    const res=await axios.get(`${URL}/post/getposts?username=${username}&last=${lastcount}&limit=2`);
+    const res=await axios.get(`${URL}/post/getposts?username=${username}&last=${lastcount}&limit=${limit}`);
     if(res.data)
     {
       

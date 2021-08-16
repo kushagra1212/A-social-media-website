@@ -105,7 +105,7 @@ const Profile = () => {
           </div>
         ) : (
           <>
-            <Container posts={posts} />{" "}
+            <Container  />{" "}
           </>
         )}
       </div>

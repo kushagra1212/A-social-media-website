@@ -6,8 +6,8 @@ export const getposts = async (_id, dispatch) => {
   try {
     const posts = await axios.get(`${URL}/post/getpost?id=${_id}`);
     if (posts) {
-      dispatch(addposts(posts.data));
-   
+     dispatch(addposts(posts.data));
+      
     }
   } catch (err) {
     console.log(err);

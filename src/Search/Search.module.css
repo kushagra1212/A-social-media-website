@@ -246,9 +246,9 @@
 }
 .searchbar input{
   background-color: white;
-  width: 80%;
+  width: 80vw;
   position: relative;
-  height: 5vh;
+  height: 50px;
   padding: 1em;
   border-radius: 10px;
   border: 0.2em solid #80808000;
@@ -276,5 +276,7 @@
   box-shadow: 1px 1px 15px grey;
   background: blueviolet;
   border-radius: 20px;
+  height:50px;
+  width: 50px;
   animation: Search_Search_boxAni__1z34p__2w5A8 1s ease-in-out alternate-reverse;
 }

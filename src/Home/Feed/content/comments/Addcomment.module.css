@@ -18,6 +18,7 @@
     overflow: visible;
     box-shadow: 1px 1px 10px grey;
     transition: 500ms ease-in-out box-shadow;
+    height: 35px;
 }
 .comment_input:focus{
     box-shadow: 2px 2px 50px grey;
@@ -34,8 +35,6 @@
     box-shadow: 2px 2px 10px grey;
     outline: none;
     transition: 10000ms ease-in-out box-shadow;
-
-
 
 }
 .add:active{

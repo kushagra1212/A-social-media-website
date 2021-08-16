@@ -1,22 +1,25 @@
-
 import Styles from "./Container.module.css";
 import {useEffect,useState,Suspense} from 'react'
+import InfiniteScroll from "react-infinite-scroll-component";
 import Showdetailedpost from "./Showdetailedpost/Showdetailedpost";
-import Loader from "../../Animation/Loader/Loader";
+import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
+import { useSelector } from "react-redux";
 import { SuspenseImg } from "../../Home/Feed/content/SuspenceImage/SuspenceImg";
-const Container = ({ posts }) => {
+import { getpostsforfeed } from "../../methods/getpostsforfeed";
+const Container = ( ) => {
   const [grid,setGrid]=useState(true);
   const [showDetailedPost,setShowDetailedPost]=useState(false);
-  const [post,setPost]=useState(null);
- // const [isUnmounted,setIsUnmounted]=useState(false);
-  useEffect(()=>{
- 
-    posts.sort((a,b)=>{
-    
-      return(new Date(a.createdAt)-new Date(b.createdAt));
-    });
+  const [post,setPost]=useState([]);
+  //const posts = useSelector((state) => state.userposts);
+  const [posts,setPosts]=useState([]);
+  const [hasMore,setHasMore]=useState(true);
 
-  },[posts])
+  const {  username } = useSelector((state) => {
+ 
+    return state.user;
+  });
+ // const [isUnmounted,setIsUnmounted]=useState(false);
+
   
   const gridHandler=(bool)=>{
     setGrid(bool);
@@ -26,33 +29,82 @@ const Container = ({ posts }) => {
   }
   const setPostHandler=(post)=>{
     setPost(post);
+  
     setShowDetailedPostHandler(true);
   }  
+  const call_func=async()=>{
+    let lastCount;
+    if(posts)
+       lastCount=posts.length;
+    else
+      lastCount=0;
+    let temp_array=await getpostsforfeed(username,lastCount,6);
+    if(temp_array.length===0)
+      setHasMore(false);
+    setPosts(prev=>[...prev,...temp_array]);
+    
+  }
+  useState(()=>{
+    call_func();
+  },[]);
+ 
   if(showDetailedPost)
     return(<Showdetailedpost setShowDetailedPostHandler={setShowDetailedPostHandler} post={post}  />);
   
   return (
    <>   
-    <div className={Styles.topButtons}       >
-   <button disabled={grid?true:false} onClick={()=>gridHandler(true)}   > <img width="30px" height="30px"  src="https://img.icons8.com/ios-glyphs/60/000000/grid-2.png"/></button>
-   <button  onClick={()=>gridHandler(false)} disabled={grid?false:true}     > <img  width="30px" height="30px" src="https://img.icons8.com/material-outlined/60/000000/ingredients-list.png"/></button>
+    <div className={Styles.topButtons} >
+   <button disabled={grid?true:false} onClick={()=>gridHandler(true)}   > <img width="30px" height="30px"  src="https://img.icons8.com/ios-glyphs/60/000000/grid-2.png" alt=""/></button>
+   <button  onClick={()=>gridHandler(false)} disabled={grid?false:true}     > <img  width="30px" height="30px" src="https://img.icons8.com/material-outlined/60/000000/ingredients-list.png" alt=""/></button>
     </div>
-    <div style={grid?{}:{flexDirection:"column",alignItems:"center"}}  className={Styles.maindiv}>
-   
+
+    <InfiniteScroll
+  
+  className={Styles.infi}
+          dataLength={posts.length}
+          next={call_func}
+          hasMore={hasMore}
+          loader={<div className={Styles.loader}></div>}
+          endMessage={
+            <p
+              style={{
+                textAlign: "center",
+                backgroundColor: "black",
+                color: "white",
+                width: "100%",
+                height: "30px",
+                marginTop: "1%",
+                marginBottom: "25%",
+                position: "relative",
+              }}
+            >
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+            <div style={grid?{}:{flexDirection:"column",alignItems:"center"}}  className={Styles.maindiv}>
+    
+              
       {posts.length > 0
         ? posts.map((post,id) => {
             return (
-         
-                <Suspense key={id} fallback={<Loader/>} >
-                  <SuspenseImg className={Styles.post} className={Styles.image}     key={post._id} onClick={()=>setPostHandler(post)}  src={post.picture}  />
-                </Suspense>
-              
-            
+              <Suspense   key={id} fallback={null} >
+                  <SuspenseImg  className={Styles.image}   onClick={()=>setPostHandler(post)}  src={post.picture}  />
+                  </Suspense> 
             )
           })
         : <h3>NOTHING POSTED YET</h3>}
-   
-    </div></>
+                   
+                  </div>
+
+        </InfiniteScroll>
+
+
+    
+    
+    
+  
+    </>
   );
 };
 export default Container;

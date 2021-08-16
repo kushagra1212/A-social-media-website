@@ -3,7 +3,7 @@ import Styles from "./Addcomment.module.css";
 const Addcomment = ({ addCommentFunc }) => {
   const [comment, setcomment] = useState("");
   const add_comment_handle = () => {
-    if (comment != "") {
+    if (comment !== "") {
       addCommentFunc(comment);
       setcomment("");
     }
@@ -12,7 +12,7 @@ const Addcomment = ({ addCommentFunc }) => {
     <div className={Styles.maindiv}>
       <input className={Styles.comment_input}
         onKeyDown={(event) =>
-          event.key == "Enter" ? add_comment_handle() : null
+          event.key === "Enter" ? add_comment_handle() : null
         }
         placeholder="Write a Comment"
         type="text"

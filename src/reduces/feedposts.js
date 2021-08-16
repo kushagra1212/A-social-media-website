@@ -1,5 +1,6 @@
 const feedposts = (
   state = {
+    // eslint-disable-next-line no-array-constructor
     posts: new Array(),
     lastcount: new Number(),
     array: new Array(),
@@ -50,6 +51,8 @@ const feedposts = (
         array: new Array(),
         lastcount2: new Number(),
       };
+    default:
+      break;
   }
   return state;
 };
