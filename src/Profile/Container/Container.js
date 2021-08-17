@@ -13,6 +13,7 @@ const Container = ( ) => {
   //const posts = useSelector((state) => state.userposts);
   const [posts,setPosts]=useState([]);
   const [hasMore,setHasMore]=useState(true);
+  const [isUnmounted,setIsUnmounted]=useState(false);
 
   const {  username } = useSelector((state) => {
  
@@ -39,14 +40,29 @@ const Container = ( ) => {
     else
       lastCount=0;
     let temp_array=await getpostsforfeed(username,lastCount,6);
-    if(temp_array.length===0)
-      setHasMore(false);
+ 
     setPosts(prev=>[...prev,...temp_array]);
-    
+      
+ 
+      if(temp_array.length<6 && !isUnmounted)
+      {
+        setHasMore(false);
+       
+      }
+ 
+      
+
+  
   }
   useState(()=>{
     call_func();
+  
   },[]);
+  useState(()=>{
+    return ()=>{
+      setIsUnmounted(true);
+    }
+  })
  
   if(showDetailedPost)
     return(<Showdetailedpost setShowDetailedPostHandler={setShowDetailedPostHandler} post={post}  />);
@@ -93,7 +109,7 @@ const Container = ( ) => {
                   </Suspense> 
             )
           })
-        : <h3>NOTHING POSTED YET</h3>}
+        : null}
                    
                   </div>
 

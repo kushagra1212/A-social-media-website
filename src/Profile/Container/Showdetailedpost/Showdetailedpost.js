@@ -1,11 +1,9 @@
-import {useEffect,useState} from "react";
+import {useState} from "react";
 import backIcon from "./icons/back.png";
 import Styles from "./Showdetailedpost.module.css";
 import {  updateLikesArray,
     updateUnlikesArray} from "../../../reduces/actions/userAction";
 import Comments from "../../../Home/Feed/content/comments/Comments";
-import sharepic from "../../../Home/Feed/content/images/share.png";
-
 import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
 import { useAlert } from "react-alert";
@@ -121,38 +119,64 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
                       (ele) =>
                         ele.username === username && ele.postID === post._id
                     ) >= 0 ? (
-                      <span onClick={() => unlikefunction(post, post._id)}>
-                        💖{" "}
-                        {likeCountArray.findIndex(
-                          (ele) =>
-                            ele.username === username && ele.postID === post._id
-                        ) >= 0
-                          ? post.likes.length + 1
-                          : post.likes.length}
-                      </span>
-                    ) : (
-                      <span onClick={() => likefunction(post, post._id)}>
-                        🤍{" "}
-                        {likeCountArray.findIndex(
-                          (ele) =>
-                            ele.username === username && ele.postID === post._id
-                        ) >= 0
-                          ? post.likes.length - 1
-                          : post.likes.length}
-                      </span>
-                    )}
-                    <span
-                      onClick={() => setcommentsfunc({ val: true, post: post })}
-                    >
-                      💬 {post?.comments?.length}
-                    </span>
+                      <div     >
+                    <img
+                  className={Styles.bottombarImg}
+                  alt=""
+                  width="10px"
+                  height="10px"
+                  src={process.env.PUBLIC_URL+'/likeIcon.png'}
+                  onClick={() => unlikefunction(post, post._id)} />
+                    {" "}
+                    {likeCountArray.findIndex(
+                      (ele) =>
+                        ele.username === username && ele.postID === post._id
+                    ) >= 0
+                      ? post.likes.length + 1
+                      : post.likes.length}
+              
+                 </div>
+                ) : (
+                 <div        >
+                    <img
+            className={Styles.bottombarImg}
+                  alt=""
+                  width="10px"
+                  height="10px"
+                  src={process.env.PUBLIC_URL+'/unlikeIcon.png'}
+                   onClick={() => likefunction(post, post._id)}/>
+                    {" "}
+                    {likeCountArray.findIndex(
+                      (ele) =>
+                        ele.username === username && ele.postID === post._id
+                    ) >= 0
+                      ? post.likes.length - 1
+                      : post.likes.length}
+              
+                 </div>
+                )}
+               <div  >
+
+               <img
+               className={Styles.bottombarImg}
+                alt=""
+                width="10px"
+                height="10px"
+                src={process.env.PUBLIC_URL+'/chatIcon.png'}
+                  onClick={() => setcommentsfunc({ val: true, post: post })}
+                />
+                 {post?.comments?.length}
+                
+               </div>
+
+                <img className={Styles.bottombarImg}  src={process.env.PUBLIC_URL+'/shareIcon.png'} width="4.5%" height="2%" alt="" />
                 
                    
                     
                      {setting?<option value="delete" className={Styles.delete} onClick={()=>deletePostHandle(post._id,post.picture)} > ❌Delete </option>:<button onClick={()=>setSetting(true)}>⚙️</button>} 
                     
             
-                    <img src={sharepic?sharepic:process.env.PUBLIC_URL+'/userImage.png'} width="4.5%" height="2%" alt=" " />
+                    <img src={process.env.PUBLIC_URL+'/shareIcon.png'} width="4.5%" height="2%" alt=" " />
                   </div>
                   <div className={Styles.caption}>{post.desc}</div>
                 </div>}

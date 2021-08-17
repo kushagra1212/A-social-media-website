@@ -1,7 +1,6 @@
 import Styles from "./Content.module.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getpostsforfeed } from "../../../methods/getpostsforfeed";
-import sharepic from "./images/share.png";
 import { Suspense, useEffect, useState } from "react";
 import getuser from "../../../methods/getuser";
 import { useDispatch, useSelector } from "react-redux";
@@ -314,33 +313,57 @@ const Contentmain = () => {
                 {likesArray.findIndex(
                   (ele) => ele.username === username && ele.postID === post._id
                 ) >= 0 ? (
-                  <span onClick={() => unlikefunction(post, post._id)}>
-                    💖{" "}
+                 <div     >
+                    <img
+                  className={Styles.bottombarImg}
+                  alt=""
+                  width="10px"
+                  height="10px"
+                  src={process.env.PUBLIC_URL+'/likeIcon.png'}
+                  onClick={() => unlikefunction(post, post._id)} />
+                    {" "}
                     {likeCountArray.findIndex(
                       (ele) =>
                         ele.username === username && ele.postID === post._id
                     ) >= 0
                       ? post.likes.length + 1
                       : post.likes.length}
-                  </span>
+              
+                 </div>
                 ) : (
-                  <span onClick={() => likefunction(post, post._id)}>
-                    🤍{" "}
+                 <div        >
+                    <img
+            className={Styles.bottombarImg}
+                  alt=""
+                  width="10px"
+                  height="10px"
+                  src={process.env.PUBLIC_URL+'/unlikeIcon.png'}
+                   onClick={() => likefunction(post, post._id)}/>
+                    {" "}
                     {likeCountArray.findIndex(
                       (ele) =>
                         ele.username === username && ele.postID === post._id
                     ) >= 0
                       ? post.likes.length - 1
                       : post.likes.length}
-                  </span>
+              
+                 </div>
                 )}
-                <span
-                  onClick={() => setcommentsfunc({ val: true, post: post })}
-                >
-                  💬 {post?.comments?.length}
-                </span>
+               <div  >
 
-                <img  src={sharepic?sharepic:process.env.PUBLIC_URL+'/userImage.png'} width="4.5%" height="2%" alt="" />
+               <img
+               className={Styles.bottombarImg}
+                alt=""
+                width="10px"
+                height="10px"
+                src={process.env.PUBLIC_URL+'/chatIcon.png'}
+                  onClick={() => setcommentsfunc({ val: true, post: post })}
+                />
+                 {post?.comments?.length}
+                
+               </div>
+
+                <img className={Styles.bottombarImg}  src={process.env.PUBLIC_URL+'/shareIcon.png'} width="4.5%" height="2%" alt="" />
               </div>
               <div className={Styles.caption}>{post.desc}</div>
             </div>
