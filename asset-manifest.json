@@ -1,30 +1,29 @@
 {
   "files": {
-    "main.css": "/Eimentum/static/css/main.4f6bfa72.chunk.css",
-    "main.js": "/Eimentum/static/js/main.8dbcf1d3.chunk.js",
-    "main.js.map": "/Eimentum/static/js/main.8dbcf1d3.chunk.js.map",
+    "main.css": "/Eimentum/static/css/main.a47df09d.chunk.css",
+    "main.js": "/Eimentum/static/js/main.b10b9b82.chunk.js",
+    "main.js.map": "/Eimentum/static/js/main.b10b9b82.chunk.js.map",
     "runtime-main.js": "/Eimentum/static/js/runtime-main.3b2f669d.js",
     "runtime-main.js.map": "/Eimentum/static/js/runtime-main.3b2f669d.js.map",
     "static/css/2.d565e0ea.chunk.css": "/Eimentum/static/css/2.d565e0ea.chunk.css",
-    "static/js/2.e017a936.chunk.js": "/Eimentum/static/js/2.e017a936.chunk.js",
-    "static/js/2.e017a936.chunk.js.map": "/Eimentum/static/js/2.e017a936.chunk.js.map",
+    "static/js/2.609162ad.chunk.js": "/Eimentum/static/js/2.609162ad.chunk.js",
+    "static/js/2.609162ad.chunk.js.map": "/Eimentum/static/js/2.609162ad.chunk.js.map",
     "index.html": "/Eimentum/index.html",
     "static/css/2.d565e0ea.chunk.css.map": "/Eimentum/static/css/2.d565e0ea.chunk.css.map",
-    "static/css/main.4f6bfa72.chunk.css.map": "/Eimentum/static/css/main.4f6bfa72.chunk.css.map",
-    "static/js/2.e017a936.chunk.js.LICENSE.txt": "/Eimentum/static/js/2.e017a936.chunk.js.LICENSE.txt",
+    "static/css/main.a47df09d.chunk.css.map": "/Eimentum/static/css/main.a47df09d.chunk.css.map",
+    "static/js/2.609162ad.chunk.js.LICENSE.txt": "/Eimentum/static/js/2.609162ad.chunk.js.LICENSE.txt",
     "static/media/camera.f8234a47.png": "/Eimentum/static/media/camera.f8234a47.png",
     "static/media/cameraimg.b27c35b6.png": "/Eimentum/static/media/cameraimg.b27c35b6.png",
     "static/media/heart.c412cbae.png": "/Eimentum/static/media/heart.c412cbae.png",
     "static/media/home.07df57e7.png": "/Eimentum/static/media/home.07df57e7.png",
     "static/media/homeblack.110e5535.png": "/Eimentum/static/media/homeblack.110e5535.png",
-    "static/media/search.2550c90b.png": "/Eimentum/static/media/search.2550c90b.png",
-    "static/media/share.a767f6af.png": "/Eimentum/static/media/share.a767f6af.png"
+    "static/media/search.2550c90b.png": "/Eimentum/static/media/search.2550c90b.png"
   },
   "entrypoints": [
     "static/js/runtime-main.3b2f669d.js",
     "static/css/2.d565e0ea.chunk.css",
-    "static/js/2.e017a936.chunk.js",
-    "static/css/main.4f6bfa72.chunk.css",
-    "static/js/main.8dbcf1d3.chunk.js"
+    "static/js/2.609162ad.chunk.js",
+    "static/css/main.a47df09d.chunk.css",
+    "static/js/main.b10b9b82.chunk.js"
   ]
 }
