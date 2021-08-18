@@ -11,7 +11,7 @@ import deletePost from "../../../methods/deletePost";
 import {useDispatch,useSelector} from "react-redux";
 
 let likeCountArray = [];
-const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
+const Showdetailedpost=({post,setShowDetailedPostHandler,toDelete})=>{
     const Alert=useAlert();
     const dispatch=useDispatch();
     const [showcomments, setshowcomments] = useState(false);
@@ -123,8 +123,7 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
                     <img
                   className={Styles.bottombarImg}
                   alt=""
-                  width="10px"
-                  height="10px"
+              
                   src={process.env.PUBLIC_URL+'/likeIcon.png'}
                   onClick={() => unlikefunction(post, post._id)} />
                     {" "}
@@ -141,8 +140,7 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
                     <img
             className={Styles.bottombarImg}
                   alt=""
-                  width="10px"
-                  height="10px"
+             
                   src={process.env.PUBLIC_URL+'/unlikeIcon.png'}
                    onClick={() => likefunction(post, post._id)}/>
                     {" "}
@@ -160,8 +158,7 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
                <img
                className={Styles.bottombarImg}
                 alt=""
-                width="10px"
-                height="10px"
+             
                 src={process.env.PUBLIC_URL+'/chatIcon.png'}
                   onClick={() => setcommentsfunc({ val: true, post: post })}
                 />
@@ -173,10 +170,10 @@ const Showdetailedpost=({post,setShowDetailedPostHandler})=>{
                 
                    
                     
-                     {setting?<option value="delete" className={Styles.delete} onClick={()=>deletePostHandle(post._id,post.picture)} > ❌Delete </option>:<button onClick={()=>setSetting(true)}>⚙️</button>} 
+                     {toDelete?setting?<option value="delete" className={Styles.delete} onClick={()=>deletePostHandle(post._id,post.picture)} > ❌Delete </option>:<button onClick={()=>setSetting(true)}>⚙️</button>:null} 
                     
             
-                    <img src={process.env.PUBLIC_URL+'/shareIcon.png'} width="4.5%" height="2%" alt=" " />
+               
                   </div>
                   <div className={Styles.caption}>{post.desc}</div>
                 </div>}

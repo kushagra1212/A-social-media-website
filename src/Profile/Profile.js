@@ -50,7 +50,7 @@ const Profile = () => {
       setstart(false);
   }
   setTimeout(()=>{
-    if(posts.length==0) {setstart(false);}
+    if(posts.length===0) {setstart(false);}
      },1000);
 
   }, [posts]);
@@ -105,7 +105,7 @@ const Profile = () => {
           </div>
         ) : (
           <>
-            <Container  />{" "}
+            <Container toDelete={true} username={username} />{" "}
           </>
         )}
       </div>

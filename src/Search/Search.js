@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import User from "./Searchuser/User";
-import Container from "./Searchuser/Container";
+import ShowPost from "./Searchuser/ShowPost";
 import {useSelector } from "react-redux";
 import Profile from "../Profile/Profile";
 import Styles from "./Search.module.css";
@@ -152,7 +152,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
           showfollowing={showfollowing}
         />
         {showfollowers || showfollowing ? null : (
-          <Container collectposts={collectposts} user={user} />
+           <ShowPost  username={user.username} />
         )}
       </div>
     );
@@ -254,7 +254,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
           showfollowing={showfollowing}
         />
         {showfollowers || showfollowing ? null : (
-          <Container collectposts={collectposts} user={user} />
+          <ShowPost  username={user.username} />
         )}
       </div>
     );

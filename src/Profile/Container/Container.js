@@ -6,7 +6,7 @@ import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
 import { useSelector } from "react-redux";
 import { SuspenseImg } from "../../Home/Feed/content/SuspenceImage/SuspenceImg";
 import { getpostsforfeed } from "../../methods/getpostsforfeed";
-const Container = ( ) => {
+const Container = ({toDelete,username}) => {
   const [grid,setGrid]=useState(true);
   const [showDetailedPost,setShowDetailedPost]=useState(false);
   const [post,setPost]=useState([]);
@@ -15,10 +15,7 @@ const Container = ( ) => {
   const [hasMore,setHasMore]=useState(true);
   const [isUnmounted,setIsUnmounted]=useState(false);
 
-  const {  username } = useSelector((state) => {
- 
-    return state.user;
-  });
+  
  // const [isUnmounted,setIsUnmounted]=useState(false);
 
   
@@ -48,11 +45,7 @@ const Container = ( ) => {
       {
         setHasMore(false);
        
-      }
- 
-      
-
-  
+      } 
   }
   useState(()=>{
     call_func();
@@ -65,7 +58,7 @@ const Container = ( ) => {
   })
  
   if(showDetailedPost)
-    return(<Showdetailedpost setShowDetailedPostHandler={setShowDetailedPostHandler} post={post}  />);
+    return(<Showdetailedpost setShowDetailedPostHandler={setShowDetailedPostHandler} toDelete={toDelete} post={post}  />);
   
   return (
    <>   
