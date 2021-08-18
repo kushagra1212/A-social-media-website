@@ -13,12 +13,25 @@ const Like = () => {
   const [loading,setloading]=useState(true);
   const dispatch=useDispatch();
   const state=useSelector(state=>state.Likeposts)
+  const unique = (array) => {
+    let isvisited = {};
+    let newarray = [];
+ 
+    array.forEach((ele) => {
+      if (!isvisited[ele.picture]) {
+        newarray.push(ele);
+        isvisited[ele.picture] = true;
+      }
+    });
+    return newarray;
+  };
   const getposts = async () => {
     setloading(true);
-    getpostsforfeed(username, state.lastcount)
+    getpostsforfeed(username, state.lastcount,2)
       .then((res) => {
         if (res.length > 0) {
           let arr = [...state.posts, ...res];
+          arr=unique(arr);
           let lastcount=state.lastcount+2;
           dispatch(populateLike(arr,lastcount));
           
@@ -33,7 +46,7 @@ const Like = () => {
   useEffect(() => {
    if(!isUnmounted)
    {
-    if(state.posts.length==0)
+    if(state.posts.length===0)
     {
      getposts();
     }else{

@@ -5,7 +5,7 @@ const Likeposts = (
   switch (action.type) {
     case "POPULATE_IT":
     
-      return {...state,posts:action.payload.posts,lastcount:action.payload.lastcount};
+      return {posts:action.payload.posts,lastcount:action.payload.lastcount};
     default:
       return state;
   }
