@@ -168,3 +168,45 @@ zoom: 100%;
   width: 25px;
   height: 25px;
 }
+
+
+
+@media screen and (min-width:768px){
+  .maincontent{
+    background: white;
+    top: 100px;
+  }
+  .singlecontainer{
+
+    transform: translate(0%);
+    justify-items: center;
+    width: 30%;
+    margin: 1%;
+    padding: 0%;
+    box-shadow: 1px 3px 0px 0px rgb(23 10 44 / 0%);
+   
+ 
+  }
+  .infi {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .caption{
+    overflow: hidden;
+  }
+  .singlecontainer:hover{
+   
+        animation: item 1s ease-in-out  ;
+  }
+  @keyframes item {
+    to{
+      box-shadow: -1px -1px 20px 0px rgb(108 108 108);
+    }from{
+      box-shadow: 10px 10px 10px 0px rgb(23 10 44 / 0%);
+    }
+  }
+}

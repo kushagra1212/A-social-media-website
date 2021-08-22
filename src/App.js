@@ -5,7 +5,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { getuser, access_Action } from "./reduces/actions/userAction";
 import { useEffect, useState } from "react";
-
+import Styles from './App.module.css';
 
 const URL = process.env.REACT_APP_URL;
 const App = () => {
@@ -42,6 +42,6 @@ const App = () => {
     return () => {  setUnmounted(true);    };
   }, []);
  
-  return <div>{access ? <Main /> : issignup ? <Signup /> : <Signin />}</div>;
+  return <div className={Styles.main} >{access ? <Main /> : issignup ? <Signup /> : <Signin />}</div>;
 };
 export default App;

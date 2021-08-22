@@ -204,7 +204,7 @@ const Contentmain = () => {
     if (username) {
       try {
         let lastcount = state.feedposts.lastcount;
-        const res = await getpostsforfeed(username, lastcount,2);
+        const res = await getpostsforfeed(username, lastcount,4);
 
         if (res) {
           post1 = res;

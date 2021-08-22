@@ -76,3 +76,16 @@
     color:red;
     font-size: 0.7em;
 }
+@media screen and (min-width:768px) {
+  .container{
+    width: 30%;
+    height: 96vh;
+    padding: 5%;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    box-shadow: 19px 8px 20px #0000006e;
+    border: 2px solid #69696900;
+    border-radius: 10px;
+  }
+}

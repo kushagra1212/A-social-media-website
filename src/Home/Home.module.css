@@ -12,3 +12,9 @@
  
   
 }
+/*FOR BIGGER SCREEN DEVICES*/
+@media screen and (min-width:768px){
+    .maindiv{
+        background: white;
+    }
+}
