@@ -160,7 +160,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
     return <div></div>;
   } else if (showlist === true) {
     return (
-      <div>
+      <div className={Styles.maindiv2}>
         <div className={Styles.topsearchbar}>
           {view ? (
             <div className={Styles.searchbar}>

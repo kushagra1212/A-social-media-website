@@ -280,3 +280,9 @@
   width: 50px;
   animation: Search_Search_boxAni__1z34p__2w5A8 1s ease-in-out alternate-reverse;
 }
+
+@media screen and (min-width:768px){
+  .maindiv2{
+     background-color: aliceblue;
+  }
+}
