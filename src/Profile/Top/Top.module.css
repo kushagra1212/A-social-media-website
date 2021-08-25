@@ -160,3 +160,14 @@ padding-bottom:0% ;
 .thirddiv label h6{
     color: black;
 }
+
+@media screen and (min-width:678px){
+    .maindiv{
+        position: absolute;
+        /* height: 30%; */
+        left: 50%;
+        width: 50%;
+        height: auto;
+        z-index: -1;
+    }
+}

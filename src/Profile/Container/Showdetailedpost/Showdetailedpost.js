@@ -97,7 +97,7 @@ const Showdetailedpost=({post,setShowDetailedPostHandler,toDelete})=>{
     }
     return(
     <div className={Styles.maincontent}  >
-        <img src={backIcon} onClick={()=>setShowDetailedPostHandler(false)} width="30px" height="30px" alt="😉" />
+        <img className={Styles.backbut} src={backIcon} onClick={()=>setShowDetailedPostHandler(false)} width="30px" height="30px" alt="😉" />
         {showcomments.val? <Comments
             username={username}
             showcomments={showcomments}

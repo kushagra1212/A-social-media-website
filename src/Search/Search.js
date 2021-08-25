@@ -89,6 +89,8 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
         setuser(res.data);
         setfound({ found: true, text: "" });
       } else {
+         
+    setloading(false);
         setfound({ found: false, text: "user not found" });
       }
     } catch (err) {
@@ -211,7 +213,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
             </div>
           </>
         ) : (
-          <div></div>
+          <div className={Styles.temp}></div>
         )}
       </div>
     );

@@ -84,7 +84,7 @@ const Profile = () => {
     );
   } else {
     return (
-      <div style={{ margin: "0px", padding: "0px" }}>
+      <div className={Styles.maindiv}>
         <Top
           setshowfollowershandle={setshowfollowershandle}
           setshowfollowinghandle={setshowfollowinghandle}

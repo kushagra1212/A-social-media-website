@@ -105,3 +105,13 @@ zoom: 110%;
     transform: rotate(360deg);
   }
 }
+
+@media screen and (min-width:768px){
+  .maindiv{
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    width: 50%;
+    padding-bottom: 50px;
+  }
+}
