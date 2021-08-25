@@ -167,9 +167,7 @@ zoom: 100%;
   width:30px;
   height:30px;
 }
-.backbut{
 
-}
 
 @media screen and (min-width:768px) {
   .maincontent{
@@ -183,15 +181,22 @@ zoom: 100%;
   }
   .backbut{
     position: absolute;
-    width: 10%;
+    width: 50px;
     border: 2px solid #8080802b;
-    height: 10%;
+    height: 50px;
     /* transform: translate(-50%, -50%); */
     left: 10%;
     right: 10%;
     translate: auto;
     border-radius: 20px;
-    box-shadow: -7px -2px 20px 10px #a58d8d;
+    box-shadow: -7px -2px 20px 10px #a58d8d63;
     color: blanchedalmond;
+    transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.4s;
   }
+  .backbut:hover{
+    transform:scale(1.1);
+     transform:rotate(300deg);
+    box-shadow: -7px -2px 30px 10px #a58d8d88;
+  }
+  
 }

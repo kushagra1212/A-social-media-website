@@ -19,7 +19,7 @@
   margin-top: 1%;
   border: 2px solid rgba(255, 255, 255, 0);
   border-radius: 10px;
-  box-shadow: 2px 2px 20px rgb(73 73 80);
+  box-shadow: 1px 1px 5px 0px rgb(73 73 80 / 55%);
   margin: 2%;
   justify-content: space-around;
   align-items: stretch;
@@ -105,6 +105,26 @@ zoom: 110%;
     transform: rotate(360deg);
   }
 }
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 5px;
+}
+ 
+
+::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 5px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
 
 @media screen and (min-width:768px){
   .maindiv{
@@ -113,5 +133,11 @@ zoom: 110%;
     top: 50%;
     width: 50%;
     padding-bottom: 50px;
+    overflow-x: hidden;
+  scrollbar-gutter: red ;
+   
+  }
+  .posts:hover{
+    size: 10em;
   }
 }

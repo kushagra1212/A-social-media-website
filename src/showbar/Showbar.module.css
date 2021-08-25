@@ -16,15 +16,13 @@
     border-radius: 10px;
     box-shadow: 1px 1px 10px 1px grey;
    transform-origin:center;
-  
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
 .listmain button{
 z-index: 1000 ; 
 }
 .backbut:active{
-    font-size: 0.5em;
-    width:50px;
-    transform-origin:center;
+   transform:scale(1.2);
   
 }
 .list
@@ -68,5 +66,11 @@ z-index: 1000 ;
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
+    }
+  }
+  @media screen and (min-width:768px) {
+    .backbut{
+      top: 40px;
+    left: 50px;
     }
   }
