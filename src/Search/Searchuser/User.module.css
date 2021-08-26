@@ -130,3 +130,13 @@ padding-bottom:0% ;
    transform-origin:center;
 
 }
+@media screen and (min-width:768px){
+    .maindiv{
+        position: absolute;
+    /* height: 30%; */
+    left: 50%;
+    width: 50%;
+    height: auto;
+    z-index: 0;
+    }
+}

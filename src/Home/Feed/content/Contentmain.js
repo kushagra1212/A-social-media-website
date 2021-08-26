@@ -281,7 +281,7 @@ const Contentmain = () => {
                 color: "white",
                 width: "100%",
                 height: "30px",
-                marginTop: "1%",
+                marginTop: "15%",
                 marginBottom: "5%",
                 position: "relative",
               }}

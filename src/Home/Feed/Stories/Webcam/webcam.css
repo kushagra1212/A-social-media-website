@@ -24,3 +24,12 @@
         width: 90vw;
         height: 80vh;
       }
+
+      @media screen and (min-width:768px){
+        .react-html5-camera-photo-fullscreen>img, .react-html5-camera-photo-fullscreen>video {
+          width: 90vw;
+        height: 85vh;
+        }
+  
+     
+      }

@@ -39,6 +39,7 @@
    flex-direction: row;
    border:2px soild greenyellow;
    border-radius: 10px;
+   transition:tranform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
 }
 .loadmorebut{
     position: relative;
@@ -138,6 +139,9 @@ zoom: 110%;
    
   }
   .posts:hover{
-    size: 10em;
+    transform:scale(1.05);
+  }
+  .loadmorebut:hover{
+    transform:scale3d(1,1.1,1)
   }
 }
