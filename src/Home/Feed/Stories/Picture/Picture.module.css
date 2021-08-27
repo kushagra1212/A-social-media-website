@@ -103,6 +103,34 @@
     
     }
     .next{
-        
+        background-image: url("https://icons.iconarchive.com/icons/iconsmind/outline/256/Next-2-icon.png") ;
+        position: absolute;
+    right: 0%;
+    top: 30%;
+    height: 260px;
+    width: 20%;
+    background-color: rgb(0 255 234 / 0%);
+    border: none;
+    outline: none;
+    transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+    
+}
+    .previous{
+        background-image: url("https://icons.iconarchive.com/icons/iconsmind/outline/256/Back-2-icon.png");
+        position: absolute;
+    right: 0%;
+    top: 30%;
+    height: 260px;
+    width: 20%;
+    background-color: rgb(0 255 234 / 0%);
+    border: none;
+    transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+    outline: none;
     }
+    .next:hover{
+       transform:scale(1.2);
+    }
+    .previous:hover{
+        transform:scale(1.2);
+     }
 }

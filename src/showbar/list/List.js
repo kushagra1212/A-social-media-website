@@ -64,6 +64,7 @@ const List = ({ list }) => {
                     ? user.profilepic
                     : process.env.PUBLIC_URL + "/userImage.png"
                 }
+                alt=""
               />
            
            <div>

@@ -28,11 +28,11 @@ const Showbar = ({
       .then((res) => {
       
         dispatch({type:'SET_FOLLOWING_USERS',payload:{following:res.following}});
-        if (res.following.length == 0) {
+        if (res.following.length === 0) {
           setnoone({ nofollowers: false, nofollowing: true });
-        } else if (res.followers.length == 0) {
+        } else if (res.followers.length === 0) {
           setnoone({ nofollowers: true, nofollowing: false });
-        } else if (res.followers.length == 0 && res.following.length == 0) {
+        } else if (res.followers.length === 0 && res.following.length === 0) {
           setnoone({ nofollowers: true, nofollowing: true });
         } else {
           setnoone({ nofollowers: false, nofollowing: false });
