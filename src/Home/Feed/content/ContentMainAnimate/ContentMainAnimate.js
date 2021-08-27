@@ -1,6 +1,6 @@
 import Styles from "./ContentMainAnimate.module.css";
 const ContentMainAnimate = () => {
-  let posts=[{},{}];
+  let posts=[{},{},{},{}];
   return (
     <div className={Styles.maincontent} id="infiniteScroll">
       <>
