@@ -5,6 +5,7 @@ import { useAlert } from "react-alert";
 import {getusername} from '../reduces/actions/countAction'
 import {uploadstories} from '../methods/uploadstories';
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 const Signup = () => {
@@ -165,12 +166,14 @@ const Signup = () => {
         <button onClick={submithandle} className={Styles.loginbut}>
           Sign up
         </button>
-        <button
+        
+        <Link
+         to="/signin"
           className={Styles.goto}
           onClick={() => dispatch({ type: "signup", payload: false })}
         >
           Go to Login page
-        </button>
+        </Link>
       </div>
     </>
   );

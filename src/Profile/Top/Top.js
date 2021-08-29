@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import FileBase64 from "react-file-base64";
 import Editprofile from "./Editprofile";
 import Topprofile from "./Topprofile";
+import { useHistory } from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -25,7 +26,7 @@ const Top = ({
     return state.user;
   });
   const { postcount } = useSelector((state) => state.count);
-
+   const history=useHistory();
   const [img, setimg] = useState(null);
   const [edit, setedit] = useState(false);
   const [post, setpost] = useState(false);
@@ -48,6 +49,7 @@ const Top = ({
       .get(`${URL}/auth/logout`, { withCredentials: true })
       .then((res) => {
         dispatch({ type: "access", payload: false });
+        history.push("/signin");
       })
       .catch((err) => console.log(err));
   };

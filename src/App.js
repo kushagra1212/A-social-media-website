@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getuser, access_Action } from "./reduces/actions/userAction";
 import { useEffect, useState } from "react";
 import Styles from './App.module.css';
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 const App = () => {
@@ -41,7 +42,33 @@ const App = () => {
     }
     return () => {  setUnmounted(true);    };
   }, []);
+  
+ return (
+  <div className={Styles.main}>
+     <BrowserRouter>
+       
+       <Switch>
+         <Route path="/" exact>
+         {access ? <Redirect to="/main"/> : issignup ? <Redirect to="/signup"/> :<Redirect to="/signin"/>}
+         </Route>
+         <Route  path="/main" component={Main} />
+         <Route  path="/signin" component={Signin} />
+         <Route  path="/signup" component={Signup} />
+                
+  
+      
+    
+
+         </Switch>
+
+     
+     </BrowserRouter>
+
+  </div>
+   
+ )
+
+
  
-  return <div className={Styles.main} >{access ? <Main /> : issignup ? <Signup /> : <Signin />}</div>;
 };
 export default App;

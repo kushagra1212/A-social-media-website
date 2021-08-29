@@ -4,15 +4,18 @@ import { useState } from "react";
 import axios from "axios";
 import { getuser } from "../reduces/actions/userAction";
 import { useAlert } from "react-alert";
-
+import Input from "../Animation/Loader/Input/Input";
+import { Link,useHistory } from "react-router-dom";
 const URL = process.env.REACT_APP_URL;
 const Signin = () => {
   const dispatch = useDispatch();
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [showAlert,setShowAlert]=useState(true);
+  const history=useHistory();
   const Alert=useAlert();
   const loginhandle = async (e) => {
+   
     e.preventDefault();
     try {
       const res = await axios.post(
@@ -29,11 +32,11 @@ const Signin = () => {
    
       if (success) {
         dispatch({ type: "access", payload: success });
-      
-      
+
           dispatch(getuser(res.data.user._id));
-    
-        
+          history.push("/main");
+          
+  
       } else {
 
         console.log(res.data);
@@ -77,13 +80,14 @@ const Signin = () => {
 
         <div className={Styles.account}>
           <label>Don't have an account ?</label>
-          <button
-            href="#"
+         
+          <Link
+            to="/signup"
             onClick={() => dispatch({ type: "signup", payload: true })}
           >
             {" "}
             Sign up
-          </button>
+          </Link>
         </div>
       </div>
     </>
