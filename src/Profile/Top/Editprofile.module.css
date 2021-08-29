@@ -32,13 +32,12 @@ margin-top: 5%;
   border:2px solid rgba(128, 128, 128, 0);
   border-radius: 10px;
   box-shadow: 1px 1px 10px 1px grey;
- transform-origin:center;
+  
+  transition:  transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
 
 }
 .editbut:active{
-    font-size: 0.5em;
-    width:50px;
-    transform-origin:center;
+   transform:scale(1.2);
 }
 .backbut
 {
@@ -54,12 +53,11 @@ margin-top: 5%;
   border:2px solid rgba(128, 128, 128, 0);
   border-radius: 10px;
   box-shadow: 1px 1px 5px 1px grey;
- transform-origin:center;
+  transition:  transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+
 }
 .backbut:active{
-  font-size: 0.5em;
-  width:50px;
-  transform-origin:center;
+  transform:scale(1.1);
 }
 .editimg
 { 
@@ -143,4 +141,10 @@ margin-top: 5%;
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+@media screen  and (min-width:768px){
+    .editprofile{
+      height: 90%;
+      width: 30%;
+    }
 }

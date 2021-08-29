@@ -48,7 +48,9 @@ const Container = ({toDelete,username}) => {
       } 
   }
   useState(()=>{
-    call_func();
+    if(!isUnmounted){
+      call_func();
+    }
   
   },[]);
   useState(()=>{
