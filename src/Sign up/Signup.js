@@ -89,7 +89,7 @@ const Signup = () => {
         password: password,
         email: email,
         username: username,
-      });
+      },{  withCredentials: true});
       if (data.data.properties && showAlert) {
         Alert.show(data.data.properties.message,{
           onOpen:()=>{
