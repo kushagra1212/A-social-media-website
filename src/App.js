@@ -17,7 +17,9 @@ const App = () => {
   useEffect(() => {
     if (!isUnmounted) {
       axios
-        .get(`${URL}/auth/verify`)
+        .get(`${URL}/auth/verify`,   {
+          withCredentials: true
+        })
         .then(async (res) => {
         
         
