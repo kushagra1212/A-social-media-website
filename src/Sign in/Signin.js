@@ -22,7 +22,7 @@ const Signin = () => {
           password: password,
         },
         {
-          withCredentials: true,
+          withCredentials: true
         }
       );
       const success = res.data.success;
