@@ -42,18 +42,10 @@
     border-radius: 10px;
     outline: none;
     padding: 8%;
-    font-size: 1.2rem;
+    font-size: medium;
     /* align-items: center; */
     box-shadow: -1px -1px 14px 5px #5c6bc06e;
 }
-.form__label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: #9b9b9b;
-  }
 .loginbut{
     background-color: #f57c00;
     outline: none;

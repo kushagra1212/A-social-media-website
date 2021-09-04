@@ -4,7 +4,6 @@ import { useState } from "react";
 import axios from "axios";
 import { getuser } from "../reduces/actions/userAction";
 import { useAlert } from "react-alert";
-import Input from "../Animation/Loader/Input/Input";
 const URL = process.env.REACT_APP_URL;
 const Signin = () => {
   const dispatch = useDispatch();
