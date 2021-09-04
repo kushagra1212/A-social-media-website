@@ -103,7 +103,7 @@ const Signup = () => {
           username: username,
         });
         dispatch(getusername(username));
-        uploadstories(username,dispatch);
+      
         Alert.success("successfully signed up 🤗 ");
         setTimeout(() => {
           dispatch({ type: "signup", payload: false });
