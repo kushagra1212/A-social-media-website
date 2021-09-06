@@ -1,16 +1,20 @@
 import Styles from "./signin.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import { getuser } from "../reduces/actions/userAction";
 import { useAlert } from "react-alert";
+import { Link, useHistory,Redirect } from "react-router-dom";
 const URL = process.env.REACT_APP_URL;
 const Signin = () => {
   const dispatch = useDispatch();
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [showAlert,setShowAlert]=useState(true);
+  const history=useHistory()
   const Alert=useAlert();
+  let access = useSelector((state) => state.signinReducer.access);
+
   const loginhandle = async (e) => {
     e.preventDefault();
     try {
@@ -50,6 +54,9 @@ const Signin = () => {
       console.log(err);
     }
   };
+  if(access){
+    return <Redirect push to="/main" />;
+  }
   return (
     <>
       <div className={Styles.container}>
@@ -76,13 +83,13 @@ const Signin = () => {
 
         <div className={Styles.account}>
           <label>Don't have an account ?</label>
-          <button
-            href="#"
+          <Link
+          to="/signup"
             onClick={() => dispatch({ type: "signup", payload: true })}
           >
             {" "}
             Sign up
-          </button>
+          </Link>
         </div>
       </div>
     </>

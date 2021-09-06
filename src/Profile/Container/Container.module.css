@@ -119,6 +119,7 @@
   }
   .maindiv{
     width:50%;
+    margin-top: 11%;
   }
   p{
     width:50%;
@@ -127,4 +128,7 @@
     box-shadow: 1px 1px 19px grey;
     transform: scale(1.01);
   }
+ .infiP{
+
+ }
 }

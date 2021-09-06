@@ -3,7 +3,7 @@ import {useEffect,useState,Suspense} from 'react'
 import InfiniteScroll from "react-infinite-scroll-component";
 import Showdetailedpost from "./Showdetailedpost/Showdetailedpost";
 import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
-import { useSelector } from "react-redux";
+
 import { SuspenseImg } from "../../Home/Feed/content/SuspenceImage/SuspenceImg";
 import { getpostsforfeed } from "../../methods/getpostsforfeed";
 const Container = ({toDelete,username}) => {
@@ -14,8 +14,7 @@ const Container = ({toDelete,username}) => {
   const [posts,setPosts]=useState([]);
   const [hasMore,setHasMore]=useState(true);
   const [isUnmounted,setIsUnmounted]=useState(false);
-
-  
+ 
  // const [isUnmounted,setIsUnmounted]=useState(false);
 
   
@@ -31,7 +30,8 @@ const Container = ({toDelete,username}) => {
     setShowDetailedPostHandler(true);
   }  
   const call_func=async()=>{
-    let lastCount;
+    if(!isUnmounted){
+      let lastCount;
     if(posts)
        lastCount=posts.length;
     else
@@ -46,10 +46,15 @@ const Container = ({toDelete,username}) => {
         setHasMore(false);
        
       } 
+    }
+    
   }
   useState(()=>{
-    if(!isUnmounted){
+ 
       call_func();
+ 
+    return ()=>{
+      setIsUnmounted(true);
     }
   
   },[]);
@@ -61,7 +66,7 @@ const Container = ({toDelete,username}) => {
  
   if(showDetailedPost)
     return(<Showdetailedpost setShowDetailedPostHandler={setShowDetailedPostHandler} toDelete={toDelete} post={post}  />);
-  
+ 
   return (
    <>   
     <div className={Styles.topButtons} >
@@ -78,6 +83,7 @@ const Container = ({toDelete,username}) => {
           loader={<div className={Styles.loader}></div>}
           endMessage={
             <p
+             className={Styles.infiP}
               style={{
                 textAlign: "center",
                 backgroundColor: "black",

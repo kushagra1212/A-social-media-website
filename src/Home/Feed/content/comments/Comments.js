@@ -21,7 +21,9 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
     com.comments.sort((a, b) => new Date(b.date) - new Date(a.date));
     setpost(com);
 
-    dispatch(updatepost(com));
+
+      dispatch(updatepost(com));
+  
   };
   useEffect(()=>{
     let com=showcomments.post;
@@ -54,7 +56,7 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
           width="30px"
           height="30px"
         />
-        <Addcomment addCommentFunc={addCommentFunc} />
+        {post?<Addcomment addCommentFunc={addCommentFunc} />:null}
       </div>
       <div className={Styles.main}>
         {post?.comments.map((ele, id) => {

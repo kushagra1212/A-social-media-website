@@ -84,4 +84,10 @@
         width: 40vw;
         z-index: 10;
     }
+    .backbut{
+        transition: transform ease-in 0.2s;
+    }
+    .backbut:hover{
+        transform:scale(1.1);
+    }
 }

@@ -1,5 +1,5 @@
 const Likeposts = (
-  state = { posts: new Array(), lastcount: new Number() },
+  state = { posts: new Array(), lastcount:0 },
   action
 ) => {
   switch (action.type) {

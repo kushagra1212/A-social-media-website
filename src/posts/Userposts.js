@@ -10,13 +10,13 @@ const Userposts = () => {
 
   useEffect(() => {
    
-    getposts(_id, dispatch);
+   
   }, []);
 
   if (loading) {
     return <div>Loading...</div>;
   } else {
   }
-  return null;
+  return null
 };
 export default Userposts;

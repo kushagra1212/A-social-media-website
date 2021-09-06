@@ -5,14 +5,16 @@ import {populateLike} from '../reduces/actions/userAction';
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import Styles from './Like.module.css'
+import VerticalLoader from "../Animation/Loader/loader/VerticalLoader";
+
 const Like = () => {
-  const { username } = useSelector((state) => state.user);
- 
+
   const [hasMore, sethasmore] = useState(true);
   const [isUnmounted,setunmounted]=useState(false);
   const [loading,setloading]=useState(true);
   const dispatch=useDispatch();
   const state=useSelector(state=>state.Likeposts)
+  const {username}=useSelector(state=>state.user)
   const unique = (array) => {
     let isvisited = {};
     let newarray = [];
@@ -25,8 +27,11 @@ const Like = () => {
     });
     return newarray;
   };
-  const getposts = async () => {
+
+
+  const getposts =  () => {
     setloading(true);
+
     getpostsforfeed(username, state.lastcount,2)
       .then((res) => {
         if (res.length > 0) {
@@ -34,7 +39,7 @@ const Like = () => {
           arr=unique(arr);
           let lastcount=state.lastcount+2;
           dispatch(populateLike(arr,lastcount));
-          
+   
           setloading(false)
      
         } else {
@@ -48,14 +53,17 @@ const Like = () => {
    {
     if(state.posts.length===0)
     {
+ 
      getposts();
+
+     
     }else{
      setloading(false)
     }
    }
    return ()=> setunmounted(true);
-  }, []);
- 
+  }, [username]);
+
   return (
  <>
       <InfiniteScroll

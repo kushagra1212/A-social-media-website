@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import FileBase64 from "react-file-base64";
 import Editprofile from "./Editprofile";
 import Topprofile from "./Topprofile";
-
+import { Redirect, useHistory,withRouter } from "react-router";
 const URL = process.env.REACT_APP_URL;
 
 const Top = ({
@@ -25,7 +25,7 @@ const Top = ({
     return state.user;
   });
   const { postcount } = useSelector((state) => state.count);
-
+  const history=useHistory();
   const [img, setimg] = useState(null);
   const [edit, setedit] = useState(false);
   const [post, setpost] = useState(false);
@@ -48,6 +48,8 @@ const Top = ({
       .get(`${URL}/auth/logout`, { withCredentials: true })
       .then((res) => {
         dispatch({ type: "access", payload: false });
+         history.push("/");
+         window.location.href = window.location.href;
       })
       .catch((err) => console.log(err));
   };
@@ -86,4 +88,4 @@ const Top = ({
   );
 };
 
-export default Top;
+export default withRouter(Top);

@@ -27,10 +27,14 @@ const func=async()=>{
 }
 useEffect(() => {
  
+  
    func();
   
- 
+
+
+
 }, []);
+
   if(show_others_stories.flag)
   {
       return (<div  className={Styles.maindiv} style={{  height:"100vh",

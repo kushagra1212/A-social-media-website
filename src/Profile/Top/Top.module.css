@@ -170,4 +170,32 @@ padding-bottom:0% ;
         height: auto;
         z-index: 0;
     }
+    .followersbut{
+        transition:transform ease-in 0.2;
+    }
+    .followingbut:hover{
+        transform:scale(1.1);
+    }
+    
+    .followersbut{
+        transition:transform ease-in 0.2;
+    }
+    .followersbut:hover{
+        transform:scale(1.1);
+    }
+  .editbut{
+    transition:transform box-shadow ease-in 0.1;
+    box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.445);
+  }
+  .editbut:hover{
+      
+    transform:scaleY(1.2);
+    box-shadow: 1px 1px 10px rgba(128, 128, 128, 0.445);
+  }
+  .addapost{
+    transition:transform ease-in 0.2;
+  }
+  .addapost:hover{
+     
+  }
 }

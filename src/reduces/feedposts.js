@@ -1,11 +1,11 @@
 const feedposts = (
   state = {
-    // eslint-disable-next-line no-array-constructor
-    posts: new Array(),
-    lastcount: new Number(),
-    array: new Array(),
-    lastcount2: new Number(),
-    likesArray: new Array(),
+ 
+    posts: [],
+    lastcount: 0,
+    array:[],
+    lastcount2: 0,
+    likesArray:[],
   },
   action
 ) => {
@@ -38,18 +38,19 @@ const feedposts = (
     case "UPDATE_POST":
       let index=state.posts.findIndex(post=>post._id===action.payload.post._id);
 
-      let newArray=[...state.posts];
-      newArray[index].comments=action.payload.post.comments;
+      let newArray=state.posts;
+
+      if(index>=0)  newArray[index].comments=action.payload.post.comments;
       return {...state,posts:newArray};
     case "UPDATE_UNLIKES_ARRAY":
       return { ...state, likesArray: action.payload.unlikesArray };
     case "RESET_FEED_POSTS":
       return {
         ...state,
-        posts: new Array(),
-        lastcount: new Number(),
-        array: new Array(),
-        lastcount2: new Number(),
+        posts: [],
+        lastcount: 0,
+        array: [],
+        lastcount2:0,
       };
     default:
       break;

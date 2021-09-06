@@ -7,12 +7,14 @@ import Userposts from "../posts/Userposts";
 import Container from "./Container/Container";
 import Showbar from "../showbar/Showbar";
 import { useEffect, useState } from "react";
+import { getposts } from "../methods/getposts";
 import Styles from "./Profile.module.css";
+import { Redirect, withRouter } from "react-router";
 const Profile = () => {
   const dispatch = useDispatch();
   const [post, setpost] = useState(false);
   const posts = useSelector((state) => state.userposts);
-  const { username } = useSelector((state) => state.user);
+  const { username,_id } = useSelector((state) => state.user);
   const { postcount } = useSelector((state) => state.count);
   const [showfollowers, setshowfollowers] = useState(false);
   const [showfollowing, setshowfollowing] = useState(false);
@@ -20,11 +22,15 @@ const Profile = () => {
   const { followerscount, followingcount } = useSelector(
     (state) => state.count
   );
+
   const [start, setstart] = useState(true);
 
   const setposthand = (is) => {
     setpost(is);
   };
+
+   
+
   useEffect(
     () => {
       if (!isUnmounted) {
@@ -34,6 +40,7 @@ const Profile = () => {
         setTimeout(() => {
           getpostcount(username, dispatch);
           getfollowers(username, dispatch);
+          getposts(_id, dispatch);
         }, 0);
       }
       return () => {
@@ -51,7 +58,7 @@ const Profile = () => {
   }
   setTimeout(()=>{
     if(posts.length===0) {setstart(false);}
-     },1000);
+     },2000);
 
   }, [posts]);
 
@@ -61,6 +68,7 @@ const Profile = () => {
   const setshowfollowinghandle = (value) => {
     setshowfollowing(value);
   };
+
 
   if (showfollowers) {
     return (
@@ -95,14 +103,17 @@ const Profile = () => {
             className={Styles.loadermaindiv}
             style={{ position: "absolute" }}
           >
+   
             {start ? (
               <div className={Styles.loader}></div>
             ) : (
               <div>NOTHING POSTED YET</div>
             )}
-           
-            <Userposts />
+                <Userposts />
+            
+        
           </div>
+          
         ) : (
           <>
             <Container toDelete={true} username={username} />{" "}
@@ -113,4 +124,4 @@ const Profile = () => {
   }
 };
 
-export default Profile;
+export default withRouter(Profile);

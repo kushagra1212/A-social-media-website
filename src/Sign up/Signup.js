@@ -5,10 +5,14 @@ import { useAlert } from "react-alert";
 import {getusername} from '../reduces/actions/countAction'
 import {uploadstories} from '../methods/uploadstories';
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { NavLink ,Redirect} from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 const Signup = () => {
   const Alert = useAlert();
+  let signup = useSelector((state) => state.signinReducer.signup);
+
   const dispatch = useDispatch();
   const [email, setemail] = useState("");
   const [name, setname] = useState("");
@@ -107,12 +111,17 @@ const Signup = () => {
         Alert.success("successfully signed up 🤗 ");
         setTimeout(() => {
           dispatch({ type: "signup", payload: false });
-        }, 2200);
+        }, 300);
       }
     } catch (err) {
       console.log(err);
     }
   };
+
+  // if(signup===false){
+  //  return  <Redirect to="/signin" />
+  // }
+
   return (
     <>
       <div className={Styles.container}>
@@ -165,12 +174,14 @@ const Signup = () => {
         <button onClick={submithandle} className={Styles.loginbut}>
           Sign up
         </button>
-        <button
+        <NavLink
+        to="/signin"
           className={Styles.goto}
+          style={{marginLeft:"70px"}}
           onClick={() => dispatch({ type: "signup", payload: false })}
         >
           Go to Login page
-        </button>
+        </NavLink>
       </div>
     </>
   );

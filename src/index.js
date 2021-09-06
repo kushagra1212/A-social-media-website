@@ -8,6 +8,8 @@ import Reducers from './reduces/Reducers'
 import thunk from 'redux-thunk'
 import AlertTemplate from 'react-alert-template-basic'
 import {composeWithDevTools} from 'redux-devtools-extension';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
+
 const store=createStore(Reducers,composeWithDevTools(compose(applyMiddleware(thunk))));
 const options = {
  
@@ -17,7 +19,20 @@ const options = {
     
     transition: transitions.SCALE
   }
-ReactDOM.render(<Provider store={store}  > 
-   <AlertProvider template={AlertTemplate} {...options}><App /></AlertProvider>
-  </Provider>,document.getElementById('root'));
+ReactDOM.render(
+
+<Provider store={store}  > 
+   <AlertProvider template={AlertTemplate} {...options}>
+
+<BrowserRouter>
+
+<App/>
+
+</BrowserRouter>
+
+   </AlertProvider>
+  </Provider>
+
+  ,document.getElementById('root'));
+
   

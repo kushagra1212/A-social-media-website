@@ -5,45 +5,68 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { getuser, access_Action } from "./reduces/actions/userAction";
 import { useEffect, useState } from "react";
-import Styles from './App.module.css';
-
+import Styles from "./App.module.css";
+import { BrowserRouter, useHistory, Switch, Route,Redirect,withRouter,useRouteMatch } from "react-router-dom";
 const URL = process.env.REACT_APP_URL;
-const App = () => {
+const App = ({match}) => {
   const dispatch = useDispatch();
-  let access = useSelector((state) => state.signinReducer.access);
+ 
   const issignup = useSelector((state) => state.signinReducer.signup);
-
+  
   const [isUnmounted, setUnmounted] = useState(false);
+ 
   useEffect(() => {
     if (!isUnmounted) {
       axios
-        .get(`${URL}/auth/verify`,   {
-          withCredentials: true
+        .get(`${URL}/auth/verify`, {
+          withCredentials: true,
         })
         .then(async (res) => {
-        
-        
-  
-          setTimeout(()=>{
+          setTimeout(() => {
             dispatch(getuser(res.data.id));
-         
+          }, 0);
 
-
-            
-          },0)
-        
           setTimeout(() => {
             dispatch(access_Action(res.data.access));
-           
-          }, 1000);
          
-      
+          }, 1000);
         })
         .catch((err) => console.log(err));
     }
-    return () => {  setUnmounted(true);    };
+    return () => {
+      setUnmounted(true);
+    };
   }, []);
+
+
+  return (
+    <div className={Styles.main}>
+      
+     
+<BrowserRouter>
+
+
  
-  return <div className={Styles.main} >{access ? <Main /> : issignup ? <Signup /> : <Signin />}</div>;
+      <Route exact path="/" >
+     
+    <Redirect to="/signin"/>
+      </Route>
+      <Route path="/signin">
+      <Signin />
+      </Route>
+        <Route  path="/signup" >
+        <Signup />
+      </Route>
+      <Route path="/main">
+       <Main/>
+      </Route>
+    
+
+ 
+   
+
+</BrowserRouter>
+    </div>
+  );
 };
-export default App;
+export default withRouter(App);
