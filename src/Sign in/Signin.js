@@ -17,6 +17,18 @@ const Signin = () => {
 
   const loginhandle = async (e) => {
     e.preventDefault();
+    if(!username ||!password){
+      if(showAlert) {
+        Alert.error("Field is Empty !",{
+          onOpen:()=>{
+             setShowAlert(false);
+          },onClose:()=>{
+              setShowAlert(true);
+          }
+        });
+      }
+      return ;
+    }
     try {
       const res = await axios.post(
         `${URL}/auth/signin`,

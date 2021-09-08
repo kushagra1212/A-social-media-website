@@ -8,6 +8,7 @@ import Message from "./Home/Messagesec/Message";
 
 import Profile from "./Profile/Profile";
 import { BrowserRouter,Switch,Route ,useHistory,Redirect, HashRouter,withRouter,useRouteMatch} from "react-router-dom";
+import Loader from "./Animation/Loader/Loader";
 const Main = ({match}) => {
   let profile = useSelector((state) => state.main.profile);
   let home = useSelector((state) => state.main.home);
@@ -52,7 +53,7 @@ const Main = ({match}) => {
      </Route>
      <Route>
        <div>
-         404 page
+         <Loader/>
        </div>
       </Route>
 </Switch>

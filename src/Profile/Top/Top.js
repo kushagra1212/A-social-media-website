@@ -45,8 +45,9 @@ const Top = ({
   }, [edit]);
   const logouthandle = () => {
     axios
-      .get(`${URL}/auth/logout`, { withCredentials: true })
+      .post(`${URL}/auth/logout`, { } , { withCredentials: true })
       .then((res) => {
+        console.log(res);
         dispatch({ type: "access", payload: false });
          history.push("/");
          window.location.href = window.location.href;
