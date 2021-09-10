@@ -1,0 +1,54 @@
+.maindiv{
+        min-height: 100vh;
+        background-color: #263238;
+}
+
+.list{
+        display: flex;
+        position: absolute;
+        width: 100%;
+        background-color: black;
+        flex-direction: column;
+        scroll-behavior: smooth;
+        top: 10vh;
+    
+}
+.listitem{
+        background: #546e7a;
+        position: relative;
+        display: flex;
+        border: 2px solid #80808061;
+        border-radius: 10px;
+        height: 15%;
+        color: white;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 2%;
+  
+}
+.userimg{
+        position: relative;
+    width: 20%;
+    height: 80%;
+}
+.userimg img{
+        width: 100%;
+        height: 100%;
+}
+.usernamediv{
+        width: 100%;
+        border-left: 2px solid #455a64;
+    
+        height: 10vh;
+        border-radius: 5px;
+   
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+.usernamelabel{
+
+}

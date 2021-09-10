@@ -9,6 +9,7 @@ import user from './user'
 import feedposts from './feedposts'
 import Likeposts from './Likeposts';
 import Stories from './Stories';
+import MessageReducer from './MessageReducer';
 
-const Reducers=combineReducers({signinReducer,main,user,userposts,count,feedposts,Likeposts,Stories});
+const Reducers=combineReducers({signinReducer,main,user,userposts,count,feedposts,Likeposts,Stories,MessageReducer});
 export default Reducers;
