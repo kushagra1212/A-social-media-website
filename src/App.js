@@ -5,16 +5,22 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { getuser, access_Action } from "./reduces/actions/userAction";
 import { useEffect, useState } from "react";
+
 import Styles from "./App.module.css";
-import { BrowserRouter, useHistory, Switch, Route,Redirect,withRouter,useRouteMatch } from "react-router-dom";
+import {
+  BrowserRouter,
+
+  Route,
+  Redirect,
+  withRouter,
+
+} from "react-router-dom";
 const URL = process.env.REACT_APP_URL;
-const App = ({match}) => {
+const App = ({ match }) => {
   const dispatch = useDispatch();
- 
-  const issignup = useSelector((state) => state.signinReducer.signup);
-  
+
   const [isUnmounted, setUnmounted] = useState(false);
- 
+
   useEffect(() => {
     if (!isUnmounted) {
       axios
@@ -28,7 +34,6 @@ const App = ({match}) => {
 
           setTimeout(() => {
             dispatch(access_Action(res.data.access));
-         
           }, 1000);
         })
         .catch((err) => console.log(err));
@@ -38,34 +43,23 @@ const App = ({match}) => {
     };
   }, []);
 
-
   return (
     <div className={Styles.main}>
-      
-     
-<BrowserRouter>
-
-
- 
-      <Route exact path="/" >
-     
-    <Redirect to="/signin"/>
-      </Route>
-      <Route path="/signin">
-      <Signin />
-      </Route>
-        <Route  path="/signup" >
-        <Signup />
-      </Route>
-      <Route path="/main">
-       <Main/>
-      </Route>
+      <BrowserRouter>
+        <Route exact path="/">
+          <Redirect to="/signin" />
+        </Route>
+        <Route path="/signin">
+          <Signin />
+        </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+        <Route path="/main">
+          <Main />
+        </Route>
     
-
- 
-   
-
-</BrowserRouter>
+      </BrowserRouter>
     </div>
   );
 };

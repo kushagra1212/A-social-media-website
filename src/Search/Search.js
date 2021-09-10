@@ -53,7 +53,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
         username: searchuser,
       });
       const res2 = await axios.patch(`${URL}/count/updatefollowingcount`, {
-        username: searchuser,
+        username: searchuser
       });
       if (res2.data) {
         setpostcount(res2.data.postcount);
@@ -171,8 +171,8 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
                 type="text"
                 value={searchuser}
                 onChange={(e) => {
-                  setsearchuser(e.target.value);
-                  searchuserhandle(e.target.value);
+                  setsearchuser(e.target.value.toLowerCase());
+                  searchuserhandle(e.target.value.toLowerCase());
                 }}
                 required
               />
@@ -185,7 +185,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
                 width="40px"
                 height="40px"
                 alt=""
-              / >
+              />
             </div>
           ) : null}
         </div>

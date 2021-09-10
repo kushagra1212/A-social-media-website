@@ -12,7 +12,7 @@ const Footer = ({ url, path }) => {
   const dispatch = useDispatch();
   const { home, search, like, profile } = useSelector((state) => state.main);
   const { profilepic } = useSelector((state) => state.user);
-  console.log(url, "footer");
+
   return (
     <>
       <div className={Styles.footer}>

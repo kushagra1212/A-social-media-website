@@ -77,7 +77,7 @@ const Signin = () => {
           {" "}
           <input
             placeholder="username"
-            onChange={(e) => setusername(e.target.value.substr(0, 15))}
+            onChange={(e) => setusername(e.target.value.substr(0, 15).toLowerCase())}
             value={username}
             type="text"
           />

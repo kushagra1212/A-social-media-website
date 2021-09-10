@@ -4,19 +4,14 @@ import Like from "./Like/Like";
 import Search from "./Search/Search";
 import Footer from "./Bottom Bar/Footer";
 import { useSelector } from "react-redux";
-import Message from "./Home/Messagesec/Message";
-
+import Messenger from "./Messenger/Messenger";
 import Profile from "./Profile/Profile";
 import { BrowserRouter,Switch,Route ,useHistory,Redirect, HashRouter,withRouter,useRouteMatch} from "react-router-dom";
 import Loader from "./Animation/Loader/Loader";
 const Main = ({match}) => {
-  let profile = useSelector((state) => state.main.profile);
-  let home = useSelector((state) => state.main.home);
-  let search = useSelector((state) => state.main.search);
-  let like = useSelector((state) => state.main.like);
-  let message = useSelector((state) => state.main.message);
+
   const { show_others_stories } = useSelector((state) => state.Stories);
-  let access = useSelector((state) => state.signinReducer.access);
+  const {message}=useSelector((state) => state.main);
 
   const { url, path } = useRouteMatch();  
   useEffect(() => {}, [show_others_stories.flag]);
@@ -32,7 +27,7 @@ const Main = ({match}) => {
 
 <BrowserRouter>
 
- <Footer url={url} path={path} />
+ {message?null:<Footer url={url} path={path} />}
 
 
 <Switch>
@@ -51,6 +46,9 @@ const Main = ({match}) => {
      <Route  path={`${path}/search`}>
      <Search fromshowbar={false} usernameformshowbar={null} view={true} />
      </Route>
+     <Route path={`${path}/messenger`}>
+          <Messenger/>
+        </Route>
      <Route>
        <div>
          <Loader/>
