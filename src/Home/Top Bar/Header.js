@@ -17,7 +17,7 @@ const Header=()=>{
 
                <NavLink      className={Styles.messageimg} to={`main/messenger`}>
           <img
-            src={ process.env.PUBLIC_URL+"/messageicon.png" }
+            src={ `${process.env.PUBLIC_URL}/messageicon.png` }
         
             onClick={()=>dispatch({type:"SHOWMESSAGE",payload:true})} 
             alt=""
