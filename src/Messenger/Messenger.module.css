@@ -1,5 +1,6 @@
 .maindiv{
-          
+          height: 100vh;
+          width:100vw;
   
 }
 .backbut{
@@ -8,7 +9,7 @@
         width:30px;
         height:30px;
         margin:5px;
-        bottom: 91vh;
+        top:10px;
         outline: none;
         background-color: #90caf9;
         border: 1px solid rgba(128, 128, 128, 0.185); 

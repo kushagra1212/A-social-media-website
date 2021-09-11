@@ -2,18 +2,18 @@
         width: 100vw;
         height: 100vh;
         background-color: #263238;
-        position: relative;
+        position: absolute;
         display: flex;
         flex-direction: column;
         overflow-y: hidden;
 }
 .messages{
-        height: 82vh;
+        height: 80%;
         box-shadow: inset -1px -5px 8px 0px #455a64;
         background-color: #455a64;
         border: 1px solid #80808000;
         border-radius: 5px;
-        top: 35px;
+        top: 50px;
         max-width: 100%;
         overflow: scroll;
         overflow-x: hidden;
@@ -21,13 +21,13 @@
         position: relative;
 }
 .senddiv{
-        position: absolute;
+        position: relative;
         display: flex;
         width: 90vw;
         left: 5vw;
-        top: 90vh;
-        height: px;
-        height: 10vh;
+        top: 50px;
+        margin-bottom: -10px;
+        height: 50px;
         background-color: #f6fbff;
         border: 5px solid #37474f00;
         border-radius: 10px;
@@ -37,13 +37,14 @@
 .textarea{
         position: relative;
         width: 70%;
-        height: 10vh;
+        height: 50px;
         outline: none;
         border: 1px solid #26323829;
         border-radius: 10px;
         font-family: sans-serif;
         padding: 5px;
         resize: none;
+        font-size: 1.3em;
 }
 .sendbut{
         position: relative;
@@ -85,7 +86,7 @@
         border-radius: 10px;
 }
 .perticularmessage_sender label{
-        background-color: #ba68c8;
+        background-color: #90539b;
         color: white;
         border: 1px solid #80808000;
         border-radius: 10px;
