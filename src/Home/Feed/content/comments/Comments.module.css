@@ -13,7 +13,7 @@
     border-radius: 10px;
     box-shadow: 8px 9px 15px 0px #505050;
     background-color: aliceblue;
-    z-index: 2;
+    z-index: 10;
 
     overflow: hidden;
 }
