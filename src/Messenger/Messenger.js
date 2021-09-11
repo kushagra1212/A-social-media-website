@@ -34,8 +34,8 @@ const Messenger=()=>{
 
     return(<>
    <div className={Styles.maindiv}>
-
-   <button className={Styles.topbar} />
+{/* 
+   <button className={Styles.topbar} /> */}
        <button onClick={backbButFun} className={Styles.backbut}  ><img src={process.env.PUBLIC_URL+'/previous.png'} alt="" width="100%" height="100%" /></button>
     {loading?<Loader/>  :
          box?<Box conversations={conversations} username={username}  />:<Messages    /> }   

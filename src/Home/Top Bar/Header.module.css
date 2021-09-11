@@ -26,13 +26,11 @@ justify-content: space-between;
   
 .messageimg{
     position: absolute;
-
-    width:14%;
-    height:10%;
+    width: 14%;
+    height: 9%;
     z-index: 1;
-   
     border-radius: 10px;
-    box-shadow: 1px 1px 1px grey;
+    box-shadow: 1px 1px 3px grey;
     animation: box-shadow alternate-reverse 0.2s;
 
 }

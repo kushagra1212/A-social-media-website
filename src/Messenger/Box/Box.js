@@ -25,6 +25,7 @@ const List = ({ chatuser,conversationID }) => {
   const showmessages=()=>{
   
     
+     dispatch({type:"SETUSERCONVERSATION",payload:user})
      dispatch(setconversationID(conversationID));
      dispatch({type:"SHOWBOX",payload:false});
   }
@@ -35,7 +36,7 @@ const List = ({ chatuser,conversationID }) => {
           src={
             user.profilepic
               ? user.profilepic
-              : process.env.PUBLIC_URL + "/messageicon.png"
+              : `${process.env.PUBLIC_URL}/chatIcon.png` 
           }
           alt=""
         />
@@ -54,6 +55,7 @@ const Box = ({ conversations, username }) => {
         {conversations?.map((element, id) => {
           return (
             <List
+            key={element._id}
               
               conversationID={element._id}
               chatuser={
