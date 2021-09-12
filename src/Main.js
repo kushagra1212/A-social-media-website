@@ -23,7 +23,7 @@ const Main = ({match}) => {
 
 
 
-<div> 
+<div style={{overflow:"hidden"}}> 
 
 <BrowserRouter>
 

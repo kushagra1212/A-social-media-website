@@ -36,7 +36,7 @@ const List = ({ chatuser,conversationID }) => {
           src={
             user.profilepic
               ? user.profilepic
-              : `${process.env.PUBLIC_URL}/chatIcon.png` 
+              : `${process.env.PUBLIC_URL}/userImage.png` 
           }
           alt=""
         />

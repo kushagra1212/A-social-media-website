@@ -56,18 +56,22 @@
 }
 .sendbut:active{
         transform: translate(100px,-100px);
+
    
+}
+.sendbut:hover{
+        transform: scale(1.4);
 }
 
 .perticularmessage_receiver{
         position: relative;
-        background-color: #1565c0;
+        background-color: #0d3b70;
         max-width: 70%;
         overflow-wrap: break-word;
         margin-top: 10px;
         margin-bottom: 10px;
         color: white;
-        margin-left: 105px;
+        margin-left: 170px;
         /* color: #ffffff; */
         /* margin-right: 50px; */
         border: 1px solid #80808000;
@@ -78,7 +82,7 @@
 .perticularmessage_sender{
 
         position: relative;
-        background-color: #9c27b0;
+        background-color: #661873;
         max-width: 70%;
         overflow-wrap: break-word;
         margin-top: 10px;
@@ -125,7 +129,8 @@
         left: 60%;
         width: 100%;
         position: relative;
-        background-color: #2196f3;
+  
+        background-color: #2e6795;
         color: white;
         border: 1px solid #80808000;
         border-radius: 10px;
@@ -149,4 +154,30 @@
 }
 .scrolldiv{
 
+}
+
+
+@media screen and (min-width:768px) {
+        .maindiv{
+                width: 50vw;
+                left: 27vw;
+                box-shadow: 2px -6px 300px 6px #37474f;
+        }
+        .perticularmessage_receiver{
+                max-width: 70%;
+                overflow-wrap: break-word;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                color: white;
+                margin-left: 40%;
+                margin-right: 15px;
+        }
+        .senddiv{
+                width: 40vw;
+                left: 5vw;
+        }
+        .textarea{
+                width: 80%;
+                height: 50px;
+        }
 }
