@@ -8,10 +8,12 @@
         display: flex;
         position: absolute;
         width: 100%;
-        background-color: black;
+        background-color: #000000de;
         flex-direction: column;
         scroll-behavior: smooth;
-        top: 10vh;
+        top: 50px;
+        height: 100vh;
+    
     
 }
 .listitem{

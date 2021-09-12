@@ -9,16 +9,16 @@
 }
 .messages{
         height: 80%;
-        box-shadow: inset -1px -5px 8px 0px #455a64;
-        background-color: #263238;
-        border: 1px solid #80808000;
-        border-radius: 5px;
-        top: 50px;
-        max-width: 100%;
-        overflow: scroll;
-        overflow-x: hidden;
-        overflow-x: none;
-        position: relative;
+    box-shadow: -1px -5px 8px 0px #37474f;
+    background-color: #263238;
+    border: 1px solid #80808000;
+    border-radius: 5px;
+    top: 50px;
+    max-width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-x: none;
+    position: relative;
 }
 .senddiv{
         position: relative;
@@ -39,21 +39,24 @@
         width: 70%;
         height: 50px;
         outline: none;
-        border: 1px solid #26323829;
+        border: 1px solid #26323847;
         border-radius: 10px;
         font-family: sans-serif;
         padding: 5px;
         resize: none;
-        font-size: 1.3em;
+        font-size: 1.1em;
 }
 .sendbut{
         position: relative;
-        width: 40px;
-        height: 40PX;
-        transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 2s;
+        width: 50px;
+        height: 50PX;
+        transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 3s;
+ 
+    
+    
 }
 .sendbut:active{
-        transform: translate(30px,-60px);
+        transform: translate(500px,-500px);
    
 }
 
@@ -62,10 +65,10 @@
         background-color: #1565c0;
         width: 70%;
         overflow-wrap: break-word;
-        margin-top: 5px;
-        margin-bottom: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         color: white;
-        margin-left: 30%;
+        margin-left: 105px;
         /* color: #ffffff; */
         /* margin-right: 50px; */
         border: 1px solid #80808000;
@@ -79,12 +82,15 @@
         background-color: #9c27b0;
         width: 70%;
         overflow-wrap: break-word;
-        margin-top: 5px;
-        margin-bottom: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         color: white;
-        margin-left: 5px;
+        margin-left: 10px;
         border: 1px solid #80808000;
         border-radius: 10px;
+
+    
+    
 }
 .perticularmessage_sender label{
         background-color: #90539b;
