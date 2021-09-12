@@ -5,6 +5,7 @@ import { setfollowers } from "../../methods/setfollowers";
 import verifiesusers from "../../methods/verifiesusers";
 import Showbar from '../../showbar/Showbar'
 import { useAlert } from "react-alert";
+import addconversation from "../../methods/addconversation";
 const URL = process.env.REACT_APP_URL;
 const User = ({
   profpic,
@@ -29,9 +30,11 @@ const User = ({
   const [showAlert,setShowAlert]=useState(true);
   const Alert=useAlert();
   const setfollowinghandle = (e) => {
-    if (following == false) {
+    if (following === false) {
+      addconversation([username,usernameofsender]);
       setfollowers(username, usernameofsender, dispatch);
       setfollowing(true);
+   
     }
   };
   const setfollowingfunc = (value) => {

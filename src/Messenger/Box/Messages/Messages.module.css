@@ -5,12 +5,12 @@
         position: absolute;
         display: flex;
         flex-direction: column;
-        overflow-y: visible;
+        overflow: hidden;
 }
 .messages{
         height: 80%;
         box-shadow: inset -1px -5px 8px 0px #455a64;
-        background-color: #455a64;
+        background-color: #263238;
         border: 1px solid #80808000;
         border-radius: 5px;
         top: 50px;
@@ -76,11 +76,12 @@
 .perticularmessage_sender{
 
         position: relative;
-        background-color: #e1f5fe;
+        background-color: #9c27b0;
         width: 70%;
         overflow-wrap: break-word;
         margin-top: 5px;
         margin-bottom: 5px;
+        color: white;
         margin-left: 5px;
         border: 1px solid #80808000;
         border-radius: 10px;

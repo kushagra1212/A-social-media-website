@@ -49,8 +49,16 @@ const List = ({ chatuser,conversationID }) => {
 };
 
 const Box = ({ conversations, username }) => {
+
+  if(conversations!=null && conversations.length===0){
+    return  <div  className={Styles.maindiv} style={{color:"white",height:"100vh",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"2em"}}>
+    You have no conversation
+    <h6>Please Follow your friends</h6>
+  </div>
+  }
   return (
     <div className={Styles.maindiv}>
+      
       <div className={Styles.list}>
         {conversations?.map((element, id) => {
           return (

@@ -6,11 +6,12 @@ import {getusername} from '../reduces/actions/countAction'
 import {uploadstories} from '../methods/uploadstories';
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { NavLink ,Redirect} from "react-router-dom";
+import { NavLink ,Redirect,useHistory} from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 const Signup = () => {
   const Alert = useAlert();
+  const history=useHistory();
   let signup = useSelector((state) => state.signinReducer.signup);
 
   const dispatch = useDispatch();
@@ -111,6 +112,7 @@ const Signup = () => {
         Alert.success("successfully signed up 🤗 ");
         setTimeout(() => {
           dispatch({ type: "signup", payload: false });
+          history.push("/");
         }, 300);
       }
     } catch (err) {
