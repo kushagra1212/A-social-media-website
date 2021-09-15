@@ -28,13 +28,11 @@ const App = ({ match }) => {
           withCredentials: true,
         })
         .then(async (res) => {
-          setTimeout(() => {
+     
             dispatch(getuser(res.data.id));
-          }, 0);
-
-          setTimeout(() => {
+     
             dispatch(access_Action(res.data.access));
-          }, 1000);
+    
         })
         .catch((err) => console.log(err));
     }
