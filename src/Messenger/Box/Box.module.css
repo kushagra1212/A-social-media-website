@@ -18,7 +18,8 @@
     
 }
 .listitem{
-        background: #546e7a;
+        background: #37474f;
+        cursor: pointer;
         position: relative;
         display: flex;
         border: 2px solid #80808061;
@@ -38,8 +39,7 @@
 }
 .userimg{
         position: relative;
-    width: 20%;
-    height: 80%;
+        width: 15%;
 }
 .userimg img{
         width: 100%;

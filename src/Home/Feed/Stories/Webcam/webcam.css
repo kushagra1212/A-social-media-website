@@ -19,16 +19,36 @@
         left: 50%;
         bottom: 90px;
         top: 100%;
+        animation: tranform cubic-bezier(0.455, 0.03, 0.515, 0.955) 1s;
       }
+      
       .react-html5-camera-photo-fullscreen>img, .react-html5-camera-photo-fullscreen>video {
         width: 90vw;
         height: 80vh;
+     
+        border: 2px solid #80808000;
+        border-radius: 10px;
+        box-shadow: 1px 1px 10px grey;
       }
 
       @media screen and (min-width:768px){
         .react-html5-camera-photo-fullscreen>img, .react-html5-camera-photo-fullscreen>video {
-          width: 90vw;
-        height: 85vh;
+          width: 60vw;
+          height: 70vh;
+          border: 2px solid #80808000;
+          border-radius: 10px;
+          box-shadow: 1px 1px 10px grey;
+        }
+        #container-circles {
+          position: absolute;
+          left: 50%;
+          bottom: 90px;
+          top: 100%;
+          animation: transform cubic-bezier(0.455, 0.03, 0.515, 0.955) 1s;
+          cursor: pointer;
+        }
+        #container-circles:hover{
+          transform: scale(1.3);
         }
   
      

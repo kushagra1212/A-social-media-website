@@ -14,7 +14,7 @@ const Stories = () => {
 
 
       <div className={Styles.stories}>
-        <div onClick={()=> dispatch(show_user_stories_handle(true))} className={Styles.userStories} ><img src={profilepic?profilepic:process.env.PUBLIC_URL+'/userImage.png'} alt="" width="100%" height="100%" /></div>
+        <div onClick={()=> dispatch(show_user_stories_handle(true))} className={Styles.userStories} ><img src={profilepic?profilepic:process.env.PUBLIC_URL+'/AddIcon.png'} alt="" width="100%" height="100%" /></div>
      
         {othersStories?.map((ele,id)=>
      
