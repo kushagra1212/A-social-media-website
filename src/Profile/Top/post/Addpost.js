@@ -33,9 +33,11 @@ const Addpost = ({ setposthandle }) => {
         params:{username:username,desc:desc}
       });
       setloading(!loading);
+
       dispatch(resetFeedPosts());
       dispatch(resetUserPosts());
       setposthandle(false);
+      window.location.reload("/main");
     } catch (err) {
       console.log(err);
     }

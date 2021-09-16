@@ -19,18 +19,26 @@ const Messenger=()=>{
  
     }
     const getconversation=async()=>{
-       const conver=await getconversations(username);
-
-       setconversations(conver);
-       dispatch({type:"SHOWBOX",payload:true});
-
-       setloading(false);
+    
+    
+         const conver=await getconversations(username);
+      
+         setconversations(conver);
+         dispatch({type:"SHOWBOX",payload:true});
+  
+         setloading(false);
+    
     
     }
   useEffect(() => {
-     setloading(true); 
-    getconversation();
-  }, [])
+ 
+
+      setloading(true); 
+      dispatch({type:"SHOWMESSAGE",payload:true});
+     getconversation();
+
+  }, [username]);
+
 
     return(<>
    <div className={Styles.maindiv}>

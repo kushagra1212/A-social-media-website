@@ -49,18 +49,18 @@
         position: relative;
         width: 50px;
         height: 50PX;
-        transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 3s;
+        transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
  
     
     
 }
 .sendbut:active{
-        transform: translate(100px,-100px);
+        transform: translate(60px,-100px);
 
    
 }
 .sendbut:hover{
-        transform: scale(1.4);
+        transform: scale(1.2);
 }
 
 .perticularmessage_receiver{
