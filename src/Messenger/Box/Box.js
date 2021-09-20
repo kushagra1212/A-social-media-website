@@ -4,15 +4,17 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
 import { setconversationID } from "../../reduces/actions/MessageReducerAction";
+
 const List = ({ chatuser,conversationID }) => {
   const [user, setuser] = useState(null);
   const dispatch=useDispatch();
-  const getUser = async () => {
-    const User = await getuser(chatuser);
 
-    setuser(User);
-  };
   useEffect(() => {
+    const getUser = async () => {
+      const User = await getuser(chatuser);
+  
+      setuser(User);
+    };
     getUser(chatuser);
   }, [chatuser]);
   if (user === null) {
@@ -23,11 +25,13 @@ const List = ({ chatuser,conversationID }) => {
     );
   }
   const showmessages=()=>{
+
   
-    
+
      dispatch({type:"SETUSERCONVERSATION",payload:user})
      dispatch(setconversationID(conversationID));
      dispatch({type:"SHOWBOX",payload:false});
+
   }
   return (
     <div className={Styles.listitem} onClick={showmessages}>
@@ -64,7 +68,7 @@ const Box = ({ conversations, username }) => {
           return (
             <List
             key={element._id}
-              
+             
               conversationID={element._id}
               chatuser={
                 element.members[0] === username

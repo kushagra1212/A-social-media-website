@@ -5,7 +5,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import {show_user_stories_handle,show_others_stories_handle} from '../../../reduces/actions/StoriesAction';
 
 const Stories = () => {
-   const dispatch=useDispatch();
+  const dispatch=useDispatch();
   const {username,profilepic} =useSelector(state=>state.user);
 
   const {othersStories,loading} =useSelector(state=>state.Stories);
