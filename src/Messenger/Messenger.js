@@ -41,13 +41,13 @@ const Messenger=()=>{
        
          const conver=await getconversations(username);
           console.log(conver);
-          socket.current = io("https://eimentum-chat-socket-server.vercel.app");
-        setTimeout(()=>{
+         socket.current = io("https://eimentum-chat-socket-server.vercel.app");
+        //   socket.current = io("http://localhost:8000/");
             setconversations(conver);
             dispatch({type:"SHOWBOX",payload:true});
      
             setloading(false);
-        },2000);
+      
     
     
     }
