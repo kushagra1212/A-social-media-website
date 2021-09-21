@@ -41,7 +41,7 @@ const Messenger=()=>{
        
          const conver=await getconversations(username);
           console.log(conver);
-          socket.current = io("ws://eimentum-chat-socket-server.vercel.app");
+          socket.current = io(`${process.env.REACT_APP_SOCKETURL}`);
          setconversations(conver);
          dispatch({type:"SHOWBOX",payload:true});
   
