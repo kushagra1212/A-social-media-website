@@ -42,10 +42,12 @@ const Messenger=()=>{
          const conver=await getconversations(username);
           console.log(conver);
           socket.current = io("https://eimentum-chat-socket-server.vercel.app");
-         setconversations(conver);
-         dispatch({type:"SHOWBOX",payload:true});
-  
-         setloading(false);
+        setTimeout(()=>{
+            setconversations(conver);
+            dispatch({type:"SHOWBOX",payload:true});
+     
+            setloading(false);
+        },2000);
     
     
     }
