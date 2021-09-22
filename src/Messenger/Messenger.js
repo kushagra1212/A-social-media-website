@@ -42,7 +42,7 @@ const Messenger=()=>{
        
          const conver=await getconversations(username);
           console.log(conver);
-         socket.current = io.connnect(SURL);
+         socket.current = io.connect(SURL);
         //   socket.current = io.connect("http://localhost:8000/");
             setconversations(conver);
             dispatch({type:"SHOWBOX",payload:true});
