@@ -47,7 +47,7 @@ const Messenger=()=>{
          
            const conver=await getconversations(username);
             console.log(conver);
-            let socket = io.connect(ENDPOINT);
+            let socket = io(ENDPOINT,{ transports: ['websocket', 'polling', 'flashsocket'] });
        
             dispatch(setsocket(socket));
          
