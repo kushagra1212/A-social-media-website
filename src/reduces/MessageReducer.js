@@ -1,4 +1,4 @@
-let initialstate={box:Boolean,conversationID:null,user:null};
+let initialstate={box:Boolean,conversationID:null,user:null,socket:null};
 const MessageReducer=(state=initialstate,action)=>{
         
         switch(action.type){
@@ -9,6 +9,8 @@ const MessageReducer=(state=initialstate,action)=>{
                     return {...state,conversationID:action.payload};
                 case "SETUSERCONVERSATION":
                     return {...state,user:action.payload};
+                case "SETSOCKET":
+                    return {...state,socket:action.payload}
                 default:
                         return state;
         }

@@ -5,17 +5,18 @@ import TimeAgo from "react-timeago";
 import getmessages from "../../../methods/getmessages";
 import addmessage from "../../../methods/addmessage";
 
-const Messages = ({socket}) => {
-  const { conversationID, user } = useSelector((state) => state.MessageReducer);
+const Messages = () => {
+  const { conversationID, user,socket } = useSelector((state) => state.MessageReducer);
   const [messages, setmessages] = useState(null);
   let Scrollref = useRef(null);
   const { username } = useSelector((state) => state.user);
   const [text, setText] = useState("");
- 
+
+ console.log(socket);
   useEffect(() => {
-     if(socket.current){
+     if(socket){
        
-    socket.current.on("getmessage",({sender,text})=>{
+    socket.on("getmessage",({sender,text})=>{
       if(sender===user.username){
         const Message = {
           conversationID: conversationID.conversationID,
@@ -32,20 +33,23 @@ const Messages = ({socket}) => {
   
       })
      }
-  }, []);
+  }, [username]);
 
   useEffect(() => {
-   if(socket.current){
-    socket.current.on("connect", () => {
-       console.log(socket.current);
-    });
-    socket.current.emit("adduser", username);
-    socket.current.on("getuser", (users) => {
-      console.log(users, "users");
-    });
-   }
+
+  if(socket){
+    socket.on("connection", () => {
+      console.log(socket);
+      console.log("connection")
+   });
+   socket.emit("adduser", username);
+   socket.on("getuser", (users) => {
+     console.log(users, "users");
+   });
+  }
+
     
-  }, [username]);
+  }, []);
 
 
 
@@ -74,9 +78,9 @@ const Messages = ({socket}) => {
       sender: username,
       text: text
     };
- // console.log(user.username);
+ console.log(user.username);
    
-    socket.current.emit("sendmessage",{receiver:user.username,sender:username,text:text});
+    socket?.emit("sendmessage",{receiver:user.username,sender:username,text:text});
 
     setText("");
 

@@ -7,25 +7,29 @@ import Styles from "./Messenger.module.css"
 import Loader from "../../src/Animation/Loader/Loader"
 import Messages from './Box/Messages/Messages';
 import io from "socket.io-client";
-
+import { setsocket } from '../reduces/actions/MessageReducerAction';
+const ENDPOINT="https://eimentum-chat-app.herokuapp.com/";
+//const ENDPOINT="http://localhost:8000/";
 const Messenger=()=>{
-    const socket = useRef();
+   
     const dispatch =useDispatch();
     const history=useHistory();
     const [conversations,setconversations]=useState(null);
-    const {box}=useSelector(state=>state.MessageReducer);
+    const {box,socket}=useSelector(state=>state.MessageReducer);
     const [loading,setloading]=useState(false);
     const {username}=useSelector(state => state.user)
-    
+ 
     const backbButFun=()=>{
     
-        socket.current?.disconnect();
+        socket?.disconnect();
 
  
         
+       setTimeout(()=>{
         dispatch({type:"SHOWHOME",payload:true})
         
         history.push("/main");
+       },500);
      
  
     }
@@ -35,27 +39,33 @@ const Messenger=()=>{
   useEffect(() => {
  
 
-      setloading(true); 
-      dispatch({type:"SHOWMESSAGE",payload:true});
-         const getconversation=async()=>{
-    
-       
-         const conver=await getconversations(username);
-          console.log(conver);
-         socket.current = io('https://eimentum-chat-app.herokuapp.com/', { transports: ['websocket', 'polling', 'flashsocket'] });
-            setconversations(conver);
-            dispatch({type:"SHOWBOX",payload:true});
-     
-            setloading(false);
+    if(username){
+        setloading(true); 
+        dispatch({type:"SHOWMESSAGE",payload:true});
+           const getconversation=async()=>{
       
-    
-    
+         
+           const conver=await getconversations(username);
+            console.log(conver);
+            let socket = io.connect(ENDPOINT);
+       
+            dispatch(setsocket(socket));
+         
+              setconversations(conver);
+              dispatch({type:"SHOWBOX",payload:true});
+       
+              setloading(false);
+       
+        
+      
+      
+      }
+  
+  
+       getconversation();
     }
 
-
-     getconversation();
-
-  }, [username]);
+  }, []);
 
 
     return(<>
@@ -64,7 +74,7 @@ const Messenger=()=>{
    <button className={Styles.topbar} /> */}
        <button onClick={backbButFun} className={Styles.backbut}  ><img src={process.env.PUBLIC_URL+'/previous.png'} alt="" width="100%" height="100%" /></button>
     {loading?<Loader/>  :
-         box?<Box   conversations={conversations} username={username}  />:<Messages socket={socket}   /> }   
+         box?<Box   conversations={conversations} username={username}  />:<Messages  /> }   
        
 
    </div>
