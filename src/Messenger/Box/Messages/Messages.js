@@ -37,11 +37,11 @@ const Messages = ({socket}) => {
   useEffect(() => {
    if(socket.current){
     socket.current.on("connect", () => {
-      // console.log(socket.current);
+       console.log(socket.current);
     });
     socket.current.emit("adduser", username);
     socket.current.on("getuser", (users) => {
-      // console.log(users, "users");
+      console.log(users, "users");
     });
    }
     

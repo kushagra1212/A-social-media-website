@@ -42,7 +42,7 @@ const Messenger=()=>{
        
          const conver=await getconversations(username);
           console.log(conver);
-         socket.current = io.connect("https://eimentum-chat-app.herokuapp.com/");
+         socket.current = io("https://eimentum-chat-app.herokuapp.com/");
    
             setconversations(conver);
             dispatch({type:"SHOWBOX",payload:true});
