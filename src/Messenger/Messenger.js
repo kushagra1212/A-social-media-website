@@ -7,7 +7,7 @@ import Styles from "./Messenger.module.css"
 import Loader from "../../src/Animation/Loader/Loader"
 import Messages from './Box/Messages/Messages';
 import io from "socket.io-client";
-const SURL="https://eimentum-chat-socket-server.vercel.app";
+const SURL="https://eimentum-chat-app.herokuapp.com/";
 const Messenger=()=>{
     const socket = useRef();
     const dispatch =useDispatch();
@@ -42,7 +42,7 @@ const Messenger=()=>{
        
          const conver=await getconversations(username);
           console.log(conver);
-         socket.current = io.connect(SURL);
+         socket.current = io(SURL);
         //   socket.current = io.connect("http://localhost:8000/");
             setconversations(conver);
             dispatch({type:"SHOWBOX",payload:true});
