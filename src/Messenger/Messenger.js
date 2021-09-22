@@ -42,7 +42,7 @@ const Messenger=()=>{
        
          const conver=await getconversations(username);
           console.log(conver);
-         socket.current = io(`${process.env.REACT_APP_SOCKETURL}`);
+         socket.current = io();
    
             setconversations(conver);
             dispatch({type:"SHOWBOX",payload:true});
