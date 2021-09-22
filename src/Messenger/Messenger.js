@@ -7,7 +7,7 @@ import Styles from "./Messenger.module.css"
 import Loader from "../../src/Animation/Loader/Loader"
 import Messages from './Box/Messages/Messages';
 import io from "socket.io-client";
-const SURL="ws://eimentum-chat-socket-server.vercel.app";
+const SURL="https://eimentum-chat-socket-server.vercel.app";
 const Messenger=()=>{
     const socket = useRef();
     const dispatch =useDispatch();
