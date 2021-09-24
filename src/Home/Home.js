@@ -30,7 +30,7 @@ useEffect(() => {
   
    func();
   
-
+   dispatch({type:"SHOWHOME",payload:true});
 
 
 }, []);
