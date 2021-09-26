@@ -18,8 +18,7 @@ const Top = ({
     name,
     profilepic,
     email,
-
-    bio,
+ bio,
   } = useSelector((state) => {
    
     return state.user;
@@ -71,7 +70,7 @@ const Top = ({
           <Topprofile
             name={name}
             edit_it={edit_it}
-            profpic={profpic}
+    
             logouthandle={logouthandle}
             img={img}
             username={username}

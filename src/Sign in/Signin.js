@@ -72,18 +72,18 @@ const Signin = () => {
   return (
     <>
       <div className={Styles.container}>
-        <label className={Styles.instagram}>Eimentum</label>
+       <img className={Styles.logo} src={process.env.PUBLIC_URL+'/logo.svg'} alt="logo" />
         <div className={Styles.input}>
           {" "}
           <input
             placeholder="username"
-            onChange={(e) => setusername(e.target.value.substr(0, 15).toLowerCase())}
+            onChange={(e) => setusername(e.target.value.substr(0, 15).toLowerCase().trim(""))}
             value={username}
             type="text"
           />
           <input
           onKeyDown={event=>event.key==="Enter"?loginhandle(event):null}
-            onChange={(e) => setpassword(e.target.value)}
+            onChange={(e) => setpassword(e.target.value.trim(""))}
             value={password}
             placeholder="Password"
             type="password"

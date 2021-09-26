@@ -3,23 +3,23 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useAlert } from "react-alert";
 import {getusername} from '../reduces/actions/countAction'
-import {uploadstories} from '../methods/uploadstories';
+
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { NavLink ,Redirect,useHistory} from "react-router-dom";
+import { NavLink ,useHistory} from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 const Signup = () => {
   const Alert = useAlert();
   const history=useHistory();
-  let signup = useSelector((state) => state.signinReducer.signup);
-
+ 
   const dispatch = useDispatch();
   const [email, setemail] = useState("");
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [username, setusername] = useState("");
   const [showAlert,setShowAlert]=useState(true);
+  const [loading,setloading]=useState(false);
   const [error, seterror] = useState({
     emailerr: false,
     nameerr: {
@@ -74,8 +74,9 @@ const Signup = () => {
         },
       }));
   };
-  const submithandle = async (e) => {
+  const submithandle =  (e) => {
     e.preventDefault();
+    setloading(true);
     if (!password || !email || !name || !username) {
        if(showAlert){
         Alert.show("🤔 Enter the Details ",{
@@ -86,38 +87,49 @@ const Signup = () => {
           }
         });
        }
+       setloading(false);
       return;
     }
     try {
-      const data = await axios.post(`${URL}/auth/signup`, {
+ axios.post(`${URL}/auth/signup`, {
         name: name,
         password: password,
         email: email,
         username: username,
-      });
-      if (data.data.properties && showAlert) {
-        Alert.show(data.data.properties.message,{
-          onOpen:()=>{
-            setShowAlert(false);
-          },onClose:()=>{
-            setShowAlert(true);
-          }
-        });
-      } else {
-        await axios.post(`${URL}/item/setstart`, {
-          username: username,
-        });
-        dispatch(getusername(username));
+      }).then(res=>{
+     
+        if (res.data?.properties?.message!=="" && showAlert) {
+          Alert.show(res.data.properties.message,{
+            onOpen:()=>{
+              setShowAlert(false);
+            },onClose:()=>{
+              setShowAlert(true);
+            }
+          }); 
+         
+        } else if(res.data?.properties?.message==="") {
+           axios.post(`${URL}/item/setstart`, {
+            username: username,
+          }).then(res=>{
+            dispatch(getusername(username));
+        
+            Alert.success("successfully signed up 🤗 ");
+         
       
-        Alert.success("successfully signed up 🤗 ");
-        setTimeout(() => {
-          dispatch({ type: "signup", payload: false });
-          history.push("/");
-        }, 300);
-      }
+              dispatch({ type: "signup", payload: false });
+              history.push("/");
+          });
+      
+      
+        }
+      });
+     
     } catch (err) {
+ 
       console.log(err);
     }
+    
+   
   };
 
   // if(signup===false){
@@ -127,7 +139,7 @@ const Signup = () => {
   return (
     <>
       <div className={Styles.container}>
-        <label className={Styles.instagram}>Eimentum</label>
+        <img className={Styles.logo} src={process.env.PUBLIC_URL+'/logo.svg'} alt="logo" />
         <div className={Styles.input}>
           <input
             value={email}
@@ -176,14 +188,18 @@ const Signup = () => {
         <button onClick={submithandle} className={Styles.loginbut}>
           Sign up
         </button>
-        <NavLink
+
+       <NavLink
         to="/signin"
+       
+        
+          disabled={loading}
           className={Styles.goto}
-          style={{marginLeft:"70px"}}
           onClick={() => dispatch({ type: "signup", payload: false })}
         >
           Go to Login page
         </NavLink>
+
       </div>
     </>
   );

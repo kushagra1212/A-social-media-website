@@ -2,12 +2,18 @@
 import { useState } from 'react';
 import FileBase64 from 'react-file-base64';
 import { useSelector } from 'react-redux';
-import Styles from './Top.module.css'
+import Styles from './Topprofile.module.css'
 import { useAlert } from 'react-alert';
-const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,bio,postsnumber,setshowfollowershandle,setshowfollowinghandle})=>{
+const Topprofile=({setposthandle,edit_it,logouthandle,name,img,username,bio,postsnumber,setshowfollowershandle,setshowfollowinghandle})=>{
     const Alert=useAlert();
     const [showAlert,setShowAlert]=useState(true);
     const {followerscount,followingcount}=useSelector(state=>state.count);
+    let {
+        profilepic,
+      } = useSelector((state) => {
+       
+        return state.user;
+      });
     const showAlertHandle=()=>{
       
         Alert.info("Not Available 😛",{
@@ -25,7 +31,7 @@ const Topprofile=({setposthandle,edit_it,profpic,logouthandle,name,img,username,
     return(
         <div className={Styles.maindiv}  >
         <div className={Styles.firstdiv} >
-        <img src={profpic?profpic:process.env.PUBLIC_URL+'/userImage.png'} alt=""  />
+        <img src={profilepic?profilepic:process.env.PUBLIC_URL+'/userImage.png'} alt=""  />
         <button onClick={()=>edit_it()} className={Styles.editbut}>Edit Profile</button>
         <button className={Styles.logoutbut} onClick={logouthandle}>Log out</button>
 

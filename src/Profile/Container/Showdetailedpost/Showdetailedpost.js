@@ -25,6 +25,7 @@ const Showdetailedpost=({post,setShowDetailedPostHandler,toDelete})=>{
  
         return state.user;
     });
+  
     let tempUserLikes = [];
  
     const likefunction=(post,key)=>{
@@ -104,7 +105,8 @@ const Showdetailedpost=({post,setShowDetailedPostHandler,toDelete})=>{
             setcommentsfunc={setcommentsfunc}
           />:<div key={post._id} className={Styles.singlecontainer}>
                   <div className={Styles.topdiv}>
-                    <img src={post.pic?post.pic:process.env.PUBLIC_URL+'/userImage.png'} alt=" " />
+                  
+                    <img src={profilepic?profilepic:process.env.PUBLIC_URL+'/userImage.png'} alt=" " />
 
                     <h5>{post.username}</h5>
                   </div>

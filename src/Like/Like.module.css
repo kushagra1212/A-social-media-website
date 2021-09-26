@@ -9,10 +9,11 @@
   padding: 1%;
   height: 94%;
   flex-wrap: nowrap;
+  overflow-x: hidden;
 }
 .posts{
   position: relative;
-  display: flex;
+
   flex-direction: row;
   width: 95%;
   background-color: rgba(248, 248, 248, 0.219);
@@ -23,15 +24,13 @@
   margin: 2%;
   justify-content: space-around;
   align-items: stretch;
+
+}
+.postimg{
+  position: relative;
 }
 .likes{
-  position: relative;
-  background-color: #ec407a;
-  color: white;
-  /* height: 1em; */
-  border: 0.3em solid #80808000;
-  border-radius: 0.6em;
-   
+
 }
 .posts img{
    position: relative;

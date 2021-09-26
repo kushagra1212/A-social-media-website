@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     padding: 10%;
-    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 .instagram{
     display: flex;
@@ -41,7 +41,7 @@
     border: 2px solid rgb(255 255 255);
     border-radius: 10px;
     outline: none;
-    padding: 8%;
+    padding: 2%;
     font-size: medium;
     /* align-items: center; */
     box-shadow: -1px -1px 14px 5px #5c6bc06e;
@@ -57,6 +57,7 @@
     border: 2px solid #80808000;
     border-radius: 10px;
     box-shadow: 1px 1px 10px grey;
+    z-index: 10;
 }
 
 .loginbut:active{
@@ -64,6 +65,7 @@
 }
 .account{
     margin-top: 10%;
+    z-index: 10;
 }
 .account button{
     background-color: rgb(255 255 255 / 0%);
@@ -84,4 +86,9 @@
     border: 2px solid #69696900;
     border-radius: 10px;
 }
+}
+.logo{
+    height: 100px;
+    position: static;
+    transform: scale(8.5);
 }

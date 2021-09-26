@@ -86,12 +86,14 @@ const Like = () => {
         {state.posts.map((post, id) => {
           return (
             <div className={Styles.posts} key={id}>
-                  <img
+              <div className={Styles.postimg} >
+              <img
              src={post.picture}
              width="60px"
              height="60px"
              alt=""
-              />
+              />  
+              </div>
               {post?.likes.length>0?post?.likes?.map((like, id) => {
                 return (
                   <div

@@ -72,7 +72,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
         return res.data;
       }
     } catch (err) {
-      console.log(err);
+      console.log(err); 
     }
   };
 
