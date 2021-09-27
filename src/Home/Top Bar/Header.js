@@ -13,9 +13,12 @@ const Header=()=>{
     return(
   
             <div className={Styles.Header}>
-              <img onClick={()=>{dispatch(show_user_stories_handle(true))}}  id={Styles.cameraimg} src={cameraimg} alt="" />
+           <div className={Styles.abovediv}>
+           <img onClick={()=>{dispatch(show_user_stories_handle(true))}}  id={Styles.cameraimg} src={cameraimg} alt="" />
+           </div>
 
-               <NavLink      className={Styles.messageimg} to={`main/messenger`}>
+        <div  className={Styles.abovediv2} >
+        <NavLink      className={Styles.messageimg} to={`main/messenger`}>
           <img
             src={ `${process.env.PUBLIC_URL}/chatIcon.png` }
         
@@ -23,6 +26,7 @@ const Header=()=>{
             alt=""
           />
         </NavLink>
+        </div>
               
             </div>
     

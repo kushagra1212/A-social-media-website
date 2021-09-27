@@ -32,6 +32,7 @@ position: relative;
   margin-bottom: 1%;
   width: 95%;
   margin-left: 50%;
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   transform: translate(-50%);
   padding: 0%;
   display: flex;
@@ -84,7 +85,8 @@ zoom: 100%;
   justify-content: space-evenly;
   background-color: rgb(255, 255, 255);
   border: 2px solid rgba(245, 222, 179, 0);
-  border-radius: 20px;
+  border-radius: 2px;
+
 
   align-items: center;
 }
@@ -94,10 +96,12 @@ zoom: 100%;
   width:100%;
   background-color: rgb(255, 255, 255);
   min-height:0px;
+
   max-height: 50px;
   border:1px solid rgba(0, 0, 0, 0.418);
   border-radius: 5px;
- overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
  overflow-wrap: break-word;
 
   
@@ -188,7 +192,7 @@ zoom: 100%;
     width: 30%;
     margin: 1%;
     padding: 0%;
-    box-shadow: 1px 3px 0px 0px rgb(23 10 44 / 0%);
+
     animation: transform box-shadow  0.1s;
 
    
