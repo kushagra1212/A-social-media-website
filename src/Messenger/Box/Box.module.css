@@ -9,7 +9,8 @@
         display: flex;
         position: absolute;
         width: 100%;
-        background-color: #000000de;
+        background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+        background-blend-mode: multiply;
         flex-direction: column;
         scroll-behavior: smooth;
         top: 50px;
@@ -18,24 +19,25 @@
     
 }
 .listitem{
-        background: #37474f;
-        cursor: pointer;
+        background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+            cursor: pointer;
         position: relative;
         display: flex;
         border: 2px solid #80808061;
         border-radius: 10px;
         height: 15%;
-        color: white;
+
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
         margin-top: 2%;
         transform: scale(1);
-        transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
+        transition: transform background-image cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
   
 }
 .listitem:active{
         transform: scale(1.1);
+
 }
 .userimg{
         position: relative;
@@ -47,29 +49,37 @@
 }
 .usernamediv{
         width: 100%;
-        border-left: 2px solid #455a64;
-    
+        font-size: 3em;
+        font-weight: 600;
+        left: 10%;
+  
+        font-family: cursive;
+        /* border-left: 2px solid #455a64; */
         height: 10vh;
         border-radius: 5px;
-   
         position: relative;
-
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: row;
 }
-.usernamelabel{
+.usernamediv label{
+cursor: pointer;
+}
 
-}
 
 @media screen and (min-width:768px) {
    .listitem{
         margin-top: 2%;
         width: 45%;
         left: 30%;
+        transition: transform background-image cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
    
    }    
    .listitem:hover{
+           cursor: pointer;
         transform: scale(1.02);
+        background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+   
    }   
 }

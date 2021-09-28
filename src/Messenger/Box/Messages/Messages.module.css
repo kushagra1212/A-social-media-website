@@ -1,6 +1,6 @@
 .maindiv{
         width: 100vw;
-        height: 100vh;
+ 
         background-color: #263238;
         position: absolute;
         display: flex;
@@ -55,42 +55,45 @@
     
 }
 .sendbut:active{
-        transform: translate(60px,-100px);
+        transform: translate(50px,-50px);
 
    
 }
-.sendbut:hover{
-        transform: scale(1.2);
-}
+
 
 .perticularmessage_receiver{
         position: relative;
-        background-color: #0d3b70;
+        background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);        
         max-width: 70%;
         overflow-wrap: break-word;
         margin-top: 10px;
         margin-bottom: 10px;
+        margin-right: 10px;
         color: white;
         margin-left: 170px;
         /* color: #ffffff; */
         /* margin-right: 50px; */
-        border: 1px solid #80808000;
-        border-radius: 10px;
+        border: 2px solid #80808000;
+        border-radius: 15px;
+        border-bottom-right-radius: 0px;
+        /* border-right: 0px solid grey; */
         overflow-x: hidden;
 }
 
 .perticularmessage_sender{
 
         position: relative;
-        background-color: #661873;
+        background-image: linear-gradient(to top, #c71d6f 0%, #d09693 100%);
         max-width: 70%;
         overflow-wrap: break-word;
         margin-top: 10px;
         margin-bottom: 10px;
         color: white;
         margin-left: 10px;
-        border: 1px solid #80808000;
-        border-radius: 10px;
+     
+        border: 2px solid #80808000;
+        border-radius: 15px;
+        border-bottom-left-radius: 0px;
 
     
     

@@ -278,17 +278,14 @@
   border-radius: 20px;
   height:50px;
   width: 50px;
-  animation: Search_Search_boxAni__1z34p__2w5A8 1s ease-in-out alternate-reverse;
+
 }
 .searchbar input:hover{
   animation: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.001s;
   box-shadow: 0 0 25px 0 rgb(191 193 230 / 84%), 0 20px 25px 0 rgb(0 0 0 / 20%);
   transform: scale(1.01);
 }
-.searchbtn{
-  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
-  
-}
+
 .searchbtn:active{
   transform:scale3d(1.2,1.2,10);
   box-shadow: 1px 1px 20px grey;
