@@ -74,22 +74,21 @@
         border-radius: 10px;
         box-shadow: 1px 2px 2px 1px rgba(128, 128, 128, 0.514);
         
-        animation: box-shadow transform alternate-reverse 1s;
-
+        transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+    
     
     }
     .messageimg:hover{
+        transform:scale3d(1.2,1.2,10);
         box-shadow: 1px 1px 20px grey;
-        transform: scale(1.1);
     }
     #cameraimg{
-        box-shadow: 1px 2px 2px 1px rgba(128, 128, 128, 0.514);
-        
-        animation: box-shadow transform alternate-reverse 1s;
+        transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+    
     }
     #cameraimg:hover{
+        transform:scale3d(1.2,1.2,10);
         box-shadow: 1px 1px 20px grey;
-        transform: scale(1.1);
     }
     .abovediv2{
         left: 0%;

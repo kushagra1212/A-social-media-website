@@ -117,9 +117,11 @@ const Contentmain = () => {
   };
   const PostsWraper=(post1,post2)=>{
     let newArray = [];
-
+ 
     let newpost = [...post1, ...post2];
+    
     newpost = unique(newpost);
+  
     let feedpos = state.feedposts.posts;
 
     feedpos = unique(feedpos);
@@ -136,7 +138,7 @@ const Contentmain = () => {
       });
     });
     newpost = [...feedpos, ...newpost];
-
+   
     let array1 = [...array, ...newArray];
 
     let lastcount = 1,
@@ -147,12 +149,13 @@ const Contentmain = () => {
         dispatch(updateLikesArray(ele2.username, ele._id));
       });
     });
+  
     Feedposts(newpost, lastcount, array1, lastcount2, dispatch);
    
     setarray([...array, ...newArray]);
 
   
- 
+
 
     setloading(false);
   }
@@ -166,15 +169,16 @@ const Contentmain = () => {
           PostsWraper(post1,[]);
            return;
          }
+         item?.following.map((ele)=>{
+           
+          return getstoriesFromOthers(ele.username,dispatch);
+        })
+      
+        getstories(username, dispatch);
         item?.following?.map((dat) => {
           let lastcount2 = state.feedposts.lastcount;
              
-            item?.following.map((ele)=>{
            
-              return getstoriesFromOthers(ele.username,dispatch);
-            })
-          
-            getstories(username, dispatch);
     
 
 
@@ -182,6 +186,7 @@ const Contentmain = () => {
           getpostsforfeed(dat.username, lastcount2,2)
             .then((post) => {
               post2 = post;
+      
               getuser(dat.username).then((ele) =>
                 post2.map((elee) => {
                  return  elee["pic"] = ele.profilepic;
@@ -190,38 +195,39 @@ const Contentmain = () => {
             PostsWraper(post1,post2);
             
             })
-            .catch((err) => console.log(err));
+            .catch((err) =>{console.log(err);         setloading(false);} );
             return 0;
         })
        }
-      );
+      ).catch(err=>console.log(err));
     } else {
-  
+    setloading(false);
     }
   };
   let post1 = [];
-  const call_func = async () => {
+  const call_func =  () => {
     if (username) {
-      try {
+   
         let lastcount = state.feedposts.lastcount;
-        const res = await getpostsforfeed(username, lastcount,4);
+       getpostsforfeed(username, lastcount,4).then(res=>{
+        post1 = res;
+   
+        getothers(post1);
 
-        if (res) {
-          post1 = res;
+        post1.map((ele) => {
+          return ele["pic"] = profilepic;
+        });
+        if (post1.length === 0) {
         
-          getothers(post1);
-
-          post1.map((ele) => {
-            return ele["pic"] = profilepic;
-          });
-          if (post1.length === 0) {
-            setloading(false);
-          }
-        
+           
         }
-      } catch (err) {
-      
-      }
+       });
+  
+
+        
+        
+   
+    
     } else {
       setloading(false);
     }
@@ -294,7 +300,7 @@ const Contentmain = () => {
             <div key={post._id} className={Styles.singlecontainer} >
               <div className={Styles.topdiv}>
               <Suspense fallback={<VerticalLoader />}>
-           
+             
                 <img src={post.pic?post.pic:process.env.PUBLIC_URL+'/userImage.png'} alt="" />
                 </Suspense>
                 <h5>{post.username}</h5>
