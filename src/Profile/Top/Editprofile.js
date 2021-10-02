@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import {useSpring,animated} from "react-spring";
 import Styles from "./Editprofile.module.css";
 import Cropper from "react-easy-crop";
+import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader"
 const URL = process.env.REACT_APP_URL;
 const Editprofile = ({ edit_it, setprofpichandle }) => {
   const Alert = useAlert();
@@ -79,7 +80,8 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     })
  
       console.log(e.target.files[0]);
-    //   setSelectedFile(e.target.files[0]);
+    //   setSelectedFile(e.target.files[0]); 
+    //this was previous code   
         // setPic(global.URL.createObjectURL(e.target.files[0]));
 
   }
@@ -137,10 +139,11 @@ const createImage = (url) =>
     return canvas;
   }
   const generateDownload = async (imageSrc, crop) => {
+    
     if (!crop || !imageSrc) {
       return;
     }
-  
+  setloading(true);
     const canvas = await getCroppedImg(imageSrc, crop);
 
     canvas.toBlob(
@@ -163,6 +166,7 @@ const createImage = (url) =>
       "image/png",
       0.66
     );
+    setloading(false);
   };
 
 const openChoosefile=()=>{
@@ -179,8 +183,9 @@ const openChoosefile=()=>{
 
   if (loading) {
     return (
-      <div>
-        <div className={Styles.loader}></div>
+      <div  className={Styles.cropdiv}  style={{backgroundColor:"white"}}  >
+        <label style={{color:"black",frontSize:"100px"}}  >Wait for a while !  Uploading...</label>
+        <VerticalLoader/>
       </div>
     );
   }else if(image){
@@ -198,7 +203,6 @@ const openChoosefile=()=>{
         />
   
   </div>
-
     <button className={Styles.cropbut} type="button" onClick={()=>generateDownload(image,croppedArea)}    > Crop</button>
     <button className={Styles.reselect} onClick={()=>setImage(null)} >Reselect</button>
 

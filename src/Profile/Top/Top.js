@@ -7,7 +7,6 @@ import Editprofile from "./Editprofile";
 import Topprofile from "./Topprofile";
 import { Redirect, useHistory,withRouter } from "react-router";
 const URL = process.env.REACT_APP_URL;
-
 const Top = ({
   setposthand,
   setshowfollowershandle,
@@ -70,7 +69,6 @@ const Top = ({
           <Topprofile
             name={name}
             edit_it={edit_it}
-    
             logouthandle={logouthandle}
             img={img}
             username={username}
