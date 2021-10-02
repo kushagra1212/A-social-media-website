@@ -192,6 +192,7 @@ const Contentmain = () => {
                  return  elee["pic"] = ele.profilepic;
                 })
               );
+       
             PostsWraper(post1,post2);
             
             })
@@ -205,15 +206,16 @@ const Contentmain = () => {
     }
   };
   let post1 = [];
+ 
   const call_func =  () => {
     if (username) {
    
         let lastcount = state.feedposts.lastcount;
-       getpostsforfeed(username, lastcount,4).then(res=>{
+       getpostsforfeed(username, lastcount,2).then(res=>{
         post1 = res;
    
         getothers(post1);
-
+ 
         post1.map((ele) => {
           return ele["pic"] = profilepic;
         });
@@ -221,8 +223,7 @@ const Contentmain = () => {
         
            
         }
-       });
-  
+       })
 
         
         
@@ -255,6 +256,7 @@ const Contentmain = () => {
   else if (element != null) enableBodyScroll(element);
 
   if (loading === true) {
+   
     return <ContentMainAnimate/>;
   } else if (state.feedposts.posts.length === 0) {
     return (

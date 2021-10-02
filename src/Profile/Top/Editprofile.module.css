@@ -7,7 +7,7 @@
   height: 100%;
   width: 100%;
   transform: translate(-50%, -50%);
-  background-color: rgb(189 224 247);
+  background-image: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);
   z-index: 200;
   top: 50%;
   left: 50%;
@@ -17,6 +17,8 @@
   align-content: center;
   flex-wrap: nowrap;
   flex-direction: column;
+  overflow-y: scroll;
+    overflow-x: hidden;
 }
 .editbut
 {
@@ -38,6 +40,25 @@ margin-top: 5%;
 }
 .editbut:active{
    transform:scale(1.2);
+}
+.cropButton{
+  position: absolute;
+  top:60%;
+  left: 45%;
+}
+.choosebutton{
+  width: 50%;
+    outline: none;
+    border: 2px solid #80808000;
+    border-radius: 10px;
+    /* left: 50%; */
+    position: relative;
+    align-self: center;
+    color: white;
+    background-color: chocolate;
+    height: 30px;
+    box-shadow: 1px 1px 1px #808080b3;
+    font-size: 1.5em;
 }
 .backbut
 {
@@ -62,7 +83,7 @@ margin-top: 5%;
 .editimg
 { 
   position: relative;
-  margin-left: 40%;
+  margin-top: 40%;
   margin-bottom: 10%;
   background-color: rgba(158, 21, 221, 0.246);
   outline: none;
@@ -89,16 +110,21 @@ margin-top: 5%;
 }
 .savebut
 {
-    font-size: 0.9em;
-    color: white;
-    background-color: rgba(158, 21, 221, 0.246);
-    outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    background-color: rgb(86, 209, 15);
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 1px grey;
-   transform-origin:center;
 
+  color: white;
+
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  background-color: rgb(86, 209, 15);
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px grey;
+  transform-origin: center;
+  
+  width: 30%;
+  height: 30px;
+  font-size: 1.1em;
+  font-weight: bold;
+  align-self: center;
 }
 .loader,
 .loader:after {
@@ -142,13 +168,172 @@ margin-top: 5%;
     transform: rotate(360deg);
   }
 }
+.cropper{
+  z-index: 1  ;
+ cursor: default;
+
+
+}
+.cropdiv{
+  position: fixed;
+  
+  display: flex;
+  
+  justify-content: center;
+  align-items: stretch;
+  height: 70%;
+  width: 90%;
+  transform: translate(-50%, -50%);
+background-color: indigo;
+  z-index: 200;
+  top: 40%;
+  left: 50%;
+  border: 2px solid #80808000;
+  border-radius: 10px;
+  box-shadow: 10px 10px 1000px 1000px #000000;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  padding:10% ;
+}
+.editlabel{
+  color: black;
+  left: 5%;
+  position: relative;
+  margin-top: 10px;
+}
+.cropbut{
+  z-index: 1;
+  position: relative;
+  TOP: 300PX;
+  height: 50px;
+  margin-top: 10px;
+  outline: none;
+  background-color: #9ccc65;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white;
+  font-size: 2em;
+  width: 50%;
+  align-self: center;
+  box-shadow: 1px 1px 100px grey;
+  transition: transform cubic-bezier(0.215, 0.610, 0.355, 1) 0.2s;
+}
+.cropbut:hover{
+  transform: scale3d(1.02,1.02,2);
+}
+.reselect{
+  z-index: 1;
+  position: relative;
+  TOP: 300PX;
+  height: 50px;
+  margin-top: 10px;
+  outline: none;
+  background-color: #cc8b65;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.4em;
+  width: 50%;
+  
+  align-self: center;
+  box-shadow: 100px 1px 100px 10px grey;
+  transition: transform cubic-bezier(0.215, 0.610, 0.355, 1) 0.2s;
+}
+.reselect:hover{
+  transform: scale3d(1.02,1.02,2);
+}
 @media screen  and (min-width:768px){
     .editprofile{
       height: 90%;
       width: 30%;
+      position: absolute;
+      left:30%;
+      box-shadow: 10px 10px 1000px 10px rgb(0, 0, 0);
+      z-index: 1000;
+      overflow: visible;
+    }
+    .editimg{
+
+
+
+
+      position: absolute;
+      width:100%;
+      left:150%;
+      margin-top: 10%;
+      box-shadow: 1px 1px 1000px 5px rgb(0, 0, 0);
+      z-index: 10;
     }
     .editbut:hover{
       transform:scale3d(1.2,1.2,10);
       box-shadow: 1px 1px 20px grey;
     }
+    .choosebutton{
+      width: 50%;
+    outline: none;
+    border: 2px solid #80808000;
+    border-radius: 10px;
+    /* left: 50%; */
+    position: relative;
+    align-self: center;
+    color: white;
+    background-color: chocolate;
+    height: 30px;
+    box-shadow: 1px 5px 5px 1px #808080b3;
+  
+    font-size: 1.5em;
+    animation: transform background-color cubic-bezier(0.075, 0.82, 0.165, 1) ease-in-out reverse 0.3s;
+    }
+    .choosebutton:hover{
+    
+      background-color: #94c71e;
+      box-shadow: 1px 1px 1px #808080b3;
+    }
+    .savebut:hover{
+     background-color: rgb(12, 255, 113);
+  
+    }
+
+    .cropbut{
+      z-index: 1;
+      position: relative;
+      TOP: 300PX;
+      height: 50px;
+      margin-top: 10px;
+      outline: none;
+      background-color: #9ccc65;
+      border: 1px solid grey;
+      border-radius: 10px;
+      color: white;
+      font-size: 2em;
+      width: 50%;
+      align-self: center;
+      box-shadow: 1px 1px 100px grey;
+      transition: transform cubic-bezier(0.215, 0.610, 0.355, 1) 0.2s;
+    }
+    .cropbut:hover{
+      transform: scale3d(1.02,1.02,2);
+    }
+    .reselect{
+      z-index: 1;
+      position: relative;
+      TOP: 300PX;
+      height: 50px;
+      margin-top: 10px;
+      outline: none;
+      background-color: #cc8b65;
+      border: 1px solid grey;
+      border-radius: 10px;
+      color: white;
+      font-size: 2em;
+      width: 50%;
+      align-self: center;
+      box-shadow: 100px 1px 100px 10px grey;
+      transition: transform cubic-bezier(0.215, 0.610, 0.355, 1) 0.2s;
+    }
+    .reselect:hover{
+      transform: scale3d(1.02,1.02,2);
+    }
+
 }

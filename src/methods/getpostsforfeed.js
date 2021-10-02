@@ -6,7 +6,7 @@ export const getpostsforfeed=async(username,lastcount,limit)=>{
   
   try{
     const res=await axios.get(`${URL}/post/getposts?username=${username}&last=${lastcount}&limit=${limit}`);
-
+console.log("res",limit,res)
     if(res.data)
     {
   
