@@ -31,8 +31,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     try {
       const data=new FormData(e.target);
       data.append('file',selectedFile);
-      console.log(selectedFile);
-    
+     console.log(selectedFile);
       const res = await axios.patch(`${URL}/upload/updateuser`,data, 
     { params:{
         email: newemail,
@@ -41,6 +40,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
         profilepic: pic,
         bio: newbio,
       }});
+    
       if (res) {
   
         setprofpichandle(pic);
@@ -72,15 +72,15 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   const selectedFileHandle=(e)=>{
   e.preventDefault();
 
-    const reader=new FileReader();
+    const reader= new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.addEventListener("load",()=>{
       setImage(reader.result);
    
     })
  
-      console.log(e.target.files[0]);
-    //   setSelectedFile(e.target.files[0]); 
+    
+    setSelectedFile(e.target.files[0]); 
     //this was previous code   
         // setPic(global.URL.createObjectURL(e.target.files[0]));
 
@@ -149,24 +149,24 @@ const createImage = (url) =>
     canvas.toBlob(
       (blob) => {
   
-
         const previewUrl = window.URL.createObjectURL(blob);
     
         const anchor = document.createElement("a");
-        anchor.download = "image.png";
+  
         anchor.href = window.URL.createObjectURL(blob);
     
         setPic(anchor.href);
   
         window.URL.revokeObjectURL(previewUrl);
-        console.log(blob)
-        setSelectedFile(blob);
-        setImage(null);
+ 
+     //   setSelectedFile(blob);
+     setloading(false);  
+     setImage(null);
       },
-      "image/png",
-      0.66
+      "image/",
+      0.01
     );
-    setloading(false);
+
   };
 
 const openChoosefile=()=>{
@@ -195,7 +195,6 @@ const openChoosefile=()=>{
         <Cropper
           image={image}
           crop={crop}
-     
           aspect={1}
           onCropChange={setCrop}
   
@@ -206,7 +205,7 @@ const openChoosefile=()=>{
     <button className={Styles.cropbut} type="button" onClick={()=>generateDownload(image,croppedArea)}    > Crop</button>
     <button className={Styles.reselect} onClick={()=>setImage(null)} >Reselect</button>
 
-    </div>)
+    </div>) 
 
     
   }
@@ -218,8 +217,7 @@ const openChoosefile=()=>{
           BACK
         </button>
         {pic?<img className={Styles.editimg} src={pic?pic:process.env.PUBLIC_URL+'/userImage.png'} alt=""/>:null}
-     
-                          
+    
          <input style={{display:"none"}}  type="file" ref={Refinput}  onChange={selectedFileHandle}/>
 
          <button className={Styles.choosebutton} type="button" onClick={openChoosefile} >choose file</button>
