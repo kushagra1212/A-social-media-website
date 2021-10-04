@@ -1,6 +1,7 @@
-#  Eimentum - A social Media website
-Tech Stack Used --> React || Redux
+# Eimentum
+
+ A social Networking website (Client-side)
 
 
-Client Side
-
+## Hosted on Vercel
+[Eimentum](https://eimentum.vercel.app/)
