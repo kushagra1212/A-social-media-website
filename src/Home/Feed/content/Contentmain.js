@@ -183,7 +183,7 @@ const Contentmain = () => {
 
 
 
-          getpostsforfeed(dat.username, lastcount2,2)
+          getpostsforfeed(dat.username, lastcount2,3)
             .then((post) => {
               post2 = post;
       
@@ -211,7 +211,7 @@ const Contentmain = () => {
     if (username) {
    
         let lastcount = state.feedposts.lastcount;
-       getpostsforfeed(username, lastcount,2).then(res=>{
+       getpostsforfeed(username, lastcount,3).then(res=>{
         post1 = res;
    
         getothers(post1);

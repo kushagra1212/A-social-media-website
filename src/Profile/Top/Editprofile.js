@@ -5,8 +5,9 @@ import { useAlert } from "react-alert";
 import { useRef, useState } from "react";
 import {useSpring,animated} from "react-spring";
 import Styles from "./Editprofile.module.css";
-import Cropper from "react-easy-crop";
-import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader"
+import ImageCropper from "./ImageCroper/ImageCropper";
+import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
+import { getCroppedImg } from "../../methods/createcrop";
 const URL = process.env.REACT_APP_URL;
 const Editprofile = ({ edit_it, setprofpichandle }) => {
   const Alert = useAlert();
@@ -90,54 +91,8 @@ const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
   setCroppedArea(croppedAreaPixels);
 
 };
-const createImage = (url) =>
-	new Promise((resolve, reject) => {
-		const image = new Image();
-		image.addEventListener("load", () => resolve(image));
-		image.addEventListener("error", (error) => reject(error));
-		image.src = url;
-	});
 
-  //-----
-  // I don't know properly how canvas works but I understood this code that's why i added it here
- const  getCroppedImg=async(imageSrc, pixelCrop)=> {
-   
-    const image = await createImage(imageSrc);
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-  
-    const maxSize = Math.max(image.width, image.height);
-    const safeArea = 2 * ((maxSize / 2) * Math.sqrt(2));
-  
-    canvas.width = safeArea;
-    canvas.height = safeArea;
 
-    ctx.translate(safeArea / 2, safeArea / 2);
- 
-    ctx.translate(-safeArea / 2, -safeArea / 2);
- 
-    ctx.drawImage(
-      image,
-      safeArea / 2 - image.width * 0.5,
-      safeArea / 2 - image.height * 0.5
-    );
-  
-    const data = ctx.getImageData(0, 0, safeArea, safeArea);
-  
-
-    canvas.width = pixelCrop.width;
-    canvas.height = pixelCrop.height;
-  
-
-    ctx.putImageData(
-      data,
-      0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x,
-      0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y
-    );
-  
-  
-    return canvas;
-  }
   const generateDownload = async (imageSrc, crop) => {
     
     if (!crop || !imageSrc) {
@@ -159,7 +114,7 @@ const createImage = (url) =>
   
         window.URL.revokeObjectURL(previewUrl);
  
-     //   setSelectedFile(blob);
+   
      setloading(false);  
      setImage(null);
       },
@@ -190,22 +145,19 @@ const openChoosefile=()=>{
     );
   }else if(image){
  
-    return (	<div className={Styles.cropdiv}>
-      <div className={Styles.cropper}>
-        <Cropper
-          image={image}
-          crop={crop}
-          aspect={1}
-          onCropChange={setCrop}
-  
-          onCropComplete={onCropComplete}
-        />
-  
-  </div>
-    <button className={Styles.cropbut} type="button" onClick={()=>generateDownload(image,croppedArea)}    > Crop</button>
-    <button className={Styles.reselect} onClick={()=>setImage(null)} >Reselect</button>
-
-    </div>) 
+    return (
+    <div className={Styles.cropdiv} >
+    <ImageCropper
+      crop={crop}
+      image={image}
+      setCrop={setCrop}
+      onCropComplete={onCropComplete}
+      generateDownload={generateDownload}
+      setImage={setImage}
+      croppedArea={croppedArea}
+    />
+       </div>
+    ) 
 
     
   }
@@ -220,7 +172,7 @@ const openChoosefile=()=>{
     
          <input style={{display:"none"}}  type="file" ref={Refinput}  onChange={selectedFileHandle}/>
 
-         <button className={Styles.choosebutton} type="button" onClick={openChoosefile} >choose file</button>
+         <button className={Styles.choosebutton} type="button" onClick={openChoosefile} >Choose Image</button>
     
          <label className={Styles.editlabel} >Email</label>
         <input onChange={(e) => setnewemail(e.target.value)} value={newemail} />

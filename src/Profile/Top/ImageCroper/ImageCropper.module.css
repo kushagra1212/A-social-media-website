@@ -1,0 +1,116 @@
+
+.cropdiv {
+  position: fixed;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: stretch;
+  height: 70%;
+  width: 90%;
+  transform: translate(-50%, -50%);
+  background-color: indigo;
+  z-index: 200;
+  top: 40%;
+  left: 50%;
+  border: 2px solid #80808000;
+  border-radius: 10px;
+  box-shadow: 10px 10px 1000px 1000px #000000;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  padding: 10%;
+}
+.cropper {
+  z-index: 1;
+  cursor: default;
+}
+.cropButton{
+  position: absolute;
+  top:60%;
+  left: 45%;
+}
+.cropbut {
+  z-index: 1;
+  position: relative;
+  top: 300px;
+  height: 50px;
+  margin-top: 10px;
+  outline: none;
+  background-color: #9ccc65;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white;
+  font-size: 2em;
+  width: 50%;
+  align-self: center;
+  box-shadow: 1px 1px 100px grey;
+  transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.2s;
+}
+.cropbut:hover {
+  transform: scale3d(1.02, 1.02, 2);
+}
+.reselect {
+  z-index: 1;
+  position: relative;
+  top: 300px;
+  height: 50px;
+  margin-top: 10px;
+  outline: none;
+  background-color: #cc8b65;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.4em;
+  width: 50%;
+
+  align-self: center;
+  box-shadow: 100px 1px 100px 10px grey;
+  transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.2s;
+}
+.reselect:hover {
+  transform: scale3d(1.02, 1.02, 2);
+}
+@media  screen and(min-width:768px){
+        .cropbut{
+                z-index: 1;
+                position: relative;
+                TOP: 300PX;
+                height: 50px;
+                margin-top: 10px;
+                outline: none;
+                background-color: #9ccc65;
+                border: 1px solid grey;
+                border-radius: 10px;
+                color: white;
+                font-size: 2em;
+                width: 50%;
+                align-self: center;
+                box-shadow: 1px 1px 100px grey;
+                transition: transform cubic-bezier(0.215, 0.610, 0.355, 1) 0.2s;
+              }
+              .cropbut:hover{
+                transform: scale3d(1.02,1.02,2);
+              }
+              .reselect{
+                z-index: 1;
+                position: relative;
+                TOP: 300PX;
+                height: 50px;
+                margin-top: 10px;
+                outline: none;
+                background-color: #cc8b65;
+                border: 1px solid grey;
+                border-radius: 10px;
+                color: white;
+                font-size: 2em;
+                width: 50%;
+                align-self: center;
+                box-shadow: 100px 1px 100px 10px grey;
+                transition: transform cubic-bezier(0.215, 0.610, 0.355, 1) 0.2s;
+              }
+              .reselect:hover{
+                transform: scale3d(1.02,1.02,2);
+              }
+          
+}
