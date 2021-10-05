@@ -6,8 +6,9 @@ import { useRef, useState } from "react";
 import {useSpring,animated} from "react-spring";
 import Styles from "./Editprofile.module.css";
 import ImageCropper from "./ImageCroper/ImageCropper";
-import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
+
 import { getCroppedImg } from "../../methods/createcrop";
+import ProgressBar from "../../Animation/Loader/Progressbar/ProgressBar"
 const URL = process.env.REACT_APP_URL;
 const Editprofile = ({ edit_it, setprofpichandle }) => {
   const Alert = useAlert();
@@ -32,7 +33,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     try {
       const data=new FormData(e.target);
       data.append('file',selectedFile);
-     console.log(selectedFile);
+   console.log(selectedFile,"selcected");
       const res = await axios.patch(`${URL}/upload/updateuser`,data, 
     { params:{
         email: newemail,
@@ -41,9 +42,9 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
         profilepic: pic,
         bio: newbio,
       },    onUploadProgress: data => {
-        //Set the progress value to show the progress bar
+
         setProgress(Math.round((100 * data.loaded) / data.total));
-        console.log(Math.round((100 * data.loaded) / data.total));  
+     
       }});
     
       if (res) {
@@ -143,8 +144,8 @@ const openChoosefile=()=>{
   if (loading) {
     return (
       <div  className={Styles.cropdiv}  style={{backgroundColor:"white"}}  >
-        <label style={{color:"black",frontSize:"100px"}}  >Wait for a while !  Uploading...</label>
-        <VerticalLoader/>
+        <label style={{color:"black",frontSize:"100px"}}  >{progress!==0?"Wait for a while !  Uploading...":"Loading..."}</label>
+        <ProgressBar bgcolor="#99ff66" progress={progress}  height={30} />
       </div>
     );
   }else if(image){
