@@ -26,7 +26,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   const [image, setImage] = useState(null);
 	const [croppedArea, setCroppedArea] = useState(null);
 	const [crop, setCrop] =useState({ x: 0, y: 0 });
-
+  const [progress,setProgress]=useState(0);
   const save_it = async (e) => {
     setloading(true);
     try {
@@ -40,6 +40,10 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
         _id: _id,
         profilepic: pic,
         bio: newbio,
+      },    onUploadProgress: data => {
+        //Set the progress value to show the progress bar
+        setProgress(Math.round((100 * data.loaded) / data.total));
+        console.log(Math.round((100 * data.loaded) / data.total));  
       }});
     
       if (res) {
