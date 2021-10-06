@@ -164,7 +164,7 @@ const Signup = () => {
           ) : null}
           <input
             value={username}
-            onChange={(e) => setusername(e.target.value.substr(0, 15).toLowerCase())}
+            onChange={(e) => setusername(e.target.value.substr(0, 15).toLowerCase().trim(""))}
             placeholder="Username"
             type="text"
           />

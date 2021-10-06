@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import FileBase64 from "react-file-base64";
 import axios from "axios";
 import { useAlert } from "react-alert";
 import { useRef, useState } from "react";
@@ -7,7 +6,7 @@ import {useSpring,animated} from "react-spring";
 import Styles from "./Editprofile.module.css";
 import ImageCropper from "./ImageCroper/ImageCropper";
 
-import { getCroppedImg ,blobToDataURL} from "../../methods/createcrop";
+import { getCroppedImg } from "../../methods/createcrop";
 import ProgressBar from "../../Animation/Loader/Progressbar/ProgressBar";
 import {data_URL_to_file} from "../../../src/methods/data_URL_to_file";
 const URL = process.env.REACT_APP_URL;
@@ -29,12 +28,15 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
 	const [croppedArea, setCroppedArea] = useState(null);
 	const [crop, setCrop] =useState({ x: 0, y: 0 });
   const [progress,setProgress]=useState(0);
+  const [fileName,setFileName]=useState("");
   const save_it = async (e) => {
     setloading(true);
     try {
       const data=new FormData(e.target);
       data.append('file',selectedFile);
+      
    console.log(selectedFile,"selcected");
+
       const res = await axios.patch(`${URL}/upload/updateuser`,data, 
     { params:{
         email: newemail,
@@ -81,16 +83,15 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
 
     const reader= new FileReader();
     reader.readAsDataURL(e.target.files[0]);
-  
+  setFileName(e.target.files[0].name);
     reader.addEventListener("load",()=>{
       setImage(reader.result);
-     setSelectedFile(data_URL_to_file(reader.result,"Image"));
     })
  
     
-   // setSelectedFile(e.target.files[0]); 
-    //this was previous code   
-        // setPic(global.URL.createObjectURL(e.target.files[0]));
+  // setSelectedFile(e.target.files[0]); 
+  // this was previous code   
+  // setPic(global.URL.createObjectURL(e.target.files[0]));
 
   }
  
@@ -107,8 +108,10 @@ const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     }
   setloading(true);
     const canvas = await getCroppedImg(imageSrc, crop);
+    let dataURL=canvas.toDataURL('image/jpeg',.10);
 
-    canvas.toBlob(
+    setSelectedFile(data_URL_to_file(dataURL,fileName))
+      canvas.toBlob(
       (blob) => {
   
         const previewUrl = window.URL.createObjectURL(blob);
@@ -120,12 +123,10 @@ const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
         setPic(anchor.href);
   
         window.URL.revokeObjectURL(previewUrl);
-        blobToDataURL(blob,result=>setSelectedFile(data_URL_to_file(result)));
-   
-     setloading(false);   
-     setImage(null);
+ 
+        setloading(false);   
+        setImage(null);
 
-    //    setSelectedFile(data_URL_to_file(anchor.href,"image"));
       },
       "image/",
       0.01

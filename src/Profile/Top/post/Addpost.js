@@ -7,7 +7,7 @@ import { useSpring,animated } from "react-spring";
 import { useAlert } from "react-alert";
 import ProgressBar from "../../../Animation/Loader/Progressbar/ProgressBar";
 import ImageCropper from "../ImageCroper/ImageCropper";
-import { getCroppedImg ,blobToDataURL} from "../../../methods/createcrop";
+import { getCroppedImg } from "../../../methods/createcrop";
 import {resetUserPosts,resetFeedPosts} from "../../../reduces/actions/userAction";
 import {data_URL_to_file} from "../../../methods/data_URL_to_file"
 const URL = process.env.REACT_APP_URL;
@@ -25,6 +25,7 @@ const Addpost = ({ setposthandle }) => {
   const [progress,setProgress]=useState(0);
   const dispatch = useDispatch();
   const { postcount } = useSelector((state) => state.count);
+  const [fileName,setfileName]=useState("");
   const savehandle = async (e) => {
 
     if(selectedFile==null)
@@ -36,6 +37,7 @@ const Addpost = ({ setposthandle }) => {
     setloading(!loading);
     const data=new FormData(e.target);
     data.append('file',selectedFile);
+
     
     try {
       const res = await axios.post(`${URL}/post/uploadpost`,data,{
@@ -64,6 +66,7 @@ const Addpost = ({ setposthandle }) => {
   
       const reader= new FileReader();
       reader.readAsDataURL(e.target.files[0]);
+      setfileName(e.target.files[0].name);
       reader.addEventListener("load",()=>{
         setImage(reader.result);
 
@@ -71,8 +74,8 @@ const Addpost = ({ setposthandle }) => {
    
       
     //  setSelectedFile(e.target.files[0]); 
-      //this was previous code   
-          // setPic(global.URL.createObjectURL(e.target.files[0]));
+    // this was previous code   
+    // setPic(global.URL.createObjectURL(e.target.files[0]));
   
     }
 
@@ -88,7 +91,9 @@ const Addpost = ({ setposthandle }) => {
     }
   setloading(true);
     const canvas = await getCroppedImg(imageSrc, crop);
-
+    let dataURL=canvas.toDataURL('image/jpeg',.10);
+  
+    setSelectedFile(data_URL_to_file(dataURL,fileName))
     canvas.toBlob(
       (blob) => {
   
@@ -101,8 +106,7 @@ const Addpost = ({ setposthandle }) => {
         setPic(anchor.href);
   
         window.URL.revokeObjectURL(previewUrl);
-        blobToDataURL(blob,result=>setSelectedFile(data_URL_to_file(result)));
-   //     setSelectedFile(blob);
+
    
      setloading(false);  
      setImage(null);
@@ -152,20 +156,20 @@ const Addpost = ({ setposthandle }) => {
   return (
 <>
      <animated.form className={Styles.maindiv} style={Popup} onSubmit={e=>savehandle(e)}>
-     <button onClick={() => setposthandle(false)}>Back</button>
+     <button className={Styles.backbut} onClick={() => setposthandle(false)}>Back</button>
      {pic?<img className={Styles.editimg} src={pic?pic:process.env.PUBLIC_URL+'/userImage.png'} alt=""/>:null}
     
     <input style={{display:"none"}}  type="file" ref={Refinput}  onChange={selectedFileHandle}/>
 
-    <button className={Styles.choosebutton} type="button" onClick={openChoosefile} >Choose Image</button>
+    <button className={Styles.choosebutton} type="button" onClick={openChoosefile} >Choose Picture</button>
   
       <textarea
         type="name"
         value={desc}
         onChange={(e) => setdesc(e.target.value.substr(0, 100))}
-        placeholder="    Write Something 😜   "
+        placeholder="    Write Caption 😜   "
       />
-      <button type="submit">save</button>
+      <button className={Styles.savebut} type="submit">Upload</button>
      </animated.form></>
  
   );
