@@ -7,8 +7,9 @@ import {useSpring,animated} from "react-spring";
 import Styles from "./Editprofile.module.css";
 import ImageCropper from "./ImageCroper/ImageCropper";
 
-import { getCroppedImg } from "../../methods/createcrop";
-import ProgressBar from "../../Animation/Loader/Progressbar/ProgressBar"
+import { getCroppedImg ,blobToDataURL} from "../../methods/createcrop";
+import ProgressBar from "../../Animation/Loader/Progressbar/ProgressBar";
+import {data_URL_to_file} from "../../../src/methods/data_URL_to_file";
 const URL = process.env.REACT_APP_URL;
 const Editprofile = ({ edit_it, setprofpichandle }) => {
   const Alert = useAlert();
@@ -80,13 +81,14 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
 
     const reader= new FileReader();
     reader.readAsDataURL(e.target.files[0]);
+  
     reader.addEventListener("load",()=>{
       setImage(reader.result);
-   
+     setSelectedFile(data_URL_to_file(reader.result,"Image"));
     })
  
     
-    setSelectedFile(e.target.files[0]); 
+   // setSelectedFile(e.target.files[0]); 
     //this was previous code   
         // setPic(global.URL.createObjectURL(e.target.files[0]));
 
@@ -118,10 +120,12 @@ const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
         setPic(anchor.href);
   
         window.URL.revokeObjectURL(previewUrl);
- 
+        blobToDataURL(blob,result=>setSelectedFile(data_URL_to_file(result)));
    
-     setloading(false);  
+     setloading(false);   
      setImage(null);
+
+    //    setSelectedFile(data_URL_to_file(anchor.href,"image"));
       },
       "image/",
       0.01

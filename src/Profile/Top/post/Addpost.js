@@ -7,8 +7,9 @@ import { useSpring,animated } from "react-spring";
 import { useAlert } from "react-alert";
 import ProgressBar from "../../../Animation/Loader/Progressbar/ProgressBar";
 import ImageCropper from "../ImageCroper/ImageCropper";
-import { getCroppedImg } from "../../../methods/createcrop";
+import { getCroppedImg ,blobToDataURL} from "../../../methods/createcrop";
 import {resetUserPosts,resetFeedPosts} from "../../../reduces/actions/userAction";
+import {data_URL_to_file} from "../../../methods/data_URL_to_file"
 const URL = process.env.REACT_APP_URL;
 const Addpost = ({ setposthandle }) => {
   const [pic, setPic] = useState(null);
@@ -65,11 +66,11 @@ const Addpost = ({ setposthandle }) => {
       reader.readAsDataURL(e.target.files[0]);
       reader.addEventListener("load",()=>{
         setImage(reader.result);
-         console.log(Image);
-      })
+
+      });
    
       
-      setSelectedFile(e.target.files[0]); 
+    //  setSelectedFile(e.target.files[0]); 
       //this was previous code   
           // setPic(global.URL.createObjectURL(e.target.files[0]));
   
@@ -78,6 +79,7 @@ const Addpost = ({ setposthandle }) => {
     const openChoosefile=()=>{
       Refinput.current.click();
   }
+
 
   const generateDownload = async (imageSrc, crop) => {
     
@@ -99,7 +101,7 @@ const Addpost = ({ setposthandle }) => {
         setPic(anchor.href);
   
         window.URL.revokeObjectURL(previewUrl);
- 
+        blobToDataURL(blob,result=>setSelectedFile(data_URL_to_file(result)));
    //     setSelectedFile(blob);
    
      setloading(false);  

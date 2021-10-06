@@ -6,7 +6,11 @@ const createImage = (url) =>
 		image.src = url;
 	});
         
-
+export const blobToDataURL=(blob, callback) =>{
+    var a = new FileReader();
+    a.onload = function(e) {callback(e.target.result);}
+    a.readAsDataURL(blob);
+}
   //-----
   // I don't know properly how canvas works but I understood this code that's why i added it here
 export const  getCroppedImg=async(imageSrc, pixelCrop)=> {
