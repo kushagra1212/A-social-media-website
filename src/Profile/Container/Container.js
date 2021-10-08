@@ -14,7 +14,7 @@ const Container = ({toDelete,username}) => {
   const [posts,setPosts]=useState([]);
   const [hasMore,setHasMore]=useState(true);
   const [isUnmounted,setIsUnmounted]=useState(false);
- 
+
  // const [isUnmounted,setIsUnmounted]=useState(false);
 
   
@@ -49,6 +49,7 @@ const Container = ({toDelete,username}) => {
     }
     
   }
+
   useState(()=>{
  
       call_func();
@@ -100,13 +101,17 @@ const Container = ({toDelete,username}) => {
           }
         >
             <div style={grid?{}:{flexDirection:"column",alignItems:"center"}}  className={Styles.maindiv}>
-    
+         
               
       {posts.length > 0
         ? posts.map((post,id) => {
+       
+          
             return (
               <Suspense   key={id} fallback={null} >
-                  <SuspenseImg  className={Styles.image}   onClick={()=>setPostHandler(post)}  src={post.picture}  />
+               
+                  <SuspenseImg className={Styles.image}   onClick={()=>setPostHandler(post)}  src={post.picture}  />
+               
                   </Suspense> 
             )
           })

@@ -108,7 +108,7 @@ const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     }
   setloading(true);
     const canvas = await getCroppedImg(imageSrc, crop);
-    let dataURL=canvas.toDataURL('image/jpeg',.10);
+    let dataURL=canvas.toDataURL('image/jpeg',.70);
 
     setSelectedFile(data_URL_to_file(dataURL,fileName))
       canvas.toBlob(
