@@ -186,13 +186,16 @@ zoom: 100%;
 }
 @media screen and (min-width:768px) {
   .maincontent{
-    z-index: 1;
+ 
+    z-index: 10000;
   }
   .singlecontainer{
     padding: 1%;
-    padding-bottom: 10%;
-    width:auto;
+    /* padding-bottom: 10%; */
+    width: auto;
     background-color: #fafafa;
+    box-shadow: 1px 1px 1000px 30px #181818;
+   
   }
   .backbut{
     position: absolute;

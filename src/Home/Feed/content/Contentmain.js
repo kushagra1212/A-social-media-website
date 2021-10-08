@@ -24,7 +24,6 @@ let element = null;
 const Contentmain = () => {
   const dispatch = useDispatch();
   const { profilepic, username } = useSelector((state) => {
- 
     return state.user;
   });
   const { likesArray } = useSelector((state) => {
@@ -115,7 +114,7 @@ const Contentmain = () => {
     }
     //temp section
   };
-  const PostsWraper=(post1,post2)=>{
+  const PostsWraper=(post1,post2,otheruser)=>{
     let newArray = [];
  
     let newpost = [...post1, ...post2];
@@ -141,16 +140,14 @@ const Contentmain = () => {
    
     let array1 = [...array, ...newArray];
 
-    let lastcount = 1,
-      lastcount2 = 1;
     newpost = unique(newpost);
     newpost.forEach((ele) => {
       ele.likes.forEach((ele2) => {
         dispatch(updateLikesArray(ele2.username, ele._id));
       });
     });
-  
-    Feedposts(newpost, lastcount, array1, lastcount2, dispatch);
+   
+    Feedposts(newpost, array1,otheruser, dispatch);
    
     setarray([...array, ...newArray]);
 
@@ -172,18 +169,12 @@ const Contentmain = () => {
          item?.following.map((ele)=>{
            
           return getstoriesFromOthers(ele.username,dispatch);
-        })
-      
+        });
         getstories(username, dispatch);
         item?.following?.map((dat) => {
-          let lastcount2 = state.feedposts.lastcount;
-             
-           
-    
+          let otherUsersLastcount = state.feedposts.otherUsersLastcount;
 
-
-
-          getpostsforfeed(dat.username, lastcount2,3)
+          getpostsforfeed(dat.username, otherUsersLastcount[dat.username],3)
             .then((post) => {
               post2 = post;
       
@@ -192,8 +183,8 @@ const Contentmain = () => {
                  return  elee["pic"] = ele.profilepic;
                 })
               );
-       
-            PostsWraper(post1,post2);
+           let otheruser=dat.username;
+            PostsWraper(post1,post2,otheruser);
             
             })
             .catch((err) =>{console.log(err);         setloading(false);} );
@@ -219,19 +210,14 @@ const Contentmain = () => {
         post1.map((ele) => {
           return ele["pic"] = profilepic;
         });
-        if (post1.length === 0) {
-        
-           
-        }
+ 
        })
 
         
         
    
     
-    } else {
-      setloading(false);
-    }
+    } 
   };
   const setcommentsfunc = ({ val, post }) => {
     element = document.querySelector("#infiniteScroll");
@@ -251,11 +237,11 @@ const Contentmain = () => {
     }
 
     return () => setIsUnmounted(true);
-  }, []);
+  }, [username]);
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);
 
-  if (loading === true) {
+  if (loading === true) { 
    
     return <ContentMainAnimate/>;
   } else if (state.feedposts.posts.length === 0) {

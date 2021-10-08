@@ -1,8 +1,8 @@
 
 import { addfeedposts } from "../reduces/actions/userAction";
 
-const Feedposts = (newpost, lastcount, array, lastcount2, dispatch) => {
-  dispatch(addfeedposts(newpost, lastcount, array, lastcount2));
+const Feedposts = (newpost, array,otheruser, dispatch) => {
+  dispatch(addfeedposts(newpost, array,otheruser));
 
   return null;
 };

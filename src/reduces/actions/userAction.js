@@ -12,8 +12,8 @@ const getuserfor=()=>{
         type:"GET_USER"
     }
 }
-export const addfeedposts=(posts,lastcount,array,lastcount2)=>{
-    return({type:"ADD_FEED_POSTS",payload:{posts:posts,lastcount:lastcount,array:array,lastcount2:lastcount2}});
+export const addfeedposts=(posts,array,otheruser)=>{
+    return({type:"ADD_FEED_POSTS",payload:{posts:posts,lastcount:3,array:array,otheruser:otheruser}});
 }
 
 export const addposts=(posts)=>{

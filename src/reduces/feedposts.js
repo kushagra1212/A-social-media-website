@@ -4,8 +4,8 @@ const feedposts = (
     posts: [],
     lastcount: 0,
     array:[],
-    lastcount2: 0,
     likesArray:[],
+    otherUsersLastcount:[]
   },
   action
 ) => {
@@ -14,7 +14,11 @@ const feedposts = (
       state.posts = action.payload.posts;
       state.lastcount += action.payload.lastcount;
       state.array = action.payload.array;
-      state.lastcount2 += action.payload.lastcount2;
+      if(isNaN(state.otherUsersLastcount[action.payload.otheruser])){
+        state.otherUsersLastcount[action.payload.otheruser]=action.payload.lastcount;
+      }else
+      state.otherUsersLastcount[action.payload.otheruser]+=action.payload.lastcount;
+   
       return state;
     case "GET_FEED_POSTS":
       return state;
@@ -50,7 +54,7 @@ const feedposts = (
         posts: [],
         lastcount: 0,
         array: [],
-        lastcount2:0,
+        otherUsersLastcount:[]
       };
     default:
       break;
