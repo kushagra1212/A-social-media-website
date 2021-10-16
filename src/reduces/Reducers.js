@@ -1,5 +1,4 @@
 
-import Signin from '../Sign in/Signin'
 import signinReducer from './signinReducer';
 import userposts from './userposts';
 import {combineReducers} from 'redux';

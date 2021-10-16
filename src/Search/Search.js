@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import User from "./Searchuser/User";
 import ShowPost from "./Searchuser/ShowPost";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Profile from "../Profile/Profile";
 import Styles from "./Search.module.css";
-import searchImg from "./icons/search-icon.png"
+import searchImg from "./icons/search-icon.png";
 import verifiesusers from "../methods/verifiesusers";
 
-
 const URL = process.env.REACT_APP_URL;
-let  count=0;
+let count = 0;
 const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
   const [searchuser, setsearchuser] = useState("");
   const [user, setuser] = useState("");
@@ -46,14 +45,14 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       setloading(false);
     }, 2000);
   }, []);
-  
+
   const getcounts = async () => {
     try {
       await axios.patch(`${URL}/count/updatefollowerscount`, {
         username: searchuser,
       });
       const res2 = await axios.patch(`${URL}/count/updatefollowingcount`, {
-        username: searchuser
+        username: searchuser,
       });
       if (res2.data) {
         setpostcount(res2.data.postcount);
@@ -72,7 +71,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
         return res.data;
       }
     } catch (err) {
-      console.log(err); 
+      console.log(err);
     }
   };
 
@@ -89,8 +88,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
         setuser(res.data);
         setfound({ found: true, text: "" });
       } else {
-         
-    setloading(false);
+        setloading(false);
         setfound({ found: false, text: "user not found" });
       }
     } catch (err) {
@@ -118,22 +116,19 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       verifiesusers(setfollowingfunc, username, usernameofsender);
     }
     return () => setUnmounted(true);
-  }, [searchuser,isUnmounted,username]);
+  }, [searchuser, isUnmounted, username]);
   if (showprofilefromshowbar && !loading) {
     if (username === searchuser) {
-    
-      if(count>=30)
-      {
-        count=0;
+      if (count >= 30) {
+        count = 0;
         window.location.reload();
         return null;
       }
       count++;
 
       return (
-      
         <div style={{ width: "100%", height: "100%", zIndex: 100 }}>
-          <Profile  />
+          <Profile />
         </div>
       );
     }
@@ -154,7 +149,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
           showfollowing={showfollowing}
         />
         {showfollowers || showfollowing ? null : (
-           <ShowPost  username={user.username} />
+          <ShowPost username={user.username} />
         )}
       </div>
     );
@@ -218,22 +213,16 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       </div>
     );
   } else if (showprofile) {
-    if (username === searchuser && showprofilefromshowbar===false) {
-      if(count>=30)
-      {
+    if (username === searchuser && showprofilefromshowbar === false) {
+      if (count >= 30) {
         window.location.reload();
-        count=0;
+        count = 0;
         return null;
       }
       count++;
-    
-    
+
       return (
         <div style={{ width: "100%", height: "100%" }}>
-          {/*<button style={{zIndex:10}}  className={Styles.backbut} onClick={showuserprofilehandle}>
-            BACK
-          </button> */}
-
           <Profile />
         </div>
       );
@@ -256,7 +245,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
           showfollowing={showfollowing}
         />
         {showfollowers || showfollowing ? null : (
-          <ShowPost  username={user.username} />
+          <ShowPost username={user.username} />
         )}
       </div>
     );

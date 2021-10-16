@@ -10,7 +10,7 @@ import { updatepost } from "../../../../reduces/actions/userAction";
 const Comment = ({ username, showcomments, setcommentsfunc }) => {
   const [post, setpost] = useState();
   const profilepic = useSelector((state) => state.user.profilepic);
-  const [comments,setcomments]=useState(null);
+
   const dispatch=useDispatch();
   const addCommentFunc = async (comment) => {
     let id = showcomments.post._id;

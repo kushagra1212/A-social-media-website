@@ -2,19 +2,12 @@ import Main from "./Main";
 import Signin from "./Sign in/Signin";
 import Signup from "./Sign up/Signup";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getuser, access_Action } from "./reduces/actions/userAction";
 import { useEffect, useState } from "react";
 
 import Styles from "./App.module.css";
-import {
-  BrowserRouter,
-
-  Route,
-  Redirect,
-  withRouter,
-
-} from "react-router-dom";
+import { BrowserRouter, Route, Redirect, withRouter } from "react-router-dom";
 const URL = process.env.REACT_APP_URL;
 const App = ({ match }) => {
   const dispatch = useDispatch();
@@ -28,11 +21,9 @@ const App = ({ match }) => {
           withCredentials: true,
         })
         .then(async (res) => {
-     
-            dispatch(getuser(res.data.id));
-     
-            dispatch(access_Action(res.data.access));
-    
+          dispatch(getuser(res.data.id));
+
+          dispatch(access_Action(res.data.access));
         })
         .catch((err) => console.log(err));
     }
@@ -56,7 +47,6 @@ const App = ({ match }) => {
         <Route path="/main">
           <Main />
         </Route>
-    
       </BrowserRouter>
     </div>
   );

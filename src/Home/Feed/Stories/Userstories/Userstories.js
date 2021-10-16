@@ -5,91 +5,189 @@ import {
   show_webcam_handle,
 } from "../../../../reduces/actions/StoriesAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useState,useEffect } from "react";
-import { useSpring,animated } from "react-spring";
+import { useState, useEffect, useRef } from "react";
+import { useSpring, animated } from "react-spring";
 import cameraimg from "./cameraimg.png";
-import backImg from './backImage.png';
+import backImg from "./backImage.png";
+import ImageCropper from "../../../../Profile/Top/ImageCroper/ImageCropper";
 import Webcamcapture from "../Webcam/Webcamcapture";
 import Picture from "../Picture/Picture";
+import ProgressBar from "../../../../Animation/Loader/Progressbar/ProgressBar";
 import { uploadstories } from "../../../../methods/uploadstories";
+import { data_URL_to_file } from "../../../../methods/data_URL_to_file";
+import { getCroppedImg } from "../../../../methods/createcrop";
 const Userstories = () => {
   const dispatch = useDispatch();
+  const [pic, setPic] = useState(null);
   const { show_webcam, show_others_stories } = useSelector(
     (state) => state.Stories
   );
   const { username } = useSelector((state) => state.user);
   const { documents } = useSelector((state) => state.Stories);
   const [showpictures, setshowpictures] = useState(true);
-  const [file, setfile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [image, setImage] = useState(null);
+  const [loading, setloading] = useState(false);
+  const Refinput = useRef();
+  const [croppedArea, setCroppedArea] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [progress, setProgress] = useState(0);
+
+ 
 
   const set_picture_handle = (ans) => {
     setshowpictures(ans);
   };
 
-  const [styleOne,animateOne]=useSpring({x:100},[]);
-  const [styleTwo,animateTwo]=useSpring({y:-100},[])
-  useEffect(()=>{
-    animateOne.start({x:0,y:0});
-    animateTwo.start({y:0,x:0});
-  },[showpictures,show_webcam])
+  const [styleOne, animateOne] = useSpring({ x: 100 }, []);
+  const [styleTwo, animateTwo] = useSpring({ y: -100 }, []);
+  useEffect(() => {
+    animateOne.start({ x: 0, y: 0 });
+    animateTwo.start({ y: 0, x: 0 });
+  }, [showpictures, show_webcam,animateTwo,animateOne]);
 
+  const selectedFileHandle = (e) => {
+    e.preventDefault();
+
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+   
+    reader.addEventListener("load", () => {
+      setImage(reader.result);
+    });
+
+    //  setSelectedFile(e.target.files[0]);
+    // this was previous code
+    // setPic(global.URL.createObjectURL(e.target.files[0]));
+  };
+
+  const openChoosefile = () => {
+    Refinput.current.click();
+  };
+
+  const generateDownload = async (imageSrc, crop) => {
+    if (!crop || !imageSrc) {
+      return;
+    }
+    setloading(true);
+    const canvas = await getCroppedImg(imageSrc, crop);
+    let dataURL = canvas.toDataURL("image/jpeg", 0.1);
+
+    setSelectedFile(dataURL);
+
+    setPic(dataURL);
+    setloading(false);
+    setImage(null);
+  };
+  const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
+    setCroppedArea(croppedAreaPixels);
+  };
   const save_button_handle = () => {
-    setTimeout(() => {
-      dispatch(show_user_stories_handle(false));
-    }, 400);
-    uploadstories(username, file, dispatch);
-    setfile(null);
+    setloading(true);
+
+    uploadstories(username, selectedFile, dispatch)
+      .then((res) => {
+        setloading(false);
+        setSelectedFile(null);
+        dispatch(show_user_stories_handle(false));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(show_user_stories_handle(false));
+      });
   };
 
   if (documents.length >= 1 && showpictures)
     return (
-    
-        <Picture
+      <Picture
         other={false}
-          documents={documents}
-          set_picture_handle={set_picture_handle}
-        />
-   
+        documents={documents}
+        set_picture_handle={set_picture_handle}
+      />
     );
 
   if (show_webcam)
     return (
-      <div  className={Styles.cameradiv}>
-        <button 
+      <div className={Styles.cameradiv}>
+        <button
           onClick={() => {
             dispatch(show_webcam_handle(false));
           }}
           className={Styles.backbut}
         >
-          <span  className={Styles.back}>BACK</span>
+          <span className={Styles.back}>BACK</span>
         </button>
         <Webcamcapture />
       </div>
     );
+  if (loading) {
+    return (
+      <div className={Styles.cropdiv} style={{ backgroundColor: "white" }}>
+        <label style={{ color: "black", frontSize: "100px" }}>
+          {progress !== 0 ? "Wait for a while !  Uploading..." : "Loading..."}
+        </label>
+        <ProgressBar bgcolor="#99ff66" progress={progress} height={30} />
+      </div>
+    );
+  } else if (image) {
+    return (
+      <div className={Styles.cropdiv}>
+        <ImageCropper
+          crop={crop}
+          image={image}
+          setCrop={setCrop}
+          onCropComplete={onCropComplete}
+          generateDownload={generateDownload}
+          setImage={setImage}
+          croppedArea={croppedArea}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={Styles.maindiv}>
-      
-      <animated.div style={styleTwo}><button
-        onClick={() => {
-          dispatch(show_user_stories_handle(false));
-        }}
-        className={Styles.backbut}
-      >
-        <span className={Styles.back}>BACK</span>
-      </button></animated.div>
+      <animated.div style={styleTwo}>
+        <button
+          onClick={() => {
+            dispatch(show_user_stories_handle(false));
+          }}
+          className={Styles.backbut}
+        >
+         BACK
+        </button>
+      </animated.div>
+      {pic ? (
+      <>
+        <img
+          className={Styles.editimg}
+          src={pic ? pic : process.env.PUBLIC_URL + "/userImage.png"}
+          alt=""
+        />
+        
+        <button className={Styles.savebut} onClick={save_button_handle}>Add to Stories</button>
+      </>
+      ) : null}
 
-      <animated.div style={styleOne} className={Styles.file}>
-        <FileBase64 multiple={false} onDone={(e) => setfile(e.base64)} />
-        {file ? (
-          <div>
-            <img src={file} width="100px" height="100px" alt="" />
-            <button onClick={save_button_handle}>Add to Stories</button>
-          </div>
-        ) : null}
+      <input
+        style={{ display: "none" }}
+        type="file"
+        ref={Refinput}
+        onChange={selectedFileHandle}
+      />
+
+      <button
+        className={Styles.choosebutton}
+        type="button"
+        onClick={openChoosefile}
+      >
+        Choose Picture
+      </button>
+      <animated.div style={styleOne} >
+      
       </animated.div>
       <animated.div
-      style={styleOne}
+        style={styleOne}
         className={Styles.camera}
         onClick={() => dispatch(show_webcam_handle(true))}
       >

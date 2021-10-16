@@ -6,52 +6,45 @@ import getmessages from "../../../methods/getmessages";
 import addmessage from "../../../methods/addmessage";
 
 const Messages = () => {
-  const { conversationID, user,socket } = useSelector((state) => state.MessageReducer);
+  const { conversationID, user, socket } = useSelector(
+    (state) => state.MessageReducer
+  );
   const [messages, setmessages] = useState(null);
   let Scrollref = useRef(null);
   const { username } = useSelector((state) => state.user);
   const [text, setText] = useState("");
 
- console.log(socket);
+  console.log(socket);
   useEffect(() => {
-     if(socket){
-       
-    socket.on("getmessage",({sender,text})=>{
-      if(sender===user.username){
-        const Message = {
-          conversationID: conversationID.conversationID,
-          sender,
-          text
-        };
-        setmessages((messages) => [
-          ...messages,
-          { ...Message, createdAt: new Date() },
-        ]);
-     
-      }
-        
-  
-      })
-     }
-  }, [username]);
+    if (socket) {
+      socket.on("getmessage", ({ sender, text }) => {
+        if (sender === user.username) {
+          const Message = {
+            conversationID: conversationID.conversationID,
+            sender,
+            text,
+          };
+          setmessages((messages) => [
+            ...messages,
+            { ...Message, createdAt: new Date() },
+          ]);
+        }
+      });
+    }
+  }, [username, conversationID.conversationID, socket, user.username]);
 
   useEffect(() => {
-
-  if(socket){
-    socket.on("connection", () => {
-      console.log(socket);
-      console.log("connection")
-   });
-   socket.emit("adduser", username);
-   socket.on("getuser", (users) => {
-     console.log(users, "users");
-   });
-  }
-
-    
+    if (socket) {
+      socket.on("connection", () => {
+        console.log(socket);
+        console.log("connection");
+      });
+      socket.emit("adduser", username);
+      socket.on("getuser", (users) => {
+        console.log(users, "users");
+      });
+    }
   }, []);
-
-
 
   useEffect(() => {
     const getmessagehelper = async () => {
@@ -61,7 +54,6 @@ const Messages = () => {
 
     getmessagehelper();
   }, [conversationID]);
-
 
   useEffect(() => {
     Scrollref.current.scrollIntoView({
@@ -76,11 +68,15 @@ const Messages = () => {
     const Message = {
       conversationID: conversationID.conversationID,
       sender: username,
-      text: text
+      text: text,
     };
- console.log(user.username);
-   
-    socket?.emit("sendmessage",{receiver:user.username,sender:username,text:text});
+    console.log(user.username);
+
+    socket?.emit("sendmessage", {
+      receiver: user.username,
+      sender: username,
+      text: text,
+    });
 
     setText("");
 

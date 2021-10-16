@@ -2,10 +2,10 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Addpost from "./post/Addpost";
 import { useEffect, useState } from "react";
-import FileBase64 from "react-file-base64";
+
 import Editprofile from "./Editprofile";
 import Topprofile from "./Topprofile";
-import { Redirect, useHistory,withRouter } from "react-router";
+import { useHistory, withRouter } from "react-router";
 const URL = process.env.REACT_APP_URL;
 const Top = ({
   setposthand,
@@ -16,19 +16,18 @@ const Top = ({
     username,
     name,
     profilepic,
-    email,
- bio,
+
+    bio,
   } = useSelector((state) => {
-   
     return state.user;
   });
   const { postcount } = useSelector((state) => state.count);
-  const history=useHistory();
+  const history = useHistory();
   const [img, setimg] = useState(null);
   const [edit, setedit] = useState(false);
   const [post, setpost] = useState(false);
   const [isUnmounted, setIsUnmounted] = useState(false);
-  const [profpic, setprofpic] = useState(profilepic);
+  const [setprofpic] = useState(profilepic);
   const dispatch = useDispatch();
 
   const edit_it = () => {
@@ -40,15 +39,15 @@ const Top = ({
     return () => {
       setIsUnmounted(true);
     };
-  }, [edit]);
+  }, [edit, isUnmounted]);
   const logouthandle = () => {
     axios
-      .post(`${URL}/auth/logout`, { } , { withCredentials: true })
+      .post(`${URL}/auth/logout`, {}, { withCredentials: true })
       .then((res) => {
         console.log(res);
         dispatch({ type: "access", payload: false });
-         history.push("/");
-         window.location.href = window.location.href;
+        history.push("/");
+        window.location.href = window.location.href;
       })
       .catch((err) => console.log(err));
   };

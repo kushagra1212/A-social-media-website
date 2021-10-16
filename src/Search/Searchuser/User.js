@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import Styles from "./User.module.css";
 import { setfollowers } from "../../methods/setfollowers";
 import verifiesusers from "../../methods/verifiesusers";
-import Showbar from '../../showbar/Showbar'
+import Showbar from "../../showbar/Showbar";
 import { useAlert } from "react-alert";
 import addconversation from "../../methods/addconversation";
-const URL = process.env.REACT_APP_URL;
+
 const User = ({
   profpic,
   name,
@@ -19,22 +19,20 @@ const User = ({
   setshowfollowershandle,
   setshowfollowinghandle,
   showfollowers,
-  showfollowing
-
+  showfollowing,
 }) => {
   const [following, setfollowing] = useState(false);
-  const [loading,setloading]=useState(true);
+  const [loading, setloading] = useState(true);
   const dispatch = useDispatch();
   const usernameofsender = useSelector((state) => state.user.username);
-  const [isUnmounted,setUnmounted]=useState(false);
-  const [showAlert,setShowAlert]=useState(true);
-  const Alert=useAlert();
+  const [isUnmounted, setUnmounted] = useState(false);
+  const [showAlert, setShowAlert] = useState(true);
+  const Alert = useAlert();
   const setfollowinghandle = (e) => {
     if (following === false) {
-      addconversation([username,usernameofsender]);
+      addconversation([username, usernameofsender]);
       setfollowers(username, usernameofsender, dispatch);
       setfollowing(true);
-   
     }
   };
   const setfollowingfunc = (value) => {
@@ -42,31 +40,25 @@ const User = ({
   };
 
   useEffect(() => {
-    if(!isUnmounted)
-    {
-      
-    getcounts();
-    verifiesusers(setfollowingfunc, username, usernameofsender);
- 
+    if (!isUnmounted) {
+      getcounts();
+      verifiesusers(setfollowingfunc, username, usernameofsender);
+
       setloading(false);
     }
-    return ()=> setUnmounted(true);
-
+    return () => setUnmounted(true);
   }, []);
-  const showAlertHandle=()=>{
-      
-    Alert.info("Not Available 😛",{
-        onOpen:()=>{
-             setShowAlert(false);
-        },
-        
-        onClose:()=>{
-        setShowAlert(true);
-    }
+  const showAlertHandle = () => {
+    Alert.info("Not Available 😛", {
+      onOpen: () => {
+        setShowAlert(false);
+      },
 
-});
-   
-  }
+      onClose: () => {
+        setShowAlert(true);
+      },
+    });
+  };
 
   if (showfollowers) {
     return (
@@ -93,7 +85,10 @@ const User = ({
   return (
     <div className={Styles.maindiv}>
       <div className={Styles.firstdiv}>
-        <img alt="" src={profpic?profpic:process.env.PUBLIC_URL+'/userImage.png'} />
+        <img
+          alt=""
+          src={profpic ? profpic : process.env.PUBLIC_URL + "/userImage.png"}
+        />
       </div>
       <div className={Styles.seconddiv}>
         <h3>{name}</h3>
@@ -102,21 +97,48 @@ const User = ({
         <h5>{bio}</h5>
       </div>
       <div className={Styles.thirddiv}>
-      <div  className={Styles.posts}  >
-            <label style={{color:"white"}} >Posts</label><br/>
-            {postsnumber}
-
-            </div>
+        <div className={Styles.posts}>
+          <label style={{ color: "white" }}>Posts</label>
+          <br />
+          {postsnumber}
+        </div>
 
         <label>
-        <button className={Styles.followersbut}  onClick={()=>followerscount>=1?setshowfollowershandle(true):showAlert? showAlertHandle():null}    >followers </button> <h6>{followerscount}</h6>
+          <button
+            className={Styles.followersbut}
+            onClick={() =>
+              followerscount >= 1
+                ? setshowfollowershandle(true)
+                : showAlert
+                ? showAlertHandle()
+                : null
+            }
+          >
+            followers{" "}
+          </button>{" "}
+          <h6>{followerscount}</h6>
         </label>
 
         <label>
-        <button className={Styles.followingbut}  onClick={()=>followingcount?setshowfollowinghandle(true): showAlert? showAlertHandle():null}     >following </button> <h6>{followingcount}</h6>
+          <button
+            className={Styles.followingbut}
+            onClick={() =>
+              followingcount
+                ? setshowfollowinghandle(true)
+                : showAlert
+                ? showAlertHandle()
+                : null
+            }
+          >
+            following{" "}
+          </button>{" "}
+          <h6>{followingcount}</h6>
         </label>
 
-        <button className={Styles.isfollowing} onClick={() => !loading?setfollowinghandle():null}>
+        <button
+          className={Styles.isfollowing}
+          onClick={() => (!loading ? setfollowinghandle() : null)}
+        >
           {following ? "Following" : "Follow"}{" "}
         </button>
       </div>

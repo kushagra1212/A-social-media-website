@@ -2,24 +2,24 @@ import Styles from "./signup.module.css";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useAlert } from "react-alert";
-import {getusername} from '../reduces/actions/countAction'
+import { getusername } from "../reduces/actions/countAction";
 
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { NavLink ,useHistory} from "react-router-dom";
+
+import { NavLink, useHistory } from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 const Signup = () => {
   const Alert = useAlert();
-  const history=useHistory();
- 
+  const history = useHistory();
+
   const dispatch = useDispatch();
   const [email, setemail] = useState("");
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [username, setusername] = useState("");
-  const [showAlert,setShowAlert]=useState(true);
-  const [loading,setloading]=useState(false);
+  const [showAlert, setShowAlert] = useState(true);
+  const [loading, setloading] = useState(false);
   const [error, seterror] = useState({
     emailerr: false,
     nameerr: {
@@ -74,62 +74,59 @@ const Signup = () => {
         },
       }));
   };
-  const submithandle =  (e) => {
+  const submithandle = (e) => {
     e.preventDefault();
     setloading(true);
     if (!password || !email || !name || !username) {
-       if(showAlert){
-        Alert.show("🤔 Enter the Details ",{
-          onOpen:()=>{
+      if (showAlert) {
+        Alert.show("🤔 Enter the Details ", {
+          onOpen: () => {
             setShowAlert(false);
-          },onClose:()=>{
+          },
+          onClose: () => {
             setShowAlert(true);
-          }
+          },
         });
-       }
-       setloading(false);
+      }
+      setloading(false);
       return;
     }
     try {
- axios.post(`${URL}/auth/signup`, {
-        name: name,
-        password: password,
-        email: email,
-        username: username,
-      }).then(res=>{
-     
-        if (res.data?.properties?.message!=="" && showAlert) {
-          Alert.show(res.data.properties.message,{
-            onOpen:()=>{
-              setShowAlert(false);
-            },onClose:()=>{
-              setShowAlert(true);
-            }
-          }); 
-         
-        } else if(res.data?.properties?.message==="") {
-           axios.post(`${URL}/item/setstart`, {
-            username: username,
-          }).then(res=>{
-            dispatch(getusername(username));
-        
-            Alert.success("successfully signed up 🤗 ");
-         
-      
-              dispatch({ type: "signup", payload: false });
-              history.push("/");
-          });
-      
-      
-        }
-      });
-     
+      axios
+        .post(`${URL}/auth/signup`, {
+          name: name,
+          password: password,
+          email: email,
+          username: username,
+        })
+        .then((res) => {
+          if (res.data?.properties?.message !== "" && showAlert) {
+            Alert.show(res.data.properties.message, {
+              onOpen: () => {
+                setShowAlert(false);
+              },
+              onClose: () => {
+                setShowAlert(true);
+              },
+            });
+          } else if (res.data?.properties?.message === "") {
+            axios
+              .post(`${URL}/item/setstart`, {
+                username: username,
+              })
+              .then((res) => {
+                dispatch(getusername(username));
+
+                Alert.success("successfully signed up 🤗 ");
+
+                dispatch({ type: "signup", payload: false });
+                history.push("/");
+              });
+          }
+        });
     } catch (err) {
- 
       console.log(err);
     }
-    
-   
   };
 
   // if(signup===false){
@@ -139,7 +136,11 @@ const Signup = () => {
   return (
     <>
       <div className={Styles.container}>
-        <img className={Styles.logo} src={process.env.PUBLIC_URL+'/logo.svg'} alt="logo" />
+        <img
+          className={Styles.logo}
+          src={process.env.PUBLIC_URL + "/logo.svg"}
+          alt="logo"
+        />
         <div className={Styles.input}>
           <input
             value={email}
@@ -164,7 +165,9 @@ const Signup = () => {
           ) : null}
           <input
             value={username}
-            onChange={(e) => setusername(e.target.value.substr(0, 15).toLowerCase().trim(""))}
+            onChange={(e) =>
+              setusername(e.target.value.substr(0, 15).toLowerCase().trim(""))
+            }
             placeholder="Username"
             type="text"
           />
@@ -189,17 +192,14 @@ const Signup = () => {
           Sign up
         </button>
 
-       <NavLink
-        to="/signin"
-       
-        
+        <NavLink
+          to="/signin"
           disabled={loading}
           className={Styles.goto}
           onClick={() => dispatch({ type: "signup", payload: false })}
         >
           Go to Login page
         </NavLink>
-
       </div>
     </>
   );

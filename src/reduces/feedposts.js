@@ -1,11 +1,10 @@
 const feedposts = (
   state = {
- 
     posts: [],
     lastcount: 0,
-    array:[],
-    likesArray:[],
-    otherUsersLastcount:[]
+    array: [],
+    likesArray: [],
+    otherUsersLastcount: [],
   },
   action
 ) => {
@@ -14,11 +13,13 @@ const feedposts = (
       state.posts = action.payload.posts;
       state.lastcount += action.payload.lastcount;
       state.array = action.payload.array;
-      if(isNaN(state.otherUsersLastcount[action.payload.otheruser])){
-        state.otherUsersLastcount[action.payload.otheruser]=action.payload.lastcount;
-      }else
-      state.otherUsersLastcount[action.payload.otheruser]+=action.payload.lastcount;
-   
+      if (isNaN(state.otherUsersLastcount[action.payload.otheruser])) {
+        state.otherUsersLastcount[action.payload.otheruser] =
+          action.payload.lastcount;
+      } else
+        state.otherUsersLastcount[action.payload.otheruser] +=
+          action.payload.lastcount;
+
       return state;
     case "GET_FEED_POSTS":
       return state;
@@ -40,12 +41,14 @@ const feedposts = (
       };
 
     case "UPDATE_POST":
-      let index=state.posts.findIndex(post=>post._id===action.payload.post._id);
+      let index = state.posts.findIndex(
+        (post) => post._id === action.payload.post._id
+      );
 
-      let newArray=state.posts;
+      let newArray = state.posts;
 
-      if(index>=0)  newArray[index].comments=action.payload.post.comments;
-      return {...state,posts:newArray};
+      if (index >= 0) newArray[index].comments = action.payload.post.comments;
+      return { ...state, posts: newArray };
     case "UPDATE_UNLIKES_ARRAY":
       return { ...state, likesArray: action.payload.unlikesArray };
     case "RESET_FEED_POSTS":
@@ -54,7 +57,7 @@ const feedposts = (
         posts: [],
         lastcount: 0,
         array: [],
-        otherUsersLastcount:[]
+        otherUsersLastcount: [],
       };
     default:
       break;

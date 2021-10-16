@@ -1,6 +1,5 @@
-import {updatefollowerandfollowing} from '../reduces/actions/countAction';
+import { updatefollowerandfollowing } from "../reduces/actions/countAction";
 
-export const setfollowers=async(username,usernameofsender,dispatch)=>{
-    dispatch(updatefollowerandfollowing(username,usernameofsender));
-
-}
+export const setfollowers = async (username, usernameofsender, dispatch) => {
+  dispatch(updatefollowerandfollowing(username, usernameofsender));
+};

@@ -1,8 +1,7 @@
 import Styles from "./Container.module.css";
-import {useEffect,useState,Suspense} from 'react'
+import {useState,Suspense} from 'react'
 import InfiniteScroll from "react-infinite-scroll-component";
 import Showdetailedpost from "./Showdetailedpost/Showdetailedpost";
-import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
 
 import { SuspenseImg } from "../../Home/Feed/content/SuspenceImage/SuspenceImg";
 import { getpostsforfeed } from "../../methods/getpostsforfeed";
@@ -10,12 +9,11 @@ const Container = ({toDelete,username}) => {
   const [grid,setGrid]=useState(true);
   const [showDetailedPost,setShowDetailedPost]=useState(false);
   const [post,setPost]=useState([]);
-  //const posts = useSelector((state) => state.userposts);
+
   const [posts,setPosts]=useState([]);
   const [hasMore,setHasMore]=useState(true);
   const [isUnmounted,setIsUnmounted]=useState(false);
 
- // const [isUnmounted,setIsUnmounted]=useState(false);
 
   
   const gridHandler=(bool)=>{

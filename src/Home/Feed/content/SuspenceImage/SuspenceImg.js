@@ -22,5 +22,5 @@ const imgCache = {
 
   export const SuspenseImg = ({ src, ...rest }) => {
     imgCache.read(src);
-    return <img src={src} {...rest} width="100%" />;
+    return <img src={src} {...rest} width="100%" alt="" />;
   };

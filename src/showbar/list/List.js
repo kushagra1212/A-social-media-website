@@ -1,7 +1,7 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import getuser from "../../methods/getuser";
 import Styles from "./List.module.css";
-import user from "../../reduces/user";
+
 import Loader from "../../Animation/Loader/Loader";
 import Search from "../../Search/Search";
 const List = ({ list }) => {
@@ -12,19 +12,8 @@ const List = ({ list }) => {
   const [username, setusername] = useState([]);
   const [isUnmounted, setIsUnmounted] = useState(false);
 
-  const unique = (array) => {
-    let newar = [];
-    let isvisited = {};
-    array.forEach((ele) => {
-      if (!isvisited[ele.username]) {
-        newar.push(ele);
-        isvisited[ele.username] = true;
-      }
-    });
-    return newar;
-  };
+
   const setusershandle = async () => {
- 
     usernames.map(async (ele) => {
       const { username } = ele;
       const data = await getuser(username);
@@ -38,22 +27,18 @@ const List = ({ list }) => {
       }
     });
     setloading(false);
-
- 
   };
   useEffect(() => {
     setusershandle();
 
     return () => setIsUnmounted(true);
   }, []);
- 
 
   if (loading) return <Loader width={1} height={1} />;
   if (users.length > 0 && showprofile == false) {
     return (
       <div className={Styles.maindiv}>
         {users.map((user, id) => {
-         
           return (
             <div className={Styles.userprofile} key={id}>
               <img
@@ -66,8 +51,8 @@ const List = ({ list }) => {
                 }
                 alt=""
               />
-           
-           <div>
+
+              <div>
                 <h6>@{user.username}</h6>
                 <h4>{user.name}</h4>
               </div>
@@ -82,13 +67,12 @@ const List = ({ list }) => {
             </div>
           );
         })}
-        {list.length == users.length ? null : (
+        {list.length === users.length ? null : (
           <Loader width={1} height={1} fontSize={10} />
         )}
-      
       </div>
     );
-  }else {
+  } else {
     return (
       <div>
         <Search

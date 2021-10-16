@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import FileBase64 from 'react-file-base64';
+
 import { useSelector } from 'react-redux';
 import Styles from './Topprofile.module.css'
 import { useAlert } from 'react-alert';

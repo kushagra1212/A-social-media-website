@@ -1,69 +1,63 @@
-
-.maindiv{
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
-    width:100%;
-    height:100%;
-
-    background:linear-gradient(rgb(91, 82, 172),rgb(100,82,172),rgb(110,82,172),rgb(150,82,172),rgb(180,82,172),rgb(200,82,172),rgb(220,82,172),rgb(230,82,172),rgb(250,82,172));
-    margin:0px;
-    z-index:100;
-    position:fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.backbut {
-  position: relative;
-  border: none;
-  -webkit-user-select: none;
-  user-select: none;
-  padding: 0;
-  border-radius: 12px;
-  cursor: pointer;
-  margin-top: 5%;
+.maindiv
+{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  height: 100%;
   width: 100%;
-  /* margin-left: 5%; */
-  /* height: 15px; */
-  /* margin-right: 80%; */
-  user-select: none;
-  padding: 2px 7px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  background: hsl(345deg 100% 47%);
+  transform: translate(-50%, -50%);
+  background-image: linear-gradient(
+120deg, #fdfbfb 0%, #ebedee 100%);
+  z-index: 200;
+  top: 50%;
+  left: 50%;
+  border: 2px solid #80808000;
+  border-radius: 10px;
+  box-shadow: 10px 10px 60px 0px #808080;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;;
+
+}.backbut
+{
+  position: absolute;
+  top:0%;
+  left:2%;
+  z-index: 10;
+  width: 55px;
+  font-size: 0.9em;
   color: white;
-  transform: translateY(-4px);
-  }
-  
-  .backbut:active .back {
-    transform: translateY(-2px);
-  }
-  
-  .backbut:focus:not(:focus-visible) {
+  background-color: rgb(21, 21, 221);
+  outline: none;
+  border:2px solid rgba(128, 128, 128, 0);
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 1px grey;
+  transition:  transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+
+}
+.backbut:active{
+  transform:scale(1.1);
+}
+.choosebutton{
+  width: 50%;
     outline: none;
-  }
-  .back {
-    transition:
-      transform
-      600ms
-      cubic-bezier(.3, .7, .4, 1);
-  }
-
-  .backbut:hover .back {
-    transform: translateY(-6px);
-    transition:
-      transform
-      250ms
-      cubic-bezier(.3, .7, .4, 1.5);
-  }
-
-  .backbut:active .back {
-    transform: translateY(-2px);
-    transition: transform 34ms;
-  }
+    border: 2px solid #80808000;
+    border-radius: 10px;
+    /* left: 50%; */
+    position: relative;
+    align-self: center;
+    color: white;
+    background-color: chocolate;
+height: 10%;
+    box-shadow: 1px 1px 1px #808080b3;
+    font-size: 1.5em;
+}
 .camera{
    position: relative;
    width: 100px;
@@ -88,7 +82,77 @@
   justify-content: flex-start;
 
 }
+
+.cropdiv {
+  position: fixed;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: stretch;
+  height: 70%;
+  width: 90%;
+  transform: translate(-50%, -50%);
+  background-color: indigo;
+  z-index: 200;
+  top: 40%;
+  left: 50%;
+  border: 2px solid #80808000;
+  border-radius: 10px;
+  box-shadow: 10px 10px 1000px 1000px #000000;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  padding: 10%;
+}
+.editimg
+{ 
+  
+  position: relative;
+  margin-top: 20%;  
+  /* margin-bottom: 10%; */
+  /* margin-left: 10%; */
+  width: 300px;
+  align-self: center;
+  height: 300px;
+  background-color: rgba(158, 21, 221, 0.246);
+  outline: none;
+  /* border: 2px solid rgba(128, 128, 128, 0); */
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px grey;
+  transform-origin: center;
+}
+
+.savebut
+{
+
+  color: white;
+
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  background-color: rgb(86, 209, 15);
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px grey;
+  transform-origin: center;
+  
+  width: 30%;
+  height:10%;
+  font-size: 1.1em;
+  font-weight: bold;
+  align-self: center;
+  
+}
 @media screen and (min-width:768px){
+  .maindiv{
+    height: 90%;
+    width: 30%;
+    position: absolute;
+    left: 30%;
+    box-shadow: 10px 10px 1000px 10px rgb(0 0 0);
+    z-index: 1000;
+    overflow: visible;
+   
+  }
   .backbut{
     position: relative;
     border: none;
@@ -109,5 +173,58 @@
     background: hsl(345deg 100% 47%);
     color: white;
     transform: translateY(-4px);
+  
+  font-weight: bolder;
+    transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+  }
+
+
+   .backbut:hover{
+    transform:scale3d(1.2,1.2,10);
+    
+  }
+  .camera img{
+    transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+  }
+  .camera img:hover{
+    transform:scale3d(1.2,1.2,10);
+  }
+  .editimg{
+
+
+
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    left: 120%;
+    margin-top: 10%;
+    box-shadow: 1px 1px 1000px 5px rgb(0 0 0);
+    z-index: 10;
+  }
+  .choosebutton{
+    width: 50%;
+  outline: none;
+  border: 2px solid #80808000;
+  border-radius: 10px;
+  /* left: 50%; */
+  position: relative;
+  align-self: center;
+  color: white;
+  background-color: chocolate;
+  height: 30px;
+  box-shadow: 1px 5px 5px 1px #808080b3;
+
+  font-size: 1.5em;
+  animation: transform background-color cubic-bezier(0.075, 0.82, 0.165, 1) ease-in-out reverse 0.3s;
+  }
+
+  .choosebutton:hover{
+  
+    background-color: #94c71e;
+    box-shadow: 1px 1px 1px #808080b3;
+  }
+  .savebut:hover{
+   background-color: rgb(12, 255, 113);
+
   }
 }
