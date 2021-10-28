@@ -8,3 +8,7 @@ export const setconversationID = (conversationID) => {
 export const setsocket = (socket) => {
   return { type: "SETSOCKET", payload: socket };
 };
+
+export const setUserPicture = (userPicture) => {
+  return { type: "SETUSERPICTURE", payload: { userPicture: userPicture } };
+};

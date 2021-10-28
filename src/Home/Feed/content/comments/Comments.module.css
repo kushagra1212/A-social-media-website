@@ -26,10 +26,9 @@
 }
 .topdiv{
     position: relative;
-    display: flex;
+
     z-index: 10;
-    flex-direction: row;
-    justify-content: space-around;
+  
     border: 2px solid #f0282800;
     box-shadow: 3px 5px 10px 0px grey;
     border: 2px solid #ffffff00;

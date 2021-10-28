@@ -1,0 +1,60 @@
+
+.shapes_3 {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        transform:rotate(45deg);
+        animation: sh3-0 1.5s infinite linear;
+      }
+      .shapes_3:before,
+      .shapes_3:after {
+        content: "";
+        width:50%;
+        color: #797979;
+        clip-path: polygon(0 50%,100% 0,100% 100%);
+        animation: inherit;
+        animation-name: sh3-1;
+      }
+      .shapes_3:after {
+        clip-path: polygon(0 0,100% 50%,0% 100%);
+        animation-name: sh3-2;
+      }
+      @keyframes sh3-0 {
+        25% {width:50px;height:50px;transform:rotate(0)}
+        50% {width:50px;height:50px}
+        75% {width:70.70px;height:35.35px}
+        100%{width:70.70px;height:35.35px;transform:rotate(0)}
+      }
+      @keyframes sh3-1 {
+        0%,25% {clip-path: polygon(0 50% ,100% 0,100% 100%);transform:translate(0.3px)}
+        50%    {clip-path: polygon(0 50% ,100% 0,100% 100%);transform:translate(-5px)}
+        75%    {clip-path: polygon(0 100%,0    0,100% 100%);transform:translate(-5px)}
+        100%   {clip-path: polygon(0 100%,0    0,100% 100%);transform:translate(17.7px)}
+      }
+      @keyframes sh3-2 {
+        0%,25% {clip-path: polygon(0 0,100% 50%,0    100%);transform:translate(-0.3px) }
+        50%    {clip-path: polygon(0 0,100% 50%,0    100%);transform:translate(5px) }
+        75%    {clip-path: polygon(0 0,100% 0  ,100% 100%);transform:translate(5px)}
+        100%   {clip-path: polygon(0 0,100% 0  ,100% 100%);transform:translate(-17.7px) }
+      }
+/* loader boxes*/
+.shapes_5 {
+        width: 100px;
+        height: 100px;
+        color: #797979;
+        background:
+          linear-gradient(currentColor 0 0),
+          linear-gradient(currentColor 0 0),
+          linear-gradient(currentColor 0 0),
+          linear-gradient(currentColor 0 0);
+        background-size: 21px 21px;
+        background-repeat:no-repeat;
+        animation: sh5 1.5s infinite cubic-bezier(0.3,1,0,1);
+    }
+    @keyframes sh5 {
+       0%   {background-position: 0    0,100% 0   ,100% 100%,0 100%}
+       33%  {background-position: 0    0,100% 0   ,100% 100%,0 100%;width:60px;height: 60px}
+       66%  {background-position: 100% 0,100% 100%,0    100%,0 0   ;width:60px;height: 60px}
+       100% {background-position: 100% 0,100% 100%,0    100%,0 0   }
+    }
+

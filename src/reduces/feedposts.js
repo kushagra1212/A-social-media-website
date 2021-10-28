@@ -1,8 +1,8 @@
 const feedposts = (
   state = {
     posts: [],
-    lastcount: 0,
     array: [],
+    count: 0,
     likesArray: [],
     otherUsersLastcount: [],
   },
@@ -11,14 +11,22 @@ const feedposts = (
   switch (action.type) {
     case "ADD_FEED_POSTS":
       state.posts = action.payload.posts;
-      state.lastcount += action.payload.lastcount;
       state.array = action.payload.array;
-      if (isNaN(state.otherUsersLastcount[action.payload.otheruser])) {
-        state.otherUsersLastcount[action.payload.otheruser] =
-          action.payload.lastcount;
+
+        if (isNaN(state.otherUsersLastcount[action.payload.otheruser])) {
+          state.otherUsersLastcount[action.payload.otheruser] =
+            action.payload.count;
+        } else
+          state.otherUsersLastcount[action.payload.otheruser] +=
+            action.payload.count;
+
+
+      if (isNaN(state.otherUsersLastcount[action.payload.username])) {
+        state.otherUsersLastcount[action.payload.username] =
+          action.payload.count;
       } else
-        state.otherUsersLastcount[action.payload.otheruser] +=
-          action.payload.lastcount;
+        state.otherUsersLastcount[action.payload.username] +=
+          action.payload.count;
 
       return state;
     case "GET_FEED_POSTS":
@@ -55,9 +63,10 @@ const feedposts = (
       return {
         ...state,
         posts: [],
-        lastcount: 0,
         array: [],
-        otherUsersLastcount: [],
+        count: 0,
+        likesArray: [],
+        otherUsersLastcount: []
       };
     default:
       break;

@@ -10,15 +10,19 @@ import deletelike from "../../../methods/deletelike";
 import Feedposts from "../../../posts/Feedposts";
 import Comments from "./comments/Comments";
 import { getstoriesFromOthers } from "../../../methods/uploadstories";
-import VerticalLoader from "../../../Animation/Loader/loader/VerticalLoader";
+import { updatepost } from "../../../reduces/actions/userAction";
+import { FluidLoaderFive } from "../../../Animation/Loader/loader/FluidLoader";
 import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
 import { SuspenseImg } from "./SuspenceImage/SuspenceImg";
 import { getstories } from "../../../methods/uploadstories";
 import ContentMainAnimate from "./ContentMainAnimate/ContentMainAnimate";
+import Addcomment from "./comments/Addcomment";
+import addcomment from "../../../methods/addcomments";
 import {
   updateLikesArray,
   updateUnlikesArray,
 } from "../../../reduces/actions/userAction";
+import Search from "../../../Search/Search";
 let likeCountArray = [];
 let element = null;
 const Contentmain = () => {
@@ -27,7 +31,6 @@ const Contentmain = () => {
     return state.user;
   });
   const { likesArray } = useSelector((state) => {
-  
     return state.feedposts;
   });
   const [hasMore, sethasmore] = useState(true);
@@ -36,11 +39,11 @@ const Contentmain = () => {
 
   const [showcomments, setshowcomments] = useState(false);
   const [likeLoading, setlikeLoading] = useState(false);
-
+  const [showProfile,setShowProfile]=useState(false);
   const unique = (array) => {
     let isvisited = {};
     let newarray = [];
- 
+
     array.forEach((ele) => {
       if (!isvisited[ele.picture]) {
         newarray.push(ele);
@@ -51,7 +54,6 @@ const Contentmain = () => {
   };
   const state = useSelector((state) => state);
   const [array, setarray] = useState([]);
-
 
   const [loading, setloading] = useState(false);
 
@@ -114,21 +116,19 @@ const Contentmain = () => {
     }
     //temp section
   };
-  const PostsWraper=(post1,post2,otheruser)=>{
+  const PostsWraper = (post1, post2, otheruser) => {
     let newArray = [];
- 
+
     let newpost = [...post1, ...post2];
-    
+
     newpost = unique(newpost);
-  
+
     let feedpos = state.feedposts.posts;
 
     feedpos = unique(feedpos);
 
     if (newpost.length === 0) sethasmore(false);
-    newpost.sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
+    newpost.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     newpost.forEach((ele) => {
       newArray.push({
@@ -137,7 +137,7 @@ const Contentmain = () => {
       });
     });
     newpost = [...feedpos, ...newpost];
-   
+
     let array1 = [...array, ...newArray];
 
     newpost = unique(newpost);
@@ -146,78 +146,84 @@ const Contentmain = () => {
         dispatch(updateLikesArray(ele2.username, ele._id));
       });
     });
-   
-    Feedposts(newpost, array1,otheruser, dispatch);
-   
+
+    Feedposts(newpost, array1, otheruser, username, dispatch);
+   console.log("this",newpost, array1, otheruser, username);
     setarray([...array, ...newArray]);
 
-  
-
-
     setloading(false);
-  }
+  };
   const getothers = (post1) => {
     let post2 = [];
-    
-    if (username) {
-      getitem(username).then((item) =>
-       {
-         if(item.followers.length===0 && item.following.length===0){
-          PostsWraper(post1,[]);
-           return;
-         }
-         item?.following.map((ele)=>{
-           
-          return getstoriesFromOthers(ele.username,dispatch);
-        });
-        getstories(username, dispatch);
-        item?.following?.map((dat) => {
-          let otherUsersLastcount = state.feedposts.otherUsersLastcount;
 
-          getpostsforfeed(dat.username, otherUsersLastcount[dat.username],3)
-            .then((post) => {
-              post2 = post;
-      
-              getuser(dat.username).then((ele) =>
-                post2.map((elee) => {
-                 return  elee["pic"] = ele.profilepic;
-                })
-              );
-           let otheruser=dat.username;
-            PostsWraper(post1,post2,otheruser);
-            
-            })
-            .catch((err) =>{console.log(err);         setloading(false);} );
+    if (username) {
+      getitem(username)
+        .then((item) => {
+          if (item.followers.length === 0 && item.following.length === 0) {
+            PostsWraper(post1, []);
+            return;
+          }
+          item?.following.map((ele) => {
+            return getstoriesFromOthers(ele.username, dispatch);
+          });
+          getstories(username, dispatch);
+          let otheruser="";
+          item?.following?.map((dat) => {
+            let otherUsersLastcount = state.feedposts.otherUsersLastcount;
+
+            getpostsforfeed(dat.username, otherUsersLastcount[dat.username], 3)
+              .then((post) => {
+                post2 = post;
+
+                getuser(dat.username).then((ele) =>
+                  post2.map((elee) => {
+                    return (elee["pic"] = ele.profilepic);
+                  })
+                );
+                otheruser = dat.username;
+          
+              })
+              .catch((err) => {
+                console.log(err);
+                setloading(false);
+              });
             return 0;
+          });
+          PostsWraper(post1, post2, otheruser);
         })
-       }
-      ).catch(err=>console.log(err));
+        .catch((err) => console.log(err));
     } else {
-    setloading(false);
+      setloading(false);
     }
   };
   let post1 = [];
- 
-  const call_func =  () => {
-    if (username) {
-   
-        let lastcount = state.feedposts.lastcount;
-       getpostsforfeed(username, lastcount,3).then(res=>{
-        post1 = res;
-   
-        getothers(post1);
- 
-        post1.map((ele) => {
-          return ele["pic"] = profilepic;
-        });
- 
-       })
 
-        
-        
-   
-    
-    } 
+  const call_func = () => {
+    if (username) {
+      let otherUsersLastcount = state.feedposts.otherUsersLastcount;
+
+      getpostsforfeed(username, otherUsersLastcount[username], 3).then(
+        (res) => {
+          post1 = res;
+
+          getothers(post1);
+
+          post1.map((ele) => {
+            return (ele["pic"] = profilepic);
+          });
+        }
+      );
+    }
+  };
+  const addCommentFuncforContent = async (comment, post) => {
+    let id = post._id;
+    let profilePicture = post.pic;
+
+    let com = await addcomment(id, username, comment, profilePicture);
+
+    com.comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    dispatch(updatepost(com));
   };
   const setcommentsfunc = ({ val, post }) => {
     element = document.querySelector("#infiniteScroll");
@@ -231,19 +237,40 @@ const Contentmain = () => {
 
         call_func();
       }
-  
 
       setarray(state.feedposts.array);
     }
 
     return () => setIsUnmounted(true);
-  }, [username]);
+  }, [
+    username,
+    isUnmounted,
+    state.feedposts.array,
+    state.feedposts.posts.length,
+  ]);
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);
+  if(showProfile){
+    return(
+<div className={Styles.userprofilemain}>
+<span  style={{fontSize:"40px",color:"red"  }}>
+ <i onClick={()=>setShowProfile(false)} styles={{color:"Dodgerblue",cursor:"pointer" }} className="fa fa-times-circle"></i>
+   </span>
 
-  if (loading === true) { 
-   
-    return <ContentMainAnimate/>;
+<div className={Styles.userProfile}  >
+
+      <Search
+           showprofilefromshowbar={showProfile}
+           view={false}
+           usernameformshowbar={username}
+      />
+    </div>
+    </div>
+      
+    )
+  }
+  if (loading === true) {
+    return <ContentMainAnimate />;
   } else if (state.feedposts.posts.length === 0) {
     return (
       <div className={Styles.maincontentstart}>
@@ -269,97 +296,102 @@ const Contentmain = () => {
           loader={<div className={Styles.loader}></div>}
           endMessage={
             <p
-              style={{
-                textAlign: "center",
-                backgroundColor: "black",
-                color: "white",
-                width: "100%",
-                height: "30px",
-                marginTop: "15%",
-                marginBottom: "5%",
-                position: "relative",
-              }}
+            className={Styles.infiP}
+        
             >
               <b>Yay! You have seen it all</b>
             </p>
           }
         >
           {state?.feedposts.posts.map((post, key) => (
-            <div key={post._id} className={Styles.singlecontainer} >
-              <div className={Styles.topdiv}>
-              <Suspense fallback={<VerticalLoader />}>
-             
-                <img src={post.pic?post.pic:process.env.PUBLIC_URL+'/userImage.png'} alt="" />
+            <div key={post._id} className={Styles.singlecontainer}>
+              <div className={Styles.topdiv} style={{cursor:"pointer"}} onClick={()=>setShowProfile(true)} >
+                <Suspense fallback={<FluidLoaderFive />}>
+                  <img
+                    src={
+                      post.pic
+                        ? post.pic
+                        : process.env.PUBLIC_URL + "/userImage.png"
+                    }
+                    alt=""
+                  />
                 </Suspense>
                 <h5>{post.username}</h5>
               </div>
-              <button
-                
-                className={Styles.imgdiv}
-              >
-             
-               <Suspense fallback={<VerticalLoader />}>
+              <button className={Styles.imgdiv}>
+                <Suspense fallback={<FluidLoaderFive />}>
                   <SuspenseImg alt="" src={post.picture} />
                 </Suspense>
-        
               </button>
               <div className={Styles.bottomdiv}>
                 {likesArray.findIndex(
                   (ele) => ele.username === username && ele.postID === post._id
                 ) >= 0 ? (
-                 <div     >
+                  <div>
                     <img
-                  className={Styles.bottombarImg}
-                  alt=""
-                  width="10px"
-                  height="10px"
-                  src={process.env.PUBLIC_URL+'/likeIcon.png'}
-                  onClick={() => unlikefunction(post, post._id)} />
-                    {" "}
+                      className={Styles.bottombarImg}
+                      alt=""
+                      width="10px"
+                      height="10px"
+                      src={process.env.PUBLIC_URL + "/likeIcon.png"}
+                      onClick={() => unlikefunction(post, post._id)}
+                    />{" "}
                     {likeCountArray.findIndex(
                       (ele) =>
                         ele.username === username && ele.postID === post._id
                     ) >= 0
                       ? post.likes.length + 1
                       : post.likes.length}
-              
-                 </div>
+                  </div>
                 ) : (
-                 <div        >
+                  <div>
                     <img
-            className={Styles.bottombarImg}
-                  alt=""
-                  width="10px"
-                  height="10px"
-                  src={process.env.PUBLIC_URL+'/unlikeIcon.png'}
-                   onClick={() => likefunction(post, post._id)}/>
-                    {" "}
+                      className={Styles.bottombarImg}
+                      alt=""
+                      width="10px"
+                      height="10px"
+                      src={process.env.PUBLIC_URL + "/unlikeIcon.png"}
+                      onClick={() => likefunction(post, post._id)}
+                    />{" "}
                     {likeCountArray.findIndex(
                       (ele) =>
                         ele.username === username && ele.postID === post._id
                     ) >= 0
                       ? post.likes.length - 1
                       : post.likes.length}
-              
-                 </div>
+                  </div>
                 )}
-               <div  >
+                <div>
+                  <img
+                    className={Styles.bottombarImg}
+                    alt=""
+                    width="10px"
+                    height="10px"
+                    src={process.env.PUBLIC_URL + "/chatIcon.png"}
+                    onClick={() => setcommentsfunc({ val: true, post: post })}
+                  />
+                  {post?.comments?.length}
+                </div>
 
-               <img
-               className={Styles.bottombarImg}
-                alt=""
-                width="10px"
-                height="10px"
-                src={process.env.PUBLIC_URL+'/chatIcon.png'}
-                  onClick={() => setcommentsfunc({ val: true, post: post })}
+                <img
+                  className={Styles.bottombarImg}
+                  src={process.env.PUBLIC_URL + "/shareIcon.png"}
+                  width="4.5%"
+                  height="2%"
+                  alt=""
                 />
-                 {post?.comments?.length}
-                
-               </div>
-
-                <img className={Styles.bottombarImg}  src={process.env.PUBLIC_URL+'/shareIcon.png'} width="4.5%" height="2%" alt="" />
               </div>
-              <div className={Styles.caption}>{post.desc}</div>
+              <div
+                style={post.desc !== "" ? { padding: "3%" } : {}}
+                className={Styles.caption}
+              >
+                {post.desc}
+              </div>
+              <Addcomment
+                addCommentFunc={(comment) =>
+                  addCommentFuncforContent(comment, post)
+                }
+              />
             </div>
           ))}
         </InfiniteScroll>

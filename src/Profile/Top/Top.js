@@ -27,7 +27,7 @@ const Top = ({
   const [edit, setedit] = useState(false);
   const [post, setpost] = useState(false);
   const [isUnmounted, setIsUnmounted] = useState(false);
-  const [setprofpic] = useState(profilepic);
+  const [pic, setprofpic] = useState(profilepic);
   const dispatch = useDispatch();
 
   const edit_it = () => {

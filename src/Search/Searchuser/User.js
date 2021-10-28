@@ -6,7 +6,7 @@ import verifiesusers from "../../methods/verifiesusers";
 import Showbar from "../../showbar/Showbar";
 import { useAlert } from "react-alert";
 import addconversation from "../../methods/addconversation";
-
+import getconversations from "../../methods/getconversations";
 const User = ({
   profpic,
   name,
@@ -28,11 +28,22 @@ const User = ({
   const [isUnmounted, setUnmounted] = useState(false);
   const [showAlert, setShowAlert] = useState(true);
   const Alert = useAlert();
-  const setfollowinghandle = (e) => {
+  const setfollowinghandle = async (e) => {
+     setfollowers(username, usernameofsender, dispatch);
+     let exists=false;
     if (following === false) {
-      addconversation([username, usernameofsender]);
-      setfollowers(username, usernameofsender, dispatch);
-      setfollowing(true);
+      const conver = await getconversations(username);
+
+      
+      conver.forEach((element) => {
+       
+        if (element.members.includes(usernameofsender)) {
+           exists=true;
+        }
+      });
+    if(!exists)
+     addconversation([username, usernameofsender]);
+     setfollowing(true);
     }
   };
   const setfollowingfunc = (value) => {

@@ -3,7 +3,10 @@ import getuser from "../../methods/getuser";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
-import { setconversationID } from "../../reduces/actions/MessageReducerAction";
+import {
+  setconversationID,
+  setUserPicture,
+} from "../../reduces/actions/MessageReducerAction";
 
 const List = ({ chatuser, conversationID }) => {
   const [user, setuser] = useState(null);
@@ -27,7 +30,12 @@ const List = ({ chatuser, conversationID }) => {
   const showmessages = () => {
     dispatch({ type: "SETUSERCONVERSATION", payload: user });
     dispatch(setconversationID(conversationID));
-    dispatch({ type: "SHOWBOX", payload: false });
+    let userPicture= user.profilepic
+    ? user.profilepic
+    : `${process.env.PUBLIC_URL}/userImage.png`;
+    dispatch(setUserPicture(userPicture));
+    if (window.screen.width < 768)
+      dispatch({ type: "SHOWBOX", payload: false });
   };
   return (
     <div className={Styles.listitem} onClick={showmessages}>
@@ -42,7 +50,8 @@ const List = ({ chatuser, conversationID }) => {
         />
       </div>
       <div className={Styles.usernamediv}>
-        <label>{chatuser} </label>
+        <label style={{ fontWeight: "600" }}>{chatuser} </label>
+        <label style={{ fontSize: "0.7em" }}>{user?.bio}</label>
       </div>
     </div>
   );
@@ -54,7 +63,7 @@ const Box = ({ conversations, username }) => {
       <div
         className={Styles.maindiv}
         style={{
-          color: "white",
+          color: "black",
           height: "100vh",
           display: "flex",
           alignItems: "center",
@@ -70,6 +79,7 @@ const Box = ({ conversations, username }) => {
   return (
     <div className={Styles.maindiv}>
       <div className={Styles.list}>
+        <h2 style={{ marginLeft: "10%", opacity: "0.6" }}>Messages</h2>
         {conversations?.map((element, id) => {
           return (
             <List

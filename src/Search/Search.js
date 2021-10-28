@@ -7,7 +7,6 @@ import Profile from "../Profile/Profile";
 import Styles from "./Search.module.css";
 import searchImg from "./icons/search-icon.png";
 import verifiesusers from "../methods/verifiesusers";
-
 const URL = process.env.REACT_APP_URL;
 let count = 0;
 const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
@@ -213,7 +212,11 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       </div>
     );
   } else if (showprofile) {
-    if (username === searchuser && showprofilefromshowbar === false) {
+    console.log(searchuser, username, showprofilefromshowbar, "checck");
+    if (
+      username === searchuser &&
+      (showprofilefromshowbar === false || showprofilefromshowbar === undefined)
+    ) {
       if (count >= 30) {
         window.location.reload();
         count = 0;

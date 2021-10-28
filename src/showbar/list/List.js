@@ -35,7 +35,7 @@ const List = ({ list }) => {
   }, []);
 
   if (loading) return <Loader width={1} height={1} />;
-  if (users.length > 0 && showprofile == false) {
+  if (users.length > 0 && showprofile === false) {
     return (
       <div className={Styles.maindiv}>
         {users.map((user, id) => {

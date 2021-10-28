@@ -56,8 +56,6 @@ const Main = ({ match }) => {
           </Switch>
         </BrowserRouter>
       </div>
-
-
     </>
   );
 };

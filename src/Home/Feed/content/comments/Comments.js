@@ -49,14 +49,16 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
       </button>
       <div className={Styles.topdiv}>
         {" "}
-        <img
+      <div>
+      <img
           alt=""
           className={Styles.profileimage}
           src={profilepic?profilepic:process.env.PUBLIC_URL+'/userImage.png'}
           width="30px"
           height="30px"
         />
-        {post?<Addcomment addCommentFunc={addCommentFunc} />:null}
+        </div>
+        {post?<div><Addcomment addCommentFunc={addCommentFunc} /></div>:null}
       </div>
       <div className={Styles.main}>
         {post?.comments.map((ele, id) => {

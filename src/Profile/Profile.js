@@ -15,7 +15,7 @@ const Profile = () => {
   const [post, setpost] = useState(false);
   const posts = useSelector((state) => state.userposts);
   const { username,_id } = useSelector((state) => state.user);
-  const { postcount } = useSelector((state) => state.count);
+
   const [showfollowers, setshowfollowers] = useState(false);
   const [showfollowing, setshowfollowing] = useState(false);
   const [isUnmounted, setIsUnmounted] = useState(false);

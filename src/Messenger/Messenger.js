@@ -17,15 +17,13 @@ const Messenger = () => {
   const { box, socket } = useSelector((state) => state.MessageReducer);
   const [loading, setloading] = useState(false);
   const { username } = useSelector((state) => state.user);
-
   const backbButFun = () => {
     socket?.disconnect();
 
-    setTimeout(() => {
-      dispatch({ type: "SHOWHOME", payload: true });
 
+      dispatch({ type: "SHOWHOME", payload: true });
       history.push("/main");
-    }, 500);
+
   };
 
   useEffect(() => {
@@ -48,28 +46,26 @@ const Messenger = () => {
       };
 
       getconversation();
+    }else{
+      dispatch({ type: "SHOWHOME", payload: true });
+      history.push("/main");
     }
   }, []);
-
+ 
   return (
     <>
       <div className={Styles.maindiv}>
-
-        <button onClick={backbButFun} className={Styles.backbut}>
-          <img
-            src={process.env.PUBLIC_URL + "/previous.png"}
-            alt=""
-            width="100%"
-            height="100%"
-          />
-        </button>
+      <div onClick={backbButFun} className={Styles.icon}>
+  <div className={Styles.arrow}></div>
+</div>
+    <label className={Styles.chats_label} >chats</label>
         {loading ? (
           <Loader />
-        ) : box ? (
+        ) :window.screen.width<768?box ? (
           <Box conversations={conversations} username={username} />
         ) : (
           <Messages />
-        )}
+        ):<>   <Box conversations={conversations} username={username} />  <Messages /></>}
       </div>
     </>
   );

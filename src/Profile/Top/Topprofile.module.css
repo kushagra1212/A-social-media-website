@@ -1,220 +1,197 @@
-.maindiv{
- 
-
-position: relative;
-    height: 30%;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    border: 2px solid rgba(128, 128, 128, 0);
-    border-radius: 5%;
-    box-shadow: 2px 2px 20px 2px rgb(128 128 128);
-    padding-bottom: 2%;
-    z-index: 1;
+.maindiv {
+  position: relative;
+  height: 30%;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 5%;
+  box-shadow: 2px 2px 20px 2px rgb(128 128 128 / 25%);
+  padding-bottom: 2%;
+  z-index: 1;
 }
-.firstdiv{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-padding:5%;
-padding-bottom:0% ;
-   
+.firstdiv {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5%;
+  padding-bottom: 0%;
 }
-.firstdiv img{
-    width: 70px;
-    height: 70px;
-    border: 3px solid rgb(0, 0, 0);
-    border-radius: 10px;
-
+.firstdiv img {
+  width: 70px;
+  height: 70px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 10px;
 }
-.editbut{
-    height: 20%;
-    width: 30%;
-    font-size: 0.9em;
-    color: white;
-    background-color: rgb(52, 52, 251);
-    outline: none;
-    border: 2px solid rgba(128, 128, 128, 0);
-    border-radius: 10px;
-    box-shadow: 2px 2px 15px 2px grey;
-    transform-origin: center;
-    transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
-    
+.editbut {
+  height: 30px;
+  width: 30%;
+  font-size: 0.9em;
+  color: white;
+  background-color: rgb(52, 52, 251);
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 10px;
+  box-shadow: 2px 2px 15px 2px grey;
+  transform-origin: center;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
-.editbut:active{
-     transform:scale3d(1.2,1.2,10);
+.editbut:active {
+  transform: scale3d(1.2, 1.2, 10);
   box-shadow: 1px 1px 20px grey;
-  
 }
-.followersbut
-{
-   
-    width: 70px;
-    font-size: 0.9em;
-    color: white;
-    background-color: rgb(21, 21, 221);
-    outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 1px grey;
-   transform-origin:center;
-   transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
-  
+.followersbut {
+  width: 70px;
+  font-size: 0.9em;
+  color: white;
+  background-color: rgb(21, 21, 221);
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px grey;
+  transform-origin: center;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
-.followersbut:active{
-    transform:scale3d(1.3,1.3,500);
-    box-shadow: 1px 1px 20px grey;
-  
+.followersbut:active {
+  transform: scale3d(1.3, 1.3, 500);
+  box-shadow: 1px 1px 20px grey;
 }
-.followingbut{
-    width: 70px;
-    font-size: 0.9em;
-    color: white;
-    background-color: rgb(21, 21, 221);
-    outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 1px grey;
-   transform-origin:center;
-   transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
-  
+.followingbut {
+  width: 70px;
+  font-size: 0.9em;
+  color: white;
+  background-color: rgb(21, 21, 221);
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px grey;
+  transform-origin: center;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
-.followingbut:active
-{
-    transform:scale3d(1.3,1.3,500);
-    box-shadow: 1px 1px 20px grey;
+.followingbut:active {
+  transform: scale3d(1.3, 1.3, 500);
+  box-shadow: 1px 1px 20px grey;
 }
-.addapost
-{
-    
-    font-size: 0.9em;
-    color: white;
-    background-color: rgb(59, 167, 10);
-    outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    border-radius: 6px;
-    box-shadow: 1px 1px 10px 1px grey;
-   transform-origin:center;
-   transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+.addapost {
+  font-size: 0.9em;
+  color: white;
+  background-color: rgb(59, 167, 10);
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 6px;
+  box-shadow: 1px 1px 10px 1px grey;
+  transform-origin: center;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
-.addapost:active{
-    transform:scale3d(1.2,1.2,500);
-    box-shadow: 1px 1px 20px grey;
+.addapost:active {
+  transform: scale3d(1.2, 1.2, 500);
+  box-shadow: 1px 1px 20px grey;
 }
-.posts
-{
-    position: relative;
-    padding: 0%;
-    margin-right: 1%;
-    
-   
+.posts {
+  position: relative;
+  padding: 0%;
+  margin-right: 1%;
 }
-.posts label
-{
-    font-size: 0.9em;
-    text-decoration: aliceblue;
-    background-color: #ab47bc;
-    outline: none;
-    border-radius: 5px;
-    border: 2px solid rgba(128, 128, 128, 0.466);
-    transform-origin: center;
-
+.posts label {
+  font-size: 0.9em;
+  text-decoration: aliceblue;
+  background-color: #ab47bc;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid rgba(128, 128, 128, 0.466);
+  transform-origin: center;
 }
-.logoutbut
-{
-    width: 30%;
-    font-size: 0.9em;
-    color: white;
-    background-color: rgb(248, 140, 16);
-    outline: none;
-    border: 2px solid rgba(128, 128, 128, 0);
-    border-radius: 6px;
-    box-shadow: 1px 1px 5px 1px grey;
-    transform-origin: center;
-    transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
-
+.logoutbut {
+  height: 30px;
+  font-size: 0.9em;
+  color: white;
+  background-color: rgb(248, 140, 16);
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 6px;
+  box-shadow: 1px 1px 5px 1px grey;
+  transform-origin: center;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
-.seconddiv{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-   padding: 5%;
-   padding-top:0% ;
-   word-wrap: break-word;
+.seconddiv {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  padding-top: 0%;
+  word-wrap: break-word;
 }
-.seconddiv h6{
-    opacity: 0.7;
+.seconddiv h6 {
+  opacity: 0.7;
 }
-.seconddiv h5{
-    padding-top:2% ;
+.seconddiv h5 {
+  padding-top: 2%;
 }
 .thirddiv {
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    
+  position: relative;
+  display: flex;
+  justify-content: space-around;
 }
-.thirddiv label{
-    color: rgba(17, 0, 255, 0.685);
+.thirddiv label {
+  color: rgba(17, 0, 255, 0.685);
 }
-.thirddiv label h6{
-    color: black;
+.thirddiv label h6 {
+  color: black;
 }
 
-@media screen and (min-width:678px){
-    .maindiv{
-        position: absolute;
-        /* height: 30%; */
-        left: 50%;
-        width: 50%;
-        height: auto;
-        z-index: 0;
-    }
-    .followersbut{
-        transition:transform ease-in 0.2;
-    }
-    .followingbut:hover{
-         transform:scale3d(1.2,1.2,500);
+@media screen and (min-width: 678px) {
+  .maindiv {
+  position: absolute;
+    /* height: 30%; */
+    left: 60%;
+    width: 40%;
+    height: auto;
+    z-index: 0;
+  }
+  .followersbut {
+    transition: transform ease-in 0.2;
+  }
+  .followingbut:hover {
+    transform: scale3d(1.2, 1.2, 500);
     box-shadow: 1px 1px 20px grey;
-    }
-    
-    .followersbut{
-        transition:transform ease-in 0.2;
-    }
-    .followersbut:hover{
-        transform:scale3d(1.2,1.2,500);
-        box-shadow: 1px 1px 20px grey;
-    }
-  .editbut{
+  }
+
+  .followersbut {
+    transition: transform ease-in 0.2;
+  }
+  .followersbut:hover {
+    transform: scale3d(1.2, 1.2, 500);
+    box-shadow: 1px 1px 20px grey;
+  }
+  .editbut {
     box-shadow: 2px 2px 2px 1px rgb(128 128 128 / 45%);
     width: 100px;
     height: 50px;
-
   }
-  .logoutbut{
+  .logoutbut {
     width: 100px;
     height: 50px;
   }
-  .editbut:hover{
-    transform:scale3d(1.2,1.2,500);
+  .editbut:hover {
+    transform: scale3d(1.2, 1.2, 500);
     box-shadow: 1px 1px 20px grey;
   }
-  .logoutbut:hover{
-    transform:scale3d(1.2,1.2,500);
+  .logoutbut:hover {
+    transform: scale3d(1.2, 1.2, 500);
     box-shadow: 1px 1px 20px grey;
   }
-  .addapost{
-    transition:transform ease-in 0.2;
+  .addapost {
+    transition: transform ease-in 0.2;
   }
-  .addapost:hover{
-    transform:scale3d(1.2,1.2,500);
+  .addapost:hover {
+    transform: scale3d(1.2, 1.2, 500);
     box-shadow: 1px 1px 20px grey;
   }
-  .firstdiv img{
+  .firstdiv img {
     width: 100px;
     height: 100px;
   }
-  .thirddiv label{
+  .thirddiv label {
     width: 100px;
     height: 50px;
   }
