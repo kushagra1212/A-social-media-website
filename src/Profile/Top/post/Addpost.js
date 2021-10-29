@@ -154,7 +154,7 @@ const Addpost = ({ setposthandle }) => {
     
   }
   return (
-<>
+<div className={Styles.addpostDiv}>
      <animated.form className={Styles.maindiv} style={Popup} onSubmit={e=>savehandle(e)}>
      <button className={Styles.backbut} onClick={() => setposthandle(false)}>Back</button>
      {pic?<img className={Styles.editimg} src={pic?pic:process.env.PUBLIC_URL+'/userImage.png'} alt=""/>:null}
@@ -170,7 +170,7 @@ const Addpost = ({ setposthandle }) => {
         placeholder="    Write Caption 😜   "
       />
       <button className={Styles.savebut} type="submit">Upload</button>
-     </animated.form></>
+     </animated.form></div>
  
   );
 };

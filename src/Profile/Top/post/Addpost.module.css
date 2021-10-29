@@ -183,6 +183,9 @@
   font-weight: bold;
   align-self: center;
 }
+.addpostDiv{
+  
+}
 @media screen and (min-width:768px) {
   .maindiv{
     height: 90%;
@@ -230,5 +233,15 @@
   .savebut:hover{
    background-color: rgb(12, 255, 113);
 
+  }
+  .addpostDiv{
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(252 252 252 / 11%);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    position: absolute;
+    scroll-behavior: none;
   }
 }

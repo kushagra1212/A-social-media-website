@@ -15,7 +15,7 @@ const Messages = () => {
   const { username } = useSelector((state) => state.user);
   const [text, setText] = useState("");
   const dispatch = useDispatch();
-  console.log(userPicture);
+
   useEffect(() => {
     if(!username)
      return;
@@ -100,6 +100,30 @@ useEffect(()=>{
   const backButFun = () => {
     dispatch({ type: "SHOWBOX", payload: true });
   };
+  if(user===null){
+     return (
+<div style={{display:"flex",justifyContent:"center"}}>
+      <div className={Styles.topdivmessage} style={{top:'25%',left:"10",width:'50%',height:"50%",}}>
+        
+      <h4 style={{fontSize:'4em',opacity:'0.5'}}>
+            Start the Conversation
+      </h4>
+      
+      </div>
+         <div className={Styles.scrolldiv} ref={Scrollref}></div>
+         <textarea
+         hidden
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => (e.code === "Enter" ? sendButtonHandler() : null)}
+            value={text}
+            placeholder="Type messsage"
+            className={Styles.textarea}
+         ref={inputRef}
+          />
+         </div>
+      )
+
+  }
   return (
     <>
       <div className={Styles.topdivmessage}>

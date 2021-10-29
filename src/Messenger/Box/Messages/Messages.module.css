@@ -38,27 +38,42 @@
 .senddiv {
   position: relative;
   display: flex;
-  width: 100vw;
-  /* left: 5vw; */
-  height: 12vh;
+  width: 100 vw;
+  /* left: 5
+vw
+; */
+  height: 7 vh;
+  border: 2 px solid #80808003;
+  border-radius: 10 px;
   box-shadow: 0px 0px 12px 0px #80808087;
-  background-color: #f6fbff;
-  /* border: 5px solid #37474f00; */
-  /* border-radius: 10px; */
+  background-color: #fafafa;
+  /* border: 5
+px
+solid #37474f00; */
+  /* border-radius: 10
+px
+; */
   justify-content: space-evenly;
-  align-items: center;
+  /* padding: 0%; */
+  /* padding: 0
+px
+; */
+  align-items: stretch;
 }
 .textarea {
   position: relative;
-  width: 70%;
-  /* height: 50px; */
+  width: 100%;
+  /* height: 50
+px
+; */
   outline: none;
   border: 1px solid #26323800;
-  border-radius: 10px;
+  border-radius: 10 px;
   font-family: sans-serif;
-  padding: 5px;
-  resize: none;
+  padding: 5 px;
+  margin-top: 0%;
   font-size: 1.1em;
+  resize: none;
 }
 .sendbut {
   position: relative;
@@ -80,7 +95,7 @@
   box-shadow: 0px 0px 20px 0px #80808085;
   color: white;
   background-color: #d51c5b;
-  
+
   margin-left: 170px;
   /* color: #ffffff; */
   /* margin-right: 50px; */
@@ -95,7 +110,7 @@
   position: relative;
   background-color: white;
   background-image: white;
-  max-width: 70%;
+  max-width: 50%;
   overflow-wrap: break-word;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -144,7 +159,7 @@
 
   margin-left: 5%;
 }
- .timeright {
+.timeright {
   opacity: 0.4;
   font-size: 0.5em;
   left: 80%;
@@ -208,14 +223,14 @@
 .icon:hover {
   zoom: 0.5;
 }
-.userPicture{
-      /* display: flex; */
-    /* align-self: baseline; */
-    left: 15%;
-    /* place-self: flex-start; */
-    position: absolute;
-    border:2px solid rgba(128, 128, 128, 0);
-    border-radius: 20px;
+.userPicture {
+  /* display: flex; */
+  /* align-self: baseline; */
+  left: 15%;
+  /* place-self: flex-start; */
+  position: absolute;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 20px;
 }
 @media screen and (min-width: 768px) {
   .maindiv {
@@ -226,7 +241,7 @@
   .perticularmessage_receiver p {
     opacity: 0.6;
     font-size: 0.5em;
-  float: left;
+    float: left;
     position: relative;
   }
   .perticularmessage_receiver {
@@ -244,12 +259,12 @@
     min-width: 20%;
     border: 2px solid #80808000;
     border-radius: 15px;
-    box-shadow: 0px 0px 20px 0px #8080
+    box-shadow: 0px 0px 20px 0px #8080;
   }
-  .perticularmessage_sender{
+  .perticularmessage_sender {
     position: relative;
     background-color: white;
-    max-width:50%;
+    max-width: 50%;
     padding: 1px;
     width: -moz-fit-content;
     width: fit-content;
@@ -275,6 +290,7 @@
     height: 60px;
   }
   .textarea {
+    
     width: 90%;
     height: 50px;
     font-size: 1.5em;
@@ -283,7 +299,7 @@
     /* toP: 0%; */
     height: 100%;
   }
-  .topdivmessage{
+  .topdivmessage {
     background-color: #ffffff;
     height: 7%;
     /* position: relative; */
@@ -301,7 +317,7 @@
     border-radius: 10px;
     z-index: 10;
   }
-  .messages{
+  .messages {
     height: 100%;
     box-shadow: -1px -5px 8px 0px #37474f00;
     background-color: #f6f5f5;
@@ -313,7 +329,7 @@
     overflow-x: hidden;
     position: relative;
   }
-  .to{
+  .to {
     display: flex;
     /* right: 10px; */
     position: relative;
@@ -321,24 +337,23 @@
     flex-direction: column;
     align-items: flex-end;
   }
-  .fo{
-
+  .fo {
     /* right: 10px; */
     position: relative;
     margin-left: 50px;
   }
-  .timeright{
+  .timeright {
     opacity: 0.4;
     font-size: 0.5em;
     left: 100%;
     width: 100vw;
     position: relative;
   }
-  .scrolldiv{
-  
+  .scrolldiv {
   }
-  .userPicture{
-   width:40px;
-   height:40px;
+  .userPicture {
+    width: 40px;
+    height: 40px;
+  }
 }
-}
+

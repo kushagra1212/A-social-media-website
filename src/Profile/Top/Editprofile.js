@@ -158,7 +158,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     );
   } else {
     return (
-      <>
+      <div className={Styles.editprofileMain}>
         <animated.form
           onSubmit={(e) => save_it(e)}
           className={Styles.editprofile}
@@ -206,7 +206,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
             save
           </button>
         </animated.form>
-      </>
+      </div>
     );
   }
 };

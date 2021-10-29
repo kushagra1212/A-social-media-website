@@ -23,10 +23,13 @@ import {
   updateUnlikesArray,
 } from "../../../reduces/actions/userAction";
 import Search from "../../../Search/Search";
+import { useAlert } from "react-alert";
+const CURURL = process.env.REACT_APP_CURURL;
 let likeCountArray = [];
 let element = null;
 const Contentmain = () => {
   const dispatch = useDispatch();
+  const Alert=useAlert();
   const { profilepic, username } = useSelector((state) => {
     return state.user;
   });
@@ -36,10 +39,12 @@ const Contentmain = () => {
   const [hasMore, sethasmore] = useState(true);
   const [isUnmounted, setIsUnmounted] = useState(false);
   let tempUserLikes = [];
-
+  const [showAlert, setShowAlert] = useState(true);
   const [showcomments, setshowcomments] = useState(false);
   const [likeLoading, setlikeLoading] = useState(false);
-  const [showProfile,setShowProfile]=useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+  const [showShare, setShowShare] = useState(false);
+  const [sharePostURL, setSharePostURL] = useState('');
   const unique = (array) => {
     let isvisited = {};
     let newarray = [];
@@ -148,7 +153,7 @@ const Contentmain = () => {
     });
 
     Feedposts(newpost, array1, otheruser, username, dispatch);
-   console.log("this",newpost, array1, otheruser, username);
+    console.log("this", newpost, array1, otheruser, username);
     setarray([...array, ...newArray]);
 
     setloading(false);
@@ -167,7 +172,7 @@ const Contentmain = () => {
             return getstoriesFromOthers(ele.username, dispatch);
           });
           getstories(username, dispatch);
-          let otheruser="";
+          let otheruser = "";
           item?.following?.map((dat) => {
             let otherUsersLastcount = state.feedposts.otherUsersLastcount;
 
@@ -181,7 +186,6 @@ const Contentmain = () => {
                   })
                 );
                 otheruser = dat.username;
-          
               })
               .catch((err) => {
                 console.log(err);
@@ -229,6 +233,17 @@ const Contentmain = () => {
     element = document.querySelector("#infiniteScroll");
     setshowcomments({ val: val, post: post });
   };
+ const copyToClipboardHandler=()=>{
+  navigator.clipboard.writeText(sharePostURL);
+  Alert.success("Copyied to Clipboard", {
+    onOpen: () => {
+      setShowAlert(false);
+    },
+    onClose: () => {
+      setShowAlert(true);
+    },
+  });
+};
 
   useEffect(() => {
     if (!isUnmounted) {
@@ -250,24 +265,26 @@ const Contentmain = () => {
   ]);
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);
-  if(showProfile){
-    return(
-<div className={Styles.userprofilemain}>
-<span  style={{fontSize:"40px",color:"red"  }}>
- <i onClick={()=>setShowProfile(false)} styles={{color:"Dodgerblue",cursor:"pointer" }} className="fa fa-times-circle"></i>
-   </span>
+  if (showProfile) {
+    return (
+      <div className={Styles.userprofilemain}>
+        <span style={{ fontSize: "40px", color: "red" }}>
+          <i
+            onClick={() => setShowProfile(false)}
+            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            className="fa fa-times-circle"
+          ></i>
+        </span>
 
-<div className={Styles.userProfile}  >
-
-      <Search
-           showprofilefromshowbar={showProfile}
-           view={false}
-           usernameformshowbar={username}
-      />
-    </div>
-    </div>
-      
-    )
+        <div className={Styles.userProfile}>
+          <Search
+            showprofilefromshowbar={showProfile}
+            view={false}
+            usernameformshowbar={username}
+          />
+        </div>
+      </div>
+    );
   }
   if (loading === true) {
     return <ContentMainAnimate />;
@@ -280,122 +297,144 @@ const Contentmain = () => {
     );
   } else {
     return (
-      <div className={Styles.maincontent} id="infiniteScroll">
-        {showcomments.val ? (
-          <Comments
-            username={username}
-            showcomments={showcomments}
-            setcommentsfunc={setcommentsfunc}
-          />
+      <>
+        {showShare ? (
+         
+          <div className={Styles.showshare}>
+            <span style={{ fontSize: "40px", color: "red" }}>
+              <i
+                onClick={() => setShowShare(false)}
+                styles={{ color: "Dodgerblue", cursor: "pointer" }}
+                className="fa fa-times-circle"
+              ></i>
+            </span>
+            <div>
+              <input disabled value={sharePostURL} />
+              <button onClick={copyToClipboardHandler}>Copy link</button>
+            </div>
+          </div>
+      
         ) : null}
-        <InfiniteScroll
-          className={Styles.infi}
-          dataLength={state.feedposts.posts.length}
-          next={call_func}
-          hasMore={hasMore}
-          loader={<div className={Styles.loader}></div>}
-          endMessage={
-            <p
-            className={Styles.infiP}
-        
-            >
-              <b>Yay! You have seen it all</b>
-            </p>
-          }
-        >
-          {state?.feedposts.posts.map((post, key) => (
-            <div key={post._id} className={Styles.singlecontainer}>
-              <div className={Styles.topdiv} style={{cursor:"pointer"}} onClick={()=>setShowProfile(true)} >
-                <Suspense fallback={<FluidLoaderFive />}>
-                  <img
-                    src={
-                      post.pic
-                        ? post.pic
-                        : process.env.PUBLIC_URL + "/userImage.png"
-                    }
-                    alt=""
-                  />
-                </Suspense>
-                <h5>{post.username}</h5>
-              </div>
-              <button className={Styles.imgdiv}>
-                <Suspense fallback={<FluidLoaderFive />}>
-                  <SuspenseImg alt="" src={post.picture} />
-                </Suspense>
-              </button>
-              <div className={Styles.bottomdiv}>
-                {likesArray.findIndex(
-                  (ele) => ele.username === username && ele.postID === post._id
-                ) >= 0 ? (
+        <div className={Styles.maincontent} id="infiniteScroll">
+          {showcomments.val ? (
+            <Comments
+              username={username}
+              showcomments={showcomments}
+              setcommentsfunc={setcommentsfunc}
+            />
+          ) : null}
+          <InfiniteScroll
+            className={Styles.infi}
+            dataLength={state.feedposts.posts.length}
+            next={call_func}
+            hasMore={hasMore}
+            loader={<div className={Styles.loader}></div>}
+            endMessage={
+              <p className={Styles.infiP}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
+          >
+            {state?.feedposts.posts.map((post, key) => (
+              <div key={post._id} className={Styles.singlecontainer}>
+                <div
+                  className={Styles.topdiv}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setShowProfile(true)}
+                >
+                  <Suspense fallback={<FluidLoaderFive />}>
+                    <img
+                      src={
+                        post.pic
+                          ? post.pic
+                          : process.env.PUBLIC_URL + "/userImage.png"
+                      }
+                      alt=""
+                    />
+                  </Suspense>
+                  <h5>{post.username}</h5>
+                </div>
+                <button className={Styles.imgdiv}>
+                  <Suspense fallback={<FluidLoaderFive />}>
+                    <SuspenseImg alt="" src={post.picture} />
+                  </Suspense>
+                </button>
+                <div className={Styles.bottomdiv}>
+                  {likesArray.findIndex(
+                    (ele) =>
+                      ele.username === username && ele.postID === post._id
+                  ) >= 0 ? (
+                    <div>
+                      <img
+                        className={Styles.bottombarImg}
+                        alt=""
+                        width="10px"
+                        height="10px"
+                        src={process.env.PUBLIC_URL + "/likeIcon.png"}
+                        onClick={() => unlikefunction(post, post._id)}
+                      />{" "}
+                      {likeCountArray.findIndex(
+                        (ele) =>
+                          ele.username === username && ele.postID === post._id
+                      ) >= 0
+                        ? post.likes.length + 1
+                        : post.likes.length}
+                    </div>
+                  ) : (
+                    <div>
+                      <img
+                        className={Styles.bottombarImg}
+                        alt=""
+                        width="10px"
+                        height="10px"
+                        src={process.env.PUBLIC_URL + "/unlikeIcon.png"}
+                        onClick={() => likefunction(post, post._id)}
+                      />{" "}
+                      {likeCountArray.findIndex(
+                        (ele) =>
+                          ele.username === username && ele.postID === post._id
+                      ) >= 0
+                        ? post.likes.length - 1
+                        : post.likes.length}
+                    </div>
+                  )}
                   <div>
                     <img
                       className={Styles.bottombarImg}
                       alt=""
                       width="10px"
                       height="10px"
-                      src={process.env.PUBLIC_URL + "/likeIcon.png"}
-                      onClick={() => unlikefunction(post, post._id)}
-                    />{" "}
-                    {likeCountArray.findIndex(
-                      (ele) =>
-                        ele.username === username && ele.postID === post._id
-                    ) >= 0
-                      ? post.likes.length + 1
-                      : post.likes.length}
+                      src={process.env.PUBLIC_URL + "/chatIcon.png"}
+                      onClick={() => setcommentsfunc({ val: true, post: post })}
+                    />
+                    {post?.comments?.length}
                   </div>
-                ) : (
-                  <div>
-                    <img
-                      className={Styles.bottombarImg}
-                      alt=""
-                      width="10px"
-                      height="10px"
-                      src={process.env.PUBLIC_URL + "/unlikeIcon.png"}
-                      onClick={() => likefunction(post, post._id)}
-                    />{" "}
-                    {likeCountArray.findIndex(
-                      (ele) =>
-                        ele.username === username && ele.postID === post._id
-                    ) >= 0
-                      ? post.likes.length - 1
-                      : post.likes.length}
-                  </div>
-                )}
-                <div>
+
                   <img
                     className={Styles.bottombarImg}
+                    src={process.env.PUBLIC_URL + "/shareIcon.png"}
+                    width="4.5%"
+                    height="2%"
                     alt=""
-                    width="10px"
-                    height="10px"
-                    src={process.env.PUBLIC_URL + "/chatIcon.png"}
-                    onClick={() => setcommentsfunc({ val: true, post: post })}
+                    onClick={() => {setSharePostURL(`${CURURL}/post/${post._id}`); setShowShare(true)}}
                   />
-                  {post?.comments?.length}
                 </div>
-
-                <img
-                  className={Styles.bottombarImg}
-                  src={process.env.PUBLIC_URL + "/shareIcon.png"}
-                  width="4.5%"
-                  height="2%"
-                  alt=""
+                <div
+                  style={post.desc !== "" ? { padding: "3%" } : {}}
+                  className={Styles.caption}
+                >
+                  {post.desc}
+                </div>
+                <Addcomment
+                  addCommentFunc={(comment) =>
+                    addCommentFuncforContent(comment, post)
+                  }
                 />
               </div>
-              <div
-                style={post.desc !== "" ? { padding: "3%" } : {}}
-                className={Styles.caption}
-              >
-                {post.desc}
-              </div>
-              <Addcomment
-                addCommentFunc={(comment) =>
-                  addCommentFuncforContent(comment, post)
-                }
-              />
-            </div>
-          ))}
-        </InfiniteScroll>
-      </div>
+            ))}
+          </InfiniteScroll>
+        </div>
+      </>
     );
   }
 };

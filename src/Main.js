@@ -14,6 +14,7 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import Loader from "./Animation/Loader/Loader";
+
 const Main = ({ match }) => {
   const { show_others_stories } = useSelector((state) => state.Stories);
   const { message } = useSelector((state) => state.main);
@@ -28,6 +29,7 @@ const Main = ({ match }) => {
           {message ? null : <Footer url={url} path={path} />}
 
           <Switch>
+
             <Route exact path="/main">
               <Home />
             </Route>
@@ -48,6 +50,7 @@ const Main = ({ match }) => {
             <Route path={`${path}/messenger`}>
               <Messenger />
             </Route>
+
             <Route>
               <div>
                 <Loader />

@@ -5,7 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getuser, access_Action } from "./reduces/actions/userAction";
 import { useEffect, useState } from "react";
-
+import Post from "./posts/Post";
 import Styles from "./App.module.css";
 import { BrowserRouter, Route, Redirect, withRouter } from "react-router-dom";
 const URL = process.env.REACT_APP_URL;
@@ -47,6 +47,9 @@ const App = ({ match }) => {
         <Route path="/main">
           <Main />
         </Route>
+        <Route  path={`/post/:id`}>
+              <Post />
+            </Route>
       </BrowserRouter>
     </div>
   );
