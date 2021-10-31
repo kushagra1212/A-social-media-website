@@ -66,7 +66,7 @@
   margin-right: 5%;
   margin-left: 0%;
   zoom: 0%;
-  
+ 
   background-color: rgb(195 195 195 / 53%);
 
   border: 2px solid rgba(202, 179, 245, 0);
@@ -118,7 +118,7 @@
   border: 2px solid rgba(245, 222, 179, 0);
   border-radius: 20px;
   border: none;
-  height: 50vh;
+  height: 45vh;
 }
 .imgdiv img {
   border: 1px solid rgba(245, 222, 179, 0);

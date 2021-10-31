@@ -9,6 +9,8 @@ import AlertTemplate from "react-alert-template-basic";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { BrowserRouter } from "react-router-dom";
 import 'font-awesome/css/font-awesome.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 const store = createStore(
   Reducers,
   composeWithDevTools(compose(applyMiddleware(thunk)))

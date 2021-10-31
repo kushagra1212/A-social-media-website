@@ -143,14 +143,13 @@ useEffect(()=>{
             return (
              <div    key={id} className={message.sender === username?Styles.to:Styles.fo}>
                 <div
-            
                 className={
                   message.sender === username
                     ? Styles.perticularmessage_receiver
                     : Styles.perticularmessage_sender
                 }
               >
-                <h6 style={{opacity:"0.6"}}>{message.sender}</h6>
+                <div style={{opacity:"0.6",fontSize:"0.3"}}>{message.sender}</div>
                 <h3>{message.text}</h3>
             
               </div>

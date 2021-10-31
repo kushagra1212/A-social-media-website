@@ -148,6 +148,8 @@ const User = ({
 
         <button
           className={Styles.isfollowing}
+          style={following?{backgroundColor:"grey",cursor:'none'}:{}}
+
           onClick={() => (!loading ? setfollowinghandle() : null)}
         >
           {following ? "Following" : "Follow"}{" "}

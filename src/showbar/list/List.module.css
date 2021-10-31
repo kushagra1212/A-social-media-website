@@ -25,10 +25,10 @@
   border-radius: 15px;
   margin: 2%;
   align-items: center;
-  box-shadow: 2px 2px 10px 1px rgba(128, 128, 128, 0.52);
+  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.52);
   flex-wrap: wrap;
   align-content: space-between;
-  animation: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.001s;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
   justify-content: space-around;
 
 

@@ -29,7 +29,7 @@ let likeCountArray = [];
 let element = null;
 const Contentmain = () => {
   const dispatch = useDispatch();
-  const Alert=useAlert();
+  const Alert = useAlert();
   const { profilepic, username } = useSelector((state) => {
     return state.user;
   });
@@ -39,12 +39,13 @@ const Contentmain = () => {
   const [hasMore, sethasmore] = useState(true);
   const [isUnmounted, setIsUnmounted] = useState(false);
   let tempUserLikes = [];
-  const [showAlert, setShowAlert] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
   const [showcomments, setshowcomments] = useState(false);
   const [likeLoading, setlikeLoading] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showShare, setShowShare] = useState(false);
-  const [sharePostURL, setSharePostURL] = useState('');
+  const [userSearch,setUserSearch]=useState("");
+  const [sharePostURL, setSharePostURL] = useState("");
   const unique = (array) => {
     let isvisited = {};
     let newarray = [];
@@ -121,7 +122,7 @@ const Contentmain = () => {
     }
     //temp section
   };
-  const PostsWraper = (post1, post2, otheruser) => {
+  const PostsWraper = (post1, post2, otheruser="none") => {
     let newArray = [];
 
     let newpost = [...post1, ...post2];
@@ -179,13 +180,16 @@ const Contentmain = () => {
             getpostsforfeed(dat.username, otherUsersLastcount[dat.username], 3)
               .then((post) => {
                 post2 = post;
-
-                getuser(dat.username).then((ele) =>
+                console.log(post2);
+                getuser(dat.username).then((ele) =>{
                   post2.map((elee) => {
                     return (elee["pic"] = ele.profilepic);
                   })
+                  otheruser = dat.username;
+                  PostsWraper(post1, post2, otheruser);
+                }
                 );
-                otheruser = dat.username;
+                
               })
               .catch((err) => {
                 console.log(err);
@@ -193,12 +197,14 @@ const Contentmain = () => {
               });
             return 0;
           });
-          PostsWraper(post1, post2, otheruser);
+         
         })
         .catch((err) => console.log(err));
     } else {
+     
       setloading(false);
     }
+   
   };
   let post1 = [];
 
@@ -233,17 +239,19 @@ const Contentmain = () => {
     element = document.querySelector("#infiniteScroll");
     setshowcomments({ val: val, post: post });
   };
- const copyToClipboardHandler=()=>{
-  navigator.clipboard.writeText(sharePostURL);
-  Alert.success("Copyied to Clipboard", {
-    onOpen: () => {
-      setShowAlert(false);
-    },
-    onClose: () => {
-      setShowAlert(true);
-    },
-  });
-};
+  const copyToClipboardHandler = () => {
+    if(!showAlert){
+      navigator.clipboard.writeText(sharePostURL);
+      Alert.success("Link Copyied", {
+        onOpen: () => {
+          setShowAlert(false);
+        },
+        onClose: () => {
+          setShowAlert(true);
+        },
+      });
+    }
+  };
 
   useEffect(() => {
     if (!isUnmounted) {
@@ -280,7 +288,7 @@ const Contentmain = () => {
           <Search
             showprofilefromshowbar={showProfile}
             view={false}
-            usernameformshowbar={username}
+            usernameformshowbar={userSearch}
           />
         </div>
       </div>
@@ -299,30 +307,36 @@ const Contentmain = () => {
     return (
       <>
         {showShare ? (
-         
-          <div className={Styles.showshare}>
-            <span style={{ fontSize: "40px", color: "red" }}>
+          <div className={Styles.topshare}>
+            <span style={{ color: "red" }}>
               <i
                 onClick={() => setShowShare(false)}
-                styles={{ color: "Dodgerblue", cursor: "pointer" }}
+                styles={{
+                  color: "Dodgerblue",
+                  cursor: "pointer",
+                  boxShadow: "8px 9px 15px 10px #5050504d",
+                }}
                 className="fa fa-times-circle"
               ></i>
             </span>
-            <div>
+            <div className={Styles.showshare}>
               <input disabled value={sharePostURL} />
               <button onClick={copyToClipboardHandler}>Copy link</button>
             </div>
           </div>
-      
         ) : null}
-        <div className={Styles.maincontent} id="infiniteScroll">
+ 
+     <div className={Styles.maincontent} id="infiniteScroll">
           {showcomments.val ? (
+            <div className={Styles.commenttopdiv}>
             <Comments
               username={username}
               showcomments={showcomments}
               setcommentsfunc={setcommentsfunc}
             />
+            </div>
           ) : null}
+ 
           <InfiniteScroll
             className={Styles.infi}
             dataLength={state.feedposts.posts.length}
@@ -340,7 +354,7 @@ const Contentmain = () => {
                 <div
                   className={Styles.topdiv}
                   style={{ cursor: "pointer" }}
-                  onClick={() => setShowProfile(true)}
+                  onClick={() =>{setUserSearch(post.username); setShowProfile(true);}}
                 >
                   <Suspense fallback={<FluidLoaderFive />}>
                     <img
@@ -352,7 +366,7 @@ const Contentmain = () => {
                       alt=""
                     />
                   </Suspense>
-                  <h5>{post.username}</h5>
+                  <h5 className={Styles.usernamediv}>{post.username}</h5>
                 </div>
                 <button className={Styles.imgdiv}>
                   <Suspense fallback={<FluidLoaderFive />}>
@@ -365,14 +379,25 @@ const Contentmain = () => {
                       ele.username === username && ele.postID === post._id
                   ) >= 0 ? (
                     <div>
-                      <img
-                        className={Styles.bottombarImg}
-                        alt=""
-                        width="10px"
-                        height="10px"
-                        src={process.env.PUBLIC_URL + "/likeIcon.png"}
-                        onClick={() => unlikefunction(post, post._id)}
-                      />{" "}
+                            <span
+                        style={{
+                          color:"red",
+                       
+                          cursor: "pointer",
+                        }}
+                      >
+                        <i
+                          onClick={() => unlikefunction(post, post._id)}
+                          styles={{
+                            color: "Dodgerblue",
+                            cursor: "pointer",
+                            boxShadow: "8px 9px 15px 10px #5050504d",
+                          }}
+                          className="fa fa-heart"
+                          aria-hidden="true"
+                        ></i>
+                      </span>
+                 {" "}
                       {likeCountArray.findIndex(
                         (ele) =>
                           ele.username === username && ele.postID === post._id
@@ -382,14 +407,24 @@ const Contentmain = () => {
                     </div>
                   ) : (
                     <div>
-                      <img
-                        className={Styles.bottombarImg}
-                        alt=""
-                        width="10px"
-                        height="10px"
-                        src={process.env.PUBLIC_URL + "/unlikeIcon.png"}
-                        onClick={() => likefunction(post, post._id)}
-                      />{" "}
+                      <span
+                        style={{
+                          color:"grey",
+                        
+                          cursor: "pointer",
+                        }}
+                      >
+                        <i
+                          onClick={() => likefunction(post, post._id)}
+                          styles={{
+                            color: "Dodgerblue",
+                            cursor: "pointer",
+                            boxShadow: "8px 9px 15px 10px #5050504d",
+                          }}
+                          className="fa fa-heart"
+                          aria-hidden="true"
+                        ></i>
+                      </span>{" "}
                       {likeCountArray.findIndex(
                         (ele) =>
                           ele.username === username && ele.postID === post._id
@@ -399,25 +434,49 @@ const Contentmain = () => {
                     </div>
                   )}
                   <div>
-                    <img
-                      className={Styles.bottombarImg}
-                      alt=""
-                      width="10px"
-                      height="10px"
-                      src={process.env.PUBLIC_URL + "/chatIcon.png"}
-                      onClick={() => setcommentsfunc({ val: true, post: post })}
-                    />
+                    <span
+                      style={{
+                        color: "black",
+                       
+                        cursor: "pointer",
+                      }}
+                    >
+                      <i
+                        onClick={() =>
+                          setcommentsfunc({ val: true, post: post })
+                        }
+                        styles={{
+                          color: "Dodgerblue",
+                          cursor: "pointer",
+                          boxShadow: "8px 9px 15px 10px #5050504d",
+                        }}
+                        className="far fa-comment-alt"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
                     {post?.comments?.length}
                   </div>
-
-                  <img
-                    className={Styles.bottombarImg}
-                    src={process.env.PUBLIC_URL + "/shareIcon.png"}
-                    width="4.5%"
-                    height="2%"
-                    alt=""
-                    onClick={() => {setSharePostURL(`${CURURL}/post/${post._id}`); setShowShare(true)}}
-                  />
+                  <span
+                    style={{
+                      color: "lightgreen",
+                  
+                      cursor: "pointer",
+                    }}
+                  >
+                    <i
+                      onClick={() => {
+                        setSharePostURL(`${CURURL}/post/${post._id}`);
+                        setShowShare(true);
+                      }}
+                      styles={{
+                        color: "Dodgerblue",
+                        cursor: "pointer",
+                        boxShadow: "8px 9px 15px 10px #5050504d",
+                      }}
+                      className="fa fa-share-alt"
+                      aria-hidden="true"
+                    ></i>
+                  </span>
                 </div>
                 <div
                   style={post.desc !== "" ? { padding: "3%" } : {}}

@@ -9,12 +9,12 @@
     z-index: 100;
     width: 70px;
     font-size: 0.9em;
-    color: white;
-    background-color: rgb(21, 21, 221);
+
+
     outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 1px grey;
+ 
+
+   
    transform-origin:center;
   transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }

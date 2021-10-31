@@ -41,22 +41,29 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
 
   return (
     <animated.div className={Styles.maindiv} style={Popup}>
-      <button
-        className={Styles.backbut}
-        onClick={() => setcommentsfunc({ val: false, post: null })}
-      >
-        back
-      </button>
-      <div className={Styles.topdiv}>
-        {" "}
-      <div>
-      <img
+      <div className={Styles.wrapspan}>
+      <span style={{ fontSize: "40px", color: "red",cursor:'pointer' }}>
+          <i
+          onClick={() => setcommentsfunc({ val: false, post: null })}
+            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            className="fa fa-times-circle"
+          ></i>
+        </span>
+        <img
           alt=""
-          className={Styles.profileimage}
+ 
           src={profilepic?profilepic:process.env.PUBLIC_URL+'/userImage.png'}
           width="30px"
           height="30px"
+          style={{borderRadius:"10px",cursor:"unset"}}
         />
+
+
+      </div>
+      <div className={Styles.topdiv}>
+   
+      <div>
+ 
         </div>
         {post?<div><Addcomment addCommentFunc={addCommentFunc} /></div>:null}
       </div>

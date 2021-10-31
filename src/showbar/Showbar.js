@@ -53,15 +53,14 @@ const Showbar = ({
     return (
       <div className={Styles.maindiv}>
         {" "}
-        <button
-          className={Styles.backbut}
-          onClick={() => {
+        
+      <span className={Styles.backbut} style={{fontSize:"50px",color:"blue",cursor:"pointer"  }}       onClick={() => {
             setshowfollowershandle(false);
             setshowfollowinghandle(false);
-          }}
-        >
-          Back
-        </button>
+          }} >
+      <i styles={{color:"Dodgerblue",cursor:"pointer" }}  className="fa fa-arrow-circle-left"></i>
+        </span>
+  
         <List list={item} />
       </div>
     );
