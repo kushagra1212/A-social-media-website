@@ -13,7 +13,7 @@ const getuserfor=()=>{
     }
 }
 export const addfeedposts=(posts,array,otheruser,username)=>{
-    return({type:"ADD_FEED_POSTS",payload:{posts:posts,count:3,array:array,otheruser:otheruser,username:username}});
+    return({type:"ADD_FEED_POSTS",payload:{posts:posts,count:5,array:array,otheruser:otheruser,username:username}});
 }
 
 export const addposts=(posts)=>{

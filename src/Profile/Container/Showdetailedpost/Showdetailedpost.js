@@ -1,5 +1,4 @@
 import { useState } from "react";
-import backIcon from "./icons/back.png";
 import Styles from "./Showdetailedpost.module.css";
 import {
   updateLikesArray,
@@ -56,7 +55,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
   };
   const copyToClipboardHandler = () => {
     navigator.clipboard.writeText(sharePostURL);
-    if(!showAlert){
+    if (!showAlert) {
       Alert.success("Link Copyied", {
         onOpen: () => {
           setShowAlert(false);
@@ -113,190 +112,195 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
   };
   return (
     <>
-          {showShare ? (
-          <div className={Styles.topshare}>
-            <span style={{ color: "red" }}>
-              <i
-                onClick={() => setShowShare(false)}
-                styles={{
-                  color: "Dodgerblue",
-                  cursor: "pointer",
-                  boxShadow: "8px 9px 15px 10px #5050504d",
-                }}
-                className="fa fa-times-circle"
-              ></i>
-            </span>
-            <div className={Styles.showshare}>
-              <input disabled value={sharePostURL} />
-              <button onClick={copyToClipboardHandler}>Copy link</button>
-            </div>
+      {showShare ? (
+        <div className={Styles.topshare}>
+          <span style={{ color: "red" }}>
+            <i
+              onClick={() => setShowShare(false)}
+              styles={{
+                color: "Dodgerblue",
+                cursor: "pointer",
+                boxShadow: "8px 9px 15px 10px #5050504d",
+              }}
+              className="fa fa-times-circle"
+            ></i>
+          </span>
+          <div className={Styles.showshare}>
+            <input disabled value={sharePostURL} />
+            <button onClick={copyToClipboardHandler}>Copy link</button>
           </div>
-        ) : 
-    <div className={Styles.maincontent}>
-
-      <span className={Styles.backbut} style={{fontSize:"50px",color:"blue",cursor:"pointer"  }}   onClick={() => setShowDetailedPostHandler(false)}  >
-      <i styles={{color:"Dodgerblue",cursor:"pointer" }}  className="fa fa-arrow-circle-left"></i>
-        </span>
-      {showcomments.val ? (
-        <Comments
-          username={username}
-          showcomments={showcomments}
-          setcommentsfunc={setcommentsfunc}
-        />
-      ) : (
-     
-          <div key={post._id} className={Styles.singlecontainer}>
-          <div className={Styles.topdiv}>
-            <img
-              src={
-                profilepic
-                  ? profilepic
-                  : process.env.PUBLIC_URL + "/userImage.png"
-              }
-              alt=" "
-            />
-
-            <h5>{post.username}</h5>
-          </div>
-          <button
-            onDoubleClick={() => likefunction(post, post._id)}
-            className={Styles.imgdiv}
+        </div>
+      ) : showcomments.val?
+      <div className={Styles.topshare}>
+      <Comments
+      username={username}
+      showcomments={showcomments}
+      setcommentsfunc={setcommentsfunc}
+    />
+    </div>:(
+        <div className={Styles.maincontent}>
+          <span
+            className={Styles.backbut}
+            style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
+            onClick={() => setShowDetailedPostHandler(false)}
           >
-            <img
-              src={
-                post.picture
-                  ? post.picture
-                  : process.env.PUBLIC_URL + "/userImage.png"
-              }
-              width="100%"
-              alt=" "
-            />
-          </button>
-          <div className={Styles.bottomdiv}>
-            {likesArray.findIndex(
-              (ele) => ele.username === username && ele.postID === post._id
-            ) >= 0 ? (
-              <div>
-                           <span
-                        style={{
-                          color:"red",
-                          position: "inherit",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <i
-                          onClick={() => unlikefunction(post, post._id)}
-                          styles={{
-                            color: "Dodgerblue",
-                            cursor: "pointer",
-                            boxShadow: "8px 9px 15px 10px #5050504d",
-                          }}
-                          className="fa fa-heart"
-                          aria-hidden="true"
-                        ></i>
-                      </span>
-           {" "}
-                {likeCountArray.findIndex(
-                  (ele) => ele.username === username && ele.postID === post._id
-                ) >= 0
-                  ? post.likes.length + 1
-                  : post.likes.length}
+            <i
+              styles={{ color: "Dodgerblue", cursor: "pointer" }}
+              className="fa fa-arrow-circle-left"
+            ></i>
+          </span>
+            <div key={post._id} className={Styles.singlecontainer}>
+              <div className={Styles.topdiv}>
+                <img
+                  src={
+                    profilepic
+                      ? profilepic
+                      : process.env.PUBLIC_URL + "/userImage.png"
+                  }
+                  alt=" "
+                />
+
+                <h5>{post.username}</h5>
               </div>
-            ) : (
-              <div>
-                <span
-                        style={{
-                          color:"grey",
-                          position: "inherit",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <i
-                          onClick={() => likefunction(post, post._id)}
-                          styles={{
-                            color: "Dodgerblue",
-                            cursor: "pointer",
-                            boxShadow: "8px 9px 15px 10px #5050504d",
-                          }}
-                          className="fa fa-heart"
-                          aria-hidden="true"
-                        ></i>
-                      </span>
-            {" "}
-                {likeCountArray.findIndex(
+              <button
+                onDoubleClick={() => likefunction(post, post._id)}
+                className={Styles.imgdiv}
+              >
+                <img
+                  src={
+                    post.picture
+                      ? post.picture
+                      : process.env.PUBLIC_URL + "/userImage.png"
+                  }
+                  width="100%"
+                  alt=" "
+                />
+              </button>
+              <div className={Styles.bottomdiv}>
+                {likesArray.findIndex(
                   (ele) => ele.username === username && ele.postID === post._id
-                ) >= 0
-                  ? post.likes.length - 1
-                  : post.likes.length}
-              </div>
-            )}
-            <div>
-            <span
+                ) >= 0 ? (
+                  <div>
+                    <span
                       style={{
-                        color: "black",
+                        color: "red",
                         position: "inherit",
                         cursor: "pointer",
                       }}
                     >
                       <i
-                        onClick={() =>
-                          setcommentsfunc({ val: true, post: post })
-                        }
+                        onClick={() => unlikefunction(post, post._id)}
                         styles={{
                           color: "Dodgerblue",
                           cursor: "pointer",
                           boxShadow: "8px 9px 15px 10px #5050504d",
                         }}
-                        className="far fa-comment-alt"
+                        className="fa fa-heart"
                         aria-hidden="true"
                       ></i>
-                    </span>
-              {post?.comments?.length}
-            </div>
-
-            <span
+                    </span>{" "}
+                    {likeCountArray.findIndex(
+                      (ele) =>
+                        ele.username === username && ele.postID === post._id
+                    ) >= 0
+                      ? post.likes.length + 1
+                      : post.likes.length}
+                  </div>
+                ) : (
+                  <div>
+                    <span
+                      style={{
+                        color: "grey",
+                        position: "inherit",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <i
+                        onClick={() => likefunction(post, post._id)}
+                        styles={{
+                          color: "Dodgerblue",
+                          cursor: "pointer",
+                          boxShadow: "8px 9px 15px 10px #5050504d",
+                        }}
+                        className="fa fa-heart"
+                        aria-hidden="true"
+                      ></i>
+                    </span>{" "}
+                    {likeCountArray.findIndex(
+                      (ele) =>
+                        ele.username === username && ele.postID === post._id
+                    ) >= 0
+                      ? post.likes.length - 1
+                      : post.likes.length}
+                  </div>
+                )}
+                <div>
+                  <span
                     style={{
-                      color: "lightgreen",
+                      color: "black",
                       position: "inherit",
                       cursor: "pointer",
                     }}
                   >
                     <i
-                      onClick={() => {
-                        setSharePostURL(`${CURURL}/post/${post._id}`);
-                      
-                        setShowShare(true);
-                      }}
+                      onClick={() => setcommentsfunc({ val: true, post: post })}
                       styles={{
                         color: "Dodgerblue",
                         cursor: "pointer",
                         boxShadow: "8px 9px 15px 10px #5050504d",
                       }}
-                      className="fa fa-share-alt"
+                      className="far fa-comment-alt"
                       aria-hidden="true"
                     ></i>
                   </span>
+                  {post?.comments?.length}
+                </div>
 
-            {!toDelete ? (
-              setting ? (
-                <option
-                  value="delete"
-                  className={Styles.delete}
-                  onClick={() => deletePostHandle(post._id, post.picture)}
+           <div>
+           <span
+                  style={{
+                    color: "lightgreen",
+                    position: "inherit",
+                    cursor: "pointer",
+                  }}
                 >
-                  {" "}
-                  ❌Delete{" "}
-                </option>
-              ) : (
-                <button onClick={() => setSetting(true)}>⚙️</button>
-              )
-            ) : null}
-          </div>
-          <div className={Styles.caption}>{post.desc}</div>
+                  <i
+                    onClick={() => {
+                      setSharePostURL(`${CURURL}/post/${post._id}`);
+
+                      setShowShare(true);
+                    }}
+                    styles={{
+                      color: "Dodgerblue",
+                      cursor: "pointer",
+                      boxShadow: "8px 9px 15px 10px #5050504d",
+                    }}
+                    className="fa fa-share-alt"
+                    aria-hidden="true"
+                  ></i>
+                </span>
+             </div>
+
+                {!toDelete ? (
+                  setting ? (
+                    <option
+                      value="delete"
+                      className={Styles.delete}
+                      onClick={() => deletePostHandle(post._id, post.picture)}
+                    >
+                      {" "}
+                      ❌Delete{" "}
+                    </option>
+                  ) : (
+                    <button onClick={() => setSetting(true)}>⚙️</button>
+                  )
+                ) : null}
+              </div>
+              <div className={Styles.caption}>{post.desc}</div>
+            </div>
+       
         </div>
-    
       )}
-    </div>}
     </>
   );
 };

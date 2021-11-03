@@ -7,6 +7,7 @@ import { animated, useSpring } from "react-spring";
 import Userstories from "../Home/Feed/Stories/Userstories/Userstories";
 import Othersstories from "../Home/Feed/Stories/Othersstories/Othersstories";
 import { getstories } from "../methods/uploadstories";
+import SuggestionList from "../components/suggestionlist/SuggestionList";
 const Home = () => {
   const { username } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -61,12 +62,12 @@ const Home = () => {
         }
       >
         {show_user_stories ? (
-          <animated.div style={fade}>
-            <Userstories />
+          <animated.div className={Styles.userstoriesani} style={fade}>
+            <div className={Styles.helperdiv} ><Userstories /></div>
           </animated.div>
         ) : (
           <>
-            <Header /> <Feed />
+            <Header /> <Feed />  {window.screen.width>=768?<SuggestionList/>:null}
           </>
         )}
       </div>

@@ -1,4 +1,20 @@
 import Styles from "./ContentMainAnimate.module.css";
+import ContentLoader from 'react-content-loader'
+const MyLoader = (props) => (
+  <ContentLoader 
+    speed={1}
+    width="100%"
+    height="100vh"
+ 
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
+    {...props}
+  >    <rect x="0" y="0" rx="0" ry="3" width="100%" height="100%" /> 
+  
+
+
+  </ContentLoader>
+)
 const ContentMainAnimate = () => {
   let posts=[{},{},{},{}];
   return (
@@ -12,7 +28,7 @@ const ContentMainAnimate = () => {
            
               <div className={Styles.topcap}> </div>
             </div>
-            <button className={Styles.imgdiv}></button>
+            <MyLoader/>
             <div className={Styles.bottomdiv}>
               
             </div>

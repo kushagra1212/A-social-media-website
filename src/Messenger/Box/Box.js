@@ -8,8 +8,9 @@ import {
   setUserPicture,
 } from "../../reduces/actions/MessageReducerAction";
 
-const List = ({ chatuser, conversationID }) => {
+const List = ({ chatuser, conversationID,selectedID,selectIDHandler }) => {
   const [user, setuser] = useState(null);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,8 +29,10 @@ const List = ({ chatuser, conversationID }) => {
     );
   }
   const showmessages = () => {
+    selectIDHandler(user._id);
     dispatch({ type: "SETUSERCONVERSATION", payload: user });
     dispatch(setconversationID(conversationID));
+ 
     let userPicture= user.profilepic
     ? user.profilepic
     : `${process.env.PUBLIC_URL}/userImage.png`;
@@ -37,8 +40,9 @@ const List = ({ chatuser, conversationID }) => {
     if (window.screen.width < 768)
       dispatch({ type: "SHOWBOX", payload: false });
   };
+  console.log(selectedID,user._id);
   return (
-    <div className={Styles.listitem} onClick={showmessages}>
+    <div className={Styles.listitem} style={user._id===selectedID?{backgroundColor:"rgba(5, 93, 133, 0.054)"}:{}} onClick={showmessages}>
       <div className={Styles.userimg}>
         <img
           src={
@@ -58,6 +62,10 @@ const List = ({ chatuser, conversationID }) => {
 };
 
 const Box = ({ conversations, username }) => {
+  const [selectedID,setSelectedID]=useState("");
+  const selectIDHandler=(id)=>{
+    setSelectedID(id);
+  }
   if (conversations != null && conversations.length === 0) {
     return (
       <div
@@ -83,8 +91,10 @@ const Box = ({ conversations, username }) => {
         {conversations?.map((element, id) => {
           return (
             <List
+            selectedID={selectedID}
               key={element._id}
               conversationID={element._id}
+              selectIDHandler={selectIDHandler}
               chatuser={
                 element.members[0] === username
                   ? element.members[1]

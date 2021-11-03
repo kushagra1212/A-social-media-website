@@ -14,16 +14,14 @@ const feedposts = (
       state.array = action.payload.array;
 
         if (isNaN(state.otherUsersLastcount[action.payload.otheruser])) {
-          state.otherUsersLastcount[action.payload.otheruser] =
-            action.payload.count;
+          state.otherUsersLastcount[action.payload.otheruser] =0
         } else
           state.otherUsersLastcount[action.payload.otheruser] +=
             action.payload.count;
 
 
       if (isNaN(state.otherUsersLastcount[action.payload.username])) {
-        state.otherUsersLastcount[action.payload.username] =
-          action.payload.count;
+        state.otherUsersLastcount[action.payload.username] =0
       } else
         state.otherUsersLastcount[action.payload.username] +=
           action.payload.count;

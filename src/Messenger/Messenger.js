@@ -20,10 +20,8 @@ const Messenger = () => {
   const backbButFun = () => {
     socket?.disconnect();
 
-
-      dispatch({ type: "SHOWHOME", payload: true });
-      history.push("/main");
-
+    dispatch({ type: "SHOWHOME", payload: true });
+    history.push("/main");
   };
 
   useEffect(() => {
@@ -46,26 +44,34 @@ const Messenger = () => {
       };
 
       getconversation();
-    }else{
+    } else {
       dispatch({ type: "SHOWHOME", payload: true });
       history.push("/main");
     }
   }, []);
- 
+
   return (
     <>
       <div className={Styles.maindiv}>
-      <div onClick={backbButFun} className={Styles.icon}>
-  <div className={Styles.arrow}></div>
-</div>
-    <label className={Styles.chats_label} >chats</label>
+        <div onClick={backbButFun} className={Styles.icon}>
+          <div className={Styles.arrow}></div>
+        </div>
+        <label className={Styles.chats_label}>chats</label>
         {loading ? (
           <Loader />
-        ) :window.screen.width<768?box ? (
-          <Box conversations={conversations} username={username} />
+        ) : window.screen.width < 768 ? (
+          box ? (
+            <Box conversations={conversations} username={username} />
+          ) : (
+            <Messages />
+          )
         ) : (
-          <Messages />
-        ):<>   <Box conversations={conversations} username={username} />  <Messages /></>}
+          <>
+            {" "}
+            <Box conversations={conversations} username={username} />{" "}
+            <Messages />
+          </>
+        )}
       </div>
     </>
   );

@@ -32,7 +32,7 @@ const Userstories = () => {
   const [croppedArea, setCroppedArea] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [progress, setProgress] = useState(0);
-
+  const [showChoosebut,setShowChoosebut]=useState(true);
  
 
   const set_picture_handle = (ans) => {
@@ -48,7 +48,7 @@ const Userstories = () => {
 
   const selectedFileHandle = (e) => {
     e.preventDefault();
-
+    setShowChoosebut(false);
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
    
@@ -148,15 +148,22 @@ const Userstories = () => {
   return (
     <div className={Styles.maindiv}>
       <animated.div style={styleTwo}>
-        <button
-          onClick={() => {
-            dispatch(show_user_stories_handle(false));
-          }}
-          className={Styles.backbut}
-        >
-         BACK
-        </button>
-      </animated.div>
+      
+      
+      <span
+            
+            style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
+            onClick={() => {
+              dispatch(show_user_stories_handle(false));
+            }}
+          >
+            <i
+              styles={{ color: "Dodgerblue", cursor: "pointer" }}
+              className="fa fa-arrow-circle-left"
+            ></i>
+          </span>
+   
+          </animated.div>
       {pic ? (
       <>
         <img
@@ -176,13 +183,13 @@ const Userstories = () => {
         onChange={selectedFileHandle}
       />
 
-      <button
+      {showChoosebut?<button
         className={Styles.choosebutton}
         type="button"
         onClick={openChoosefile}
       >
         Choose Picture
-      </button>
+      </button>:null}
       <animated.div style={styleOne} >
       
       </animated.div>

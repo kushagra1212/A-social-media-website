@@ -7,15 +7,15 @@ const Feed = () => {
   const [isUnmounted, setUnmounted] = useState(false);
   useEffect(() => {
     if (!isUnmounted) {
-      setTimeout(() => {
+     
         setgo(true);
-      }, 1000);
+   
     }
     return () => setUnmounted(true);
   }, []);
   return (
     <div className={Styles.maindiv}>
-      <Stories />
+ <Stories/>
       {go ? <Contentmain /> : null}
     </div>
   );

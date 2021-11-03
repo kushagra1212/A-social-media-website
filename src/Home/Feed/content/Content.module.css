@@ -135,7 +135,7 @@
   /* margin-top: 1%; */
   margin: 1%;
   margin-bottom: 5%;
-min-height: 45vh;
+  min-height: 45vh;
   outline: none;
   border: 2px solid rgba(245, 222, 179, 0);
   border-radius: 20px;
@@ -305,9 +305,11 @@ min-height: 45vh;
   font-size: 1.3em;
   transition: transform cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s;
 }
+
 .showshare button:hover {
   transform: scale3d(1.1, 1.1, 1.1);
 }
+
 .topshare {
   width: 100vw;
   height: 100vh;
@@ -323,26 +325,30 @@ min-height: 45vh;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .topshare span {
   font-size: 40px;
   color: red;
   cursor: pointer;
 }
+
 .singlecontainer span {
   font-size: 30px;
 }
+
 .usernamediv {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1.3em;
+  font-size: 1.1em;
 }
+
 .commenttopdiv {
   width: 100vw;
   height: 100vh;
   display: flex;
   position: fixed;
   z-index: 100;
-  top:0;
+  top: 0;
   background-color: rgb(252 252 252 / 11%);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
@@ -351,10 +357,11 @@ min-height: 45vh;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 @media screen and (min-width: 768px) {
   .maincontent {
     background: white;
-    top: 100px;
+    top: 30px;
   }
 
   .singlecontainer {
@@ -447,23 +454,32 @@ min-height: 45vh;
     padding-bottom: 0%;
     left: 0%;
   }
+
   .showshare {
     width: 50vw;
   }
+
   .showshare input {
     width: 50%;
     font-size: 1em;
   }
+
   .showshare button {
     width: 20%;
     height: 30%;
   }
+
   .topshare span {
     font-size: 50px;
     color: red;
     cursor: pointer;
   }
+
   .singlecontainer span {
     font-size: 30px;
+  }
+
+  .usernamediv {
+    font-size: 1.1em;
   }
 }

@@ -24,16 +24,36 @@ import {
 } from "../../../reduces/actions/userAction";
 import Search from "../../../Search/Search";
 import { useAlert } from "react-alert";
+import SuggestionList from "../../../components/suggestionlist/SuggestionList";
+import ContentLoader from 'react-content-loader'
+let heightofAni=(window.screen.width>=768)?'100vh':'45vh';
 const CURURL = process.env.REACT_APP_CURURL;
 let likeCountArray = [];
 let element = null;
+const MyLoader = (props) => (
+  <ContentLoader 
+    speed={1}
+    width="100%"
+    height={heightofAni}
+ 
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
+    {...props}
+  >    <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" /> 
+  
+
+
+  </ContentLoader>
+)
 const Contentmain = () => {
   const dispatch = useDispatch();
   const Alert = useAlert();
   const { profilepic, username } = useSelector((state) => {
+   
     return state.user;
   });
   const { likesArray } = useSelector((state) => {
+
     return state.feedposts;
   });
   const [hasMore, sethasmore] = useState(true);
@@ -154,7 +174,7 @@ const Contentmain = () => {
     });
 
     Feedposts(newpost, array1, otheruser, username, dispatch);
-    console.log("this", newpost, array1, otheruser, username);
+
     setarray([...array, ...newArray]);
 
     setloading(false);
@@ -180,7 +200,7 @@ const Contentmain = () => {
             getpostsforfeed(dat.username, otherUsersLastcount[dat.username], 3)
               .then((post) => {
                 post2 = post;
-                console.log(post2);
+              
                 getuser(dat.username).then((ele) =>{
                   post2.map((elee) => {
                     return (elee["pic"] = ele.profilepic);
@@ -206,12 +226,12 @@ const Contentmain = () => {
     }
    
   };
-  let post1 = [];
+ 
 
   const call_func = () => {
     if (username) {
       let otherUsersLastcount = state.feedposts.otherUsersLastcount;
-
+      let post1 = [];
       getpostsforfeed(username, otherUsersLastcount[username], 3).then(
         (res) => {
           post1 = res;
@@ -366,10 +386,10 @@ const Contentmain = () => {
                       alt=""
                     />
                   </Suspense>
-                  <h5 className={Styles.usernamediv}>{post.username}</h5>
+                  <h6 className={Styles.usernamediv}>{post.username}</h6>
                 </div>
                 <button className={Styles.imgdiv}>
-                  <Suspense fallback={<FluidLoaderFive />}>
+                  <Suspense fallback={<MyLoader />}>
                     <SuspenseImg alt="" src={post.picture} />
                   </Suspense>
                 </button>
@@ -492,6 +512,7 @@ const Contentmain = () => {
               </div>
             ))}
           </InfiniteScroll>
+        
         </div>
       </>
     );

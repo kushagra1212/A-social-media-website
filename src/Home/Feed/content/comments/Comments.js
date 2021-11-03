@@ -40,8 +40,8 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
   });
 
   return (
-    <animated.div className={Styles.maindiv} style={Popup}>
-      <div className={Styles.wrapspan}>
+    <>
+         <div className={Styles.wrapspan}>
       <span style={{ fontSize: "40px", color: "red",cursor:'pointer' }}>
           <i
           onClick={() => setcommentsfunc({ val: false, post: null })}
@@ -49,7 +49,12 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
             className="fa fa-times-circle"
           ></i>
         </span>
-        <img
+  
+
+
+      </div>
+    <animated.div className={Styles.maindiv} style={Popup}>
+    <img
           alt=""
  
           src={profilepic?profilepic:process.env.PUBLIC_URL+'/userImage.png'}
@@ -57,9 +62,6 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
           height="30px"
           style={{borderRadius:"10px",cursor:"unset"}}
         />
-
-
-      </div>
       <div className={Styles.topdiv}>
    
       <div>
@@ -87,6 +89,7 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
         })}
       </div>
     </animated.div>
+    </>
   );
 };
 
