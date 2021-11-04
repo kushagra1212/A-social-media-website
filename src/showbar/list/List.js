@@ -21,12 +21,14 @@ const List = ({ list }) => {
       try {
         if (data) {
           setusers((prev) => [...prev, data]);
+          setloading(false);
         }
       } catch (err) {
         console.log(err);
+        setloading(false);
       }
     });
-    setloading(false);
+ 
   };
   useEffect(() => {
     setusershandle();
@@ -74,7 +76,7 @@ const List = ({ list }) => {
     );
   } else {
     return (
-      <div>
+      <div >
         <Search
           showprofilefromshowbar={showprofile}
           view={false}

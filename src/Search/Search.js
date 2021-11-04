@@ -8,11 +8,14 @@ import Styles from "./Search.module.css";
 import searchImg from "./icons/search-icon.png";
 import verifiesusers from "../methods/verifiesusers";
 import SuggestionList from "../components/suggestionlist/SuggestionList";
+import getpartialusers from "../methods/getpartialusers";
+import getuser from "../methods/getuser";
 const URL = process.env.REACT_APP_URL;
 let count = 0;
 const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
   const [searchuser, setsearchuser] = useState("");
   const [user, setuser] = useState("");
+  const [users, setUsers] = useState([]);
   const [loading, setloading] = useState(false);
   const [found, setfound] = useState({ found: false, text: "" });
 
@@ -26,43 +29,81 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
   const [showfollowing, setshowfollowing] = useState(false);
   const [showlist, setshowlist] = useState(true);
   const [isUnmounted, setUnmounted] = useState(false);
-
+ const [loading2,setLoading2]=useState(false);
   const setfollowingfunc = (value) => {
     setfollowing(value);
   };
-
-  useEffect(() => {
-    if (showprofilefromshowbar) {
-      setloading(true);
-      setuser(usernameformshowbar);
-      setsearchuser(usernameformshowbar);
-      setfound({ found: true, text: "" });
-      searchuserhandle(usernameformshowbar);
-      showuserprofilehandle();
-    }
-    count++;
-    setTimeout(() => {
-      setloading(false);
-    }, 100);
-  }, []);
-
-  const getcounts = async () => {
+  
+  const getcounts = async (u) => {
     try {
       await axios.patch(`${URL}/count/updatefollowerscount`, {
-        username: searchuser,
+        username: u.username,
       });
       const res2 = await axios.patch(`${URL}/count/updatefollowingcount`, {
-        username: searchuser,
+        username: u.username,
       });
       if (res2.data) {
+        console.log(res2.data,"gtecounts");
         setpostcount(res2.data.postcount);
         setfollowerscount(res2.data.followerscount);
         setfollowingcount(res2.data.followingcount);
+        setshowprofile(true);
+        setshowlist(false);
+       
+        setloading(false);
+        setLoading2(false);
       }
     } catch (err) {
       console.log(err);
     }
   };
+
+  const showuserprofilehandle = (u) => {
+    setloading(true);
+      setuser(u);
+      console.log(u,user);
+      getcounts(u);
+    };
+  const searchuserhandle = (username) => {
+    if (username === "") {
+      setloading(false);
+      setUsers([]);
+      return;
+    }
+
+    setloading(true);
+    getpartialusers(username)
+      .then((us) => {
+        setUsers(us);
+     
+        
+        setfound({ found: true, text: "" });
+        setloading(false);
+        
+      })
+      .catch((err) => {
+        setfound({ found: false, text: "user not found" });
+        setloading(false);
+      });
+
+    // setfound({ found: false, text: "user not found" });
+  };
+  useEffect(() => {
+    if (showprofilefromshowbar) {
+      setshowlist(false);
+      setloading(true);
+     
+
+   
+     
+      getuser(usernameformshowbar).then(u=>{
+        showuserprofilehandle(u);
+      })
+      count++;
+    }
+ 
+
+  }, [showprofilefromshowbar]);
 
   const collectposts = async (id) => {
     try {
@@ -75,33 +116,9 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
     }
   };
 
-  const searchuserhandle = async (username) => {
-    if (username == null) {
-      setloading(false);
-      return;
-    }
-    try {
-      setloading(true);
-      const res = await axios.get(`${URL}/users/getuser?username=${username}`);
 
-      if (res) {
-        setuser(res.data);
-        setfound({ found: true, text: "" });
-      } else {
-        setloading(false);
-        setfound({ found: false, text: "user not found" });
-      }
-    } catch (err) {
-      setfound({ found: false, text: "user not found" });
-      console.log(err);
-    }
-    setloading(false);
-  };
 
-  const showuserprofilehandle = () => {
-    setshowlist(false);
-    setshowprofile(!showprofile);
-  };
+
   const setshowfollowershandle = (val) => {
     setshowfollowers(val);
   };
@@ -117,6 +134,9 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
     }
     return () => setUnmounted(true);
   }, [searchuser, isUnmounted, username]);
+  if(loading2){
+    return <div className={Styles.loader}></div> ;
+  }
   if (showprofilefromshowbar && !loading) {
     if (username === searchuser) {
       if (count >= 30) {
@@ -148,79 +168,79 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
           showfollowers={showfollowers}
           showfollowing={showfollowing}
         />
-        {showfollowers || showfollowing ? null : (
+     
           <ShowPost username={user.username} />
-        )}
+   
       </div>
     );
   } else if (showprofilefromshowbar && loading) {
-    return <div></div>;
+    return <div className={Styles.loader}></div> ;
   } else if (showlist === true) {
     return (
       <>
-      <div className={Styles.maindiv2}>
-        <div className={Styles.topsearchbar}>
-          {view ? (
-            <div className={Styles.searchbar}>
-              <input
-                placeholder="Search User Here..."
-                type="text"
-                value={searchuser}
-                onChange={(e) => {
-                  setsearchuser(e.target.value.toLowerCase());
-                  if(e.target.value!=="") searchuserhandle(e.target.value.toLowerCase());
-                }}
-                required
-              />
-              <img
-                className={Styles.searchbtn}
-                onClick={() =>
-                  searchuser.length > 0 ? setshowprofile(true) : null
-                }
-                src={searchImg}
-                width="40px"
-                height="40px"
-                alt=""
-              />
-            </div>
-          ) : null}
-        </div>
-       
-        {loading ? (
-          <div className={Styles.loader}></div>
-        ) : found.found ? (
-          <>
-            <div className={Styles.userprofile} onClick={showuserprofilehandle}>
-              <img
-                width="30px"
-                height="30px"
-                alt=""
-                src={
-                  user.profilepic
-                    ? user.profilepic
-                    : process.env.PUBLIC_URL + "/userImage.png"
-                }
-              />
-
-              <div>
-                <h6>@{user.username}</h6>
-                <h4>{user.name}</h4>
+        <div className={Styles.maindiv2}>
+          <div className={Styles.topsearchbar}>
+            {view ? (
+              <div className={Styles.searchbar}>
+                <input
+                  placeholder="Search User Here..."
+                  type="text"
+                  value={searchuser}
+                  onChange={(e) => {
+                    setsearchuser(e.target.value.toLowerCase());
+                    searchuserhandle(e.target.value.toLowerCase());
+                  }}
+                  required
+                />
+                <img
+                  className={Styles.searchbtn}
+                  onClick={() =>
+                    searchuser.length > 0 ? setshowprofile(true) : null
+                  }
+                  src={searchImg}
+                  width="40px"
+                  height="40px"
+                  alt=""
+                />
               </div>
-              <button>Go to profile</button>
-            </div>
+            ) : null}
+          </div>
+          <>
+            {users.map((u) => (
+              <div
+                key={u._id}
+                className={Styles.userprofile}
+                onClick={() =>{  setLoading2(true); showuserprofilehandle(u);}}
+              >
+                <img
+                  width="30px"
+                  height="30px"
+                  alt=""
+                  src={
+                    u.profilepic
+                      ? u.profilepic
+                      : process.env.PUBLIC_URL + "/userImage.png"
+                  }
+                />
+
+                <div>
+                  <h6>@{u.username}</h6>
+                  <h4>{u.name}</h4>
+                </div>
+                <button>Go to profile</button>
+              </div>
+            ))}
+            {loading ? <div className={Styles.loader}></div> : null}
           </>
-        ) : (
-          <div className={Styles.temp}></div>
-        )}
-      
-      </div>
-        {window.screen.width>=768? <SuggestionList/>:null}
-         </>
+     
+        </div>
+        {window.screen.width >= 768 ? <SuggestionList /> : null}
+      </>
     );
   } else if (showprofile) {
-    console.log(searchuser, username, showprofilefromshowbar, "checck");
+   
     if (
-      username === searchuser &&
+      username === user.username &&
       (showprofilefromshowbar === false || showprofilefromshowbar === undefined)
     ) {
       if (count >= 30) {
@@ -253,9 +273,9 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
           showfollowers={showfollowers}
           showfollowing={showfollowing}
         />
-        {showfollowers || showfollowing ? null : (
+      
           <ShowPost username={user.username} />
-        )}
+      
       </div>
     );
   }

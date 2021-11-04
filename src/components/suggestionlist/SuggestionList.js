@@ -73,7 +73,7 @@ const handleAdd=(user)=>{
                </div>
                <h6>@{user.username}</h6>
              
-        </div>;
+        </div>
       })}
     </div>
     </>

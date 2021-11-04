@@ -52,7 +52,7 @@ const User = ({
 
   useEffect(() => {
     if (!isUnmounted) {
-      getcounts();
+     
       verifiesusers(setfollowingfunc, username, usernameofsender);
 
       setloading(false);
