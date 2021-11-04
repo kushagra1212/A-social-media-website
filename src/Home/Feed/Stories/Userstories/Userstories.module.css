@@ -73,12 +73,12 @@
 .cameradiv {
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-content: flex-start;
-  /* height: 100vh; */
+  flex-direction: row;
+  overflow: hidden;
+  height: 100vh;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
+  align-content: center;
 }
 
 .cropdiv {

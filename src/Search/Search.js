@@ -7,6 +7,7 @@ import Profile from "../Profile/Profile";
 import Styles from "./Search.module.css";
 import searchImg from "./icons/search-icon.png";
 import verifiesusers from "../methods/verifiesusers";
+import SuggestionList from "../components/suggestionlist/SuggestionList";
 const URL = process.env.REACT_APP_URL;
 let count = 0;
 const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
@@ -42,7 +43,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
     count++;
     setTimeout(() => {
       setloading(false);
-    }, 2000);
+    }, 100);
   }, []);
 
   const getcounts = async () => {
@@ -156,6 +157,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
     return <div></div>;
   } else if (showlist === true) {
     return (
+      <>
       <div className={Styles.maindiv2}>
         <div className={Styles.topsearchbar}>
           {view ? (
@@ -166,7 +168,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
                 value={searchuser}
                 onChange={(e) => {
                   setsearchuser(e.target.value.toLowerCase());
-                  searchuserhandle(e.target.value.toLowerCase());
+                  if(e.target.value!=="") searchuserhandle(e.target.value.toLowerCase());
                 }}
                 required
               />
@@ -183,6 +185,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
             </div>
           ) : null}
         </div>
+       
         {loading ? (
           <div className={Styles.loader}></div>
         ) : found.found ? (
@@ -209,7 +212,10 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
         ) : (
           <div className={Styles.temp}></div>
         )}
+      
       </div>
+        {window.screen.width>=768? <SuggestionList/>:null}
+         </>
     );
   } else if (showprofile) {
     console.log(searchuser, username, showprofilefromshowbar, "checck");

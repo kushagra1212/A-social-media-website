@@ -109,14 +109,20 @@ const Userstories = () => {
   if (show_webcam)
     return (
       <div className={Styles.cameradiv}>
-        <button
-          onClick={() => {
-            dispatch(show_webcam_handle(false));
-          }}
-          className={Styles.backbut}
-        >
-          <span className={Styles.back}>BACK</span>
-        </button>
+   
+
+        <span
+            
+            style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
+            onClick={() => {
+              dispatch(show_webcam_handle(false));
+            }}
+          >
+            <i
+              styles={{ color: "Dodgerblue", cursor: "pointer" }}
+              className="fa fa-arrow-circle-left"
+            ></i>
+          </span>
         <Webcamcapture />
       </div>
     );
@@ -193,13 +199,13 @@ const Userstories = () => {
       <animated.div style={styleOne} >
       
       </animated.div>
-      <animated.div
+      {window.screen.width>=768? <animated.div
         style={styleOne}
         className={Styles.camera}
         onClick={() => dispatch(show_webcam_handle(true))}
       >
         <img width="100%" height="100%" src={cameraimg} alt="NAN" />
-      </animated.div>
+      </animated.div>:null}
     </div>
   );
 };

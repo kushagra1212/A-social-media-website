@@ -63,7 +63,7 @@ const Like = () => {
         next={getposts}
         loader={loading ? <div className={Styles.loader}></div> : null}
         endMessage={
-          <div className={Styles.endmessage}>
+          <div className={Styles.infiP}>
             <p style={{ textAlign: "center" }}>
               <b>Yay! You have seen it all</b>
             </p>

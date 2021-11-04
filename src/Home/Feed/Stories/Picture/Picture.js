@@ -58,12 +58,15 @@ const Picture = ({ documents, set_picture_handle, other }) => {
   return (
     <div className={Styles.maindiv}>
       {other === true ? null : (
-        <button
-          className={Styles.addMore}
-          onClick={() => set_picture_handle(false)}
-        >
-          Add more
-        </button>
+  
+                <span    className={Styles.addMore} style={{ fontSize: "40px", color: "white" }}>
+                <i
+               
+                 onClick={() => set_picture_handle(false)}
+                  styles={{ color: "Dodgerblue", cursor: "pointer" }}
+                  className="fa fa-plus"
+                ></i>
+              </span>
       )}
 
       {Transition((style, i) => {
@@ -71,39 +74,63 @@ const Picture = ({ documents, set_picture_handle, other }) => {
           <animated.div
             className={Styles.picture}
             style={{
-              backgroundImage: backgroundImages[backgroundCount],
+              
               ...style,
+            
             }}
           >
             <img src={documents[i].picture} width="100%" alt="" />
           </animated.div>
         );
       })}
+              {window.screen.width>=768?<>
+                <span className={Styles.bigright}   >
+                <i
+               
+               onClick={() =>
+                count + 1 <= documents.length - 1
+                  ? increaseCount()
+                  : other === true
+                  ? dispatch(show_others_stories_handle(false, -1))
+                  : dispatch(show_user_stories_handle(false))
+              }
+                  styles={{ color: "Dodgerblue", cursor: "pointer" }}
+                  className="fa fa-arrow-left"
+                ></i>
+              </span>
+              <span  className={Styles.bigleft}   >
+                <i
+               
+               onClick={() =>
+                count - 1 >= 0
+                  ? decreaseCount()
+                  : other === true
+                  ? dispatch(show_others_stories_handle(false, -1))
+                  : dispatch(show_user_stories_handle(false))
+              }
+                  styles={{ color: "Dodgerblue", cursor: "pointer" }}
+                  className="fa fa-arrow-right"
+                ></i>
+              </span></>:<>
+              
+              <button    onClick={() =>
+                count + 1 <= documents.length - 1
+                  ? increaseCount()
+                  : other === true
+                  ? dispatch(show_others_stories_handle(false, -1))
+                  : dispatch(show_user_stories_handle(false))
+              }  className={Styles.previous} ></button>
+              <button       onClick={() =>
+                count - 1 >= 0
+                  ? decreaseCount()
+                  : other === true
+                  ? dispatch(show_others_stories_handle(false, -1))
+                  : dispatch(show_user_stories_handle(false))
+              } className={Styles.next} >
 
-      <button
-        className={Styles.next}
-        onClick={() =>
-          count + 1 <= documents.length - 1
-            ? increaseCount()
-            : other === true
-            ? dispatch(show_others_stories_handle(false, -1))
-            : dispatch(show_user_stories_handle(false))
-        }
-      >
-        {" "}
-      </button>
-      <button
-        className={Styles.previous}
-        onClick={() =>
-          count - 1 >= 0
-            ? decreaseCount()
-            : other === true
-            ? dispatch(show_others_stories_handle(false, -1))
-            : dispatch(show_user_stories_handle(false))
-        }
-      >
-        {" "}
-      </button>
+              </button>
+              </>}
+     
     </div>
   );
 };

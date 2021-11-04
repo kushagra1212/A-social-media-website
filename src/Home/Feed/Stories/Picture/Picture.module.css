@@ -1,136 +1,140 @@
-.maindiv{
-    width: 100%;
-    z-index: 2;
-    position: absolute;
-    height: 100%;
-    background-color: lavenderblush;
+.maindiv {
+  width: 100%;
+  height: 100vh;
+  z-index: 2;
+  /* position: absolute; */
+  display: flex;
+  /* height: 100%; */
+  background-color: #ffffff;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+}
+.addMore {
+  position: relative;
+  /* width: 100%; */
+  display: flex;
+  cursor: pointer;
+  /* height: 3
+vh
+; */
+  /* width: 14%; */
+  width: 50%;
+  /* width: 50%; */
+  background-color: rgb(0, 0, 0);
+  border: 2px solid #80808000;
+  border-radius: 20px;
+  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.321);
+  margin-top: 1%;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.pictures {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+}
+.picture {
+  width: 100%;
+  height: 100%;
+  border-top: 2px solid rgba(128, 128, 128, 0);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.picture img {
+  position: relative;
+  /* transform: translate(-50vw, -50vw); */
+  /* width: 100
+vw
+; */
+  /* margin-left: 5
+vw
+; */
+  margin-top: 15vh;
+  /* height: 100
+vh
+; */
+  border: 2 px solid #80808000;
+  border-radius: 10px;
+}
+
+.next {
+  position: absolute;
+  right: 0%;
+  top: 5%;
+  height: 90%;
+  width: 50%;
+  background-color: rgb(0 255 234 / 0%);
+  border: none;
+  outline: none;
+}
+.previous {
+  position: absolute;
+  left: 0%;
+  top: 5%;
+  height: 90%;
+  width: 50%;
+  background-color: rgb(166 255 0 / 0%);
+  border: none;
+  outline: none;
+}
+@media screen and (min-width: 768px) {
+  .maindiv {
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
-
-}
-.addMore{
-    position: relative;
-    width: 100%;
-    background-color: white;
-    border: 2px solid #80808000;
-    border-radius: 20px;
-    box-shadow: 1px 1px 10px 1px grey;
-    margin-top: 1%;
-}
-
-.pictures{
-    position: relative;
-    
-    width:100%;
-    height: 100%;
-  
-
-}
-.picture{
-    position:absolute;
-
- width:100%;
- height: 100%;
-
- 
- 
-}
-.picture img{
-    position: relative;
-    /* transform: translate(-50vw, -50vw); */
-    width: 90vw;
-    margin-left: 5vw;
-    margin-top: 5vh;
-    height: 80vh;
-    border: 2px solid #80808000;
-    border-radius: 10px;
- 
-
-}
-
-.next{
-    position: absolute;
-    right: 0%;
-    top: 5%;
-    height: 90%;
+  }
+  .picture {
     width: 50%;
-    background-color: rgb(0 255 234 / 0%);
-    border: none;
-    outline: none;
-}
-.previous{
-    position: absolute;
-    left: 0%;
-    top: 5%;
-    height: 90%;
-    width: 50%;
-    background-color: rgb(166 255 0 / 0%);
-    border: none;
-    outline: none;
-}
-@media screen and (min-width:768px){
-    .maindiv{
-        width: 80%;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        z-index: 2;
-        position: absolute;
-        height: 80%;
-        background-color: white;
-        overflow: hidden;
-    }
-    .addMore{
-        position: relative;
-        width: 100%;
-        height: 50px;
-        background-color: #66bb6a;
-        color: white;
-        font-size: 1.5em;
-        border: 2px solid #80808000;
-        border-radius: 20px;
-        box-shadow: 1px 1px 10px 1px grey;
-        margin-top: 1%;
-    }
-    .picture img{
-        position: relative;
-    /* transform: translate(-50vw, -50vw); */
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 5vh;
-    height: 60vh;
-    border: 2px solid #80808000;
-    border-radius: 10px;
-    
-    }
-    .next{
-        background-image: url("https://icons.iconarchive.com/icons/iconsmind/outline/256/Next-2-icon.png") ;
-        position: absolute;
-    right: 0%;
-    top: 30%;
-    height: 260px;
-    width: 20%;
-    background-color: rgb(0 255 234 / 0%);
-    border: none;
-    outline: none;
-    transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
-    
-}
-    .previous{
-        background-image: url("https://icons.iconarchive.com/icons/iconsmind/outline/256/Back-2-icon.png");
-        position: absolute;
-    right: 0%;
-    top: 30%;
-    height: 260px;
-    width: 20%;
-    background-color: rgb(0 255 234 / 0%);
-    border: none;
-    transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
-    outline: none;
-    }
-    .next:hover{
-       transform:scale(1.2);
-    }
-    .previous:hover{
-        transform:scale(1.2);
-     }
+    top: 0%;
+    background-color: blue;
+    height: 50vh;
+  }
+  .picture img {
+    margin-top: 0%;
+  }
+  .bigleft {
+    font-size: 100px;
+    color: black;
+    /* box-shadow: 1px 1px 10px 1px #80808069; */
+    /* left: 40%; */
+    left: 40%;
+    position: relative;
+    top: -35%;
+    cursor: pointer;
+    width: 100px;
+    box-shadow: 1px 1px 10px 1px #80808033;
+    border: 1px solid #80808021;
+    border-radius: 40px;
+    transition: transform cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s;
+  }
+  .bigright {
+    font-size: 100px;
+    color: black;
+    /* box-shadow: 1px 1px 10px 1px #80808069; */
+    /* left: 40%; */
+    right: 40%;
+    position: relative;
+    top: -20%;
+    cursor: pointer;
+    width: 100px;
+    box-shadow: 1px 1px 10px 1px #80808033;
+    border: 1px solid #80808021;
+    border-radius: 40px;
+    transition: transform cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s;
+  }
+  .bigleft:hover {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  .bigright:hover {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  .b .next:hover {
+    transform: scale(1.1);
+  }
+  .previous:hover {
+    transform: scale(1.1);
+  }
 }
