@@ -93,7 +93,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       setshowlist(false);
       setloading(true);
      
-
+setsearchuser(usernameformshowbar);
    
      
       getuser(usernameformshowbar).then(u=>{

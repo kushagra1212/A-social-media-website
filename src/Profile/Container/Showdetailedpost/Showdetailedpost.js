@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Styles from "./Showdetailedpost.module.css";
 import {
+  resetFeedPosts,
+  resetUserPosts,
   updateLikesArray,
   updateUnlikesArray,
 } from "../../../reduces/actions/userAction";
@@ -10,16 +12,22 @@ import deletelike from "../../../methods/deletelike";
 import { useAlert } from "react-alert";
 import deletePost from "../../../methods/deletePost";
 import { useDispatch, useSelector } from "react-redux";
+import firebase from "../../../Firebase/index"
+import axios from "axios";
+import { updatecountforpost } from "../../../reduces/actions/countAction";
+import { getcount } from "../../../methods/getcount";
+const URL = process.env.REACT_APP_URL;
 const CURURL = process.env.REACT_APP_CURURL;
 let likeCountArray = [];
 const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
   const Alert = useAlert();
   const dispatch = useDispatch();
+  let { postcount } = useSelector((state) => state.count);
   const [showcomments, setshowcomments] = useState(false);
   const [likeLoading, setlikeLoading] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [sharePostURL, setSharePostURL] = useState("");
-  const [setting, setSetting] = useState(false);
+  const [setting, setSetting] = useState(true);
   const { likesArray } = useSelector((state) => {
     return state.feedposts;
   });
@@ -105,10 +113,21 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
   const setcommentsfunc = ({ val, post }) => {
     setshowcomments({ val: val, post: post });
   };
-  const deletePostHandle = async (id, picture) => {
-    Alert.error("Post can not be deleted ! 😉");
-    return;
-    await deletePost(id, picture);
+  const deletePostHandle = async (post) => {
+    const fileRef  = firebase.storage().refFromURL(post.picture);
+    fileRef.delete().then( async()=>{  
+        const res=await axios.delete(`${URL}/post/deleteuserpost/${post._id}`);
+        dispatch(resetFeedPosts());
+        dispatch(resetUserPosts());
+      
+       postcount-=2;
+        dispatch(updatecountforpost(username,postcount ));
+        window.location.reload("/main");
+     
+        
+  }).catch( (err)=>{
+    console.log(err);
+  });
   };
   return (
     <>
@@ -286,7 +305,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
                     <option
                       value="delete"
                       className={Styles.delete}
-                      onClick={() => deletePostHandle(post._id, post.picture)}
+                      onClick={() => deletePostHandle(post)}
                     >
                       {" "}
                       ❌Delete{" "}

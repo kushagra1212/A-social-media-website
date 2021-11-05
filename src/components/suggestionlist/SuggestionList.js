@@ -6,6 +6,8 @@ import ContentLoader from 'react-content-loader'
 import isconnection from "../../methods/isconnection";
 import { setfollowers } from "../../methods/setfollowers";
 import { useDispatch } from "react-redux";
+import addconversation from "../../methods/addconversation";
+import getconversations from "../../methods/getconversations";
 const MyLoader = (props) => (
   <ContentLoader 
     speed={3}
@@ -50,8 +52,23 @@ const SuggestionList = () => {
    
   },[username])
 
-const handleAdd=(user)=>{
+const handleAdd=async(user)=>{
   setfollowers(username, user.username, dispatch);
+  let exists=false;
+ 
+    const conver = await getconversations(username);
+
+    
+    conver.forEach((element) => {
+     
+      if (element.members.includes(user.username)) {
+         exists=true;
+      }
+    });
+  if(!exists)
+   addconversation([username, user.username]);
+  
+
   let currentusers=users;
   currentusers=users.filter((u)=>u._id!==user._id);
   setUsers(currentusers);

@@ -16,6 +16,13 @@ export const addfeedposts=(posts,array,otheruser,username)=>{
     return({type:"ADD_FEED_POSTS",payload:{posts:posts,count:5,array:array,otheruser:otheruser,username:username}});
 }
 
+export const addfriendfeedposts=(posts,array,friend,count)=>{
+    return({type:"ADD_FRIEND_FEED_POSTS",payload:{posts:posts,count:count,array:array,friend:friend}});
+}
+export const adduserfeedposts=(posts,array,username,count)=>{
+    return({type:"ADD_USER_FEED_POSTS",payload:{posts:posts,count:count,array:array,username:username}});
+}
+
 export const addposts=(posts)=>{
 return({type:"ADD_POSTS",payload:posts})
 }

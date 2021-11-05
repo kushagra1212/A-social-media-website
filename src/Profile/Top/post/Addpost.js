@@ -10,6 +10,7 @@ import ImageCropper from "../ImageCroper/ImageCropper";
 import { getCroppedImg } from "../../../methods/createcrop";
 import {resetUserPosts,resetFeedPosts} from "../../../reduces/actions/userAction";
 import {data_URL_to_file} from "../../../methods/data_URL_to_file"
+import firebase from "../../../Firebase/index";
 const URL = process.env.REACT_APP_URL;
 const Addpost = ({ setposthandle }) => {
   const [pic, setPic] = useState(null);
@@ -26,6 +27,56 @@ const Addpost = ({ setposthandle }) => {
   const dispatch = useDispatch();
   const { postcount } = useSelector((state) => state.count);
   const [fileName,setfileName]=useState("");
+  const upload=async(ul)=>{
+    try{
+      const res=await axios.post(`${URL}/post/addpost`,{
+        username:username,
+        picture:ul,
+        desc:desc
+      }, {onUploadProgress: data => {
+        //Set the progress value to show the progress bar
+        setProgress(Math.round((100 * data.loaded) / data.total));
+     
+      }});
+      
+      dispatch(resetFeedPosts());
+      dispatch(resetUserPosts());
+    
+      setloading(!loading);
+      setposthandle(false);
+      dispatch(updatecountforpost(username, postcount));
+      window.location.reload("/main");
+    }catch(err){
+        console.log(err);
+    }
+  
+  }
+  const handleUpdateItemImage = (e) => {
+    e.preventDefault();
+    setloading(!loading);
+    const storage = firebase.storage();
+
+    const uploadTask = storage
+      .ref(`photos/${selectedFile.name}`)
+      .put(selectedFile);
+    uploadTask.on(
+      "state_changed",
+      () => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("photos")
+          .child(selectedFile.name)
+          .getDownloadURL()
+          .then((ul) => {
+            console.log(ul);
+            upload(ul);
+          });
+      }
+    );
+  };
   const savehandle = async (e) => {
 
     if(selectedFile==null)
@@ -155,7 +206,7 @@ const Addpost = ({ setposthandle }) => {
   }
   return (
 <div className={Styles.addpostDiv}>
-     <animated.form className={Styles.maindiv} style={Popup} onSubmit={e=>savehandle(e)}>
+     <animated.form className={Styles.maindiv} style={Popup} onSubmit={(e)=>handleUpdateItemImage(e)}>
      <button className={Styles.backbut} onClick={() => setposthandle(false)}>Back</button>
      {pic?<img className={Styles.editimg} src={pic?pic:process.env.PUBLIC_URL+'/userImage.png'} alt=""/>:null}
     

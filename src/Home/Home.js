@@ -37,6 +37,7 @@ const Home = () => {
           backgroundColor: "white",
           position: "absolute",
           width: "100vw",
+          zIndex: 10,
         }}
       >
         <animated.div style={fade}>

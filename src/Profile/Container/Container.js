@@ -2,14 +2,14 @@ import Styles from "./Container.module.css";
 import { useState, Suspense } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Showdetailedpost from "./Showdetailedpost/Showdetailedpost";
-
+import { useSelector } from "react-redux";
 import { SuspenseImg } from "../../Home/Feed/content/SuspenceImage/SuspenceImg";
 import { getpostsforfeed } from "../../methods/getpostsforfeed";
 const Container = ({ toDelete, username }) => {
   const [grid, setGrid] = useState(true);
   const [showDetailedPost, setShowDetailedPost] = useState(false);
   const [post, setPost] = useState([]);
-
+  const { postcount } = useSelector((state) => state.count);
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [isUnmounted, setIsUnmounted] = useState(false);
@@ -30,13 +30,13 @@ const Container = ({ toDelete, username }) => {
       let lastCount;
       if (posts) lastCount = posts.length;
       else lastCount = 0;
-      let temp_array = await getpostsforfeed(username, lastCount, 6);
+      let temp_array = await getpostsforfeed(username, lastCount, 3);
 
       setPosts((prev) => [...prev, ...temp_array]);
-
-      if (temp_array.length < 6 && !isUnmounted) {
+      if(posts.length===postcount){
         setHasMore(false);
       }
+      
     }
   };
 

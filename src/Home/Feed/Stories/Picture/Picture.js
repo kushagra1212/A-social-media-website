@@ -19,14 +19,14 @@ const Picture = ({ documents, set_picture_handle, other }) => {
     keys: null,
     from: {
       opacity: 1,
-      transform: `translate3d(${increased ? 100 : -100}%,0,0) scale(0.5)`,
+      transform: `translate3d(${increased ? 100 : 0}%,0,0) scale(0.1)`,
     },
     enter: { opacity: 1, transform: "translate3d(0,0,0) scale(1)" },
     leave: {
       opacity: 1,
-      transform: `translate3d(${increased ? 100 : -100}%,0,0) scale(0.5)`,
+      transform: `translate3d(${increased ? 0 : 0}%,0,0) scale(0.1)`,
     },
-    backgroundPosition: "10% 0%",
+    backgroundPosition: "-10% 10%",
     config: { duration: 300 },
   });
 
@@ -88,8 +88,8 @@ const Picture = ({ documents, set_picture_handle, other }) => {
                 <i
                
                onClick={() =>
-                count + 1 <= documents.length - 1
-                  ? increaseCount()
+                count - 1 >= 0
+                  ? decreaseCount()
                   : other === true
                   ? dispatch(show_others_stories_handle(false, -1))
                   : dispatch(show_user_stories_handle(false))
@@ -101,9 +101,10 @@ const Picture = ({ documents, set_picture_handle, other }) => {
               <span  className={Styles.bigleft}   >
                 <i
                
-               onClick={() =>
-                count - 1 >= 0
-                  ? decreaseCount()
+           
+              onClick={() =>
+                count + 1 <= documents.length - 1
+                  ? increaseCount()
                   : other === true
                   ? dispatch(show_others_stories_handle(false, -1))
                   : dispatch(show_user_stories_handle(false))

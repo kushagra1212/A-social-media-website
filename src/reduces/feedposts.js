@@ -1,3 +1,4 @@
+let post;
 const feedposts = (
   state = {
     posts: [],
@@ -27,6 +28,26 @@ const feedposts = (
           action.payload.count;
 
       return state;
+    case "ADD_FRIEND_FEED_POSTS":
+      post=state.posts;
+      post=[...post,...action.payload.posts];
+      state.posts=post;
+      state.array = action.payload.array;
+      if (isNaN(state.otherUsersLastcount[action.payload.friend])) {
+        state.otherUsersLastcount[action.payload.friend] =3
+      } else
+        state.otherUsersLastcount[action.payload.friend] +=action.payload.count;
+    return state;
+    case "ADD_USER_FEED_POSTS":
+      post=state.posts;
+      post=[...post,...action.payload.posts];
+      state.posts=post;
+      state.array = action.payload.array;
+      if (isNaN(state.otherUsersLastcount[action.payload.username])) {
+        state.otherUsersLastcount[action.payload.username] =3
+      } else
+        state.otherUsersLastcount[action.payload.username] +=action.payload.count;
+    return state;
     case "GET_FEED_POSTS":
       return state;
     case "UPDATE_LIKES_ARRAY":

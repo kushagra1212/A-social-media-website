@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import getitem from "../../../methods/getitem";
 import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
-import Feedposts from "../../../posts/Feedposts";
+import {
+  feedPostsUpdateFriend,
+  feedPostsUpdateUser,
+} from "../../../posts/Feedposts";
 import Comments from "./comments/Comments";
 import { getstoriesFromOthers } from "../../../methods/uploadstories";
 import { updatepost } from "../../../reduces/actions/userAction";
@@ -25,35 +28,31 @@ import {
 import Search from "../../../Search/Search";
 import { useAlert } from "react-alert";
 import SuggestionList from "../../../components/suggestionlist/SuggestionList";
-import ContentLoader from 'react-content-loader'
-let heightofAni=(window.screen.width>=768)?'100vh':'45vh';
+import ContentLoader from "react-content-loader";
+let heightofAni = window.screen.width >= 768 ? "100vh" : "45vh";
 const CURURL = process.env.REACT_APP_CURURL;
 let likeCountArray = [];
 let element = null;
 const MyLoader = (props) => (
-  <ContentLoader 
+  <ContentLoader
     speed={1}
     width="100%"
     height={heightofAni}
- 
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
     {...props}
-  >    <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" /> 
-  
-
-
+  >
+    {" "}
+    <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
   </ContentLoader>
-)
+);
 const Contentmain = () => {
   const dispatch = useDispatch();
   const Alert = useAlert();
   const { profilepic, username } = useSelector((state) => {
-   
     return state.user;
   });
   const { likesArray } = useSelector((state) => {
-
     return state.feedposts;
   });
   const [hasMore, sethasmore] = useState(true);
@@ -64,8 +63,10 @@ const Contentmain = () => {
   const [likeLoading, setlikeLoading] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showShare, setShowShare] = useState(false);
-  const [userSearch,setUserSearch]=useState("");
+  const [userSearch, setUserSearch] = useState("");
   const [sharePostURL, setSharePostURL] = useState("");
+  const [hasMoreUser,setHasMoreUser]=useState(true);
+  const [hasMoreFriend,setHasMoreFriend]=useState(true);
   const unique = (array) => {
     let isvisited = {};
     let newarray = [];
@@ -142,101 +143,147 @@ const Contentmain = () => {
     }
     //temp section
   };
-  const PostsWraper = (post1, post2, otheruser="none") => {
+  // const PostsWraper = async(post1, post2, otheruser="none") => {
+  //      return await new Promise((resolve,reject)=>{
+  //       try{
+  //         let newArray = [];
+
+  //         let newpost = [...post1, ...post2];
+
+  //         newpost = unique(newpost);
+
+  //         let feedpos = state.feedposts.posts;
+
+  //         feedpos = unique(feedpos);
+
+  //         if (newpost.length === 0) sethasmore(false);
+  //         newpost.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  //         newpost.forEach((ele) => {
+  //           newArray.push({
+  //             liked: ele.likes.find((elee) => elee.username === username),
+  //             length: ele.likes.length,
+  //           });
+  //         });
+  //         newpost = [...feedpos, ...newpost];
+
+  //         let array1 = [...array, ...newArray];
+
+  //         newpost = unique(newpost);
+  //         newpost.forEach((ele) => {
+  //           ele.likes.forEach((ele2) => {
+  //             dispatch(updateLikesArray(ele2.username, ele._id));
+  //           });
+  //         });
+
+  //         Feedposts(newpost, array1, otheruser, username, dispatch);
+
+  //         setarray([...array, ...newArray]);
+
+  //         setloading(false);
+  //         setTimeout(()=>{
+  //           resolve("Yay");
+  //         },2000)
+  //        }catch(err){
+  //         reject("err")
+  //        }
+  //      })
+  // };
+  const friendPostWraper = (friend, posts) => {
     let newArray = [];
 
-    let newpost = [...post1, ...post2];
+    if (posts.length === 0) {
+      setHasMoreFriend(false);
+      setloading(false);
+      return;
+    }
+    posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    newpost = unique(newpost);
-
-    let feedpos = state.feedposts.posts;
-
-    feedpos = unique(feedpos);
-
-    if (newpost.length === 0) sethasmore(false);
-    newpost.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-    newpost.forEach((ele) => {
+    posts.forEach((ele) => {
       newArray.push({
         liked: ele.likes.find((elee) => elee.username === username),
         length: ele.likes.length,
       });
     });
-    newpost = [...feedpos, ...newpost];
 
     let array1 = [...array, ...newArray];
 
-    newpost = unique(newpost);
-    newpost.forEach((ele) => {
+    posts.forEach((ele) => {
+      ele.likes.forEach((ele2) => {
+        dispatch(updateLikesArray(ele2.username, ele._id));
+      });
+    });
+    setarray([...array, ...newArray]);
+    feedPostsUpdateFriend(posts, array1, friend, 3, dispatch);
+
+    setloading(false);
+  };
+  const userPostWraper = (username, Posts) => {
+    let newArray = [];
+
+    if (Posts.length === 0) {
+      setHasMoreUser(false);
+      setloading(false);
+      return;
+    }
+    Posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    Posts.forEach((ele) => {
+      newArray.push({
+        liked: ele.likes.find((elee) => elee.username === username),
+        length: ele.likes.length,
+      });
+    });
+
+    let array1 = [...array, ...newArray];
+
+    Posts.forEach((ele) => {
       ele.likes.forEach((ele2) => {
         dispatch(updateLikesArray(ele2.username, ele._id));
       });
     });
 
-    Feedposts(newpost, array1, otheruser, username, dispatch);
+    feedPostsUpdateUser(Posts, array1, username, 3, dispatch);
 
     setarray([...array, ...newArray]);
 
     setloading(false);
   };
-  const getothers = (post1) => {
-    let post2 = [];
-
+  const getothers = () => {
     if (username) {
-      getitem(username)
-        .then((item) => {
-          if (item.followers.length === 0 && item.following.length === 0) {
-            PostsWraper(post1, []);
-            return;
-          }
-          item?.following.map((ele) => {
-            return getstoriesFromOthers(ele.username, dispatch);
+      getitem(username).then(async (item) => {
+  
+        getstories(username, dispatch);
+        let otherUsersLastcount = state.feedposts.otherUsersLastcount;
+        for (let dat of item.following) {
+          const posts = await getpostsforfeed(
+            dat.username,
+            otherUsersLastcount[dat.username],
+            3
+          );
+          let picki;
+          const res = await getuser(dat.username);
+          picki = res.profilepic;
+          posts.map((elee) => {
+            return (elee["pic"] = picki);
           });
-          getstories(username, dispatch);
-          let otheruser = "";
-          item?.following?.map((dat) => {
-            let otherUsersLastcount = state.feedposts.otherUsersLastcount;
 
-            getpostsforfeed(dat.username, otherUsersLastcount[dat.username], 3)
-              .then((post) => {
-                post2 = post;
-              
-                getuser(dat.username).then((ele) =>{
-                  post2.map((elee) => {
-                    return (elee["pic"] = ele.profilepic);
-                  })
-                  otheruser = dat.username;
-                  PostsWraper(post1, post2, otheruser);
-                }
-                );
-                
-              })
-              .catch((err) => {
-                console.log(err);
-                setloading(false);
-              });
-            return 0;
-          });
-         
-        })
-        .catch((err) => console.log(err));
-    } else {
-     
-      setloading(false);
+          friendPostWraper(dat.username, posts);
+        }
+      });
     }
-   
   };
- 
 
   const call_func = () => {
     if (username) {
       let otherUsersLastcount = state.feedposts.otherUsersLastcount;
       let post1 = [];
       getpostsforfeed(username, otherUsersLastcount[username], 3).then(
-        (res) => {
+        async (res) => {
           post1 = res;
-
-          getothers(post1);
+          console.log(post1);
+          userPostWraper(username, post1);
+          getothers();
 
           post1.map((ele) => {
             return (ele["pic"] = profilepic);
@@ -260,7 +307,7 @@ const Contentmain = () => {
     setshowcomments({ val: val, post: post });
   };
   const copyToClipboardHandler = () => {
-    if(!showAlert){
+    if (!showAlert) {
       navigator.clipboard.writeText(sharePostURL);
       Alert.success("Link Copyied", {
         onOpen: () => {
@@ -272,7 +319,10 @@ const Contentmain = () => {
       });
     }
   };
-
+useEffect(()=>{
+   if(hasMoreUser===false && hasMoreFriend===false)
+    sethasmore(false);
+},[hasMoreFriend,hasMoreUser])
   useEffect(() => {
     if (!isUnmounted) {
       if (state.feedposts.posts.length === 0) {
@@ -280,7 +330,11 @@ const Contentmain = () => {
 
         call_func();
       }
-
+      getitem(username).then(async (item) => {
+        item?.following.forEach((ele) => {
+           getstoriesFromOthers(ele.username, dispatch);
+        });
+      });
       setarray(state.feedposts.array);
     }
 
@@ -345,18 +399,18 @@ const Contentmain = () => {
             </div>
           </div>
         ) : null}
- 
-     <div className={Styles.maincontent} id="infiniteScroll">
+
+        <div className={Styles.maincontent} id="infiniteScroll">
           {showcomments.val ? (
             <div className={Styles.commenttopdiv}>
-            <Comments
-              username={username}
-              showcomments={showcomments}
-              setcommentsfunc={setcommentsfunc}
-            />
+              <Comments
+                username={username}
+                showcomments={showcomments}
+                setcommentsfunc={setcommentsfunc}
+              />
             </div>
           ) : null}
- 
+
           <InfiniteScroll
             className={Styles.infi}
             dataLength={state.feedposts.posts.length}
@@ -374,7 +428,10 @@ const Contentmain = () => {
                 <div
                   className={Styles.topdiv}
                   style={{ cursor: "pointer" }}
-                  onClick={() =>{setUserSearch(post.username); setShowProfile(true);}}
+                  onClick={() => {
+                    setUserSearch(post.username);
+                    setShowProfile(true);
+                  }}
                 >
                   <Suspense fallback={<FluidLoaderFive />}>
                     <img
@@ -399,10 +456,10 @@ const Contentmain = () => {
                       ele.username === username && ele.postID === post._id
                   ) >= 0 ? (
                     <div>
-                            <span
+                      <span
                         style={{
-                          color:"red",
-                       
+                          color: "red",
+
                           cursor: "pointer",
                         }}
                       >
@@ -416,21 +473,20 @@ const Contentmain = () => {
                           className="fa fa-heart"
                           aria-hidden="true"
                         ></i>
-                      </span>
-                 {" "}
+                      </span>{" "}
                       {likeCountArray.findIndex(
                         (ele) =>
                           ele.username === username && ele.postID === post._id
                       ) >= 0
-                        ? post.likes.length + 1
-                        : post.likes.length}
+                        ? post?.likes?.length + 1
+                        : post?.likes?.length}
                     </div>
                   ) : (
                     <div>
                       <span
                         style={{
-                          color:"grey",
-                        
+                          color: "grey",
+
                           cursor: "pointer",
                         }}
                       >
@@ -457,7 +513,7 @@ const Contentmain = () => {
                     <span
                       style={{
                         color: "black",
-                       
+
                         cursor: "pointer",
                       }}
                     >
@@ -479,7 +535,7 @@ const Contentmain = () => {
                   <span
                     style={{
                       color: "lightgreen",
-                  
+
                       cursor: "pointer",
                     }}
                   >
@@ -512,7 +568,6 @@ const Contentmain = () => {
               </div>
             ))}
           </InfiniteScroll>
-        
         </div>
       </>
     );
