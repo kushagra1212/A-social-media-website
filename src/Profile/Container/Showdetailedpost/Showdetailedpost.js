@@ -10,9 +10,10 @@ import Comments from "../../../Home/Feed/content/comments/Comments";
 import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
 import { useAlert } from "react-alert";
+import { useEffect } from "react";
 import deletePost from "../../../methods/deletePost";
 import { useDispatch, useSelector } from "react-redux";
-import firebase from "../../../Firebase/index"
+import firebase from "../../../Firebase/index";
 import axios from "axios";
 import { updatecountforpost } from "../../../reduces/actions/countAction";
 import { getcount } from "../../../methods/getcount";
@@ -27,7 +28,10 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
   const [likeLoading, setlikeLoading] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [sharePostURL, setSharePostURL] = useState("");
-  const [setting, setSetting] = useState(true);
+  const [setting, setSetting] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [deleteIt, setDeleteIt] = useState(false);
+  const [deletePost, setDeletePost] = useState(null);
   const { likesArray } = useSelector((state) => {
     return state.feedposts;
   });
@@ -113,22 +117,57 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
   const setcommentsfunc = ({ val, post }) => {
     setshowcomments({ val: val, post: post });
   };
-  const deletePostHandle = async (post) => {
-    const fileRef  = firebase.storage().refFromURL(post.picture);
-    fileRef.delete().then( async()=>{  
-        const res=await axios.delete(`${URL}/post/deleteuserpost/${post._id}`);
-        dispatch(resetFeedPosts());
-        dispatch(resetUserPosts());
-      
-       postcount-=2;
-        dispatch(updatecountforpost(username,postcount ));
-        window.location.reload("/main");
-     
-        
-  }).catch( (err)=>{
-    console.log(err);
-  });
-  };
+  useEffect(() => {
+    const deletePostHandle = async () => {
+      const fileRef = firebase.storage().refFromURL(deletePost.picture);
+      fileRef
+        .delete()
+        .then(async () => {
+          const res = await axios.delete(
+            `${URL}/post/deleteuserpost/${deletePost._id}`
+          );
+          dispatch(resetFeedPosts());
+          dispatch(resetUserPosts());
+
+          let c = postcount;
+          c -= 2;
+          dispatch(updatecountforpost(username, c));
+          setDeleteIt(false);
+          window.location.reload("/main");
+        })
+        .catch((err) => {
+          setDeleteIt(false);
+          console.log(err);
+        });
+    };
+    if (deleteIt) deletePostHandle();
+  }, [deleteIt]);
+  if (showConfirm) {
+    return (
+      <div className={Styles.confirmmain}>
+        <div className={Styles.confirm}>
+          <label>Do you want to delete ?</label>
+          <div>
+            <button
+              className={Styles.confirmno}
+              onClick={() => setShowConfirm(false)}
+            >
+              No
+            </button>
+            <button
+              className={Styles.confirmyes}
+              onClick={() => {
+                setShowConfirm(false);
+                setDeleteIt(true);
+              }}
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       {showShare ? (
@@ -149,14 +188,15 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
             <button onClick={copyToClipboardHandler}>Copy link</button>
           </div>
         </div>
-      ) : showcomments.val?
-      <div className={Styles.topshare}>
-      <Comments
-      username={username}
-      showcomments={showcomments}
-      setcommentsfunc={setcommentsfunc}
-    />
-    </div>:(
+      ) : showcomments.val ? (
+        <div className={Styles.topshare}>
+          <Comments
+            username={username}
+            showcomments={showcomments}
+            setcommentsfunc={setcommentsfunc}
+          />
+        </div>
+      ) : (
         <div className={Styles.maincontent}>
           <span
             className={Styles.backbut}
@@ -168,115 +208,114 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
               className="fa fa-arrow-circle-left"
             ></i>
           </span>
-            <div key={post._id} className={Styles.singlecontainer}>
-              <div className={Styles.topdiv}>
-                <img
-                  src={
-                    profilepic
-                      ? profilepic
-                      : process.env.PUBLIC_URL + "/userImage.png"
-                  }
-                  alt=" "
-                />
+          <div key={post._id} className={Styles.singlecontainer}>
+            <div className={Styles.topdiv}>
+              <img
+                src={
+                  profilepic
+                    ? profilepic
+                    : process.env.PUBLIC_URL + "/userImage.png"
+                }
+                alt=" "
+              />
 
-                <h5>{post.username}</h5>
-              </div>
-              <button
-                onDoubleClick={() => likefunction(post, post._id)}
-                className={Styles.imgdiv}
-              >
-                <img
-                  src={
-                    post.picture
-                      ? post.picture
-                      : process.env.PUBLIC_URL + "/userImage.png"
-                  }
-                  width="100%"
-                  alt=" "
-                />
-              </button>
-              <div className={Styles.bottomdiv}>
-                {likesArray.findIndex(
-                  (ele) => ele.username === username && ele.postID === post._id
-                ) >= 0 ? (
-                  <div>
-                    <span
-                      style={{
-                        color: "red",
-                        position: "inherit",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <i
-                        onClick={() => unlikefunction(post, post._id)}
-                        styles={{
-                          color: "Dodgerblue",
-                          cursor: "pointer",
-                          boxShadow: "8px 9px 15px 10px #5050504d",
-                        }}
-                        className="fa fa-heart"
-                        aria-hidden="true"
-                      ></i>
-                    </span>{" "}
-                    {likeCountArray.findIndex(
-                      (ele) =>
-                        ele.username === username && ele.postID === post._id
-                    ) >= 0
-                      ? post.likes.length + 1
-                      : post.likes.length}
-                  </div>
-                ) : (
-                  <div>
-                    <span
-                      style={{
-                        color: "grey",
-                        position: "inherit",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <i
-                        onClick={() => likefunction(post, post._id)}
-                        styles={{
-                          color: "Dodgerblue",
-                          cursor: "pointer",
-                          boxShadow: "8px 9px 15px 10px #5050504d",
-                        }}
-                        className="fa fa-heart"
-                        aria-hidden="true"
-                      ></i>
-                    </span>{" "}
-                    {likeCountArray.findIndex(
-                      (ele) =>
-                        ele.username === username && ele.postID === post._id
-                    ) >= 0
-                      ? post.likes.length - 1
-                      : post.likes.length}
-                  </div>
-                )}
+              <h5>{post.username}</h5>
+            </div>
+            <button
+              onDoubleClick={() => likefunction(post, post._id)}
+              className={Styles.imgdiv}
+            >
+              <img
+                src={
+                  post.picture
+                    ? post.picture
+                    : process.env.PUBLIC_URL + "/userImage.png"
+                }
+                width="100%"
+                alt=" "
+              />
+            </button>
+            <div className={Styles.bottomdiv}>
+              {likesArray.findIndex(
+                (ele) => ele.username === username && ele.postID === post._id
+              ) >= 0 ? (
                 <div>
                   <span
                     style={{
-                      color: "black",
+                      color: "red",
                       position: "inherit",
                       cursor: "pointer",
                     }}
                   >
                     <i
-                      onClick={() => setcommentsfunc({ val: true, post: post })}
+                      onClick={() => unlikefunction(post, post._id)}
                       styles={{
                         color: "Dodgerblue",
                         cursor: "pointer",
                         boxShadow: "8px 9px 15px 10px #5050504d",
                       }}
-                      className="far fa-comment-alt"
+                      className="fa fa-heart"
                       aria-hidden="true"
                     ></i>
-                  </span>
-                  {post?.comments?.length}
+                  </span>{" "}
+                  {likeCountArray.findIndex(
+                    (ele) =>
+                      ele.username === username && ele.postID === post._id
+                  ) >= 0
+                    ? post.likes.length + 1
+                    : post.likes.length}
                 </div>
-
-           <div>
-           <span
+              ) : (
+                <div>
+                  <span
+                    style={{
+                      color: "grey",
+                      position: "inherit",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <i
+                      onClick={() => likefunction(post, post._id)}
+                      styles={{
+                        color: "Dodgerblue",
+                        cursor: "pointer",
+                        boxShadow: "8px 9px 15px 10px #5050504d",
+                      }}
+                      className="fa fa-heart"
+                      aria-hidden="true"
+                    ></i>
+                  </span>{" "}
+                  {likeCountArray.findIndex(
+                    (ele) =>
+                      ele.username === username && ele.postID === post._id
+                  ) >= 0
+                    ? post.likes.length - 1
+                    : post.likes.length}
+                </div>
+              )}
+              <div>
+                <span
+                  style={{
+                    color: "black",
+                    position: "inherit",
+                    cursor: "pointer",
+                  }}
+                >
+                  <i
+                    onClick={() => setcommentsfunc({ val: true, post: post })}
+                    styles={{
+                      color: "Dodgerblue",
+                      cursor: "pointer",
+                      boxShadow: "8px 9px 15px 10px #5050504d",
+                    }}
+                    className="far fa-comment-alt"
+                    aria-hidden="true"
+                  ></i>
+                </span>
+                {post?.comments?.length}
+              </div>
+              <div>
+                <span
                   style={{
                     color: "lightgreen",
                     position: "inherit",
@@ -298,26 +337,36 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
                     aria-hidden="true"
                   ></i>
                 </span>
-             </div>
-
-                {!toDelete ? (
-                  setting ? (
-                    <option
-                      value="delete"
-                      className={Styles.delete}
-                      onClick={() => deletePostHandle(post)}
-                    >
-                      {" "}
-                      ❌Delete{" "}
-                    </option>
-                  ) : (
-                    <button onClick={() => setSetting(true)}>⚙️</button>
-                  )
-                ) : null}
               </div>
-              <div className={Styles.caption}>{post.desc}</div>
+            <div>
+
+              {!toDelete ? (
+                setting ? (
+                  <span
+               
+                    style={{  position: "inherit",
+                    cursor: "pointer", color: "red" }}
+                    onClick={() => {
+                      setDeletePost(post);
+                      setShowConfirm(true);
+                    }}
+                  >
+                    <i className="fa fa-trash"></i>
+                  </span>
+                ) : (
+                  <span
+                  style={{  position: "inherit",
+                  cursor: "pointer" }}
+                    onClick={() => setSetting(true)}
+                  >
+                    <i className="fa fa-gear"></i>
+                  </span>
+                )
+              ) : null}
+              </div>
             </div>
-       
+            <div className={Styles.caption}>{post.desc}</div>
+          </div>
         </div>
       )}
     </>

@@ -2,11 +2,13 @@ import Styles from "./Container.module.css";
 import { useState, Suspense } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Showdetailedpost from "./Showdetailedpost/Showdetailedpost";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SuspenseImg } from "../../Home/Feed/content/SuspenceImage/SuspenceImg";
 import { getpostsforfeed } from "../../methods/getpostsforfeed";
+import { updateLikesArray } from "../../reduces/actions/userAction";
 const Container = ({ toDelete, username }) => {
   const [grid, setGrid] = useState(true);
+  const dispatch=useDispatch();
   const [showDetailedPost, setShowDetailedPost] = useState(false);
   const [post, setPost] = useState([]);
   const { postcount } = useSelector((state) => state.count);
@@ -22,20 +24,28 @@ const Container = ({ toDelete, username }) => {
   };
   const setPostHandler = (post) => {
     setPost(post);
-
     setShowDetailedPostHandler(true);
   };
   const call_func = async () => {
+
     if (!isUnmounted) {
       let lastCount;
       if (posts) lastCount = posts.length;
       else lastCount = 0;
       let temp_array = await getpostsforfeed(username, lastCount, 3);
-
-      setPosts((prev) => [...prev, ...temp_array]);
-      if(posts.length===postcount){
+      temp_array.forEach((ele) => {
+        ele.likes.forEach((ele2) => {
+         
+          dispatch(updateLikesArray(ele2.username, ele._id));
+        });
+      });
+      let newArray=[...posts, ...temp_array]
+      setPosts((prev)=>[...prev,...temp_array]);
+      if(newArray.length===postcount){
         setHasMore(false);
       }
+  
+  
       
     }
   };

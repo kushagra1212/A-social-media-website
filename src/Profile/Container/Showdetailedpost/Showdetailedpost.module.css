@@ -251,8 +251,76 @@
 .singlecontainer span {
   font-size: 30px;
 }
-
+.confirmmain {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: white;
+  font-size: 1.3em;
+  font-family: ui-sans-serif;
+  z-index: 10;
+  top: 0%;
+  background-color: rgba(56, 55, 55, 0.253);
+  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px);
+}
+.confirm {
+  background-color: white;
+  height: auto;
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-top: 30vh;
+  border: 1px solid #80808000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px #80808073;
+}
+.confirm div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.confirmno {
+  cursor: pointer;
+  width: 50px;
+  outline: none;
+  color: white;
+  background-color: #006800;
+  font-size: 1em;
+  /* top: 5%; */
+  margin: 5%;
+  border: 1px solid rgba(128, 128, 128, 0);
+  border-radius: 10px;
+  transition: tranform cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s;
+}
+.confirmyes {
+  cursor: pointer;
+  width: 50px;
+  outline: none;
+  color: white;
+  background-color: #8d3603;
+  font-size: 1em;
+  /* top: 5%; */
+  border: 1px solid rgba(128, 128, 128, 0);
+  margin: 5%;
+  border-radius: 10px;
+  transition: tranform cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.4s;
+}
 @media screen and (min-width: 768px) {
+  .confirm {
+    width: 50%;
+    margin-left: 25%;
+  }
+  .confirmyes:hover {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  .confirmno:hover {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
   .maincontent {
     z-index: 10000;
     background-color: rgb(252 252 252 / 21%);

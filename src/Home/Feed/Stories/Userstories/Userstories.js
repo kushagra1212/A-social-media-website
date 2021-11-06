@@ -16,6 +16,7 @@ import ProgressBar from "../../../../Animation/Loader/Progressbar/ProgressBar";
 import { uploadstories } from "../../../../methods/uploadstories";
 import { data_URL_to_file } from "../../../../methods/data_URL_to_file";
 import { getCroppedImg } from "../../../../methods/createcrop";
+import firebase from "@firebase/app-compat";
 const Userstories = () => {
   const dispatch = useDispatch();
   const [pic, setPic] = useState(null);
@@ -33,7 +34,7 @@ const Userstories = () => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [progress, setProgress] = useState(0);
   const [showChoosebut,setShowChoosebut]=useState(true);
- 
+  const [fileName,setfileName]=useState("");
 
   const set_picture_handle = (ans) => {
     setshowpictures(ans);
@@ -48,13 +49,15 @@ const Userstories = () => {
 
   const selectedFileHandle = (e) => {
     e.preventDefault();
-    setShowChoosebut(false);
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-   
-    reader.addEventListener("load", () => {
-      setImage(reader.result);
-    });
+  
+      const reader= new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      setfileName(e.target.files[0].name);
+      reader.addEventListener("load",()=>{
+        setImage(reader.result);
+
+      });
+
 
     //  setSelectedFile(e.target.files[0]);
     // this was previous code
@@ -64,37 +67,63 @@ const Userstories = () => {
   const openChoosefile = () => {
     Refinput.current.click();
   };
+  const handleUpdateItemImage = (sfile) => {
+    setloading(!loading);
+    const storage = firebase.storage();
 
+    const uploadTask = storage
+      .ref(`stories/${fileName}`)
+      .put(sfile);
+    uploadTask.on(
+      "state_changed",
+      () => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("stories")
+          .child(fileName)
+          .getDownloadURL()
+          .then((ul) => {
+          
+            uploadstories(username, ul, dispatch)
+            .then((res) => {
+              setloading(false);
+              setSelectedFile(null);
+              dispatch(show_user_stories_handle(false));
+            })
+            .catch((err) => {
+              console.log(err);
+              dispatch(show_user_stories_handle(false));
+            });
+          });
+      }
+    );
+  };
   const generateDownload = async (imageSrc, crop) => {
     if (!crop || !imageSrc) {
       return;
     }
     setloading(true);
     const canvas = await getCroppedImg(imageSrc, crop);
-    let dataURL = canvas.toDataURL("image/jpeg", 0.1);
+    let dataURL = canvas.toDataURL("image/jpeg", 0.40);
+  const sfile=await  data_URL_to_file(dataURL,fileName);
 
-    setSelectedFile(dataURL);
+
 
     setPic(dataURL);
-    setloading(false);
     setImage(null);
+    handleUpdateItemImage(sfile);
   };
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
   };
+
   const save_button_handle = () => {
     setloading(true);
 
-    uploadstories(username, selectedFile, dispatch)
-      .then((res) => {
-        setloading(false);
-        setSelectedFile(null);
-        dispatch(show_user_stories_handle(false));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(show_user_stories_handle(false));
-      });
+
   };
 
   if (documents.length >= 1 && showpictures)
