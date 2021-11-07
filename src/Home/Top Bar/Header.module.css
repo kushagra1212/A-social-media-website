@@ -7,7 +7,6 @@
   background-color: white;
   box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.376);
   justify-content: space-between;
-
 }
 #cameraimg {
   top: 1%;
@@ -17,9 +16,12 @@
   z-index: 1;
   width: 50px;
   height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
-  border-radius: 10px;
-  box-shadow: 1px 1px 3px grey;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.37);
   animation: Header_Header_box-shadow__1CKus__1ouEZ alternate-reverse 0.2s;
 }
 .messageimg {
@@ -32,8 +34,9 @@
   width: 50px;
   height: 50px;
   z-index: 1;
-  border-radius: 10px;
-  box-shadow: 1px 1px 3px grey;
+
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.376);
   animation: box-shadow alternate-reverse 0.2s;
 }
 .Header img {
@@ -42,7 +45,7 @@
 }
 
 .messageimg:active {
-  box-shadow: 1px 1px 20px grey;
+  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.376);
   transform: scale(1.1);
 }
 .abovediv {
@@ -71,21 +74,20 @@
     z-index: 1;
 
     left: -100px;
-    border-radius: 10px;
-    box-shadow: 1px 2px 2px 1px rgba(128, 128, 128, 0.514);
+    border-radius: 5px;
 
     transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
   }
   .messageimg:hover {
-    transform: scale3d(1.2, 1.2, 10);
-    box-shadow: 1px 1px 20px grey;
+    transform: scale3d(1.1, 1.1, 1.1);
+    box-shadow: 1px 1px 20px 1px rgba(128, 128, 128, 0.575);
   }
   #cameraimg {
     transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
   }
   #cameraimg:hover {
-    transform: scale3d(1.2, 1.2, 10);
-    box-shadow: 1px 1px 20px grey;
+    transform: scale3d(1.1, 1.1, 1.1);
+    box-shadow: 1px 1px 20px 1px rgba(128, 128, 128, 0.63);
   }
   .abovediv2 {
     left: 0%;

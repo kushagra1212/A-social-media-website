@@ -68,7 +68,8 @@ const Messages = () => {
 useEffect(()=>{
   inputRef.current.focus();
 },[])
-  const sendButtonHandler = async () => {
+  const sendButtonHandler = async (e) => {
+    inputRef.current.focus();
     if (text.trim("") === "") return;
 
     const Message = {
@@ -114,7 +115,7 @@ useEffect(()=>{
          <textarea
          hidden
             onChange={(e) => setText(e.target.value)}
-            onKeyDown={(e) => (e.code === "Enter" ? sendButtonHandler() : null)}
+            onKeyDown={(e) => (e.code === "Enter" ? sendButtonHandler(e) : null)}
             value={text}
             placeholder="Type messsage"
             className={Styles.textarea}

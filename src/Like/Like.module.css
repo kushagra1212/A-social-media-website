@@ -23,7 +23,7 @@
   width: 50%;
   border: 1px solid #80808000;
   border-radius: 10px;
-  padding-bottom: 15%;
+
   left: 25%;
   box-shadow: 1px 1px 10px 1px grey;
 }
@@ -60,6 +60,11 @@
   outline: none;
   border: 2px solid rgba(255, 255, 255, 0.041);
   border-radius: 10px;
+  width: 25%;
+  align-items: center;
+  left: 35%;
+  display: flex;
+  justify-content: center;
 
   transition: ease-in-out zoom;
 }

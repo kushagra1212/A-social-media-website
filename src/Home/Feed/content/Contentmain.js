@@ -417,7 +417,7 @@ useEffect(()=>{
             dataLength={state.feedposts.posts.length}
             next={call_func}
             hasMore={hasMore}
-            loader={<div ></div>}
+            loader={<div style={{marginTop:"50px"}} ></div>}
             endMessage={
               <p className={Styles.infiP}>
                 <b>Yay! You have seen it all</b>

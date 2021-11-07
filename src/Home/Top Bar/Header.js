@@ -11,23 +11,31 @@ const Header = () => {
   return (
     <div className={Styles.Header}>
       <div className={Styles.abovediv}>
-        <img
-          onClick={() => {
-            dispatch(show_user_stories_handle(true));
-          }}
-          id={Styles.cameraimg}
-          src={cameraimg}
-          alt=""
-        />
+     <div  id={Styles.cameraimg} >
+            <span   
+       style={{ fontSize: "60px", color: "black",cursor:'pointer' }}>
+          <i
+      onClick={() => {
+        dispatch(show_user_stories_handle(true));
+      }}
+            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            className="fa fa-camera"
+          ></i>
+        </span>
+        </div>
       </div>
 
       <div className={Styles.abovediv2}>
         <NavLink className={Styles.messageimg} to={`main/messenger`}>
-          <img
-            src={`${process.env.PUBLIC_URL}/chatIcon.png`}
-            onClick={() => dispatch({ type: "SHOWMESSAGE", payload: true })}
-            alt=""
-          />
+        
+                   <span   
+       style={{ fontSize: "60px",cursor:'pointer',color:"rgb(3, 67, 218)" }}>
+          <i
+      onClick={() => dispatch({ type: "SHOWMESSAGE", payload: true })}
+            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            className="fas fa-comments"
+          ></i>
+        </span>
         </NavLink>
       </div>
     </div>

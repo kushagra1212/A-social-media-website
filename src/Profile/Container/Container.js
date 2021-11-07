@@ -8,8 +8,8 @@ import { getpostsforfeed } from "../../methods/getpostsforfeed";
 import { updateLikesArray } from "../../reduces/actions/userAction";
 import {getcount} from "../../methods/getcount";
 import ContentLoader from "react-content-loader";
-let heightofAni = window.screen.width >= 768 ? "45vh" : "25vh";
-let widthofAni = window.screen.width >= 768 ? "45vh" : "25vh";
+let heightofAni = window.screen.width >= 768 ? "45vh" : "20vh";
+let widthofAni = window.screen.width >= 768 ? "45vh" : "20vh";
 const MyLoader = (props) => (
   <ContentLoader
     speed={1}
@@ -78,27 +78,28 @@ const Container = ({ toDelete, username }) => {
         setHasMore(false);
         console.log(err);
       }
-    }else{
-      setHasMore(false);
     }
 
   };
 
   useState(() => {
-
-    getcount(username).then((count)=>{console.log(count);setPostCount(count.postcount); } );
-
-
-    return () => {
-      setIsUnmounted(true);
-    };
-  }, []);
-  useEffect(()=>{
-    if(postCount>0)
+console.log(username);
+  getcount(username).then(res=>{
+    if(res.postcount===0)
+    setHasMore(false)
     call_func();
-    else
-    setHasMore(false);
-  },[postCount])
+    setPostCount(res.postcount);
+   });
+
+ 
+
+
+  
+
+
+  
+  }, [username]);
+
 
 
   if (showDetailedPost)
@@ -137,8 +138,9 @@ const Container = ({ toDelete, username }) => {
             alt=""
           />
         </button>
+        {postCount===0 ?<div className={Styles.noposts} > No Posts</div>:null} 
       </div>
-
+     
       <InfiniteScroll
         className={Styles.infi}
         dataLength={posts.length}
@@ -157,8 +159,7 @@ const Container = ({ toDelete, username }) => {
           style={grid ? {} : { flexDirection: "column", alignItems: "center" }}
           className={Styles.maindiv}
         >
-          {posts.length > 0
-            ? posts.map((post, id) => {
+          {posts.map((post, id) => {
                 return (
                   <Suspense key={id} fallback={<div className={Styles.shadow} ><MyLoader/></div>}>
                     <SuspenseImg
@@ -169,9 +170,11 @@ const Container = ({ toDelete, username }) => {
                   </Suspense>
                 );
               })
-            : null}
+            }
         </div>
+      
       </InfiniteScroll>
+    
     </>
   );
 };

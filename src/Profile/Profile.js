@@ -23,7 +23,7 @@ const Profile = () => {
     (state) => state.count
   );
 
-  const [start, setstart] = useState(true);
+
 
   const setposthand = (is) => {
     setpost(is);
@@ -47,20 +47,11 @@ const Profile = () => {
         setIsUnmounted(true);
       };
     },
-    [username],
+    [username,
     followingcount,
-    followerscount
+    followerscount]
   );
-  useEffect(() => {
-  if(posts.length>=1)
-  {
-      setstart(false);
-  }
-  setTimeout(()=>{
-    if(posts.length===0) {setstart(false);}
-     },2000);
-
-  }, [posts]);
+ 
 
   const setshowfollowershandle = (val) => {
     setshowfollowers(val);
@@ -98,27 +89,11 @@ const Profile = () => {
           setshowfollowinghandle={setshowfollowinghandle}
           setposthand={setposthand}
         />
-        {!posts.length > 0 ? (
-          <div
-            className={Styles.loadermaindiv}
-            style={{ position: "absolute" }}
-          >
-   
-            {start ? (
-              <div className={Styles.loader}></div>
-            ) : (
-              <div>NOTHING POSTED YET</div>
-            )}
-                <Userposts />
-            
-        
-          </div>
-          
-        ) : (
+
           <>
-            <Container toDelete={false} username={username} />{" "}
+          {username!==""?<Container toDelete={false} username={username} />:null}{" "}
           </>
-        )}
+
       </div>
     );
   }

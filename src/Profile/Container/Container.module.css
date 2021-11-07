@@ -101,7 +101,26 @@
     transform: rotate(360deg);
   }
 }
+.noposts {
+  width: 50%;
+  background-color: white;
+  display: flex;
+  /* justify-self: center; */
+  position: relative;
 
+  margin-top: 10%;
+  font-size: 1.3em;
+  color: black;
+  font-family: ui-rounded;
+  justify-content: center;
+  height: 50px;
+  align-items: center;
+  font-weight: 900;
+  border: 1px 1px 10px 1px grey;
+  border: 1px solid #80808000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px #80808042;
+}
 .infiP {
   text-align: center;
   background-color: #424242;
@@ -114,8 +133,9 @@
   width: 50%;
   border: 1px solid #80808000;
   border-radius: 10px;
-  padding-bottom: 15%;
+  /* padding-bottom: 15%; */
   left: 25%;
+
   box-shadow: 1px 1px 10px 1px grey;
 }
 @media screen and (min-width: 768px) {

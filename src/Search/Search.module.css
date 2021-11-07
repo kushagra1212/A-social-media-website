@@ -34,7 +34,7 @@
   border-radius: 15px;
   margin: 2%;
   align-items: center;
-  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.438);
+  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.308);
   flex-wrap: wrap;
   align-content: space-between;
   justify-content: space-around;
@@ -243,7 +243,7 @@
   font-size: 1.3em;
   border-radius: 10px;
   border: 0.2em solid #80808000;
-  box-shadow: 2px 2px 10px 1px #8080805c;
+  box-shadow: 1px 1px 10px 1px #8080803d;
   outline: none;
   animation: Search_Search_Search_boxAni__1z34p__3sZ-x__1kqDo 1s ease-in-out
     infinite alternate-reverse;
@@ -251,22 +251,13 @@
 .searchbar input:focus {
   animation: boxAni 100s ease-in-out infinite alternate-reverse;
 }
-@keyframes boxAni {
-  from {
-    box-shadow: -0.04000000000000018em 0.4em 0.5em 0px
-      rgba(128, 128, 128, 0.637);
-  }
-  to {
-    box-shadow: -0.04000000000000018em 0.4em 2em 0px rgba(128, 128, 128, 0.534);
-  }
-}
 
 .searchbtn {
   position: relative;
   margin-left: 10%;
   outline: none;
   border: 5px solid #80808030;
-  box-shadow: 1px 1px 15px grey;
+  box-shadow: 1px 1px 10px 1px rgb(128, 128, 128);
   background: rgb(38, 0, 255);
   border-radius: 20px;
   height: 50px;
@@ -274,13 +265,13 @@
 }
 .searchbar input:hover {
   animation: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.001s;
-  box-shadow: 0 0 25px 0 rgb(191 193 230 / 84%), 0 20px 25px 0 rgb(0 0 0 / 10%);
+  box-shadow: 1px 1px 100px 1px #80808057;
   transform: scale(1.01);
 }
 
 .searchbtn:active {
   transform: scale3d(1.2, 1.2, 10);
-  box-shadow: 1px 1px 20px 1px rgba(128, 128, 128, 0.431);
+  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.418);
 }
 @media screen and (min-width: 768px) {
   .maindiv2 {
@@ -297,7 +288,7 @@
     animation: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.001s;
   }
   .userprofile:hover {
-    box-shadow: 0 0 25px 0 rgb(191 193 230 / 84%), 0 20px 25px 0 rgb(0 0 0 / 1%);
+    box-shadow: 1px 1px 40px 1px rgba(128, 128, 128, 0.253);
     transform: scale(1.01);
   }
   .userprofile button:hover {
@@ -324,7 +315,7 @@
   }
   .searchbtn:hover {
     transform: scale3d(1.2, 1.2, 10);
-    box-shadow: 1px 1px 20px 1px rgba(128, 128, 128, 0.363);
+    box-shadow: 1px 1px 20px 1px rgba(128, 128, 128, 0.37);
   }
   .temp {
     height: 200px;

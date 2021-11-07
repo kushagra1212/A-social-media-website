@@ -200,11 +200,13 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
 
           <label className={Styles.editlabel}>Email</label>
           <input
+             disabled={true}
             onChange={(e) => setnewemail(e.target.value)}
             value={newemail}
           />
           <label className={Styles.editlabel}>User Name</label>
           <input
+          disabled={true}
             onChange={(e) => setnewusername(e.target.value)}
             value={newusername}
           />

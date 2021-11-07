@@ -97,9 +97,16 @@ const Like = () => {
               </div>
             );
           })}
-          <button className={Styles.loadmorebut} onClick={() => getposts()}>
-            SEE MORE
-          </button>
+          <span
+     className={Styles.loadmorebut}
+          style={{ fontSize: "40px", color: "white" }}
+        >
+          <i
+          onClick={() => getposts()}
+            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            className="fa fa-plus"
+          ></i>
+        </span>
         </div>
       </InfiniteScroll>
     </>
