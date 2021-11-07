@@ -128,9 +128,9 @@ useEffect(()=>{
     <>
       <div className={Styles.topdivmessage}>
     
-        <div onClick={backButFun} className={Styles.icon}>
-          <div className={Styles.arrow}></div>
-        </div>
+      {window.screen.width<768?<div onClick={backButFun} className={Styles.icon}> <div className={Styles.arrow}></div>
+        </div>:null}
+         
         <label>{user?.username}</label>
         <img width="30px" height="30px" className={Styles.userPicture} src={userPicture} alt="" />
         <label style={{opacity:"0.5",fontSize:"0.9em"}} >Status</label>

@@ -1,142 +1,228 @@
-.maindiv{
-    position: relative;
-    height:30%;
-    width:100%;
-background-color: rgb(255, 255, 255);
-border: 2px solid rgba(128, 128, 128, 0);
-border-radius: 5%;
-box-shadow: 2px 2px 20px 2px rgb(128, 128, 128);
+.maindiv {
+  position: relative;
+  height: 30%;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 5%;
+  box-shadow: 2px 2px 20px 2px rgb(128 128 128 / 25%);
+  padding-bottom: 2%;
+  z-index: 1;
+}
+.firstdiv {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5%;
+  padding-bottom: 0%;
+}
+.firstdiv img {
+  width: 70px;
+  height: 70px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 10px;
+}
+.editbut {
+  height: 30px;
+  width: 30%;
+  font-size: 1.1em;
+  color: white;
+  font-weight: 700;
+  font-family: ui-monospace;
+  background-color: rgb(75 75 255);
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 10px;
 
-padding-bottom: 2%;
+  transform-origin: center;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
-.firstdiv{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-padding:5%;
-padding-bottom:0% ;
-   
+.editbut:active {
+  transform: scale3d(1.2, 1.2, 10);
+  box-shadow: 1px 1px 20px grey;
+}
+.followersbut {
+  width: 80px;
+  font-size: 1.1em;
+  color: white;
+  font-weight: 700;
+  font-family: ui-monospace;
+  background-color: rgb(21, 21, 221);
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px grey;
+  transform-origin: center;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+}
+.followersbut:active {
+  transform: scale3d(1.3, 1.3, 500);
+  box-shadow: 1px 1px 20px grey;
+}
+.followingbut {
+  width: 80px;
+  font-size: 1.1em;
+  color: white;
+  font-weight: 700;
+  font-family: ui-monospace;
+  background-color: rgb(21, 21, 221);
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px grey;
+  transform-origin: center;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+}
+.followingbut:active {
+  transform: scale3d(1.3, 1.3, 500);
+  box-shadow: 1px 1px 20px grey;
+}
+.addapost {
+  font-size: 1.1em;
+  color: white;
+  font-weight: 700;
+  font-family: ui-monospace;
+  background-color: rgb(59, 167, 10);
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 6px;
+  box-shadow: 1px 1px 10px 1px grey;
+  transform-origin: center;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+}
+.addapost:active {
+  transform: scale3d(1.2, 1.2, 500);
+  box-shadow: 1px 1px 20px grey;
+}
+.posts {
+  position: relative;
+  padding: 0%;
+  margin-right: 1%;
+}
+.posts label {
+  text-decoration: aliceblue;
+  background-color: #ab47bc;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid rgba(128, 128, 128, 0.466);
+  transform-origin: center;
+}
+.logoutbut {
+  height: 30px;
+  font-size: 1.1em;
+  color: white;
+  font-weight: 700;
+  font-family: ui-monospace;
+  background-color: rgb(248, 140, 16);
+  outline: none;
+  border: 2px solid rgba(128, 128, 128, 0);
+  border-radius: 6px;
+  box-shadow: 1px 1px 5px 1px grey;
+  transform-origin: center;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+}
+h6 {
+  font-size: 1.2em;
+}
 
+.seconddiv {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  padding-top: 0%;
+  word-wrap: break-word;
 }
-
-.firstdiv img{
-  width:90px;
-  height:90px;
-  border:3px solid rgb(0, 0, 0);
-
-  border-radius: 50px;
-
+.seconddiv h6 {
+  opacity: 0.7;
 }
-
-.followersbut
-{
-   
-    width: 70px;
-    font-size: 0.9em;
-    color: white;
-    background-color: rgb(21, 21, 221);
-    outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 1px grey;
-   transform-origin:center;
-  
-}
-.followersbut:active{
-    font-size: 0.5em;
-    width:50px;
-    transform-origin:center;
-  
-}
-.followingbut{
-    width: 70px;
-    font-size: 0.9em;
-    color: white;
-    background-color: rgb(21, 21, 221);
-    outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 1px grey;
-   transform-origin:center;
-  
-}
-.followingbut:active
-{
-    font-size: 0.5em;
-    width:50px;
-    transform-origin:center;
-}
-.isfollowing{
-  
-    font-size: 0.9em;
-    color: white;
-    background-color: rgb(29, 194, 117);
-    outline: none;
-    border:2px solid rgba(128, 128, 128, 0);
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 1px grey;
-   transform-origin:center;
-}
-
-.seconddiv{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-   padding: 5%;
-   padding-top:0% ;
-   word-wrap: break-word;
-}
-.seconddiv h6{
-    opacity: 0.5;
-}
-.seconddiv h5{
-    padding-top:2% ;
+.seconddiv h5 {
+  padding-top: 2%;
 }
 .thirddiv {
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    
+  position: relative;
+  display: flex;
+  justify-content: space-around;
 }
-.thirddiv label{
-    color: rgba(17, 0, 255, 0.685);
+.thirddiv label {
+  color: rgba(17, 0, 255, 0.685);
 }
-.thirddiv label h6{
-    color: black;
+.thirddiv label h6 {
+  color: black;
 }
-.posts
-{
-    position: relative;
-    padding: 0%;
-    margin-right: 1%;
-    align-items: center;
-    min-height: 37px;
-    
-   
+.isfollowing {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.1em;
+  color: white;
+  outline: none;
+  border: 1px solid #80808000;
+  background-color: #00b679;
+  font-weight: 700;
+  border-radius: 10px;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
-.posts label
-{
-    
-    font-size: 0.9em;
-  
-  text-decoration: aliceblue;   
-    background-color: rgb(207, 159, 25);
-    outline: none;
-    border-radius: 2px;
-    border:2px solid rgba(128, 128, 128, 0.466);
-  
-
-   transform-origin:center;
-
-}
-@media screen and (min-width:768px){
-    .maindiv{
-        position: absolute;
+@media screen and (min-width: 678px) {
+  .maindiv {
+    position: absolute;
     /* height: 30%; */
     left: 60%;
     width: 40%;
     height: auto;
     z-index: 0;
-    }
+  }
+  .followersbut {
+    transition: transform ease-in 0.2;
+  }
+  .followingbut:hover {
+    transform: scale3d(1.2, 1.2, 500);
+    box-shadow: 1px 1px 20px grey;
+  }
+
+  .followersbut {
+    transition: transform ease-in 0.2;
+  }
+  .followersbut:hover {
+    transform: scale3d(1.2, 1.2, 500);
+    box-shadow: 1px 1px 20px grey;
+  }
+  .editbut {
+    width: 100px;
+    height: 50px;
+  }
+  .logoutbut {
+    width: 100px;
+    height: 50px;
+  }
+  .editbut:hover {
+    transform: scale3d(1.2, 1.2, 500);
+    box-shadow: 1px 1px 20px 0px rgba(73, 64, 64, 0.575);
+  }
+  .logoutbut:hover {
+    transform: scale3d(1.2, 1.2, 500);
+    box-shadow: 1px 1px 20px grey;
+  }
+  .addapost {
+    transition: transform ease-in 0.2;
+  }
+  .addapost:hover {
+    transform: scale3d(1.2, 1.2, 500);
+    box-shadow: 1px 1px 20px grey;
+  }
+  .firstdiv img {
+    width: 100px;
+    height: 100px;
+  }
+  .thirddiv label {
+    width: 100px;
+    height: 50px;
+  }
+  .isfollowing {
+    transition: transform ease-in 0.2;
+  }
+  .isfollowing:hover {
+    transform: scale3d(1.2, 1.2, 500);
+    box-shadow: 1px 1px 20px rgba(128, 128, 128, 0.383);
+  }
 }

@@ -58,16 +58,17 @@
   border-radius: 10px;
 }
 .userprofile button {
-  background: rgb(33 70 243);
+  background: rgb(33 70 243 / 81%);
   width: 50%;
   color: white;
   height: 2em;
   font-weight: 600;
   font-size: 1.2em;
+  font-family: ui-monospace;
   border: 2px solid rgba(128, 128, 128, 0);
-  border-radius: 100px;
-  box-shadow: 2px 2px 5px rgb(28 158 49 / 76%);
-  transition: ease-in-out;
+  border-radius: 10px;
+  /* box-shadow: 2px 2px 5px rgb(28 158 49 / 76%); */
+  transition: transform cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
 }
 .userprofile button:active {
   box-shadow: 2px 2px 10px rgba(118, 182, 128, 0.76);
@@ -235,7 +236,7 @@
 }
 .searchbar input {
   background-color: white;
-  width: 80vw;
+  width: 60vw;
   position: relative;
   height: 50px;
   padding: 1em;
@@ -244,8 +245,8 @@
   border: 0.2em solid #80808000;
   box-shadow: 2px 2px 10px 1px #8080805c;
   outline: none;
-  animation: Search_Search_boxAni__1z34p__3sZ-x 1s ease-in-out infinite
-    alternate-reverse;
+  animation: Search_Search_Search_boxAni__1z34p__3sZ-x__1kqDo 1s ease-in-out
+    infinite alternate-reverse;
 }
 .searchbar input:focus {
   animation: boxAni 100s ease-in-out infinite alternate-reverse;
@@ -266,7 +267,7 @@
   outline: none;
   border: 5px solid #80808030;
   box-shadow: 1px 1px 15px grey;
-  background: blueviolet;
+  background: rgb(38, 0, 255);
   border-radius: 20px;
   height: 50px;
   width: 50px;
@@ -296,8 +297,12 @@
     animation: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.001s;
   }
   .userprofile:hover {
-    box-shadow: 0 0 25px 0 rgb(191 193 230 / 84%), 0 20px 25px 0 rgb(0 0 0 / 5%);
+    box-shadow: 0 0 25px 0 rgb(191 193 230 / 84%), 0 20px 25px 0 rgb(0 0 0 / 1%);
     transform: scale(1.01);
+  }
+  .userprofile button:hover {
+    transform: scale3d(1.1, 1.1, 1.1);
+    background-color: rgb(0, 58, 219);
   }
   .topsearchbar {
     position: relative;

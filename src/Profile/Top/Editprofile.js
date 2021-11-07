@@ -164,9 +164,17 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
           className={Styles.editprofile}
           style={floatDown}
         >
-          <button className={Styles.backbut} type="button" onClick={edit_it}>
-            BACK
-          </button>
+        
+          <span
+            className={Styles.backbut}
+            style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
+            onClick={edit_it}
+          >
+            <i
+              styles={{ color: "Dodgerblue", cursor: "pointer" }}
+              className="fa fa-arrow-circle-left"
+            ></i>
+          </span>
           {pic ? (
             <img
               className={Styles.editimg}

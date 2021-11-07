@@ -42,6 +42,7 @@ vh
   border-top: 2px solid rgba(128, 128, 128, 0);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  margin-top: 10vh;
 }
 .picture img {
   position: relative;
@@ -52,7 +53,7 @@ vw
   /* margin-left: 5
 vw
 ; */
-  margin-top: 15vh;
+
   /* height: 100
 vh
 ; */
@@ -63,7 +64,7 @@ vh
 .previous {
   position: absolute;
   right: 0%;
-  top: 5%;
+  top: 8%;
   height: 90%;
   width: 50%;
   background-color: rgb(0 255 234 / 0%);
@@ -73,7 +74,7 @@ vh
 .next {
   position: absolute;
   left: 0%;
-  top: 5%;
+  top: 8%;
   height: 90%;
   width: 50%;
   background-color: rgb(166 255 0 / 0%);
@@ -89,11 +90,14 @@ vh
   .picture {
     width: 50%;
     top: 0%;
-    background-color: blue;
+
     height: 50vh;
   }
   .picture img {
     margin-top: 0%;
+    margin-left: 5vw;
+    height: 80vh;
+    width: 40vw;
   }
   .bigleft {
     font-size: 100px;

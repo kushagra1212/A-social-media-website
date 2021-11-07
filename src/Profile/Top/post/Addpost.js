@@ -207,7 +207,17 @@ const Addpost = ({ setposthandle }) => {
   return (
 <div className={Styles.addpostDiv}>
      <animated.form className={Styles.maindiv} style={Popup} onSubmit={(e)=>handleUpdateItemImage(e)}>
-     <button className={Styles.backbut} onClick={() => setposthandle(false)}>Back</button>
+ 
+     <span
+            className={Styles.backbut}
+            style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
+            onClick={() => setposthandle(false)}
+          >
+            <i
+              styles={{ color: "Dodgerblue", cursor: "pointer" }}
+              className="fa fa-arrow-circle-left"
+            ></i>
+          </span>
      {pic?<img className={Styles.editimg} src={pic?pic:process.env.PUBLIC_URL+'/userImage.png'} alt=""/>:null}
     
     <input style={{display:"none"}}  type="file" ref={Refinput}  onChange={selectedFileHandle}/>
@@ -215,6 +225,7 @@ const Addpost = ({ setposthandle }) => {
     <button className={Styles.choosebutton} type="button" onClick={openChoosefile} >Choose Picture</button>
   
       <textarea
+      
         type="name"
         value={desc}
         onChange={(e) => setdesc(e.target.value.substr(0, 100))}

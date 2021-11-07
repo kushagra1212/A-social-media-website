@@ -38,7 +38,7 @@ const SuggestionList = () => {
     for(let user of Users){
      
       let currentusername=user.username;
-      const found=await isconnection(username,currentusername);
+      const found=await isconnection(currentusername,username);
       if(!found && username!==user.username)
         newArray.push(user);
       
@@ -53,7 +53,7 @@ const SuggestionList = () => {
   },[username])
 
 const handleAdd=async(user)=>{
-  setfollowers(username, user.username, dispatch);
+  setfollowers(user.username,username, dispatch);
   let exists=false;
  
     const conver = await getconversations(username);

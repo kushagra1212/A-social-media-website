@@ -1,21 +1,38 @@
 import Styles from "./Container.module.css";
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Showdetailedpost from "./Showdetailedpost/Showdetailedpost";
 import { useDispatch, useSelector } from "react-redux";
 import { SuspenseImg } from "../../Home/Feed/content/SuspenceImage/SuspenceImg";
 import { getpostsforfeed } from "../../methods/getpostsforfeed";
 import { updateLikesArray } from "../../reduces/actions/userAction";
+import {getcount} from "../../methods/getcount";
+import ContentLoader from "react-content-loader";
+let heightofAni = window.screen.width >= 768 ? "45vh" : "25vh";
+let widthofAni = window.screen.width >= 768 ? "45vh" : "25vh";
+const MyLoader = (props) => (
+  <ContentLoader
+    speed={1}
+    width={widthofAni}
+    height={heightofAni}
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
+    {...props}
+  >
+    {" "}
+    <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
+  </ContentLoader>
+);
 const Container = ({ toDelete, username }) => {
   const [grid, setGrid] = useState(true);
   const dispatch=useDispatch();
   const [showDetailedPost, setShowDetailedPost] = useState(false);
   const [post, setPost] = useState([]);
-  const { postcount } = useSelector((state) => state.count);
+  
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [isUnmounted, setIsUnmounted] = useState(false);
-
+  const [postCount,setPostCount]=useState(null);
   const gridHandler = (bool) => {
     setGrid(bool);
   };
@@ -26,42 +43,63 @@ const Container = ({ toDelete, username }) => {
     setPost(post);
     setShowDetailedPostHandler(true);
   };
+  const unique = (array) => {
+    let isvisited = {};
+    let newarray = [];
+
+    array.forEach((ele) => {
+      if (!isvisited[ele.picture]) {
+        newarray.push(ele);
+        isvisited[ele.picture] = true;
+      }
+    });
+    return newarray;
+  };
   const call_func = async () => {
 
     if (!isUnmounted) {
       let lastCount;
       if (posts) lastCount = posts.length;
       else lastCount = 0;
-      let temp_array = await getpostsforfeed(username, lastCount, 3);
-      temp_array.forEach((ele) => {
-        ele.likes.forEach((ele2) => {
-         
-          dispatch(updateLikesArray(ele2.username, ele._id));
+      let temp_array;
+      try{
+        temp_array= await getpostsforfeed(username, lastCount, 3);
+        temp_array.forEach((ele) => {
+          ele.likes.forEach((ele2) => {
+            dispatch(updateLikesArray(ele2.username, ele._id));
+          });
         });
-      });
-      let newArray=[...posts, ...temp_array]
-      setPosts((prev)=>[...prev,...temp_array]);
-      if(newArray.length===postcount){
+        let newArray=[...posts, ...temp_array]
+        newArray=unique(newArray);
+        setPosts(newArray);
+       if(newArray.length===postCount)
+       setHasMore(false);
+      }catch(err){
         setHasMore(false);
+        console.log(err);
       }
-  
-  
-      
+    }else{
+      setHasMore(false);
     }
+
   };
 
   useState(() => {
-    call_func();
+
+    getcount(username).then((count)=>{console.log(count);setPostCount(count.postcount); } );
+
 
     return () => {
       setIsUnmounted(true);
     };
   }, []);
-  useState(() => {
-    return () => {
-      setIsUnmounted(true);
-    };
-  });
+  useEffect(()=>{
+    if(postCount>0)
+    call_func();
+    else
+    setHasMore(false);
+  },[postCount])
+
 
   if (showDetailedPost)
     return (
@@ -110,7 +148,6 @@ const Container = ({ toDelete, username }) => {
         endMessage={
           <p
             className={Styles.infiP}
-            
           >
             <b>Yay! You have seen it all</b>
           </p>
@@ -123,7 +160,7 @@ const Container = ({ toDelete, username }) => {
           {posts.length > 0
             ? posts.map((post, id) => {
                 return (
-                  <Suspense key={id} fallback={null}>
+                  <Suspense key={id} fallback={<div className={Styles.shadow} ><MyLoader/></div>}>
                     <SuspenseImg
                       className={Styles.image}
                       onClick={() => setPostHandler(post)}

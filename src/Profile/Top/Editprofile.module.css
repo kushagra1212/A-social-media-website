@@ -47,15 +47,17 @@
   width: 50%;
   outline: none;
   border: 2px solid #80808000;
-  border-radius: 10px;
+  border-radius: 5px;
   /* left: 50%; */
   position: relative;
   align-self: center;
   color: white;
-  background-color: chocolate;
-  height: 30px;
-  box-shadow: 1px 1px 1px #808080b3;
+  background-color: #f27b26;
+  height: 40px;
+  box-shadow: 1px 1px 10px 1px #80808094;
   font-size: 1.5em;
+  font-family: ui-rounded;
+  margin: 5%;
 }
 .backbut {
   position: absolute;
@@ -64,12 +66,7 @@
   z-index: 10;
   width: 55px;
   font-size: 0.9em;
-  color: white;
-  background-color: rgb(21, 21, 221);
-  outline: none;
-  border: 2px solid rgba(128, 128, 128, 0);
-  border-radius: 10px;
-  box-shadow: 1px 1px 5px 1px grey;
+
   transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
 }
 .backbut:active {
@@ -93,29 +90,27 @@
 .editprofile input {
   position: relative;
   margin: 5%;
-  font-size: 0.9em;
-
+  font-size: 1em;
   outline: none;
   border: 2px solid rgba(128, 128, 128, 0);
   padding: 1.6%;
-  border-radius: 10px;
-  box-shadow: 1px 1px 10px 1px grey;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px #8080802e;
   transform-origin: center;
 }
 .savebut {
   color: white;
-
   outline: none;
   border: 2px solid rgba(128, 128, 128, 0);
   background-color: rgb(86, 209, 15);
   border-radius: 10px;
-  box-shadow: 1px 1px 10px 1px grey;
+  box-shadow: 1px 1px 10px 1px #8080806b;
   transform-origin: center;
-
   width: 30%;
-  height: 30px;
+  height: 40px;
   font-size: 1.1em;
   font-weight: bold;
+  margin: 5%;
   align-self: center;
 }
 .loader,
@@ -216,26 +211,17 @@
   .choosebutton {
     width: 50%;
     outline: none;
-    border: 2px solid #80808000;
-    border-radius: 10px;
-    /* left: 50%; */
-    position: relative;
-    align-self: center;
-    color: white;
-    background-color: chocolate;
-    height: 30px;
-    box-shadow: 1px 5px 5px 1px #808080b3;
 
     font-size: 1.5em;
     animation: transform background-color cubic-bezier(0.075, 0.82, 0.165, 1)
       ease-in-out reverse 0.3s;
   }
   .choosebutton:hover {
-    background-color: #94c71e;
-    box-shadow: 1px 1px 1px #808080b3;
+    background-color: #ce6b24;
+    box-shadow: 1px 1px 10px 1px #808080b3;
   }
   .savebut:hover {
-    background-color: rgb(12, 255, 113);
+    background-color: rgb(4, 180, 77);
   }
   .editprofileMain {
     width: 100%;

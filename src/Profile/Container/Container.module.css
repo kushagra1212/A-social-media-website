@@ -1,63 +1,61 @@
-.topdiv{
-    height:100vh;
+.topdiv {
+  height: 100vh;
 }
-.maindiv{
-    position: relative;
-    /* width: 100%; */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    overflow-y: scroll;
-    /* min-height: 100vh; */
-    margin-bottom: 10vh;
-    margin-top: 10%;
-    /* z-index: 10; */
-    /* background-color: rgb(255 255 255); */
-    align-items: center;
-   
+.maindiv {
+  position: relative;
+  /* width: 100%; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow-y: scroll;
+  /* min-height: 100vh; */
+  margin-bottom: 10vh;
+  margin-top: 10%;
+  /* z-index: 10; */
+  /* background-color: rgb(255 255 255); */
+  align-items: center;
 }
-.maindiv img{
-    position: relative;
-  
-    width: 40%;
-    margin: 2%; 
-    border:2px solid rgba(182, 22, 22, 0);
-    border-radius:5px;
-    box-shadow: 1px 1px 8px grey;
-    animation: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
-    
+.shadow {
+  box-shadow: 1px 1px 5px 1px rgba(128, 128, 128, 0.226);
+}
+.maindiv img {
+  position: relative;
 
+  width: 45%;
+  margin: 2%;
+  border: 2px solid rgba(182, 22, 22, 0);
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.294);
+  animation: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
-.maindiv img:hover{
-  
+.maindiv img:hover {
 }
 
-.topButtons{
-    position: relative;
-    /* margin-bottom: 2%; */
-    margin-top: 1%;
-    width: 100%;
-    padding: 0%;
-    /* z-index: 3; */
-    /* height: 2vh; */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: flex-end;
-    justify-content: space-around;
+.topButtons {
+  position: relative;
+  /* margin-bottom: 2%; */
+  margin-top: 1%;
+  width: 100%;
+  padding: 0%;
+  /* z-index: 3; */
+  /* height: 2vh; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  justify-content: space-around;
 }
-.topButtons button{
-    width: 30%;
-    background: #ffffff00;
-    border: 2px solid #80808000;
-    border-radius: 10px;
-    box-shadow: 1px 0px 12px 0px grey;
-    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
-    transition-property: box-shadow;
-    transition-duration: 10ms;
-  
+.topButtons button {
+  width: 30%;
+  background: #ffffff00;
+  border: 2px solid #80808000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 12px 1px rgba(128, 128, 128, 0.363);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-property: box-shadow;
+  transition-duration: 10ms;
 }
-.topButtons button:active{
+.topButtons button:active {
   box-shadow: 1px 1px 4px 1px grey;
 }
 
@@ -104,7 +102,7 @@
   }
 }
 
-.infiP{
+.infiP {
   text-align: center;
   background-color: #424242;
   color: white;
@@ -120,35 +118,34 @@
   left: 25%;
   box-shadow: 1px 1px 10px 1px grey;
 }
-@media screen and (min-width:768px) {
-  .topButtons{
+@media screen and (min-width: 768px) {
+  .topButtons {
     position: absolute;
     /* margin-bottom: 2%; */
     margin-top: 1%;
     width: 50%;
     left: 10%;
     padding: 0%;
-
   }
-  .topButtons button{
+  .topButtons button {
     transition: transform ease-in 0.2s;
   }
-  .topButtons button:hover{
-        transform: scale(1.1);
+  .topButtons button:hover {
+    transform: scale(1.1);
   }
-  .maindiv{
+  .maindiv {
     width: 50%;
     left: 10%;
     margin-top: 11%;
   }
-  p{
-    width:50%;
+  p {
+    width: 50%;
   }
- .maindiv img:hover{
-    box-shadow: 1px 1px 19px grey;
+  .maindiv img:hover {
+    box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.561);
     transform: scale(1.01);
   }
-  .infiP{
+  .infiP {
     padding-bottom: 0%;
     margin-top: 10%;
   }

@@ -213,17 +213,17 @@ const Contentmain = () => {
         dispatch(updateLikesArray(ele2.username, ele._id));
       });
     });
-    setarray([...array, ...newArray]);
-    feedPostsUpdateFriend(posts, array1, friend, 3, dispatch);
+   
 
+    feedPostsUpdateFriend(posts, array1, friend, 3, dispatch);
+    setarray([...array, ...newArray]);
     setloading(false);
   };
   const userPostWraper = (username, Posts) => {
     let newArray = [];
 
     if (Posts.length === 0) {
-      setHasMoreUser(false);
-      setloading(false);
+  
       return;
     }
     Posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -264,10 +264,11 @@ const Contentmain = () => {
           let picki;
           const res = await getuser(dat.username);
           picki = res.profilepic;
+
           posts.map((elee) => {
             return (elee["pic"] = picki);
           });
-
+         
           friendPostWraper(dat.username, posts);
         }
       });
@@ -309,7 +310,7 @@ const Contentmain = () => {
   const copyToClipboardHandler = () => {
     if (!showAlert) {
       navigator.clipboard.writeText(sharePostURL);
-      Alert.success("Link Copyied", {
+      Alert.success("Link Copied", {
         onOpen: () => {
           setShowAlert(false);
         },
@@ -327,7 +328,7 @@ useEffect(()=>{
     if (!isUnmounted) {
       if (state.feedposts.posts.length === 0) {
         setloading(true);
-
+       
         call_func();
       }
       getitem(username).then(async (item) => {
@@ -343,7 +344,7 @@ useEffect(()=>{
     username,
     isUnmounted,
     state.feedposts.array,
-    state.feedposts.posts.length,
+    state.feedposts.posts,
   ]);
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);
@@ -416,7 +417,7 @@ useEffect(()=>{
             dataLength={state.feedposts.posts.length}
             next={call_func}
             hasMore={hasMore}
-            loader={<div className={Styles.loader}></div>}
+            loader={<div ></div>}
             endMessage={
               <p className={Styles.infiP}>
                 <b>Yay! You have seen it all</b>

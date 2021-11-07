@@ -68,7 +68,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
   const copyToClipboardHandler = () => {
     navigator.clipboard.writeText(sharePostURL);
     if (!showAlert) {
-      Alert.success("Link Copyied", {
+      Alert.success("Link Copied", {
         onOpen: () => {
           setShowAlert(false);
         },

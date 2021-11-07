@@ -64,6 +64,7 @@ const Showbar = ({
    
   
         <List list={item} />
+    
       </div>
       </>
     );

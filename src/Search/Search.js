@@ -43,7 +43,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
         username: u.username,
       });
       if (res2.data) {
-        console.log(res2.data,"gtecounts");
+        
         setpostcount(res2.data.postcount);
         setfollowerscount(res2.data.followerscount);
         setfollowingcount(res2.data.followingcount);
@@ -65,7 +65,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
       getcounts(u);
     };
   const searchuserhandle = (username) => {
-    if (username === "") {
+    if (username === "" || username.length>10) {
       setloading(false);
       setUsers([]);
       return;
@@ -183,7 +183,7 @@ setsearchuser(usernameformshowbar);
             {view ? (
               <div className={Styles.searchbar}>
                 <input
-                  placeholder="Search User Here..."
+                  placeholder="Search Users Here..."
                   type="text"
                   value={searchuser}
                   onChange={(e) => {
@@ -206,7 +206,7 @@ setsearchuser(usernameformshowbar);
             ) : null}
           </div>
           <>
-            {users.map((u) => (
+            {users?.map((u) => (
               <div
                 key={u._id}
                 className={Styles.userprofile}
