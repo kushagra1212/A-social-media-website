@@ -5,6 +5,7 @@ import axios from "axios";
 import { getuser } from "../reduces/actions/userAction";
 import { useAlert } from "react-alert";
 import { Link, Redirect } from "react-router-dom";
+import { Background } from "../Animation/Loader/Background/Background";
 const URL = process.env.REACT_APP_URL;
 const Signin = () => {
   const dispatch = useDispatch();
@@ -109,7 +110,9 @@ const Signin = () => {
             Sign up
           </Link>
         </div>
+        
       </div>
+      <Background/>
     </>
   );
 };

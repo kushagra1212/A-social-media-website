@@ -146,7 +146,7 @@ console.log(username);
         dataLength={posts.length}
         next={call_func}
         hasMore={hasMore}
-        loader={<div className={Styles.loader}></div>}
+        loader={<div ></div>}
         endMessage={
           <p
             className={Styles.infiP}
@@ -171,10 +171,11 @@ console.log(username);
                 );
               })
             }
+               
         </div>
       
       </InfiniteScroll>
-    
+
     </>
   );
 };

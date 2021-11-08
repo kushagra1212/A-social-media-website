@@ -45,7 +45,9 @@ const Addpost = ({ setposthandle }) => {
       setloading(!loading);
       setposthandle(false);
       dispatch(updatecountforpost(username, postcount));
-      window.location.reload("/main");
+      setTimeout(()=>{
+        window.location.reload("/main");
+      },1000)
     }catch(err){
         console.log(err);
     }

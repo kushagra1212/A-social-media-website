@@ -7,6 +7,7 @@ import { getusername } from "../reduces/actions/countAction";
 import axios from "axios";
 
 import { NavLink, useHistory } from "react-router-dom";
+import { Background } from "../Animation/Loader/Background/Background";
 
 const URL = process.env.REACT_APP_URL;
 const Signup = () => {
@@ -200,7 +201,9 @@ const Signup = () => {
         >
           Go to Login page
         </NavLink>
+       
       </div>
+      <Background/>
     </>
   );
 };

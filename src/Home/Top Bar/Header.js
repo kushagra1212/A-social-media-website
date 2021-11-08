@@ -13,7 +13,7 @@ const Header = () => {
       <div className={Styles.abovediv}>
      <div  id={Styles.cameraimg} >
             <span   
-       style={{ fontSize: "60px", color: "black",cursor:'pointer' }}>
+   >
           <i
       onClick={() => {
         dispatch(show_user_stories_handle(true));
@@ -26,10 +26,11 @@ const Header = () => {
       </div>
 
       <div className={Styles.abovediv2}>
+        
         <NavLink className={Styles.messageimg} to={`main/messenger`}>
         
                    <span   
-       style={{ fontSize: "60px",cursor:'pointer',color:"rgb(3, 67, 218)" }}>
+  >
           <i
       onClick={() => dispatch({ type: "SHOWMESSAGE", payload: true })}
             styles={{ color: "Dodgerblue", cursor: "pointer" }}

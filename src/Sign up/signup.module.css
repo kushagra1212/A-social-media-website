@@ -1,178 +1,167 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
-.container{
-    position: absolute;
-    width: 100%;
-    height:100%;
-    display: flex;
-    flex-direction: column;
-    padding: 10%;
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    overflow-x: hidden;
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10%;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  overflow-x: hidden;
 }
-.instagram{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 2em;
-    
+.instagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2em;
 }
-.input{
- position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-
-    justify-content: space-around;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-    
-    
+.input {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  /* padding-top: 5%; */
+  /* padding-bottom: 5%; */
+  /* margin-top: 10%; */
+  margin-bottom: 10%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-.input input{
-    width: 100%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    height: 3em;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    border: 2px solid rgb(255 255 255);
-    border-radius: 10px;
-    outline: none;
-    padding: 2%;
-    font-size: medium;
-    /* align-items: center; */
-    box-shadow: -1px -1px 14px 5px #5c6bc06e;
+.input input {
+  width: 100%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  height: 3em;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(255 255 255);
+  border-radius: 5px;
+  outline: none;
+  padding: 2%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: medium;
+  transition: transform cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+  /* align-items: center; */
 }
-.loginbut{
-    background-color: #225af5;
-    outline: none;
-    border: 2px solid rgba(255, 255, 255, 0);
-    color: white;
-    font-weight: bolder;
-    border-radius: 0px;
-    height: 6%;
-    border: 2px solid #80808000;
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px grey;
-    z-index: 10;
-}
-
-.loginbut:active{
-    background-color:rgb(4, 122, 200) ;
-}
-.account{
-    margin-top: 10%;
-}
-.goto{
-    background-color: rgb(255 255 255 / 0%);
-    border: none;
-    margin: 10%;
-    text-decoration: underline;
-    color: #5c6bc0;
-    padding-left: 15%;
-}
-.error{
-    color: #ef5350;
-    background-color: #eeeeee;
-    border: 10px;
-    font-size: 0.8em;
-    padding-left: 10px;
-    font-family: serif;
-    border-radius: 10px;
-
-  
+.loginbut {
+  background-color: #225af5;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0);
+  color: white;
+  font-weight: bolder;
+  border-radius: 0px;
+  height: 40px;
+  border: 2px solid #80808000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px grey;
+  z-index: 10;
+  transition: transform cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
 }
 
-@media screen and (min-width:768px) {
-  .container{
+.loginbut:active {
+  background-color: rgb(4, 122, 200);
+}
+.account {
+  margin-top: 10%;
+}
+.goto {
+  background-color: rgb(255 255 255 / 0%);
+  border: none;
+  margin: 10%;
+  text-decoration: underline;
+  color: #5c6bc0;
+  padding-left: 15%;
+}
+.error {
+  color: #ef5350;
+  background-color: #eeeeee;
+  border: 10px;
+  font-size: 0.8em;
+  padding-left: 10px;
+  font-family: serif;
+  border-radius: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
     width: 30%;
     height: 96vh;
     padding: 2%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    box-shadow: 19px 8px 20px #0000006e;
+    box-shadow: 1px 1px 20px 1px rgba(128, 128, 128, 0.472);
     border: 2px solid #69696900;
     border-radius: 10px;
     overflow-x: hidden;
     overflow-y: hidden;
   }
-  .input{
+  .input {
     position: relative;
-       width: 100%;
-       display: flex;
-       flex-direction: column;
-   
-       justify-content: space-around;
-       padding-top: 0%;
-       padding-bottom: 0%;
-       margin-top: 1%;
-       margin-bottom: 1%;
-       
-       
-   }
-   .input input{
     width: 100%;
-    
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-around;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+  .input input {
+    width: 100%;
+
     margin-top: 5%;
     margin-bottom: 3%;
     height: 3em;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
     border: 2px solid rgb(255 255 255);
-    border-radius: 10px;
+    border-radius: 5px;
     outline: none;
     padding: 2%;
     font-size: medium;
     /* align-items: center; */
-    box-shadow: -1px -1px 14px 5px #5c6bc036;
-    transition: box-shadow cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
-
-}
-.loginbut{
-    background-color: rgb(0,149,246);
+  }
+  .loginbut {
+    background-color: rgb(0, 149, 246);
     outline: none;
     border: 2px solid rgba(255, 255, 255, 0);
     color: white;
     font-weight: bolder;
     border-radius: 0px;
-    height: 6%;
-    left:10px;
+    height: 40px;
+    left: 10px;
     border: 2px solid #80808000;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 1px 1px 10px grey;
     z-index: 10;
-}
-.goto{
+  }
+  .goto {
     background-color: rgb(255 255 255 / 0%);
     border: none;
     margin: 10%;
     text-decoration: underline;
     color: #5c6bc0;
     padding-left: 20%;
-}
-.loginbut{
-    transition: transform background-color cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
-
   }
-  .loginbut:hover{
-    transform:scale3d(1.1,1.1,1);
-  
+  .loginbut:hover {
+    transform: scale3d(1.1, 1.1, 1.1);
+
     background-color: #f57c00;
     box-shadow: 1px 1px 20px grey;
   }
-  .input input:focus{
-    box-shadow: -1px -1px 14px 5px #5c6bc06e;
- 
+  .input input:focus {
+    transform: scale3d(1.1, 1.1, 1.1);
+    box-shadow: 1px 1px 20px 1px rgba(128, 128, 128, 0.568);
   }
-
 }
-.logo{
-    height: 100px;
-    position: static;
-    transform: scale(8.5);
+.logo {
+  height: 100px;
+  position: static;
+  transform: scale(8.5);
 }
