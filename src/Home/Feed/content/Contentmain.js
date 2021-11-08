@@ -67,6 +67,7 @@ const Contentmain = () => {
   const [sharePostURL, setSharePostURL] = useState("");
   const [hasMoreUser,setHasMoreUser]=useState(true);
   const [hasMoreFriend,setHasMoreFriend]=useState(true);
+  const [noOne,setNoOne]=useState(false);
   const unique = (array) => {
     let isvisited = {};
     let newarray = [];
@@ -224,6 +225,7 @@ const Contentmain = () => {
 
     if (Posts.length === 0) {
   
+      setloading(false);
       return;
     }
     Posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -270,6 +272,7 @@ const Contentmain = () => {
           });
          
           friendPostWraper(dat.username, posts);
+          setNoOne(true);
         }
       });
     }
@@ -277,6 +280,7 @@ const Contentmain = () => {
 
   const call_func = () => {
     if (username) {
+
       let otherUsersLastcount = state.feedposts.otherUsersLastcount;
       let post1 = [];
       getpostsforfeed(username, otherUsersLastcount[username], 3).then(
@@ -285,7 +289,7 @@ const Contentmain = () => {
           console.log(post1);
           userPostWraper(username, post1);
           getothers();
-
+         
           post1.map((ele) => {
             return (ele["pic"] = profilepic);
           });
@@ -369,14 +373,17 @@ useEffect(()=>{
       </div>
     );
   }
-  if (loading === true) {
+  if (loading === true || !noOne) {
     return <ContentMainAnimate />;
-  } else if (state.feedposts.posts.length === 0) {
+  } else if (state.feedposts.posts.length === 0 && noOne) {
     return (
+      <>
       <div className={Styles.maincontentstart}>
-        Seems like you are not following any one , please follow others to see
+        You are not following any one , please follow others to see
         their posts
       </div>
+      {window.screen.width<768?<SuggestionList/>:null}
+      </>
     );
   } else {
     return (

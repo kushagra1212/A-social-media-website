@@ -47,7 +47,7 @@ const Addpost = ({ setposthandle }) => {
       dispatch(updatecountforpost(username, postcount));
       setTimeout(()=>{
         window.location.reload("/main");
-      },1000)
+      },1000);
     }catch(err){
         console.log(err);
     }
@@ -55,6 +55,13 @@ const Addpost = ({ setposthandle }) => {
   }
   const handleUpdateItemImage = (e) => {
     e.preventDefault();
+    if(selectedFile==null)
+    {
+     
+      ALert.error("Oops ! 😜");
+      return;
+    }
+  
     setloading(!loading);
     const storage = firebase.storage();
 

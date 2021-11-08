@@ -63,7 +63,7 @@ const Container = ({ toDelete, username }) => {
       else lastCount = 0;
       let temp_array;
       try{
-        temp_array= await getpostsforfeed(username, lastCount, 3);
+        temp_array= await getpostsforfeed(username, lastCount, 5);
         temp_array.forEach((ele) => {
           ele.likes.forEach((ele2) => {
             dispatch(updateLikesArray(ele2.username, ele._id));
@@ -146,7 +146,9 @@ console.log(username);
         dataLength={posts.length}
         next={call_func}
         hasMore={hasMore}
-        loader={<div ></div>}
+        loader={<div style={{ width:"10em",
+          marginTop: "10%",
+          height: "10em"}} ></div>}
         endMessage={
           <p
             className={Styles.infiP}

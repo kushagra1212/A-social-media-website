@@ -8,7 +8,7 @@ import { setfollowers } from "../../methods/setfollowers";
 import { useDispatch } from "react-redux";
 import addconversation from "../../methods/addconversation";
 import getconversations from "../../methods/getconversations";
-const MyLoader = (props) => (
+const MyLoaderPC = (props) => (
   <ContentLoader 
     speed={3}
     width={250}
@@ -21,6 +21,23 @@ const MyLoader = (props) => (
     <rect x="15" y="0" rx="10" ry="10" width="60" height="60" /> 
   
     <rect x="140" y="5" rx="0" ry="3" width="100" height="30" /> 
+
+
+  </ContentLoader>
+)
+const MyLoaderPhone = (props) => (
+  <ContentLoader 
+  speed={3}
+  width={550}
+  height={510}
+  viewBox="0 0 250 500"
+  backgroundColor="#f3f3f3"
+  foregroundColor="#ecebeb"
+  {...props}
+>    <rect x="15" y="70" rx="0" ry="3" width="140" height="20" /> 
+  <rect x="15" y="0" rx="10" ry="10" width="60" height="60" /> 
+
+  <rect x="140" y="5" rx="0" ry="3" width="100" height="30" /> 
 
 
   </ContentLoader>
@@ -74,7 +91,7 @@ const handleAdd=async(user)=>{
   setUsers(currentusers);
 }
   if(loading)
-  return(<div className={Styles.skeletondiv} >  <MyLoader  /> <MyLoader  /> <MyLoader  />)</div>)
+  return(<>{window.screen.width>=778?<div className={Styles.skeletondiv} >  <MyLoaderPC  /> <MyLoaderPC  /> <MyLoaderPC  />)</div>:<div className={Styles.skeletondivphone} >  <MyLoaderPhone  /> <MyLoaderPhone  /> <MyLoaderPhone  />)</div>}</>)
   else
   return (
     <>

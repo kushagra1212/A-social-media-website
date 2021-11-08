@@ -80,3 +80,52 @@
   border-radius: 10px;
   cursor: default;
 }
+.skeletondivphone {
+  position: absolute;
+  width: 100vw;
+  /* background: aqua; */
+  height: 25vh;
+  z-index: 100;
+  top: 60%;
+  /* float: right; */
+  right: 2.5%;
+  z-index: 1;
+  position: fixed;
+  border: 1px solid #80808000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px #8080804a;
+  overflow: hidden;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+@media screen and (max-width: 768px) {
+  .maindiv {
+    position: relative;
+    width: 100vw;
+
+    display: flex;
+    /* background: aqua; */
+    height: 25vh;
+    background-color: white;
+    z-index: 100;
+    scroll-behavior: smooth;
+    overflow: hidden;
+    top: 20%;
+    /* float: right; */
+
+    z-index: 1;
+    /* position: fixed; */
+    border: 1px solid #80808000;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px 1px #8080804a;
+    overflow-x: scroll;
+
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .listbut {
+    width: 100px;
+  }
+}

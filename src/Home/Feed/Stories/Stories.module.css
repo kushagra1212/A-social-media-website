@@ -1,10 +1,11 @@
 .stories {
-  background-color: rgb(255, 255, 255);
+  background: #c9ccd3;
+  background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
   height: 10%;
   display: flex;
   position: relative;
   border: 2px solid rgba(251, 250, 250, 0.479);
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 1px 1px 100px 1px rgba(128, 128, 128, 0.582);
 }
 
@@ -33,6 +34,8 @@
 
 @media screen and (min-width: 768px) {
   .stories {
+    background-color: rgb(255, 255, 255);
+    background-image: none;
     height: 70px;
     display: flex;
     width: 50%;
