@@ -272,8 +272,9 @@ const Contentmain = () => {
           });
          
           friendPostWraper(dat.username, posts);
-          setNoOne(true);
+        
         }
+      
       });
     }
   };
@@ -343,13 +344,20 @@ useEffect(()=>{
       setarray(state.feedposts.array);
     }
 
-    return () => setIsUnmounted(true);
+    return () => {  setIsUnmounted(true);};
   }, [
     username,
     isUnmounted,
     state.feedposts.array,
     state.feedposts.posts,
   ]);
+  useEffect(()=>{
+    setTimeout(()=>{
+      setNoOne(true);
+    },3000)
+  },[])
+  console.log(noOne);
+ 
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);
   if (showProfile) {
@@ -373,7 +381,7 @@ useEffect(()=>{
       </div>
     );
   }
-  if (loading === true || !noOne) {
+  if (loading || !noOne) {
     return <ContentMainAnimate />;
   } else if (state.feedposts.posts.length === 0 && noOne) {
     return (

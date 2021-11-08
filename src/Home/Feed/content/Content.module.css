@@ -12,13 +12,16 @@
   padding-bottom: 3%;
   width: 100%;
   scroll-behavior: smooth;
-  background: #ede7f6;
+  background: #ffffff;
   margin-top: 50%;
   width: 90%;
   margin-left: 5%;
   font-family: cursive;
-  border: 2px solid #8080804d;
+  border: 1px solid #80808000;
+  font-size: 1.2em;
   border-radius: 10px;
+  box-shadow: 1px 1px 10px 1px #80808047;
+  text-align: center;
 }
 
 .singlecontainer {

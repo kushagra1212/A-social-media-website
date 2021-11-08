@@ -1,12 +1,12 @@
 .stories {
-  background: #c9ccd3;
-  background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
+  background-image: linear-gradient(to left, #868f96 0%, #3b3653 100%);
   height: 10%;
   display: flex;
+  margin: 5px;
   position: relative;
   border: 2px solid rgba(251, 250, 250, 0.479);
-  border-radius: 10px;
-  box-shadow: 1px 1px 100px 1px rgba(128, 128, 128, 0.582);
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px rgb(128 128 128 / 58%);
 }
 
 .particular {

@@ -16,9 +16,12 @@ import ProgressBar from "../../../../Animation/Loader/Progressbar/ProgressBar";
 import { uploadstories } from "../../../../methods/uploadstories";
 import { data_URL_to_file } from "../../../../methods/data_URL_to_file";
 import { getCroppedImg } from "../../../../methods/createcrop";
+import { useAlert } from "react-alert";
 import firebase from "@firebase/app-compat";
+
 const Userstories = () => {
   const dispatch = useDispatch();
+  const Alert=useAlert();
   const [pic, setPic] = useState(null);
   const { show_webcam, show_others_stories } = useSelector(
     (state) => state.Stories
@@ -91,6 +94,7 @@ const Userstories = () => {
             .then((res) => {
               setloading(false);
               setSelectedFile(null);
+              Alert.success("Story Added");
               dispatch(show_user_stories_handle(false));
             })
             .catch((err) => {
