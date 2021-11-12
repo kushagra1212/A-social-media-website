@@ -9,12 +9,27 @@ import { updateLikesArray } from "../../reduces/actions/userAction";
 import {getcount} from "../../methods/getcount";
 import ContentLoader from "react-content-loader";
 let heightofAni = window.screen.width >= 768 ? "45vh" : "20vh";
-let widthofAni = window.screen.width >= 768 ? "45vh" : "20vh";
-const MyLoader = (props) => (
+let widthofAni = window.screen.width >= 768 ? "100%" : "100%";
+let heightofAniT = window.screen.width >= 768 ? "95vh" : "45vh";
+let widthofAniT = window.screen.width >= 768 ? "100%" : "100%";
+const MyLoaderGrid = (props) => (
   <ContentLoader
     speed={1}
     width={widthofAni}
     height={heightofAni}
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
+    {...props}
+  >
+    {" "}
+    <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
+  </ContentLoader>
+);
+const MyLoaderTable = (props) => (
+  <ContentLoader
+    speed={1}
+    width={widthofAniT}
+    height={heightofAniT}
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
     {...props}
@@ -159,17 +174,22 @@ console.log(username);
       >
         <div
           style={grid ? {} : { flexDirection: "column", alignItems: "center" }}
-          className={Styles.maindiv}
+          className={grid?Styles.maindiv:Styles.table}
         >
           {posts.map((post, id) => {
                 return (
-                  <Suspense key={id} fallback={<div className={Styles.shadow} ><MyLoader/></div>}>
+         <div key={id} className={grid?Styles.boxgrid:Styles.box} >
+              <div className={Styles.test}  onClick={() => setPostHandler(post)} ><h1 style={{color:"white"}}>View</h1></div>
+                    <Suspense  fallback={grid?<MyLoaderGrid/>:<MyLoaderTable/>}>
                     <SuspenseImg
-                      className={Styles.image}
-                      onClick={() => setPostHandler(post)}
+           
+                     
                       src={post.picture}
                     />
+                               
                   </Suspense>
+
+                </div>
                 );
               })
             }

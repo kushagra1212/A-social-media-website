@@ -1,60 +1,60 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
-.footer{
-    position: fixed;
-    display: flex;
-    width:100%;
-    justify-content: space-around;
-    top: 94%;
-    height: 100px;
-    background-color: rgb(255, 255, 255);
-   border: 2px solid rgba(0, 0, 0, 0);
-   border-radius: 10px;
-   box-shadow: 2px -3px 20px 0px rgb(103 103 103);
-   z-index: 10;
-}
-
-.footer img{
-    background-color: rgb(255,255,255);
-    border: 2px solid rgba(245, 222, 179, 0);
-    border-radius: 10px;
-    
-     height: 30px;
-     width: 30px;
-     transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
- 
-   
+.footer {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  top: 94%;
+  height: 100px;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  box-shadow: 2px -3px 20px 0px rgb(103 103 103);
+  z-index: 10;
 }
 
-.footer img:hover{
-    transform: scale(1.5);
-}
-.footer img:active{
-    transform: scale(1.5);
+.footer img {
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgba(245, 222, 179, 0);
+  border-radius: 10px;
+
+  height: 30px;
+  width: 30px;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
 
-@media screen and (min-width:768px) {
-    .footer{
-        position: fixed;
-      
-        width: 40%;
-        transform: rotate(
-    90deg);
-    
-        justify-content: space-around;
-        top: 50%;
-        align-items: center;
-  
-        left: -15%;
-      
-        background-color: rgb(255, 255, 255);
-        border: 2px solid rgba(0, 0, 0, 0);
-        border-radius: 10px;
-        box-shadow: 2px 1px 20px 0px rgb(103 103 103 / 40%);
-    }
-  .footer img{
-      transform: rotate(270deg);
+.footer img:hover {
+  transform: scale(1.5);
+}
+.footer img:active {
+  transform: scale(1.5);
+}
+
+@media screen and (min-width: 768px) {
+  .footer img {
+    transform: rotate(270deg);
   }
+  .footer {
+    position: fixed;
 
+    width: 40%;
+    transform: rotate(90deg);
+
+    justify-content: space-around;
+    top: 50%;
+    align-items: center;
+
+    left: -15%;
+
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    box-shadow: 2px 1px 20px 0px rgb(103 103 103 / 40%);
+    transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+  }
+  .footer img:hover {
+    transform: scale(1.5);
+  }
 }

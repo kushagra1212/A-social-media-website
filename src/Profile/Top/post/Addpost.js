@@ -234,7 +234,7 @@ const Addpost = ({ setposthandle }) => {
     <button className={Styles.choosebutton} type="button" onClick={openChoosefile} >Choose Picture</button>
   
       <textarea
-      
+     
         type="name"
         value={desc}
         onChange={(e) => setdesc(e.target.value.substr(0, 100))}
