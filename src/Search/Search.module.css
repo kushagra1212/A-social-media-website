@@ -39,7 +39,11 @@
   align-content: space-between;
   justify-content: space-around;
 }
-
+.userwrap {
+  position: relative;
+  overflow: scroll;
+  height: 86vh;
+}
 @keyframes animateIn {
   0% {
     opacity: 0;

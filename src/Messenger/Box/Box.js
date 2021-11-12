@@ -69,15 +69,7 @@ const Box = ({ conversations, username }) => {
   if (conversations != null && conversations.length === 0) {
     return (
       <div
-        className={Styles.maindiv}
-        style={{
-          color: "black",
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "2em",
-        }}
+        className={Styles.maindiv2}
       >
         You have no conversation
         <h6>Please Follow your friends</h6>
@@ -86,8 +78,9 @@ const Box = ({ conversations, username }) => {
   }
   return (
     <div className={Styles.maindiv}>
+      <div className={Styles.messagetext}>  <h2 style={{ marginLeft: "10%", opacity: "0.6" }}>Messages</h2></div>
       <div className={Styles.list}>
-        <h2 style={{ marginLeft: "10%", opacity: "0.6" }}>Messages</h2>
+      
         {conversations?.map((element, id) => {
           return (
             <List

@@ -104,13 +104,13 @@ useEffect(()=>{
   if(user===null){
      return (
 <div style={{display:"flex",justifyContent:"center"}}>
-      <div className={Styles.topdivmessage} style={{top:'25%',left:"10",width:'50%',height:"50%",}}>
-        
-      <h4 style={{fontSize:'4em',opacity:'0.5'}}>
-            Start the Conversation
-      </h4>
       
-      </div>
+        
+     {messages!==null? <div className={Styles.topdivmessage} style={{top:'25%',left:"10",width:'50%',height:"50%",}}>   <h4 style={{fontSize:'4em',opacity:'0.5'}}>
+            Start the Conversation
+      </h4>  </div>:null}
+      
+    
          <div className={Styles.scrolldiv} ref={Scrollref}></div>
          <textarea
          hidden

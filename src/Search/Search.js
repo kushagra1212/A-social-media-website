@@ -205,7 +205,7 @@ setsearchuser(usernameformshowbar);
               </div>
             ) : null}
           </div>
-          <>
+          <div className={Styles.userwrap}>
             {users?.map((u) => (
               <div
                 key={u._id}
@@ -231,7 +231,7 @@ setsearchuser(usernameformshowbar);
               </div>
             ))}
             {loading ? <div className={Styles.loader}></div> : null}
-          </>
+          </div>
      
         </div>
         {window.screen.width >= 768 ? <SuggestionList /> : null}

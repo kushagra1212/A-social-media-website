@@ -498,13 +498,14 @@ useEffect(()=>{
                         : post?.likes?.length}
                     </div>
                   ) : (
-                    <div>
+                    <div className={Styles.heart}>
                       <span
                         style={{
                           color: "grey",
 
                           cursor: "pointer",
                         }}
+                      
                       >
                         <i
                           onClick={() => likefunction(post, post._id)}
@@ -513,7 +514,8 @@ useEffect(()=>{
                             cursor: "pointer",
                             boxShadow: "8px 9px 15px 10px #5050504d",
                           }}
-                          className="fa fa-heart"
+                          
+                          className={"fa fa-heart"}
                           aria-hidden="true"
                         ></i>
                       </span>{" "}

@@ -104,7 +104,6 @@
   .maindiv {
     position: relative;
     width: 100vw;
-
     display: flex;
     /* background: aqua; */
     height: 25vh;
@@ -112,16 +111,14 @@
     z-index: 100;
     scroll-behavior: smooth;
     overflow: hidden;
-    top: 20%;
+    top: 10px;
     /* float: right; */
-
     z-index: 1;
     /* position: fixed; */
     border: 1px solid #80808000;
     border-radius: 5px;
     box-shadow: 1px 1px 10px 1px #8080804a;
     overflow-x: scroll;
-
     flex-direction: row;
     justify-content: space-between;
   }

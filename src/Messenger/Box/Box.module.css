@@ -16,9 +16,11 @@
   background-blend-mode: multiply;
   flex-direction: column;
   scroll-behavior: smooth;
-  top: 70px;
+  top: 13vh;
   padding-top: 20px;
-  height: 100vh;
+  height: 88vh;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .listitem {
   cursor: pointer;
@@ -67,7 +69,22 @@
 .usernamediv label {
   cursor: pointer;
 }
-
+.maindiv2 {
+  display: flex;
+  top: 50vh;
+  width: 100vw;
+  position: absolute;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  font-size: 1.3em;
+  font-family: cursive;
+}
+.messagetext {
+  z-index: 10;
+  top: 13vh;
+  position: absolute;
+}
 @media screen and (min-width: 768px) {
   .maindiv {
     max-height: 100vh;
@@ -147,5 +164,13 @@
     /* justify-content: space-evenly; */
     flex-direction: column;
     align-content: flex-end;
+  }
+  .maindiv2 {
+    font-size: 2.3em;
+  }
+  .messagetext {
+    z-index: 10;
+    top: 5vh;
+    position: absolute;
   }
 }
