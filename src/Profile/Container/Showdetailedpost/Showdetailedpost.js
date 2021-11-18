@@ -17,6 +17,7 @@ import firebase from "../../../Firebase/index";
 import axios from "axios";
 import { updatecountforpost } from "../../../reduces/actions/countAction";
 import { getcount } from "../../../methods/getcount";
+import { FluidLoaderFive } from "../../../Animation/Loader/loader/FluidLoader";
 const URL = process.env.REACT_APP_URL;
 const CURURL = process.env.REACT_APP_CURURL;
 let likeCountArray = [];
@@ -134,11 +135,24 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
           dispatch(updatecountforpost(username, c));
           dispatch(resetFeedPosts());
           dispatch(resetUserPosts());
-          setDeleteIt(false);
-          window.location.reload("/main");
+   
+          setTimeout(()=>{
+            
+         
+            window.location.reload("/main");
+          },2000);
         })
-        .catch((err) => {
+        .catch(async (err) => {
+          try{
+            const res = await axios.delete(
+              `${URL}/post/deleteuserpost/${deletePost._id}`
+            );
+          }catch(err2){
+            console.log(err2);
+          }
+          setShowConfirm(false)
           setDeleteIt(false);
+         
           console.log(err);
         });
     };
@@ -146,6 +160,10 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
   }, [deleteIt]);
 
   if (showConfirm) {
+
+    if(deleteIt)
+    return ( <div className={Styles.confirmmain} style={{display:"flex",flexDirection:"row",justifyContent:"center",justifyItems:"center"}}><FluidLoaderFive/>     </div>)
+    else
     return (
       <div className={Styles.confirmmain}>
         <div className={Styles.confirm}>
@@ -160,7 +178,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
             <button
               className={Styles.confirmyes}
               onClick={() => {
-                setShowConfirm(false);
+                
                 setDeleteIt(true);
               }}
             >
@@ -225,7 +243,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
               <h2>{post.username}</h2>
             </div>
             <button
-              onDoubleClick={() => likefunction(post, post._id)}
+
               className={Styles.imgdiv}
             >
               <img

@@ -152,7 +152,7 @@ const Addpost = ({ setposthandle }) => {
     }
   setloading(true);
     const canvas = await getCroppedImg(imageSrc, crop);
-    let dataURL=canvas.toDataURL('image/jpeg',.40);
+    let dataURL=canvas.toDataURL('image/jpeg',0.31);
   
     setSelectedFile(data_URL_to_file(dataURL,fileName))
     canvas.toBlob(

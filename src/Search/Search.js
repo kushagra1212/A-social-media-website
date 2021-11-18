@@ -230,7 +230,7 @@ setsearchuser(usernameformshowbar);
                 <button>Go to profile</button>
               </div>
             ))}
-            {loading ? <div className={Styles.loader}></div> :searchuser!==""?<div className={Styles.notfound}  >
+            {loading ? <div className={Styles.loader}></div> :searchuser!=="" && users.length===0?<div className={Styles.notfound}  >
             
             <img alt="" width="50%" height="40%" src={process.env.PUBLIC_URL+"/nouser.gif"} />
             <h2>Not Found</h2>
