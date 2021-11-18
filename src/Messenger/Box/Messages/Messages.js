@@ -166,7 +166,12 @@ useEffect(()=>{
                </div>
             );
           })}
-          <div className={Styles.scrolldiv} ref={Scrollref}></div>
+  
+
+          {messages?.length===0?<div className={Styles.nomessages} >
+            <h2>Start Chatting</h2>
+            <img src={process.env.PUBLIC_URL+"/chat.gif"} width="50%" height="50%" alt=""/></div>:null}
+            <div className={Styles.scrolldiv} ref={Scrollref}></div>
         </div>
 
         <div className={Styles.senddiv}>

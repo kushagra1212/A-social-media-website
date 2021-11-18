@@ -8,6 +8,7 @@ import homeblackimg from "../Home/icons/homeblack.png";
 
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setScrollPositionHandler } from "../reduces/actions/PostAction";
 const Footer = ({ url, path }) => {
   const dispatch = useDispatch();
   const { home, search, like, profile } = useSelector((state) => state.main);
@@ -19,7 +20,7 @@ const Footer = ({ url, path }) => {
         <Link to={`${url}`}>
           <img
             src={home ? homeblackimg : homeimg}
-            onClick={() => dispatch({ type: "SHOWHOME", payload: true })}
+            onClick={() =>{dispatch(setScrollPositionHandler(window.scrollY)); dispatch({ type: "SHOWHOME", payload: true });}}
             alt=""
           />
         </Link>
@@ -27,14 +28,14 @@ const Footer = ({ url, path }) => {
         <Link to={`${url}/search`}>
           <img
             src={search ? searchblackimg : searchimg}
-            onClick={() => dispatch({ type: "SHOWSEARCH", payload: true })}
+            onClick={() =>{dispatch(setScrollPositionHandler(window.scrollY)); dispatch({ type: "SHOWSEARCH", payload: true });}}
             alt=""
           />
         </Link>
         <Link to={`${url}/likes`}>
           <img
             src={like ? likeblackimg : likeimg}
-            onClick={() => dispatch({ type: "SHOWLIKE", payload: true })}
+            onClick={() =>{dispatch(setScrollPositionHandler(window.scrollY)); dispatch({ type: "SHOWLIKE", payload: true });}}
             alt=""
           />
         </Link>
@@ -50,7 +51,7 @@ const Footer = ({ url, path }) => {
                 : process.env.PUBLIC_URL + "/userImage.png"
             }
             className={Styles.profile}
-            onClick={() => dispatch({ type: "SHOWPROFILE", payload: true })}
+            onClick={() =>{dispatch(setScrollPositionHandler(window.scrollY)); dispatch({ type: "SHOWPROFILE", payload: true });}}
             alt=""
           />
         </Link>

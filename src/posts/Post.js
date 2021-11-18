@@ -16,7 +16,7 @@ const Post = () => {
 
         };
         getPost();
-  }, [])
+  }, []);
   if(post===null)
   return(<div>Loading....</div>)
   else

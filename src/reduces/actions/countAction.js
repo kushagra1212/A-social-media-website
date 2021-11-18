@@ -72,6 +72,22 @@ export const updatefollowerandfollowing = (username, usernameofsender) => {
     }
   };
 };
+export const removefollowerandfollowing = (username, usernameofsender) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.patch(`${URL}/item/removefollowerandfollowing`, {
+        username: username,
+        usernameofsender: usernameofsender,
+      });
+      console.log(res.data);
+      if (res.data) {
+        dispatch(updatefollowingcount(res.data.followingcount));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 export const getfollowingcount = (username) => {
   return async (dispatch) => {
     try {

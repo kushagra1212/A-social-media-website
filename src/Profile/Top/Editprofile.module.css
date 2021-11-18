@@ -171,13 +171,13 @@
   height: 70%;
   width: 90%;
   transform: translate(-50%, -50%);
-  background-color: indigo;
+  background-color: rgb(228, 228, 235);
   z-index: 200;
   top: 40%;
   left: 50%;
   border: 2px solid #80808000;
   border-radius: 10px;
-  box-shadow: 10px 10px 1000px 1000px #000000;
+  box-shadow: 10px 10px 1000px 1000px #ffffff;
   align-content: center;
   flex-wrap: nowrap;
   flex-direction: column;

@@ -91,7 +91,7 @@ const Profile = () => {
         />
 
           <>
-          {username!==""?<Container toDelete={false} username={username} />:null}{" "}
+          {username!==""?<Container toDelete={true} username={username}/>:null}{" "}
           </>
 
       </div>

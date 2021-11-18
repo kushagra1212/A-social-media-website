@@ -79,6 +79,10 @@
   text-decoration: underline;
   color: #fce4ec;
 }
+.input input:focus {
+  transform: scale3d(1.1, 1.1, 1.1);
+  box-shadow: 1px 1px 20px 1px rgba(128, 128, 128, 0.568);
+}
 @media screen and (min-width: 768px) {
   .container {
     width: 30%;

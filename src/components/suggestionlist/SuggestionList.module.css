@@ -6,7 +6,7 @@
   max-height: 60vh;
   z-index: 100;
   top: 20%;
-
+  background-color: #ffffff;
   /* float: right; */
   right: 2.5%;
   z-index: 1;
@@ -107,6 +107,7 @@
     display: flex;
     /* background: aqua; */
     height: 25vh;
+
     background-color: white;
     z-index: 100;
     scroll-behavior: smooth;

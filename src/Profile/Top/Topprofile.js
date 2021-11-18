@@ -38,6 +38,7 @@ const Topprofile = ({
     <div className={Styles.maindiv}>
       <div className={Styles.firstdiv}>
         <img
+        onClick={() => edit_it()}
           src={
             profilepic ? profilepic : process.env.PUBLIC_URL + "/userImage.png"
           }

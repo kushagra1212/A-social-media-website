@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { show_user_stories_handle } from "../../reduces/actions/StoriesAction";
+import { setScrollPositionHandler } from "../../reduces/actions/PostAction";
 const Header = () => {
   const dispatch = useDispatch();
 
@@ -16,6 +17,7 @@ const Header = () => {
    >
           <i
       onClick={() => {
+        dispatch(setScrollPositionHandler(window.scrollY));
         dispatch(show_user_stories_handle(true));
       }}
             styles={{ color: "Dodgerblue", cursor: "pointer" }}
@@ -32,7 +34,7 @@ const Header = () => {
                    <span   
   >
           <i
-      onClick={() => dispatch({ type: "SHOWMESSAGE", payload: true })}
+      onClick={() =>{   dispatch(setScrollPositionHandler(window.scrollY)); dispatch({ type: "SHOWMESSAGE", payload: true });}}
             styles={{ color: "Dodgerblue", cursor: "pointer" }}
             className="fas fa-comments"
           ></i>

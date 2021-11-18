@@ -325,6 +325,8 @@
     z-index: 10000;
     background-color: rgb(252 252 252 / 21%);
     backdrop-filter: blur(5px);
+    top: 2px;
+    height: auto;
   }
   .singlecontainer {
     padding: 1%;

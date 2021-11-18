@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Content from "./content/Content";
 import Contentmain from "./content/Contentmain";
 import Styles from "./Feed.module.css";
 import Stories from "./Stories/Stories";
@@ -16,7 +17,7 @@ const Feed = () => {
   return (
     <div className={Styles.maindiv}>
  <Stories/>
-      {go ? <Contentmain /> : null}
+      {go ? <Content/> : null}
     </div>
   );
 };

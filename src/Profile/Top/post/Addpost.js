@@ -17,7 +17,7 @@ const Addpost = ({ setposthandle }) => {
   const [desc, setdesc] = useState("");
   const ALert=useAlert();
   const Refinput=useRef();
-  const { username } = useSelector((state) => state.user);
+  const { username,profilepic } = useSelector((state) => state.user);
   const [loading, setloading] = useState(false);
   const [selectedFile,setSelectedFile]=useState(null);
   const [image, setImage] = useState(null);
@@ -32,7 +32,8 @@ const Addpost = ({ setposthandle }) => {
       const res=await axios.post(`${URL}/post/addpost`,{
         username:username,
         picture:ul,
-        desc:desc
+        desc:desc,
+        profilepic:profilepic
       }, {onUploadProgress: data => {
         //Set the progress value to show the progress bar
         setProgress(Math.round((100 * data.loaded) / data.total));

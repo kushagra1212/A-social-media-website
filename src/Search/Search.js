@@ -169,7 +169,7 @@ setsearchuser(usernameformshowbar);
           showfollowing={showfollowing}
         />
      
-          <ShowPost username={user.username} />
+          <ShowPost username={user.username} toDelete={false}/>
    
       </div>
     );
@@ -230,7 +230,11 @@ setsearchuser(usernameformshowbar);
                 <button>Go to profile</button>
               </div>
             ))}
-            {loading ? <div className={Styles.loader}></div> : null}
+            {loading ? <div className={Styles.loader}></div> :searchuser!==""?<div className={Styles.notfound}  >
+            
+            <img alt="" width="50%" height="40%" src={process.env.PUBLIC_URL+"/nouser.gif"} />
+            <h2>Not Found</h2>
+            </div>:null}
           </div>
      
         </div>
@@ -274,7 +278,7 @@ setsearchuser(usernameformshowbar);
           showfollowing={showfollowing}
         />
       
-          <ShowPost username={user.username} />
+          <ShowPost username={user.username} toDelete={false}/>
       
       </div>
     );

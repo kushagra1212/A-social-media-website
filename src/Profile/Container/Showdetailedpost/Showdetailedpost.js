@@ -32,6 +32,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [deleteIt, setDeleteIt] = useState(false);
   const [deletePost, setDeletePost] = useState(null);
+
   const { likesArray } = useSelector((state) => {
     return state.feedposts;
   });
@@ -126,12 +127,13 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
           const res = await axios.delete(
             `${URL}/post/deleteuserpost/${deletePost._id}`
           );
-          dispatch(resetFeedPosts());
-          dispatch(resetUserPosts());
+    
 
           let c = postcount;
           c -= 2;
           dispatch(updatecountforpost(username, c));
+          dispatch(resetFeedPosts());
+          dispatch(resetUserPosts());
           setDeleteIt(false);
           window.location.reload("/main");
         })
@@ -142,6 +144,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
     };
     if (deleteIt) deletePostHandle();
   }, [deleteIt]);
+
   if (showConfirm) {
     return (
       <div className={Styles.confirmmain}>
@@ -219,7 +222,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
                 alt=" "
               />
 
-              <h5>{post.username}</h5>
+              <h2>{post.username}</h2>
             </div>
             <button
               onDoubleClick={() => likefunction(post, post._id)}
@@ -340,7 +343,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
               </div>
             <div>
 
-              {!toDelete ? (
+              {toDelete ? (
                 setting ? (
                   <span
                
@@ -365,7 +368,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
               ) : null}
               </div>
             </div>
-            <div className={Styles.caption}>{post.desc}</div>
+            <div style={{fontSize:"1.3em"}} className={Styles.caption}>{post.desc}</div>
           </div>
         </div>
       )}

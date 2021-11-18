@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Styles from "./User.module.css";
-import { setfollowers } from "../../methods/setfollowers";
+import { removefollowers, setfollowers } from "../../methods/setfollowers";
 import verifiesusers from "../../methods/verifiesusers";
 import Showbar from "../../showbar/Showbar";
 import { useAlert } from "react-alert";
 import addconversation from "../../methods/addconversation";
 import getconversations from "../../methods/getconversations";
+import deleteconversation from "../../methods/deleteconversation";
 const User = ({
   profpic,
   name,
@@ -46,6 +47,12 @@ const User = ({
      setfollowing(true);
     }
   };
+  const removefollowinghandle=()=>{
+    console.log("Remove");
+    removefollowers(username, usernameofsender, dispatch);
+    deleteconversation([username, usernameofsender]);
+    setfollowing(false);
+  }
   const setfollowingfunc = (value) => {
     setfollowing(value);
   };
@@ -148,11 +155,11 @@ const User = ({
 
         <button
           className={Styles.isfollowing}
-          style={following?{backgroundColor:"grey",cursor:'none'}:{}}
+          style={following?{backgroundColor:"grey"}:{}}
 
-          onClick={() => (!loading ? setfollowinghandle() : null)}
+          onClick={() => (!loading ?!following?setfollowinghandle():removefollowinghandle() : null)}
         >
-          {following ? "Following" : "Follow"}{" "}
+          {following ? "Unfollow" : "Follow"}{" "}
         </button>
       </div>
     </div>

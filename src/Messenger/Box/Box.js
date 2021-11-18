@@ -7,7 +7,22 @@ import {
   setconversationID,
   setUserPicture,
 } from "../../reduces/actions/MessageReducerAction";
+import ContentLoader from "react-content-loader"
+let heightofAni = window.screen.width >= 768 ? "20vh" : "15vh";
 
+const MyLoader = (props) => (
+  <ContentLoader
+    speed={1}
+    width="100%"
+    height={heightofAni}
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
+    {...props}
+  >
+    {" "}
+    <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
+  </ContentLoader>
+);
 const List = ({ chatuser, conversationID,selectedID,selectIDHandler }) => {
   const [user, setuser] = useState(null);
   
@@ -24,7 +39,7 @@ const List = ({ chatuser, conversationID,selectedID,selectIDHandler }) => {
   if (user === null) {
     return (
       <div styles={{ height: "10px" }} className={Styles.listitem}>
-        <VerticalLoader />
+        <MyLoader />
       </div>
     );
   }
