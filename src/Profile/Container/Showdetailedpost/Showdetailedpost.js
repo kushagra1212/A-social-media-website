@@ -221,7 +221,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
         <div className={Styles.maincontent}>
           <span
             className={Styles.backbut}
-            style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
+            style={{ fontSize: "40px", color: "blue", cursor: "pointer" }}
             onClick={() => setShowDetailedPostHandler(false)}
           >
             <i

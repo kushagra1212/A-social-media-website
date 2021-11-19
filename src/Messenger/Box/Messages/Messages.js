@@ -6,19 +6,18 @@ import getmessages from "../../../methods/getmessages";
 import addmessage from "../../../methods/addmessage";
 
 const Messages = () => {
-  const { conversationID, user, socket,userPicture } = useSelector(
+  const { conversationID, user, socket, userPicture } = useSelector(
     (state) => state.MessageReducer
   );
   const [messages, setmessages] = useState(null);
   let Scrollref = useRef(null);
-  let inputRef=useRef();
+  let inputRef = useRef();
   const { username } = useSelector((state) => state.user);
   const [text, setText] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(!username)
-     return;
+    if (!username) return;
     if (socket) {
       socket.on("getmessage", ({ sender, text }) => {
         if (sender === user.username) {
@@ -63,11 +62,10 @@ const Messages = () => {
       behavior: "smooth",
       block: "start",
     });
-   
   }, [messages]);
-useEffect(()=>{
-  inputRef.current.focus();
-},[])
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   const sendButtonHandler = async (e) => {
     inputRef.current.focus();
     if (text.trim("") === "") return;
@@ -101,77 +99,108 @@ useEffect(()=>{
   const backButFun = () => {
     dispatch({ type: "SHOWBOX", payload: true });
   };
-  if(user===null){
-     return (
-<div style={{display:"flex",justifyContent:"center"}}>
-      
-        
-     {messages!==null? <div className={Styles.topdivmessage} style={{top:'25%',left:"10",width:'50%',height:"50%",}}>   <h4 style={{fontSize:'4em',opacity:'0.5'}}>
-            Start the Conversation
-      </h4>  </div>:null}
-      
-    
-         <div className={Styles.scrolldiv} ref={Scrollref}></div>
-         <textarea
-         hidden
-            onChange={(e) => setText(e.target.value)}
-            onKeyDown={(e) => (e.code === "Enter" ? sendButtonHandler(e) : null)}
-            value={text}
-            placeholder="Type messsage"
-            className={Styles.textarea}
-         ref={inputRef}
+  if (user === null) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          className={Styles.topdivmessage}
+          style={{ top: "25%", left: "10", width: "50%", height: "50%" }}
+        >
+          <img
+            alt=""
+            src={process.env.PUBLIC_URL + "/chat2.gif"}
+            height="50%"
           />
-         </div>
-      )
+          <h4 style={{ fontSize: "4em", opacity: "0.5" }}>
+            {" "}
+            Start the Conversation
+          </h4>{" "}
+        </div>
 
+        <div className={Styles.scrolldiv} ref={Scrollref}></div>
+        <textarea
+          hidden
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => (e.code === "Enter" ? sendButtonHandler(e) : null)}
+          value={text}
+          placeholder="Type messsage"
+          className={Styles.textarea}
+          ref={inputRef}
+        />
+      </div>
+    );
   }
   return (
     <>
       <div className={Styles.topdivmessage}>
-    
-      {window.screen.width<768?<div onClick={backButFun} className={Styles.icon}> <div className={Styles.arrow}></div>
-        </div>:null}
-         
+        {window.screen.width < 768 ? (
+          <div onClick={backButFun} className={Styles.icon}>
+            {" "}
+            <div className={Styles.arrow}></div>
+          </div>
+        ) : null}
+
         <label>{user?.username}</label>
-        <img width="30px" height="30px" className={Styles.userPicture} src={userPicture} alt="" />
-        <label style={{opacity:"0.5",fontSize:"0.9em"}} >Status</label>
+        <img
+          width="30px"
+          height="30px"
+          className={Styles.userPicture}
+          src={userPicture}
+          alt=""
+        />
+        <label style={{ opacity: "0.5", fontSize: "0.9em" }}>Status</label>
       </div>
       <div className={Styles.maindiv}></div>
       <div className={Styles.maindiv}>
-        
         <div className={Styles.messages}>
           {messages?.map((message, id) => {
             return (
-             <div    key={id} className={message.sender === username?Styles.to:Styles.fo}>
-                <div
-                className={
-                  message.sender === username
-                    ? Styles.perticularmessage_receiver
-                    : Styles.perticularmessage_sender
-                }
+              <div
+                key={id}
+                className={message.sender === username ? Styles.to : Styles.fo}
               >
-                <div style={{opacity:"0.6",fontSize:"0.3"}}>{message.sender}</div>
-                <h3>{message.text}</h3>
-            
-              </div>
-             <div>
-             <div  className={
-                  message.sender === username
-                    ?Styles.timeright
-                    :  Styles.timeleft
-                } >
-                 <h3> <TimeAgo date={new Date(message.createdAt)} /></h3>
+                <div
+                  className={
+                    message.sender === username
+                      ? Styles.perticularmessage_receiver
+                      : Styles.perticularmessage_sender
+                  }
+                >
+                  <div style={{ opacity: "0.6", fontSize: "0.3" }}>
+                    {message.sender}
+                  </div>
+                  <h3>{message.text}</h3>
                 </div>
-               </div>
-               </div>
+                <div>
+                  <div
+                    className={
+                      message.sender === username
+                        ? Styles.timeright
+                        : Styles.timeleft
+                    }
+                  >
+                    <h3>
+                      {" "}
+                      <TimeAgo date={new Date(message.createdAt)} />
+                    </h3>
+                  </div>
+                </div>
+              </div>
             );
           })}
-  
 
-          {messages?.length===0?<div className={Styles.nomessages} >
-            <h2>Start Chatting</h2>
-            <img src={process.env.PUBLIC_URL+"/chat.gif"} width="50%" height="50%" alt=""/></div>:null}
-            <div className={Styles.scrolldiv} ref={Scrollref}></div>
+          {messages?.length === 0 ? (
+            <div className={Styles.nomessages}>
+              <h2>Start Chatting</h2>
+              <img
+                src={process.env.PUBLIC_URL + "/chat.gif"}
+                width="50%"
+                height="50%"
+                alt=""
+              />
+            </div>
+          ) : null}
+          <div className={Styles.scrolldiv} ref={Scrollref}></div>
         </div>
 
         <div className={Styles.senddiv}>
@@ -181,7 +210,7 @@ useEffect(()=>{
             value={text}
             placeholder="Type messsage"
             className={Styles.textarea}
-         ref={inputRef}
+            ref={inputRef}
           />
 
           <img

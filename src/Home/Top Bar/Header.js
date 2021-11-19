@@ -17,7 +17,6 @@ const Header = () => {
    >
           <i
       onClick={() => {
-        dispatch(setScrollPositionHandler(window.scrollY));
         dispatch(show_user_stories_handle(true));
       }}
             styles={{ color: "Dodgerblue", cursor: "pointer" }}
@@ -34,7 +33,7 @@ const Header = () => {
                    <span   
   >
           <i
-      onClick={() =>{   dispatch(setScrollPositionHandler(window.scrollY)); dispatch({ type: "SHOWMESSAGE", payload: true });}}
+      onClick={() =>{  dispatch({ type: "SHOWMESSAGE", payload: true });}}
             styles={{ color: "Dodgerblue", cursor: "pointer" }}
             className="fas fa-comments"
           ></i>

@@ -63,13 +63,13 @@ const Messenger = () => {
           box ? (
             <Box conversations={conversations} username={username} />
           ) : (
-            <Messages />
+            (conversations!==null && conversations.length===0?null:<Messages />)
           )
         ) : (
           <>
             {" "}
             <Box conversations={conversations} username={username} />{" "}
-            <Messages />
+            {(conversations!==null && conversations.length===0?null:<Messages />)}
           </>
         )}
       </div>

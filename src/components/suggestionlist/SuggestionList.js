@@ -8,6 +8,7 @@ import { setfollowers } from "../../methods/setfollowers";
 import { useDispatch } from "react-redux";
 import addconversation from "../../methods/addconversation";
 import getconversations from "../../methods/getconversations";
+import { setScrollPositionHandler } from "../../reduces/actions/PostAction";
 const MyLoaderPC = (props) => (
   <ContentLoader
     speed={3}
@@ -39,7 +40,7 @@ const MyLoaderPhone = (props) => (
   </ContentLoader>
 );
 
-const SuggestionList = () => {
+const SuggestionList = ({setShowProfileHandler,setUserSearchHandler}) => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const { username } = useSelector((state) => state.user);
@@ -56,6 +57,7 @@ const SuggestionList = () => {
     setUsers(newArray);
     setLoading(false);
   };
+
   useEffect(() => {
     getusers()
       .then((res) => {
@@ -118,6 +120,15 @@ const SuggestionList = () => {
                           ? user.user.profilepic
                           : process.env.PUBLIC_URL + "/userImage.png"
                       }
+                      style={{cursor:"pointer"}}
+                      onClick={()=>{
+                     
+                        let x=user.user.username;
+                        setUserSearchHandler(x);
+                        
+                        setShowProfileHandler(true);
+                       
+                      }}
                     />
                     <button
                       onClick={() => handleAdd(user.user)}

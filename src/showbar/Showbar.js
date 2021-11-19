@@ -52,7 +52,7 @@ const Showbar = ({
   if (item) {
     return (
       <>
-         <span className={Styles.backbut} style={{position:'fixed', fontSize:"50px",color:"blue",cursor:"pointer"  }}       onClick={() => {
+         <span className={Styles.backbut} style={{position:'fixed', fontSize:"40px",color:"blue",cursor:"pointer"  }}       onClick={() => {
             setshowfollowershandle(false);
             setshowfollowinghandle(false);
           }} >

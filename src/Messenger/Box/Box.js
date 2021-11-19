@@ -86,8 +86,10 @@ const Box = ({ conversations, username }) => {
       <div
         className={Styles.maindiv2}
       >
-        You have no conversation
+          <img alt="" src={process.env.PUBLIC_URL+"/noconversation.gif"}  />
+         <label>   You have no conversation</label>
         <h6>Please Follow your friends</h6>
+      
       </div>
     );
   }
@@ -95,7 +97,7 @@ const Box = ({ conversations, username }) => {
     <div className={Styles.maindiv}>
       <div className={Styles.messagetext}>  <h2 style={{ marginLeft: "10%", opacity: "0.6" }}>Messages</h2></div>
       <div className={Styles.list}>
-      
+ 
         {conversations?.map((element, id) => {
           return (
             <List

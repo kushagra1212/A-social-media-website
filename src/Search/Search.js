@@ -230,15 +230,17 @@ setsearchuser(usernameformshowbar);
                 <button>Go to profile</button>
               </div>
             ))}
+             {searchuser==="" && window.screen.width<768?<SuggestionList setShowProfileHandler={null} setUserSearchHandler={null} />:null}
             {loading ? <div className={Styles.loader}></div> :searchuser!=="" && users.length===0?<div className={Styles.notfound}  >
             
             <img alt="" width="50%" height="40%" src={process.env.PUBLIC_URL+"/nouser.gif"} />
             <h2>No User Found</h2>
             </div>:null}
           </div>
-     
+         
         </div>
-        {window.screen.width >= 768 ? <SuggestionList /> : null}
+        {window.screen.width >= 768 ?<SuggestionList setShowProfileHandler={null} setUserSearchHandler={null} />: null}
+        
       </>
     );
   } else if (showprofile) {

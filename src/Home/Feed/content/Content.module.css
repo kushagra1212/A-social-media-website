@@ -1,9 +1,10 @@
 .maincontent {
   position: relative;
   padding-bottom: 3%;
-
   width: 100%;
   height: 1000px;
+  top: 10vh;
+  z-index: -1;
   scroll-behavior: smooth;
 }
 
@@ -49,10 +50,12 @@
 
 .userProfile {
   position: absolute;
-  top: 0%;
-  z-index: 10;
+  /* top: 0%; */
+  top: 20vh;
+  z-index: 9;
   background-color: whitesmoke;
   width: 100vw;
+  box-shadow: 0px 1px 520px 100px #474747;
   overflow: hidden;
 }
 
@@ -213,7 +216,9 @@
 .userprofilemain span {
   cursor: pointer;
   transform: scale3d(1.2, 1.2, 10);
-  top: -50px;
+  /* top: 12
+vh
+; */
   position: absolute;
   z-index: 10;
 }
@@ -221,14 +226,20 @@
 .userprofilemain {
   height: 100vh;
   -webkit-backdrop-filter: blur(1px);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(1 px);
   box-shadow: azure;
-  top: -70px;
+  /* top: -70
+  px
+  ; */
   position: relative;
   z-index: 10;
   background-color: rgba(255, 255, 255, 0.15);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
 }
 
 .userProfile {
@@ -253,7 +264,7 @@
   width: 50%;
   border: 1px solid #80808000;
   border-radius: 10px;
-  padding-bottom: 15%;
+  padding-bottom: 20px;
   left: 25%;
   box-shadow: 1px 1px 10px 1px grey;
 }
@@ -348,18 +359,19 @@
 
 .commenttopdiv {
   width: 100vw;
-  height: 100vh;
+  /* top: 20
+  vh
+  ; */
+  height: 84vh;
   display: flex;
   position: fixed;
-  z-index: 100;
-  top: 0;
+  z-index: 105;
+  /* top: 0; */
   background-color: rgb(252 252 252 / 11%);
   -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-  flex-direction: column;
-  align-content: space-around;
-  flex-wrap: wrap;
-  justify-content: center;
+  backdrop-filter: blur(5 px);
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 @media screen and (min-width: 768px) {

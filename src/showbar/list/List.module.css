@@ -6,11 +6,13 @@
   /* align-content: center; */
   /* align-items: baseline; */
   /* flex-wrap: wrap; */
-  top: 20px;
+  top: 7vh;
   width: 100%;
   position: absolute;
-  height: 90vh;
-  /* height: 100px; */
+  height: 85vh;
+  /* height: 100
+px
+; */
   overflow: auto;
   overflow-x: hidden;
 }

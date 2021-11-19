@@ -2,16 +2,20 @@ import Feed from "./Feed/Feed";
 import Header from "./Top Bar/Header";
 import Styles from "./Home.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { animated, useSpring } from "react-spring";
 import Userstories from "../Home/Feed/Stories/Userstories/Userstories";
 import Othersstories from "../Home/Feed/Stories/Othersstories/Othersstories";
 import { getstories } from "../methods/uploadstories";
 import SuggestionList from "../components/suggestionlist/SuggestionList";
+import Search from "../Search/Search";
+import { setScrollPositionHandler } from "../reduces/actions/PostAction";
 const Home = () => {
   const { username } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [showProfile, setShowProfile] = useState(false);
 
+  const [userSearch, setUserSearch] = useState("");
   const { show_user_stories, show_others_stories } = useSelector((state) => {
     return state.Stories;
   });
@@ -27,7 +31,37 @@ const Home = () => {
 
     dispatch({ type: "SHOWHOME", payload: true });
   }, []);
+  const setShowProfileHandler=(val)=>{
+    setShowProfile(val);
+   }
+   const setUserSearchHandler=(val)=>{
+     setUserSearch(val);
+   }
+  if(showProfile){
+    
+   return ( <div className={Styles.userprofilemain}>
+    <span style={{ fontSize: "40px", color: "red" }}>
+      <i
+        onClick={() => { 
+      
+ 
+          setShowProfile(false); setUserSearch(""); }}
+        styles={{ color: "Dodgerblue", cursor: "pointer" }}
+        className="fa fa-times-circle"
+      ></i>
+    </span>
 
+    <div className={Styles.userProfile}>
+     
+      <Search
+        showprofilefromshowbar={showProfile}
+        view={false}
+        usernameformshowbar={userSearch}
+      />
+    </div>
+  </div>)
+
+}
   if (show_others_stories.flag) {
     return (
       <div
@@ -68,7 +102,8 @@ const Home = () => {
           </animated.div>
         ) : (
           <>
-            <Header /> <Feed />  {window.screen.width>=768?<SuggestionList/>:null}
+            <Header /> <Feed />  {window.screen.width>=768?<SuggestionList setShowProfileHandler={setShowProfileHandler} setUserSearchHandler={setUserSearchHandler} />:null}
+           
           </>
         )}
       </div>

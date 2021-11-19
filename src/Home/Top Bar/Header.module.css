@@ -4,9 +4,11 @@
 .Header {
   display: flex;
   flex-direction: row;
+  position: fixed;
   background-color: white;
-  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.376);
+  box-shadow: 1px 1px 10px 1px rgb(128 128 128 / 38%);
   justify-content: space-between;
+  width: 100vw;
 }
 #cameraimg {
   top: 1%;
@@ -14,32 +16,38 @@
   left: 10%;
   margin: 1%;
   z-index: 1;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
   border-radius: 5px;
-  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.37);
-  animation: Header_Header_box-shadow__1CKus__1ouEZ alternate-reverse 0.2s;
+  box-shadow: 1px 1px 10px 1px rgb(128 128 128 / 37%);
+  animation: Header_Header_Header_box-shadow__1CKus__1ouEZ__37tUA
+    alternate-reverse 0.2s;
 }
 .messageimg {
   position: absolute;
-  left: 85%;
 
-  top: 1%;
+  /* top: 1%; */
   z-index: 1;
-
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 8px;
+  /* margin-bottom: 10
+px
+; */
   border-radius: 5px;
-  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.376);
-  animation: box-shadow alternate-reverse 0.2s;
+  box-shadow: 1px 1px 10px 1px rgb(128 128 128 / 38%);
+  animation: Header_box-shadow__1CKus alternate-reverse 0.2s;
 }
 .Header img {
   width: 100%;
@@ -58,7 +66,7 @@
 }
 .abovediv2 {
   position: relative;
-  left: -15%;
+  left: -14%;
 }
 .abovediv2 span {
   font-size: 50px;

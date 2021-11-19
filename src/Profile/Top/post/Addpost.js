@@ -46,9 +46,9 @@ const Addpost = ({ setposthandle }) => {
       setloading(!loading);
       setposthandle(false);
       dispatch(updatecountforpost(username, postcount));
-      setTimeout(()=>{
+
         window.location.reload("/main");
-      },1000);
+
     }catch(err){
         console.log(err);
     }
@@ -152,7 +152,7 @@ const Addpost = ({ setposthandle }) => {
     }
   setloading(true);
     const canvas = await getCroppedImg(imageSrc, crop);
-    let dataURL=canvas.toDataURL('image/jpeg',0.31);
+    let dataURL=canvas.toDataURL('image/jpeg',0.25);
   
     setSelectedFile(data_URL_to_file(dataURL,fileName))
     canvas.toBlob(

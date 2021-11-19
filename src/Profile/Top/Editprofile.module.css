@@ -60,13 +60,12 @@
   margin: 5%;
 }
 .backbut {
-  position: absolute;
+  /* position: absolute; */
   top: 0%;
   left: 2%;
   z-index: 10;
   width: 55px;
   font-size: 0.9em;
-
   transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
 }
 .backbut:active {
@@ -74,7 +73,7 @@
 }
 .editimg {
   position: relative;
-  margin-top: 20%;
+  /* margin-top: 20%; */
   /* margin-bottom: 10%; */
   /* margin-left: 10%; */
   width: 300px;
@@ -82,7 +81,9 @@
   height: 300px;
   background-color: rgba(158, 21, 221, 0.246);
   outline: none;
-  /* border: 2px solid rgba(128, 128, 128, 0); */
+  /* border: 2
+px
+solid rgba(128, 128, 128, 0); */
   border-radius: 10px;
   box-shadow: 1px 1px 10px 1px grey;
   transform-origin: center;

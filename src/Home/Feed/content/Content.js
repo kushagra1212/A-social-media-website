@@ -1,6 +1,6 @@
 import Styles from "./Content.module.css";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getitem from "../../../methods/getitem";
 import updatelikes from "../../../methods/updatelikes";
@@ -47,7 +47,7 @@ const Content = () => {
   const { likesLatestArray,scrollPosition } = useSelector((state) => {
     return state?.Posts;
   });
-  console.log(scrollPosition,"sss")
+
   const [hasMore, sethasmore] = useState(true);
 
   const [isUnmounted, setIsUnmounted] = useState(false);
@@ -59,8 +59,20 @@ const Content = () => {
   const [showShare, setShowShare] = useState(false);
   const [userSearch, setUserSearch] = useState("");
   const [sharePostURL, setSharePostURL] = useState("");
- 
+  const sRef=useRef();
   const [noOne,setNoOne]=useState(false);
+ const setShowProfileHandler=(val)=>{
+  if(val)
+ 
+    setShowProfile(val);
+ 
+ }
+ const setUserSearchHandler=(val)=>{
+
+
+    setUserSearch(val);
+
+ }
   const unique = (array) => {
     let isvisited = {};
     let newarray = [];
@@ -183,7 +195,7 @@ const getPosts=()=>{
             dispatch(updateLatestLikesArray(ele2.username, ele._id));
           });
         });
-     
+  
       }else{
         sethasmore(false);
       }
@@ -201,7 +213,7 @@ const getPosts=()=>{
          getstoriesFromOthers(ele.username, dispatch);
       });
     });
-    window.scrollTo(0,scrollPosition);
+  
   }
   },[username])
   useEffect(()=>{
@@ -210,12 +222,16 @@ const getPosts=()=>{
     },3000)
   },[])
   useEffect(()=>{
-   
-  
+      if(state.Posts.posts.length>=1)
+      {
+        setloading(false);
+        setNoOne(true);
+      }
       window.scrollTo(0,scrollPosition);
+
   
   
-  },[showProfile]);
+  },[showProfile,loading,noOne,state.Posts.posts.length,scrollPosition]);
 
 
 
@@ -227,7 +243,7 @@ const getPosts=()=>{
         <span style={{ fontSize: "40px", color: "red" }}>
           <i
             onClick={() => { 
-              setShowProfile(false);  }}
+              setShowProfile(false); setUserSearch(""); }}
             styles={{ color: "Dodgerblue", cursor: "pointer" }}
             className="fa fa-times-circle"
           ></i>
@@ -253,7 +269,7 @@ const getPosts=()=>{
         <img width="100%" height="90%" alt="" src={process.env.PUBLIC_URL+'/nopost.gif'}/>
   
       </div>
-      {window.screen.width<768?<SuggestionList/>:null}
+      {window.screen.width<768?<SuggestionList setShowProfileHandler={setShowProfileHandler} setUserSearchHandler={setUserSearchHandler} />:null}
       </>
     );
   } else {
@@ -279,7 +295,7 @@ const getPosts=()=>{
           </div>
         ) : null}
 
-        <div className={Styles.maincontent} id="infiniteScroll">
+        <div     className={Styles.maincontent} id="infiniteScroll">
           {showcomments.val ? (
             <div className={Styles.commenttopdiv}>
               <Comments
@@ -292,7 +308,7 @@ const getPosts=()=>{
 
           <InfiniteScroll
             className={Styles.infi}
-            dataLength={state.feedposts.posts.length}
+            dataLength={state.Posts.posts.length}
             next={getPosts}
             hasMore={hasMore}
             loader={<div style={{marginTop:"50px"}} ></div>}
@@ -301,6 +317,11 @@ const getPosts=()=>{
                 <b>Yay! You have seen it all</b>
               </p>
             }
+            ref={sRef}
+            onScroll={e=>{    const scrollY = window.scrollY; //Don't get confused by what's scrolling - It's not the window
+          if(scrollY!==0)
+            dispatch(setScrollPositionHandler(scrollY));
+           }}
           >
             {state?.Posts?.posts.map((post, key) => (
               <div key={post._id} className={Styles.singlecontainer}>
@@ -309,7 +330,7 @@ const getPosts=()=>{
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     dispatch(setScrollPositionHandler(window.scrollY));
-                    console.log(window.scrollY);
+
                     setUserSearch(post.username);
                     setShowProfile(true);
                   }}
@@ -448,8 +469,10 @@ const getPosts=()=>{
                     addCommentFuncforContent(comment, post)
                   }
                 />
+                    {(key+1)%2===0 && window.screen.width<768?<SuggestionList setShowProfileHandler={setShowProfileHandler} setUserSearchHandler={setUserSearchHandler} />:null}
               </div>
             ))}
+       
           </InfiniteScroll>
         </div>
       </>

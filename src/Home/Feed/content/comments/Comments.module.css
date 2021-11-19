@@ -3,19 +3,25 @@
   position: fixed;
   flex-direction: column;
   overflow: scroll;
-  height: 90vh;
-  width: 90vw;
+  /* height: 90
+vh
+; */
+  height: 100%;
+  /* width: 90
+vw
+; */
+  width: 100%;
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
-  /* min-height: 510px; */
+  /* min-height: 510
+px
+; */
   border: 0px solid #80808000;
   border-radius: 10px;
-
   background-color: rgb(255, 255, 255);
   z-index: 10;
-  box-shadow: 1px 1px 100px 1px rgba(128, 128, 128, 0.397);
-
+  box-shadow: 1px 1px 100px 1px rgb(128 128 128 / 40%);
   overflow: hidden;
 }
 .main {
@@ -78,7 +84,7 @@
   align-items: center;
   position: absolute;
   /* left: 15%; */
-  top: 0%;
+  /* top: 0%; */
   z-index: 100;
 }
 @media screen and (min-width: 768px) {
