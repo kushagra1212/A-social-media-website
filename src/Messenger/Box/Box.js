@@ -20,7 +20,7 @@ const MyLoader = (props) => (
     {...props}
   >
     {" "}
-    <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
+    <rect x="5" y="0" rx="10" ry="10" width="100%" height="50px" />
   </ContentLoader>
 );
 const List = ({ chatuser, conversationID,selectedID,selectIDHandler }) => {

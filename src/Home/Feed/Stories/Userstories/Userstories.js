@@ -26,7 +26,7 @@ const Userstories = () => {
   const { show_webcam, show_others_stories } = useSelector(
     (state) => state.Stories
   );
-  const { username } = useSelector((state) => state.user);
+  const { username ,profilepic} = useSelector((state) => state.user);
   const { documents } = useSelector((state) => state.Stories);
   const [showpictures, setshowpictures] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -90,7 +90,7 @@ const Userstories = () => {
           .getDownloadURL()
           .then((ul) => {
           
-            uploadstories(username, ul, dispatch)
+            uploadstories(username, ul,profilepic, dispatch)
             .then((res) => {
               setloading(false);
               setSelectedFile(null);

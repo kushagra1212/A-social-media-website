@@ -12,8 +12,8 @@
   padding-bottom: 3%;
   width: 100%;
   scroll-behavior: smooth;
-  background: #ffffff;
-  margin-top: 50%;
+  background: #fbfbfb;
+  margin-top: 5%;
   width: 90%;
   margin-left: 5%;
   font-family: cursive;
@@ -395,7 +395,7 @@
 
   .maincontentstart {
     width: 40%;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-left: 30%;
   }
 

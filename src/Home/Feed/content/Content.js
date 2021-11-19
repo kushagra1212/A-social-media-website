@@ -248,9 +248,10 @@ const getPosts=()=>{
   } else if (state.Posts.posts.length === 0 && noOne) {
     return (
       <>
-      <div className={Styles.maincontentstart}>
-        You are not following any one , please follow others to see
-        their posts
+      <div className={Styles.maincontentstart} style={{overflow:"hidden"}}>
+        No Post to See Please Follow your Friends !
+        <img width="100%" height="90%" alt="" src={process.env.PUBLIC_URL+'/nopost.gif'}/>
+  
       </div>
       {window.screen.width<768?<SuggestionList/>:null}
       </>

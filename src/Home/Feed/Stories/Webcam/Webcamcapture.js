@@ -14,7 +14,7 @@ const Webcamcapture = () => {
   const [imagecaptured, setimagecaptured] = useState(null);
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
-  const { username } = useSelector((state) => state.user);
+  const { username ,profilepic} = useSelector((state) => state.user);
 
   const [retake, setRetake] = useState(true);
 
@@ -24,7 +24,7 @@ const Webcamcapture = () => {
   });
 
   function handleTakePhoto(dataUri) {
-    // Do stuff with the photo...
+  
     setRetake(false);
     setimagecaptured(dataUri);
 
@@ -32,8 +32,7 @@ const Webcamcapture = () => {
   }
 
   function handleTakePhotoAnimationDone(dataUri) {
-    // Do stuff with the photo...
-
+   
     console.log("takePhoto");
   }
 
@@ -51,7 +50,7 @@ const Webcamcapture = () => {
 
   const save_button_handle = () => {
     setloading(true);
-    uploadstories(username, imagecaptured, dispatch);
+    uploadstories(username, imagecaptured,profilepic, dispatch);
 
     setTimeout(() => {
       setloading(false);

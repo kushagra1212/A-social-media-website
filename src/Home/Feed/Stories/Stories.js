@@ -12,7 +12,7 @@ const Stories = () => {
   const {  profilepic } = useSelector((state) => state.user);
 
   const { othersStories } = useSelector((state) => state.Stories);
-
+  console.log(othersStories);
   return (
     <div className={Styles.stories}>
       <div
@@ -36,10 +36,7 @@ const Stories = () => {
             onClick={() => dispatch(show_others_stories_handle(true, id))}
             className={Styles.particular}
             style={{
-              backgroundImage:
-                backgroundImages[
-                  Math.floor(Math.random() * backgroundImages.length)
-                ],
+              backgroundImage:ele.stories[0].profilepic!==""?`url(${ele.stories[0].profilepic})`: process.env.PUBLIC_URL + "/userImage.png",imageResolution:"from-image"
             }}
           ></div>
         ) : null

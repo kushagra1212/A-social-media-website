@@ -6,13 +6,14 @@ import {
 } from "../reduces/actions/StoriesAction";
 const URL = process.env.REACT_APP_URL;
 
-export const uploadstories = (username, picture, dispatch) => {
+export const uploadstories = (username, picture,profilepic, dispatch) => {
   return new Promise((resolve, reject) => {
     if (username) {
       axios
         .post(`${URL}/stories/uploadstories`, {
           username: username,
           picture: picture,
+          profilepic:profilepic
         })
         .then((res) => {
           if (res.data) {
