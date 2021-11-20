@@ -127,8 +127,8 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
 
   const floatDown = useSpring({
     from: { y: "-100%" },
-    y: "-50%",
-    x: "-50%",
+    y: "0%",
+    x: "0%",
 
     config: { mass: 10, tension: 10, friction: 1, duration: 200 },
   });
@@ -159,13 +159,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   } else {
     return (
       <div className={Styles.editprofileMain}>
-        <animated.form
-          onSubmit={(e) => save_it(e)}
-          className={Styles.editprofile}
-          style={floatDown}
-        >
-        
-          <span
+                  <span
             className={Styles.backbut}
             style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
             onClick={edit_it}
@@ -182,6 +176,14 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
               alt=""
             />
           ) : null}
+      <div className={Styles.Forms}>
+      <animated.form
+          onSubmit={(e) => save_it(e)}
+          className={Styles.editprofile}
+          style={floatDown}
+        >
+        
+
 
           <input
             style={{ display: "none" }}
@@ -216,6 +218,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
             save
           </button>
         </animated.form>
+      </div>
       </div>
     );
   }

@@ -9,6 +9,8 @@
   box-shadow: 1px 1px 10px 1px rgb(128 128 128 / 38%);
   justify-content: space-between;
   width: 100vw;
+  z-index: 3;
+  top: 0vh;
 }
 #cameraimg {
   top: 1%;

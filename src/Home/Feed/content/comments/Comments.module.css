@@ -3,20 +3,12 @@
   position: fixed;
   flex-direction: column;
   overflow: scroll;
-  /* height: 90
-vh
-; */
-  height: 100%;
-  /* width: 90
-vw
-; */
+  height: 80%;
+  /* bottom: 10%; */
   width: 100%;
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
-  /* min-height: 510
-px
-; */
   border: 0px solid #80808000;
   border-radius: 10px;
   background-color: rgb(255, 255, 255);

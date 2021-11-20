@@ -8,6 +8,7 @@ import { useAlert } from "react-alert";
 import addconversation from "../../methods/addconversation";
 import getconversations from "../../methods/getconversations";
 import deleteconversation from "../../methods/deleteconversation";
+import ShowPost from "./ShowPost";
 const User = ({
   profpic,
   name,
@@ -101,6 +102,7 @@ const User = ({
     );
   }
   return (
+    <>
     <div className={Styles.maindiv}>
       <div className={Styles.firstdiv}>
         <img
@@ -162,7 +164,10 @@ const User = ({
           {following ? "Unfollow" : "Follow"}{" "}
         </button>
       </div>
+  
     </div>
+        <ShowPost username={username} toDelete={false}/>
+    </>
   );
 };
 export default User;

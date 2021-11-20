@@ -1,18 +1,14 @@
 .stories {
   height: 9vh;
   display: flex;
-  /* margin: 5
-  px
-  ; */
   position: fixed;
   width: 70vw;
   left: 15vw;
-  /* top: 10
-  vh
-  ; */
-  border-radius: 10px;
+  border-radius: 10 px;
   border: 2px solid rgba(251, 250, 250, 0.479);
-  /* box-shadow: 1px 1px 1px 100px rgb(128 128 128 / 58%);*/
+  /* box-shadow: 1px 1px 1px 100px rgb(128 128 128 / 58%); */
+  z-index: 3;
+  top: 0vh;
 }
 
 .particular {

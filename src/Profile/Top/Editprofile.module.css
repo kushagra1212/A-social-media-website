@@ -1,24 +1,13 @@
-.editprofile {
-  position: fixed;
+.editprofileMain {
   display: flex;
-  justify-content: center;
-  align-items: stretch;
-  height: 100%;
-  width: 100%;
-  transform: translate(-50%, -50%);
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-  z-index: 200;
-  top: 50%;
-  left: 50%;
-  border: 2px solid #80808000;
-  border-radius: 10px;
-  box-shadow: 10px 10px 60px 0px #808080;
-  align-content: center;
-  flex-wrap: nowrap;
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  position: fixed;
   flex-direction: column;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
+
 .editbut {
   position: relative;
   margin-left: -80%;
@@ -59,12 +48,26 @@
   font-family: ui-rounded;
   margin: 5%;
 }
+.Forms {
+  position: relative;
+  display: flow-root;
+  background-color: rgb(255 255 255);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.editprofile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
 .backbut {
   /* position: absolute; */
+  position: relative;
   top: 0%;
   left: 2%;
   z-index: 10;
   width: 55px;
+  height: 55px;
   font-size: 0.9em;
   transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
 }
@@ -81,9 +84,6 @@
   height: 300px;
   background-color: rgba(158, 21, 221, 0.246);
   outline: none;
-  /* border: 2
-px
-solid rgba(128, 128, 128, 0); */
   border-radius: 10px;
   box-shadow: 1px 1px 10px 1px grey;
   transform-origin: center;
@@ -184,26 +184,24 @@ solid rgba(128, 128, 128, 0); */
   flex-direction: column;
   padding: 10%;
 }
-.editprofileMain {
-}
+
 @media screen and (min-width: 768px) {
   .editprofile {
-    height: 90%;
-    width: 30%;
     position: absolute;
-    left: 30%;
+
     box-shadow: 10px 10px 1000px 10px rgb(0, 0, 0);
     z-index: 1000;
+    height: 100%;
+    width: 100%;
     overflow: visible;
   }
   .editimg {
-    position: absolute;
+    position: relative;
     width: 500px;
     height: 500px;
-    left: 120%;
-    margin-top: 10%;
     box-shadow: 1px 1px 1000px 5px rgb(0 0 0);
-    z-index: 10;
+    /* z-index: 10;*/
+    margin-left: 10%;
   }
   .editbut:hover {
     transform: scale3d(1.2, 1.2, 10);
@@ -225,13 +223,31 @@ solid rgba(128, 128, 128, 0); */
     background-color: rgb(4, 180, 77);
   }
   .editprofileMain {
-    width: 100%;
-    height: 100vh;
     background-color: rgb(252 252 252 / 11%);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     z-index: 100;
     position: absolute;
+    width: 100vw;
+    display: flex;
     scroll-behavior: none;
+    height: 100vh;
+    /* width: 50%; */
+
+    flex-direction: row;
+  }
+  .Forms {
+    /* position: initial; */
+    box-shadow: 1px 1px 50px 1px rgba(128, 128, 128, 0.376);
+    border: 1px solid rgba(128, 128, 128, 0.02);
+    border-radius: 10px;
+    width: 30%;
+    margin-left: 10%;
+    /* left: 50%; */
+    /* position: initial; */
+    /* height: 100%; */
+    /* background-color: aqua; */
+    height: 80%;
+    margin-top: 5%;
   }
 }

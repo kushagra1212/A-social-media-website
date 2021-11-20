@@ -4,7 +4,7 @@
   width: 100%;
   height: 1000px;
   top: 10vh;
-  z-index: -1;
+  z-index: 1;
   scroll-behavior: smooth;
 }
 
@@ -16,6 +16,7 @@
   background: #fbfbfb;
   margin-top: 5%;
   width: 90%;
+  top: 10vh;
   margin-left: 5%;
   font-family: cursive;
   border: 1px solid #80808000;
@@ -48,17 +49,6 @@
   justify-items: center;
 }
 
-.userProfile {
-  position: absolute;
-  /* top: 0%; */
-  top: 20vh;
-  z-index: 9;
-  background-color: whitesmoke;
-  width: 100vw;
-  box-shadow: 0px 1px 520px 100px #474747;
-  overflow: hidden;
-}
-
 @keyframes animateIn {
   0% {
     opacity: 0;
@@ -73,7 +63,7 @@
 .topdiv {
   position: relative;
   background-color: rgb(255 255 255);
-  height: 55px;
+  height: 45px;
   font-family: sans-serif;
   margin-top: 0%;
   transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
@@ -213,16 +203,6 @@
   transform: scale(1.2);
 }
 
-.userprofilemain span {
-  cursor: pointer;
-  transform: scale3d(1.2, 1.2, 10);
-  /* top: 12
-vh
-; */
-  position: absolute;
-  z-index: 10;
-}
-
 .userprofilemain {
   height: 100vh;
   -webkit-backdrop-filter: blur(1px);
@@ -241,14 +221,20 @@ vh
   align-items: flex-start;
   justify-content: flex-end;
 }
-
+.userprofilemain span {
+  cursor: pointer;
+  transform: scale3d(1.2, 1.2, 10);
+  position: relative;
+  z-index: 10;
+}
 .userProfile {
   position: absolute;
   top: 0%;
   z-index: 9;
   background-color: whitesmoke;
   width: 100vw;
-  box-shadow: 0px 1px 520px 100px #474747;
+  min-height: 100vh;
+  box-shadow: 0px 1px 520px 100px #4747474d;
   overflow: hidden;
 }
 
@@ -359,17 +345,14 @@ vh
 
 .commenttopdiv {
   width: 100vw;
-  /* top: 20
-  vh
-  ; */
-  height: 84vh;
+  height: 90%;
   display: flex;
   position: fixed;
   z-index: 105;
-  /* top: 0; */
+  top: 10vh;
   background-color: rgb(252 252 252 / 11%);
   -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5 px);
+  backdrop-filter: blur(5px);
   flex-direction: row;
   justify-content: flex-end;
 }
