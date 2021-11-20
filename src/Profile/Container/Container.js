@@ -9,6 +9,7 @@ import { updateLikesArray } from "../../reduces/actions/userAction";
 import { getcount } from "../../methods/getcount";
 import ContentLoader from "react-content-loader";
 import Loader from "../../Animation/Loader/Loader";
+import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader"
 let heightofAni = window.screen.width >= 768 ? "45vh" : "20vh";
 let widthofAni = window.screen.width >= 768 ? "100%" : "100%";
 let heightofAniT = window.screen.width >= 768 ? "95vh" : "45vh";
@@ -49,6 +50,7 @@ const Container = ({ toDelete, username }) => {
   const [hasMore, setHasMore] = useState(true);
   const [isUnmounted, setIsUnmounted] = useState(false);
   const [postCount, setPostCount] = useState(null);
+  const [vis,setVis]=useState(true);
   const gridHandler = (bool) => {
     setGrid(bool);
   };
@@ -94,7 +96,13 @@ const Container = ({ toDelete, username }) => {
       }
     }
   };
-
+useEffect(()=>{
+  if(posts.length===0){
+    setTimeout(()=>{
+      setVis(false);
+    },1000)
+  }
+},[posts])
   useState(() => {
     console.log(username);
     getcount(username).then((res) => {
@@ -185,7 +193,7 @@ else
             );
           })}
         </div>
-        {posts.length===0?<Loader/>:null}
+        {vis?<VerticalLoader/>:null}
       </InfiniteScroll>
     </>
   );

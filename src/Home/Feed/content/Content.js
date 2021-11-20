@@ -469,7 +469,7 @@ const getPosts=()=>{
                     addCommentFuncforContent(comment, post)
                   }
                 />
-                    {(key+1)%2===0 && window.screen.width<768?<SuggestionList setShowProfileHandler={setShowProfileHandler} setUserSearchHandler={setUserSearchHandler} />:null}
+                    {(key+1)%10===0 && window.screen.width<768?<SuggestionList setShowProfileHandler={setShowProfileHandler} setUserSearchHandler={setUserSearchHandler} />:null}
               </div>
             ))}
        

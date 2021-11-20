@@ -52,10 +52,12 @@ const SuggestionList = ({setShowProfileHandler,setUserSearchHandler}) => {
     for (let user of Users) {
       let currentusername = user.username;
       const found = await isconnection(currentusername, username);
-      if (!found && username !== user.username)
+      if (!found && username!==currentusername )
         newArray.push({ user: user, following: false });
     }
+
     dispatch(addSuggestions(newArray));
+    setLoading(false);
 
   };
 
@@ -65,12 +67,14 @@ const SuggestionList = ({setShowProfileHandler,setUserSearchHandler}) => {
       setLoading(false);
       return;
     }
+    if(username!==""){
       
     getusers()
-      .then((res) => {
-        checkUsers(res.data);
-      })
-      .catch((err) => console.log(err));
+    .then((res) => {
+      checkUsers(res.data);
+    })
+    .catch((err) => console.log(err));
+    }
   }, [username,suggestion]);
 
   const handleAdd = async (user) => {

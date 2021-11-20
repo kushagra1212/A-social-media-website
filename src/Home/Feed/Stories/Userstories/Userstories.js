@@ -218,7 +218,7 @@ const Userstories = () => {
             Choose Picture
           </button>
         ) : null}
-
+ 
         {window.screen.width >= 768 ? (
           <animated.div
             style={styleOne}
@@ -227,15 +227,21 @@ const Userstories = () => {
           >
             <img width="100%" height="100%" src={cameraimg} alt="NAN" />
           </animated.div>
-        ) : null}
-      </div>
-      <animated.div style={styleOne}>
+        ) :  <animated.div style={styleOne}>
         <img
           style={{ marginLeft: "50vw" }}
           alt=""
           src={process.env.PUBLIC_URL + "/stories.gif"}
         />
-      </animated.div>
+      </animated.div>}
+      </div>
+    {window.screen.width>=768?  <animated.div style={styleOne}>
+           <img
+             style={{ marginLeft: "50vw" }}
+             alt=""
+             src={process.env.PUBLIC_URL + "/stories.gif"}
+           />
+         </animated.div>:null}
     </>
   );
 };

@@ -9,39 +9,46 @@ import {
 
 const Stories = () => {
   const dispatch = useDispatch();
-  const {  profilepic } = useSelector((state) => state.user);
+  const { profilepic } = useSelector((state) => state.user);
 
   const { othersStories } = useSelector((state) => state.Stories);
-  console.log(othersStories);
-  return (
-    <div className={Styles.stories}>
-      <div
-        onClick={() => dispatch(show_user_stories_handle(true))}
-        className={Styles.userStories}
-      >
-        <img
-          src={
-            profilepic ? profilepic : process.env.PUBLIC_URL + "/AddIcon.png"
-          }
-          alt=""
-          width="100%"
-          height="100%"
-        />
-      </div>
 
-      {othersStories?.map((ele, id) =>
-        ele.stories.length >= 1 ? (
-          <div
-            key={id}
-            onClick={() => dispatch(show_others_stories_handle(true, id))}
-            className={Styles.particular}
-            style={{
-              backgroundImage:ele.stories[0].profilepic!==""?`url(${ele.stories[0].profilepic})`: process.env.PUBLIC_URL + "/userImage.png",imageResolution:"from-image"
-            }}
-          ></div>
-        ) : null
-      )}
-    </div>
+  return (
+    <div  className={Styles.main} >
+    <div className={Styles.stories}>
+ 
+        <li
+          onClick={() => dispatch(show_user_stories_handle(true))}
+          className={Styles.userStories}
+        >
+          <img
+            src={
+              profilepic ? profilepic : process.env.PUBLIC_URL + "/AddIcon.png"
+            }
+            alt=""
+            width="100%"
+            height="100%"
+          />
+        </li>
+        {othersStories?.map((ele, id) =>
+          ele.stories.length >= 1 ? (
+            <li
+              key={id}
+              onClick={() => dispatch(show_others_stories_handle(true, id))}
+              className={Styles.particular}
+              style={{
+                backgroundImage:
+                  ele.stories[0].profilepic !== ""
+                    ? `url(${ele.stories[0].profilepic})`
+                    : process.env.PUBLIC_URL + "/userImage.png",
+                imageResolution: "from-image",
+              }}
+            ></li>
+          ) : null
+        )}
+   
+      </div>
+</div>
   );
 };
 export default Stories;
