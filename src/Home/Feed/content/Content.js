@@ -294,9 +294,7 @@ const getPosts=()=>{
             </div>
           </div>
         ) : null}
-
-        <div     className={Styles.maincontent} id="infiniteScroll">
-          {showcomments.val ? (
+ {showcomments.val ? (
             <div className={Styles.commenttopdiv}>
               <Comments
                 username={username}
@@ -305,6 +303,8 @@ const getPosts=()=>{
               />
             </div>
           ) : null}
+        <div     className={Styles.maincontent} id="infiniteScroll">
+         
 
           <InfiniteScroll
             className={Styles.infi}

@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import addconversation from "../../methods/addconversation";
 import getconversations from "../../methods/getconversations";
 import { setScrollPositionHandler } from "../../reduces/actions/PostAction";
+import { addSuggestions } from "../../reduces/actions/SuggestionsAction";
 const MyLoaderPC = (props) => (
   <ContentLoader
     speed={3}
@@ -42,9 +43,9 @@ const MyLoaderPhone = (props) => (
 
 const SuggestionList = ({setShowProfileHandler,setUserSearchHandler}) => {
   const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState([]);
+  const dispatch=useDispatch();
   const { username } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const {suggestion}=useSelector((state=>state.Suggestions));
   const checkUsers = async (Users) => {
     let newArray = [];
 
@@ -54,17 +55,23 @@ const SuggestionList = ({setShowProfileHandler,setUserSearchHandler}) => {
       if (!found && username !== user.username)
         newArray.push({ user: user, following: false });
     }
-    setUsers(newArray);
-    setLoading(false);
+    dispatch(addSuggestions(newArray));
+
   };
 
   useEffect(() => {
+    if(suggestion.length>=1)
+    {
+      setLoading(false);
+      return;
+    }
+      
     getusers()
       .then((res) => {
         checkUsers(res.data);
       })
       .catch((err) => console.log(err));
-  }, [username]);
+  }, [username,suggestion]);
 
   const handleAdd = async (user) => {
     setfollowers(user.username, username, dispatch);
@@ -79,11 +86,11 @@ const SuggestionList = ({setShowProfileHandler,setUserSearchHandler}) => {
     });
     if (!exists) addconversation([username, user.username]);
 
-    let index = users.findIndex((item) => item.user._id === user._id);
+    let index = suggestion.findIndex((item) => item.user._id === user._id);
     console.log(index);
-    let u = [...users];
+    let u = [...suggestion];
     u[index].following = true;
-    setUsers(u);
+    dispatch(addSuggestions(u));
   };
   if (loading)
     return (
@@ -105,8 +112,8 @@ const SuggestionList = ({setShowProfileHandler,setUserSearchHandler}) => {
     return (
       <>
         <div className={Styles.maindiv}>
-          {users.length > 0 &&
-            users.map((user) => {
+          {suggestion.length > 0 &&
+            suggestion.map((user) => {
               return (
                 <div key={user.user._id} className={Styles.listitem}>
                   <div className={Styles.listhead}>

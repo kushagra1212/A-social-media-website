@@ -21,12 +21,12 @@ import firebase from "@firebase/app-compat";
 
 const Userstories = () => {
   const dispatch = useDispatch();
-  const Alert=useAlert();
+  const Alert = useAlert();
   const [pic, setPic] = useState(null);
   const { show_webcam, show_others_stories } = useSelector(
     (state) => state.Stories
   );
-  const { username ,profilepic} = useSelector((state) => state.user);
+  const { username, profilepic } = useSelector((state) => state.user);
   const { documents } = useSelector((state) => state.Stories);
   const [showpictures, setshowpictures] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -36,8 +36,8 @@ const Userstories = () => {
   const [croppedArea, setCroppedArea] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [progress, setProgress] = useState(0);
-  const [showChoosebut,setShowChoosebut]=useState(true);
-  const [fileName,setfileName]=useState("");
+  const [showChoosebut, setShowChoosebut] = useState(true);
+  const [fileName, setfileName] = useState("");
 
   const set_picture_handle = (ans) => {
     setshowpictures(ans);
@@ -48,19 +48,17 @@ const Userstories = () => {
   useEffect(() => {
     animateOne.start({ x: 0, y: 0 });
     animateTwo.start({ y: 0, x: 0 });
-  }, [showpictures, show_webcam,animateTwo,animateOne]);
+  }, [showpictures, show_webcam, animateTwo, animateOne]);
 
   const selectedFileHandle = (e) => {
     e.preventDefault();
-  
-      const reader= new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      setfileName(e.target.files[0].name);
-      reader.addEventListener("load",()=>{
-        setImage(reader.result);
 
-      });
-
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    setfileName(e.target.files[0].name);
+    reader.addEventListener("load", () => {
+      setImage(reader.result);
+    });
 
     //  setSelectedFile(e.target.files[0]);
     // this was previous code
@@ -74,9 +72,7 @@ const Userstories = () => {
     setloading(!loading);
     const storage = firebase.storage();
 
-    const uploadTask = storage
-      .ref(`stories/${fileName}`)
-      .put(sfile);
+    const uploadTask = storage.ref(`stories/${fileName}`).put(sfile);
     uploadTask.on(
       "state_changed",
       () => {},
@@ -89,18 +85,17 @@ const Userstories = () => {
           .child(fileName)
           .getDownloadURL()
           .then((ul) => {
-          
-            uploadstories(username, ul,profilepic, dispatch)
-            .then((res) => {
-              setloading(false);
-              setSelectedFile(null);
-              Alert.success("Story Added");
-              dispatch(show_user_stories_handle(false));
-            })
-            .catch((err) => {
-              console.log(err);
-              dispatch(show_user_stories_handle(false));
-            });
+            uploadstories(username, ul, profilepic, dispatch)
+              .then((res) => {
+                setloading(false);
+                setSelectedFile(null);
+                Alert.success("Story Added");
+                dispatch(show_user_stories_handle(false));
+              })
+              .catch((err) => {
+                console.log(err);
+                dispatch(show_user_stories_handle(false));
+              });
           });
       }
     );
@@ -111,10 +106,8 @@ const Userstories = () => {
     }
     setloading(true);
     const canvas = await getCroppedImg(imageSrc, crop);
-    let dataURL = canvas.toDataURL("image/jpeg", 0.40);
-  const sfile=await  data_URL_to_file(dataURL,fileName);
-
-
+    let dataURL = canvas.toDataURL("image/jpeg", 0.4);
+    const sfile = await data_URL_to_file(dataURL, fileName);
 
     setPic(dataURL);
     setImage(null);
@@ -126,8 +119,6 @@ const Userstories = () => {
 
   const save_button_handle = () => {
     setloading(true);
-
-
   };
 
   if (documents.length >= 1 && showpictures)
@@ -142,20 +133,17 @@ const Userstories = () => {
   if (show_webcam)
     return (
       <div className={Styles.cameradiv}>
-   
-
         <span
-            
-            style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
-            onClick={() => {
-              dispatch(show_webcam_handle(false));
-            }}
-          >
-            <i
-              styles={{ color: "Dodgerblue", cursor: "pointer" }}
-              className="fa fa-arrow-circle-left"
-            ></i>
-          </span>
+          style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
+          onClick={() => {
+            dispatch(show_webcam_handle(false));
+          }}
+        >
+          <i
+            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            className="fa fa-arrow-circle-left"
+          ></i>
+        </span>
         <Webcamcapture />
       </div>
     );
@@ -185,12 +173,10 @@ const Userstories = () => {
   }
 
   return (
-    <div className={Styles.maindiv}>
-      <animated.div style={styleTwo}>
-      
-      
-      <span
-            
+    <>
+      <div className={Styles.maindiv}>
+        <animated.div style={styleTwo}>
+          <span
             style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
             onClick={() => {
               dispatch(show_user_stories_handle(false));
@@ -201,45 +187,56 @@ const Userstories = () => {
               className="fa fa-arrow-circle-left"
             ></i>
           </span>
-   
-          </animated.div>
-      {pic ? (
-      <>
-        <img
-          className={Styles.editimg}
-          src={pic ? pic : process.env.PUBLIC_URL + "/userImage.png"}
-          alt=""
+        </animated.div>
+        {pic ? (
+          <>
+            <img
+              className={Styles.editimg}
+              src={pic ? pic : process.env.PUBLIC_URL + "/userImage.png"}
+              alt=""
+            />
+
+            <button className={Styles.savebut} onClick={save_button_handle}>
+              Add to Stories
+            </button>
+          </>
+        ) : null}
+
+        <input
+          style={{ display: "none" }}
+          type="file"
+          ref={Refinput}
+          onChange={selectedFileHandle}
         />
-        
-        <button className={Styles.savebut} onClick={save_button_handle}>Add to Stories</button>
-      </>
-      ) : null}
 
-      <input
-        style={{ display: "none" }}
-        type="file"
-        ref={Refinput}
-        onChange={selectedFileHandle}
-      />
+        {showChoosebut ? (
+          <button
+            className={Styles.choosebutton}
+            type="button"
+            onClick={openChoosefile}
+          >
+            Choose Picture
+          </button>
+        ) : null}
 
-      {showChoosebut?<button
-        className={Styles.choosebutton}
-        type="button"
-        onClick={openChoosefile}
-      >
-        Choose Picture
-      </button>:null}
-      <animated.div style={styleOne} >
-      
+        {window.screen.width >= 768 ? (
+          <animated.div
+            style={styleOne}
+            className={Styles.camera}
+            onClick={() => dispatch(show_webcam_handle(true))}
+          >
+            <img width="100%" height="100%" src={cameraimg} alt="NAN" />
+          </animated.div>
+        ) : null}
+      </div>
+      <animated.div style={styleOne}>
+        <img
+          style={{ marginLeft: "50vw" }}
+          alt=""
+          src={process.env.PUBLIC_URL + "/stories.gif"}
+        />
       </animated.div>
-      {window.screen.width>=768? <animated.div
-        style={styleOne}
-        className={Styles.camera}
-        onClick={() => dispatch(show_webcam_handle(true))}
-      >
-        <img width="100%" height="100%" src={cameraimg} alt="NAN" />
-      </animated.div>:null}
-    </div>
+    </>
   );
 };
 export default Userstories;

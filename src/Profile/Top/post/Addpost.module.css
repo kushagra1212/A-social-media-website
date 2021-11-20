@@ -1,7 +1,6 @@
 .maindiv {
   position: fixed;
   display: flex;
-  justify-content: center;
   height: 100%;
   width: 100%;
   transform: translate(-50%, -50%);
@@ -9,8 +8,8 @@
   z-index: 200;
   top: 50%;
   left: 50%;
-  border: 2px solid #80808000;
-  border-radius: 10px;
+  border: 2 px solid #80808000;
+  border-radius: 10 px;
   box-shadow: 10px 10px 60px 0px #808080;
   align-content: center;
   flex-wrap: nowrap;
@@ -18,6 +17,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
   align-items: center;
+  justify-content: space-around;
 }
 .backbut {
   position: absolute;
@@ -173,9 +173,18 @@
   font-weight: bold;
   align-self: center;
 }
-.addpostDiv {
-}
+
 @media screen and (min-width: 768px) {
+  .addpostDiv {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(252 252 252 / 11%);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    position: absolute;
+    scroll-behavior: none;
+  }
   .maindiv {
     height: 90%;
     width: 30%;
@@ -207,15 +216,5 @@
   }
   .savebut:hover {
     background-color: rgb(7, 107, 49);
-  }
-  .addpostDiv {
-    width: 100%;
-    height: 100vh;
-    background-color: rgb(252 252 252 / 11%);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    z-index: 100;
-    position: absolute;
-    scroll-behavior: none;
   }
 }

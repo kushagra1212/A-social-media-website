@@ -149,7 +149,7 @@
 @media screen and (min-width: 768px) {
   .maincontent {
     background: white;
-    top: 30px;
+    top: 18vh;
     height: 100vh;
     display: flex;
     flex-direction: column;

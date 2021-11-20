@@ -279,9 +279,6 @@ setsearchuser(usernameformshowbar);
           showfollowers={showfollowers}
           showfollowing={showfollowing}
         />
-      
-          <ShowPost username={user.username} toDelete={false}/>
-      
       </div>
     );
   }

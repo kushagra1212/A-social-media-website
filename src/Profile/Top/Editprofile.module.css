@@ -228,10 +228,10 @@
     backdrop-filter: blur(5px);
     z-index: 100;
     position: absolute;
-    width: 100vw;
+    width: 100%;
     display: flex;
     scroll-behavior: none;
-    height: 100vh;
+    height: 100%;
     /* width: 50%; */
 
     flex-direction: row;

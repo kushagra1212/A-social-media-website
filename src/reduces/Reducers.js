@@ -10,5 +10,6 @@ import Likeposts from './Likeposts';
 import Stories from './Stories';
 import MessageReducer from './MessageReducer';
 import Posts from './Posts';
-const Reducers=combineReducers({signinReducer,main,user,userposts,count,feedposts,Likeposts,Stories,MessageReducer,Posts});
+import Suggestions from './Suggestions';
+const Reducers=combineReducers({signinReducer,main,user,userposts,count,feedposts,Likeposts,Stories,MessageReducer,Posts,Suggestions});
 export default Reducers;

@@ -8,6 +8,7 @@ import { getpostsforfeed } from "../../methods/getpostsforfeed";
 import { updateLikesArray } from "../../reduces/actions/userAction";
 import { getcount } from "../../methods/getcount";
 import ContentLoader from "react-content-loader";
+import Loader from "../../Animation/Loader/Loader";
 let heightofAni = window.screen.width >= 768 ? "45vh" : "20vh";
 let widthofAni = window.screen.width >= 768 ? "100%" : "100%";
 let heightofAniT = window.screen.width >= 768 ? "95vh" : "45vh";
@@ -111,7 +112,7 @@ const Container = ({ toDelete, username }) => {
         post={post}
       />
     );
-
+else
   return (
     <>
       <div className={Styles.topButtons}>
@@ -144,6 +145,7 @@ const Container = ({ toDelete, username }) => {
         ) : null}
       </div>
 
+
       <InfiniteScroll
         className={Styles.infi}
         dataLength={posts.length}
@@ -160,6 +162,7 @@ const Container = ({ toDelete, username }) => {
           </p>
         }
       >
+           
         <div
           style={grid ? {} : { flexDirection: "column", alignItems: "center" }}
           className={grid ? Styles.maindiv : Styles.table}
@@ -182,6 +185,7 @@ const Container = ({ toDelete, username }) => {
             );
           })}
         </div>
+        {posts.length===0?<Loader/>:null}
       </InfiniteScroll>
     </>
   );
