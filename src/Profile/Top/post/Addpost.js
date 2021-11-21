@@ -47,21 +47,20 @@ const Addpost = ({ setposthandle }) => {
           },
         }
       );
+      dispatch(updatecountforpost(username, postcount));
 
       dispatch(resetFeedPosts());
       dispatch(resetUserPosts());
 
       setloading(!loading);
       setposthandle(false);
-      dispatch(updatecountforpost(username, postcount));
-
+      
       window.location.reload("/main");
     } catch (err) {
       console.log(err);
     }
   };
   const handleUpdateItemImage = (e) => {
-    e.preventDefault();
     if (selectedFile == null) {
       ALert.error("Oops ! 😜");
       return;
@@ -209,7 +208,7 @@ const Addpost = ({ setposthandle }) => {
       <animated.form
         className={Styles.maindiv}
         style={Popup}
-        onSubmit={(e) => handleUpdateItemImage(e)}
+        onSubmit={(e) => {}}
       >
         <span
           className={Styles.backbut}
@@ -250,7 +249,7 @@ const Addpost = ({ setposthandle }) => {
           onChange={(e) => setdesc(e.target.value.substr(0, 100))}
           placeholder="    Write Caption 😜   "
         />
-        <button className={Styles.savebut} type="submit">
+        <button className={Styles.savebut} onClick={handleUpdateItemImage}>
           Upload
         </button>
       </animated.form>
