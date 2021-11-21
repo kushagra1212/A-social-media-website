@@ -45,6 +45,7 @@ const Main = ({ match }) => {
                 fromshowbar={false}
                 usernameformshowbar={null}
                 view={true}
+                preview={false}
               />
             </Route>
             <Route path={`${path}/messenger`}>

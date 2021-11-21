@@ -6,19 +6,19 @@ const userposts = (posts = [], action) => {
       pos.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);
       });
-      posts = pos;
+    
 
-      return posts;
+      return pos;
     case "GET_POSTS":
       pos = posts;
       pos.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);
       });
-      posts = pos;
-      return posts;
+      
+      return pos;
     case "RESET_USER_POSTS":
-      posts = [];
-      return posts;
+   
+      return [];
     default:
       return posts;
   }

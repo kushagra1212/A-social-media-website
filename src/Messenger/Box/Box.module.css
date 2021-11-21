@@ -86,6 +86,10 @@
   top: 13vh;
   position: absolute;
 }
+.maindiv2 img {
+  cursor: none;
+  height: 300px;
+}
 @media screen and (min-width: 768px) {
   .maindiv {
     max-height: 100vh;

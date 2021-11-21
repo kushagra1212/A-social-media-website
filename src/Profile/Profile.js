@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { getposts } from "../methods/getposts";
 import Styles from "./Profile.module.css";
 import { Redirect, withRouter } from "react-router";
-const Profile = () => {
+const Profile = ({preview}) => {
   const dispatch = useDispatch();
   const [post, setpost] = useState(false);
   const posts = useSelector((state) => state.userposts);
@@ -88,10 +88,11 @@ const Profile = () => {
           setshowfollowershandle={setshowfollowershandle}
           setshowfollowinghandle={setshowfollowinghandle}
           setposthand={setposthand}
+          preview={preview}
         />
 
           <>
-          {username!==""?<Container toDelete={true} username={username}/>:null}{" "}
+          {(username!=="" && !preview)?<Container toDelete={true} username={username}/>:null}{" "}
           </>
 
       </div>

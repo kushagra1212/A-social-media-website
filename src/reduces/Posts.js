@@ -10,10 +10,9 @@ const Posts = (
 ) => {
   switch (action.type) {
     case "ADD_LATEST_POSTS":
-      state.posts = action.payload.posts;
-      state.array = action.payload.array;
 
-      return state;
+
+      return {...state,posts:action.payload.posts,array:action.payload.array};
     case "GET_LATEST_POSTS":
       return state;
     case "UPDATE_LATEST_LIKES_ARRAY":

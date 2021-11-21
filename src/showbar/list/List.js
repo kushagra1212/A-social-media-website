@@ -81,6 +81,7 @@ const List = ({ list }) => {
           showprofilefromshowbar={showprofile}
           view={false}
           usernameformshowbar={username}
+          preview={false}
         />
       </div>
     );

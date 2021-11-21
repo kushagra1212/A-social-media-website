@@ -11,43 +11,44 @@ const feedposts = (
 ) => {
   switch (action.type) {
     case "ADD_FEED_POSTS":
-      state.posts = action.payload.posts;
+      let other = state.otherUsersLastcount;
+      if (isNaN(other[action.payload.otheruser])) {
+        other[action.payload.otheruser] = 0;
+      } else other[action.payload.otheruser] += action.payload.count;
+
+      if (isNaN(other[action.payload.username])) {
+        other[action.payload.username] = 0;
+      } else other[action.payload.username] += action.payload.count;
+
+      return {
+        ...state,
+        posts: action.payload.posts,
+        array: action.payload.array,
+        otherUsersLastcount: other,
+      };
+    case "ADD_FRIEND_FEED_POSTS":
+      post = state.posts;
+      post = [...post, ...action.payload.posts];
+      state.posts = post;
       state.array = action.payload.array;
-
-        if (isNaN(state.otherUsersLastcount[action.payload.otheruser])) {
-          state.otherUsersLastcount[action.payload.otheruser] =0
-        } else
-          state.otherUsersLastcount[action.payload.otheruser] +=
-            action.payload.count;
-
-
+      let other2=state.otherUsersLastcount;
+      if (isNaN(other2[action.payload.friend])) {
+        other2[action.payload.friend] = 3;
+      } else
+      other2[action.payload.friend] +=
+          action.payload.count;
+      return {...state,posts:post,array:action.payload.array,otherUsersLastcount:other2};
+    case "ADD_USER_FEED_POSTS":
+      post = state.posts;
+      post = [...post, ...action.payload.posts];
+      state.posts = post;
+      state.array = action.payload.array;
       if (isNaN(state.otherUsersLastcount[action.payload.username])) {
-        state.otherUsersLastcount[action.payload.username] =0
+        state.otherUsersLastcount[action.payload.username] = 3;
       } else
         state.otherUsersLastcount[action.payload.username] +=
           action.payload.count;
-
       return state;
-    case "ADD_FRIEND_FEED_POSTS":
-      post=state.posts;
-      post=[...post,...action.payload.posts];
-      state.posts=post;
-      state.array = action.payload.array;
-      if (isNaN(state.otherUsersLastcount[action.payload.friend])) {
-        state.otherUsersLastcount[action.payload.friend] =3
-      } else
-        state.otherUsersLastcount[action.payload.friend] +=action.payload.count;
-    return state;
-    case "ADD_USER_FEED_POSTS":
-      post=state.posts;
-      post=[...post,...action.payload.posts];
-      state.posts=post;
-      state.array = action.payload.array;
-      if (isNaN(state.otherUsersLastcount[action.payload.username])) {
-        state.otherUsersLastcount[action.payload.username] =3
-      } else
-        state.otherUsersLastcount[action.payload.username] +=action.payload.count;
-    return state;
     case "GET_FEED_POSTS":
       return state;
     case "UPDATE_LIKES_ARRAY":
@@ -85,7 +86,7 @@ const feedposts = (
         array: [],
         count: 0,
         likesArray: [],
-        otherUsersLastcount: []
+        otherUsersLastcount: [],
       };
     default:
       break;

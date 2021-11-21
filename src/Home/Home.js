@@ -57,6 +57,7 @@ const Home = () => {
         showprofilefromshowbar={showProfile}
         view={false}
         usernameformshowbar={userSearch}
+        preview={false}
       />
     </div>
   </div>)

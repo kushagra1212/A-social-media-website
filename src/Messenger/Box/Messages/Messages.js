@@ -113,7 +113,7 @@ const Messages = () => {
           />
           <h4 style={{ fontSize: "4em", opacity: "0.5" }}>
             {" "}
-            Start the Conversation
+            Chat with Friends
           </h4>{" "}
         </div>
 
@@ -138,9 +138,9 @@ const Messages = () => {
             {" "}
             <div className={Styles.arrow}></div>
           </div>
-        ) : null}
+        ) :null}
 
-        <label>{user?.username}</label>
+        <label style={{fontSize:"1.2em"}}>{user?.username}</label>
         <img
           width="30px"
           height="30px"
@@ -148,7 +148,7 @@ const Messages = () => {
           src={userPicture}
           alt=""
         />
-        <label style={{ opacity: "0.5", fontSize: "0.9em" }}>Status</label>
+     
       </div>
       <div className={Styles.maindiv}></div>
       <div className={Styles.maindiv}>

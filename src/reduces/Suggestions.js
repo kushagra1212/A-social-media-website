@@ -6,8 +6,7 @@ const Suggestions = (
 ) => {
   switch (action.type) {
     case "ADD_SUGGESTIONS":
-      state.suggestion = action.payload.suggestion;
-      return state;
+      return {...state,suggestion:action.payload.suggestion};
     default:
       break;
   }

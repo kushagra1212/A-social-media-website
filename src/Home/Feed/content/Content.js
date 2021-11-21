@@ -19,32 +19,41 @@ import Search from "../../../Search/Search";
 import { useAlert } from "react-alert";
 import SuggestionList from "../../../components/suggestionlist/SuggestionList";
 import ContentLoader from "react-content-loader";
-import { updateLastCount, updateLatestLikesArray, updateLatestPost, updateLatestUnlikesArray,addLatestPosts, setScrollPositionHandler } from "../../../reduces/actions/PostAction";
+import {
+  updateLastCount,
+  updateLatestLikesArray,
+  updateLatestPost,
+  updateLatestUnlikesArray,
+  addLatestPosts,
+  setScrollPositionHandler,
+} from "../../../reduces/actions/PostAction";
 import getallposts from "../../../methods/getallposts";
-let heightofAni = window.screen.width >= 768 ? "100vh" : "45vh";
+
 const CURURL = process.env.REACT_APP_CURURL;
 let likeCountArray = [];
 let element = null;
-const MyLoader = (props) => (
-  <ContentLoader
-    speed={1}
-    width="100%"
-    height={heightofAni}
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
-    {...props}
-  >
-    {" "}
-    <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
-  </ContentLoader>
-);
+export const MyLoader = (props) => {
+  let heightofAni = window.screen.width >= 768 ? "100vh" : "45vh";
+
+return(  <ContentLoader
+  speed={1}
+  width="100%"
+  height={heightofAni}
+  backgroundColor="#f3f3f3"
+  foregroundColor="#ecebeb"
+  {...props}
+>
+  {" "}
+  <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
+</ContentLoader>);
+};
 const Content = () => {
   const dispatch = useDispatch();
   const Alert = useAlert();
   const { profilepic, username } = useSelector((state) => {
     return state.user;
   });
-  const { likesLatestArray,scrollPosition } = useSelector((state) => {
+  const { likesLatestArray, scrollPosition } = useSelector((state) => {
     return state?.Posts;
   });
 
@@ -59,20 +68,14 @@ const Content = () => {
   const [showShare, setShowShare] = useState(false);
   const [userSearch, setUserSearch] = useState("");
   const [sharePostURL, setSharePostURL] = useState("");
-  const sRef=useRef();
-  const [noOne,setNoOne]=useState(false);
- const setShowProfileHandler=(val)=>{
-  if(val)
- 
-    setShowProfile(val);
- 
- }
- const setUserSearchHandler=(val)=>{
-
-
+  const sRef = useRef();
+  const [noOne, setNoOne] = useState(false);
+  const setShowProfileHandler = (val) => {
+    if (val) setShowProfile(val);
+  };
+  const setUserSearchHandler = (val) => {
     setUserSearch(val);
-
- }
+  };
   const unique = (array) => {
     let isvisited = {};
     let newarray = [];
@@ -95,8 +98,8 @@ const Content = () => {
       setlikeLoading(true);
 
       tempUserLikes.push({ username: username, postID: key });
- 
-      dispatch(updateLatestLikesArray(username,key));
+
+      dispatch(updateLatestLikesArray(username, key));
       let indexOflkesArray = likeCountArray.findIndex(
         (ele) => ele.username === username && ele.postID === post._id
       );
@@ -106,7 +109,6 @@ const Content = () => {
         likeCountArray.splice(indexOflkesArray, 1);
       }
 
-  
       updatelikes({ username: username, id: post._id });
       setTimeout(() => {
         setlikeLoading(false);
@@ -141,18 +143,13 @@ const Content = () => {
 
         dispatch(updateLatestUnlikesArray(likesArrayTemp));
       }
-    
+
       deletelike({ username: username, id: post._id });
       setTimeout(() => {
         setlikeLoading(false);
       }, 400);
     }
-  
   };
-
-
-
-
 
   const addCommentFuncforContent = async (comment, post) => {
     let id = post._id;
@@ -162,8 +159,7 @@ const Content = () => {
 
     com.comments.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-   
-    dispatch(updateLatestPost(com))
+    dispatch(updateLatestPost(com));
   };
   const setcommentsfunc = ({ val, post }) => {
     element = document.querySelector("#infiniteScroll");
@@ -182,58 +178,50 @@ const Content = () => {
       });
     }
   };
-const getPosts=()=>{
- 
-    getallposts(username,state?.Posts.lastcount,3).then((posts)=>{
-      console.log(posts);
-      if(posts.length>0){
-        dispatch(addLatestPosts(posts,array));
-        setarray([...array,...posts]);
-        dispatch(updateLastCount(state?.Posts.lastcount+3));
-        posts.forEach((ele) => {
-          ele.likes.forEach((ele2) => {
-            dispatch(updateLatestLikesArray(ele2.username, ele._id));
+  const getPosts = () => {
+    getallposts(username, state?.Posts.lastcount, 3)
+      .then((posts) => {
+        console.log(posts);
+        if (posts.length > 0) {
+          dispatch(addLatestPosts(posts, array));
+          setarray([...array, ...posts]);
+          dispatch(updateLastCount(state?.Posts.lastcount + 3));
+          posts.forEach((ele) => {
+            ele.likes.forEach((ele2) => {
+              dispatch(updateLatestLikesArray(ele2.username, ele._id));
+            });
           });
-        });
-  
-      }else{
-        sethasmore(false);
-      }
-      setloading(false);
-    }).catch(err=>console.log(err))
-};
-
-
-  useEffect(()=>{
-  if(username){
-      getPosts();
-    getstories(username, dispatch);
-    getitem(username).then(async (item) => {
-      item?.following.forEach((ele) => {
-         getstoriesFromOthers(ele.username, dispatch);
-      });
-    });
-  
-  }
-  },[username])
-  useEffect(()=>{
-    setTimeout(()=>{
-      setNoOne(true);
-    },3000)
-  },[])
-  useEffect(()=>{
-      if(state.Posts.posts.length>=1)
-      {
+        } else {
+          sethasmore(false);
+        }
         setloading(false);
-        setNoOne(true);
-      }
-      window.scrollTo(0,scrollPosition);
+      })
+      .catch((err) => console.log(err));
+  };
 
-  
-  
-  },[showProfile,loading,noOne,state.Posts.posts.length,scrollPosition]);
-
-
+  useEffect(() => {
+    if (username) {
+      getPosts();
+      getstories(username, dispatch);
+      getitem(username).then(async (item) => {
+        item?.following.forEach((ele) => {
+          getstoriesFromOthers(ele.username, dispatch);
+        });
+      });
+    }
+  }, [username]);
+  useEffect(() => {
+    setTimeout(() => {
+      setNoOne(true);
+    }, 3000);
+  }, []);
+  useEffect(() => {
+    if (state.Posts.posts.length >= 1) {
+      setloading(false);
+      setNoOne(true);
+    }
+    window.scrollTo(0, scrollPosition);
+  }, [showProfile, loading, noOne, state.Posts.posts.length, scrollPosition]);
 
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);
@@ -242,8 +230,10 @@ const getPosts=()=>{
       <div className={Styles.userprofilemain}>
         <span style={{ fontSize: "40px", color: "red" }}>
           <i
-            onClick={() => { 
-              setShowProfile(false); setUserSearch(""); }}
+            onClick={() => {
+              setShowProfile(false);
+              setUserSearch("");
+            }}
             styles={{ color: "Dodgerblue", cursor: "pointer" }}
             className="fa fa-times-circle"
           ></i>
@@ -254,6 +244,7 @@ const getPosts=()=>{
             showprofilefromshowbar={showProfile}
             view={false}
             usernameformshowbar={userSearch}
+            preview={true}
           />
         </div>
       </div>
@@ -264,12 +255,21 @@ const getPosts=()=>{
   } else if (state.Posts.posts.length === 0 && noOne) {
     return (
       <>
-      <div className={Styles.maincontentstart} style={{overflow:"hidden"}}>
-        No Post to See Please Follow your Friends !
-        <img width="100%" height="90%" alt="" src={process.env.PUBLIC_URL+'/nopost.gif'}/>
-  
-      </div>
-      {window.screen.width<768?<SuggestionList setShowProfileHandler={setShowProfileHandler} setUserSearchHandler={setUserSearchHandler} />:null}
+        <div className={Styles.maincontentstart} style={{ overflow: "hidden" }}>
+          No Post to See Please Follow your Friends !
+          <img
+            width="100%"
+            height="90%"
+            alt=""
+            src={process.env.PUBLIC_URL + "/nopost.gif"}
+          />
+        </div>
+        {window.screen.width < 768 ? (
+          <SuggestionList
+            setShowProfileHandler={setShowProfileHandler}
+            setUserSearchHandler={setUserSearchHandler}
+          />
+        ) : null}
       </>
     );
   } else {
@@ -294,34 +294,32 @@ const getPosts=()=>{
             </div>
           </div>
         ) : null}
- {showcomments.val ? (
-            <div className={Styles.commenttopdiv}>
-              <Comments
-                username={username}
-                showcomments={showcomments}
-                setcommentsfunc={setcommentsfunc}
-              />
-            </div>
-          ) : null}
-        <div     className={Styles.maincontent} id="infiniteScroll">
-         
-
+        {showcomments.val ? (
+          <div className={Styles.commenttopdiv}>
+            <Comments
+              username={username}
+              showcomments={showcomments}
+              setcommentsfunc={setcommentsfunc}
+            />
+          </div>
+        ) : null}
+        <div className={Styles.maincontent} id="infiniteScroll">
           <InfiniteScroll
             className={Styles.infi}
             dataLength={state.Posts.posts.length}
             next={getPosts}
             hasMore={hasMore}
-            loader={<div style={{marginTop:"50px"}} ></div>}
+            loader={<div style={{ marginTop: "50px" }}></div>}
             endMessage={
               <p className={Styles.infiP}>
                 <b>Yay! You have seen it all</b>
               </p>
             }
             ref={sRef}
-            onScroll={e=>{    const scrollY = window.scrollY; //Don't get confused by what's scrolling - It's not the window
-          if(scrollY!==0)
-            dispatch(setScrollPositionHandler(scrollY));
-           }}
+            onScroll={(e) => {
+              const scrollY = window.scrollY; //Don't get confused by what's scrolling - It's not the window
+              if (scrollY !== 0) dispatch(setScrollPositionHandler(scrollY));
+            }}
           >
             {state?.Posts?.posts.map((post, key) => (
               <div key={post._id} className={Styles.singlecontainer}>
@@ -391,7 +389,6 @@ const getPosts=()=>{
 
                           cursor: "pointer",
                         }}
-                      
                       >
                         <i
                           onClick={() => likefunction(post, post._id)}
@@ -400,7 +397,6 @@ const getPosts=()=>{
                             cursor: "pointer",
                             boxShadow: "8px 9px 15px 10px #5050504d",
                           }}
-                          
                           className={"fa fa-heart"}
                           aria-hidden="true"
                         ></i>
@@ -469,10 +465,14 @@ const getPosts=()=>{
                     addCommentFuncforContent(comment, post)
                   }
                 />
-                    {(key+1)%10===0 && window.screen.width<768?<SuggestionList setShowProfileHandler={setShowProfileHandler} setUserSearchHandler={setUserSearchHandler} />:null}
+                {(key + 1) % 10 === 0 && window.screen.width < 768 ? (
+                  <SuggestionList
+                    setShowProfileHandler={setShowProfileHandler}
+                    setUserSearchHandler={setUserSearchHandler}
+                  />
+                ) : null}
               </div>
             ))}
-       
           </InfiniteScroll>
         </div>
       </>

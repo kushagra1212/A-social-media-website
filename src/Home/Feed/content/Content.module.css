@@ -206,20 +206,17 @@
 .userprofilemain {
   height: 100vh;
   -webkit-backdrop-filter: blur(1px);
-  backdrop-filter: blur(1 px);
+  backdrop-filter: blur(1px);
   box-shadow: azure;
-  /* top: -70
-  px
-  ; */
   position: relative;
   z-index: 10;
   background-color: rgba(255, 255, 255, 0.15);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 }
 .userprofilemain span {
   cursor: pointer;
@@ -233,7 +230,8 @@
   z-index: 9;
   background-color: whitesmoke;
   width: 100vw;
-  min-height: 100vh;
+  top: 45vh;
+  min-height: 55vh;
   box-shadow: 0px 1px 520px 100px #4747474d;
   overflow: hidden;
 }
@@ -400,30 +398,22 @@
   }
 
   .userprofilemain {
-    height: 80vh;
     -webkit-backdrop-filter: blur(1px);
     backdrop-filter: blur(1px);
     box-shadow: azure;
-
-    position: relative;
-
     background-color: rgba(255, 255, 255, 0.15);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
   }
 
   .userProfile {
-    width: 80%;
-    /* transform: translate(-50%,-50%); */
-    top: 10vh;
-    left: 10%;
-
-    height: 80vh;
     overflow: scroll;
     overflow-x: hidden;
-    box-shadow: 1px 1px 50px 1px rgba(128, 128, 128, 0.623);
+    box-shadow: 1px 1px 50px 1px rgb(128 128 128 / 62%);
     border: 1px solid rgba(128, 128, 128, 0);
     border-radius: 20px;
+    width: 50%;
+    left: 25%;
   }
 
   .userprofilemain span,

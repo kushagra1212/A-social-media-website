@@ -62,13 +62,13 @@ const SuggestionList = ({setShowProfileHandler,setUserSearchHandler}) => {
   };
 
   useEffect(() => {
-    if(suggestion.length>=1)
-    {
-      setLoading(false);
-      return;
-    }
+
     if(username!==""){
-      
+      if(suggestion.length>=1)
+      {
+        setLoading(false);
+        return;
+      }
     getusers()
     .then((res) => {
       checkUsers(res.data);
@@ -92,7 +92,7 @@ const SuggestionList = ({setShowProfileHandler,setUserSearchHandler}) => {
 
     let index = suggestion.findIndex((item) => item.user._id === user._id);
     console.log(index);
-    let u = [...suggestion];
+    let u =suggestion;
     u[index].following = true;
     dispatch(addSuggestions(u));
   };

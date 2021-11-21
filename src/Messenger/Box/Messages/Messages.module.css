@@ -27,15 +27,14 @@
   padding-bottom: 3%;
   width: 100%;
   scroll-behavior: smooth;
-  background: #ffffff;
-
+  background: #ffffff00;
   width: 90%;
   margin-left: 5%;
   font-family: cursive;
   border: 1px solid #80808000;
   font-size: 1.2em;
   border-radius: 10px;
-  box-shadow: 1px 1px 10px 1px #80808047;
+  /* box-shadow: 1px 1px 10px 1px #80808047; */
   text-align: center;
 }
 .topdivmessage label:nth-child(2) {
@@ -394,5 +393,8 @@ px
   .userPicture {
     width: 40px;
     height: 40px;
+  }
+  .nomessages img {
+    width: 200px;
   }
 }

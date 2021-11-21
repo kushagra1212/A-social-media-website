@@ -12,7 +12,7 @@ import getpartialusers from "../methods/getpartialusers";
 import getuser from "../methods/getuser";
 const URL = process.env.REACT_APP_URL;
 let count = 0;
-const Search = ({ showprofilefromshowbar, usernameformshowbar, view }) => {
+const Search = ({ showprofilefromshowbar, usernameformshowbar, view,preview }) => {
   const [searchuser, setsearchuser] = useState("");
   const [user, setuser] = useState("");
   const [users, setUsers] = useState([]);
@@ -148,7 +148,7 @@ setsearchuser(usernameformshowbar);
 
       return (
         <div style={{ width: "100%", height: "100%", zIndex: 100 }}>
-          <Profile />
+          <Profile preview={preview} />
         </div>
       );
     }
@@ -167,6 +167,7 @@ setsearchuser(usernameformshowbar);
           setshowfollowinghandle={setshowfollowinghandle}
           showfollowers={showfollowers}
           showfollowing={showfollowing}
+          preview={preview}
         />
      
  
@@ -258,7 +259,7 @@ setsearchuser(usernameformshowbar);
 
       return (
         <div style={{ width: "100%", height: "100%" }}>
-          <Profile />
+          <Profile preview={preview} />
         </div>
       );
     }
@@ -278,6 +279,7 @@ setsearchuser(usernameformshowbar);
           setshowfollowinghandle={setshowfollowinghandle}
           showfollowers={showfollowers}
           showfollowing={showfollowing}
+          preview={preview}
         />
       </div>
     );

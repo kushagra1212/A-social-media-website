@@ -99,11 +99,11 @@ const Like = () => {
           })}
           <span
      className={Styles.loadmorebut}
-          style={{ fontSize: "40px", color: "white" }}
+          style={{ fontSize: "40px", color: "white" ,cursor: "pointer"}}
         >
           <i
           onClick={() => getposts()}
-            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            styles={{ color: "Dodgerblue" }}
             className="fa fa-plus"
           ></i>
         </span>

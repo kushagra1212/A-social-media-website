@@ -14,12 +14,11 @@ const Stories = () => {
   const { othersStories } = useSelector((state) => state.Stories);
 
   return (
-    <div  className={Styles.main} >
-    <div className={Styles.stories}>
- 
+    <div className={Styles.main}>
+      <div className={Styles.stories}>
         <li
           onClick={() => dispatch(show_user_stories_handle(true))}
-          className={Styles.userStories}
+          className={Styles.particular}
         >
           <img
             src={
@@ -36,19 +35,23 @@ const Stories = () => {
               key={id}
               onClick={() => dispatch(show_others_stories_handle(true, id))}
               className={Styles.particular}
-              style={{
-                backgroundImage:
+            >
+              <img
+                src={
                   ele.stories[0].profilepic !== ""
                     ? `url(${ele.stories[0].profilepic})`
-                    : process.env.PUBLIC_URL + "/userImage.png",
-                imageResolution: "from-image",
-              }}
-            ></li>
+                    : process.env.PUBLIC_URL + "/userImage.png"
+                }
+                alt=""
+                width="100%"
+                height="100%"
+              />
+            </li>
           ) : null
         )}
-   
+           
       </div>
-</div>
+    </div>
   );
 };
 export default Stories;

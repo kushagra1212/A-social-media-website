@@ -30,7 +30,7 @@ const Messenger = () => {
       dispatch({ type: "SHOWMESSAGE", payload: true });
       const getconversation = async () => {
         const conver = await getconversations(username);
-        console.log(conver);
+     
         let socket = io(ENDPOINT, {
           transports: ["websocket", "polling", "flashsocket"],
         });

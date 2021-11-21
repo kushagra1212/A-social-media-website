@@ -7,13 +7,24 @@ import { SuspenseImg } from "../../Home/Feed/content/SuspenceImage/SuspenceImg";
 import { getpostsforfeed } from "../../methods/getpostsforfeed";
 import { updateLikesArray } from "../../reduces/actions/userAction";
 import { getcount } from "../../methods/getcount";
+import { FluidLoaderFive } from "../../Animation/Loader/loader/FluidLoader";
 import ContentLoader from "react-content-loader";
+import { MyLoader } from "../../Home/Feed/content/Content";
 import Loader from "../../Animation/Loader/Loader";
-import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader"
+import Addcomment from "../../Home/Feed/content/comments/Addcomment";
+import addcomment from "../../methods/addcomments";
+import  Comments from "../../Home/Feed/content/comments/Comments"
+import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
+import updatelikes from "../../methods/updatelikes";
+import deletelike from "../../methods/deletelike";
+import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
+import { useAlert } from "react-alert";
+const CURURL = process.env.REACT_APP_CURURL;
 let heightofAni = window.screen.width >= 768 ? "45vh" : "20vh";
 let widthofAni = window.screen.width >= 768 ? "100%" : "100%";
 let heightofAniT = window.screen.width >= 768 ? "95vh" : "45vh";
 let widthofAniT = window.screen.width >= 768 ? "100%" : "100%";
+let element = null;
 const MyLoaderGrid = (props) => (
   <ContentLoader
     speed={1}
@@ -41,15 +52,20 @@ const MyLoaderTable = (props) => (
   </ContentLoader>
 );
 const Container = ({ toDelete, username }) => {
+  const Alert = useAlert();
+
   const [grid, setGrid] = useState(true);
   const dispatch = useDispatch();
   const [showDetailedPost, setShowDetailedPost] = useState(false);
   const [post, setPost] = useState([]);
-
+  const [showShare, setShowShare] = useState(false);
+  const [showcomments, setshowcomments] = useState(false);
+  const [sharePostURL, setSharePostURL] = useState("");
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [isUnmounted, setIsUnmounted] = useState(false);
   const [postCount, setPostCount] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
   const [vis,setVis]=useState(true);
   const gridHandler = (bool) => {
     setGrid(bool);
@@ -96,6 +112,19 @@ const Container = ({ toDelete, username }) => {
       }
     }
   };
+  const copyToClipboardHandler = () => {
+    if (!showAlert) {
+      navigator.clipboard.writeText(sharePostURL);
+      Alert.success("Link Copied", {
+        onOpen: () => {
+          setShowAlert(false);
+        },
+        onClose: () => {
+          setShowAlert(true);
+        },
+      });
+    }
+  };
 useEffect(()=>{
   if(posts.length===0){
     setTimeout(()=>{
@@ -111,7 +140,40 @@ useEffect(()=>{
       setPostCount(res.postcount);
     });
   }, [username]);
+  const setcommentsfunc = ({ val, post }) => {
+    element = document.querySelector("#infiniteScroll");
+    setshowcomments({ val: val, post: post });
+  };
+  if (showcomments.val) disableBodyScroll(element);
+  else if (element != null) enableBodyScroll(element);
+  const addCommentFuncforContent = async (comment, post) => {
+    let id = post._id;
+    let profilePicture = post.pic;
+    let index=posts.findIndex((ele)=>ele._id===id);
+    let poss=[...posts];
 
+    let com = await addcomment(id, username, comment, profilePicture);
+
+    com.comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+    poss[index]=com;
+    setPosts(poss);
+
+  };
+  const likefunction=(post,id)=>{
+    let index=posts.findIndex((ele)=>ele._id===id);
+    let poss=[...posts];
+    poss[index].likes.push({username:username,postID:id});
+    updatelikes({username:username,id:post._id });
+ 
+    setPosts(poss);
+  }
+  const unlikefunction=(post,id)=>{
+    let index=posts.findIndex((ele)=>ele._id===id);
+    let poss=[...posts];
+    poss[index].likes=poss[index].likes.filter((ele)=>ele.username!==username);
+    deletelike({username:username,id:post._id});
+    setPosts(poss);
+  }
   if (showDetailedPost)
     return (
       <Showdetailedpost
@@ -154,7 +216,9 @@ else
       </div>
 
 
-      <InfiniteScroll
+   {grid?  
+   
+   <InfiniteScroll
         className={Styles.infi}
         dataLength={posts.length}
         next={call_func}
@@ -165,15 +229,13 @@ else
           ></div>
         }
         endMessage={
-          <p className={Styles.infiP}>
-            <b>Yay! You have seen it all</b>
-          </p>
+         ""
         }
       >
            
         <div
-          style={grid ? {} : { flexDirection: "column", alignItems: "center" }}
-          className={grid ? Styles.maindiv : Styles.table}
+          style={ {}}
+          className={ Styles.maindiv}
         >
           {posts.map((post, id) => {
             return (
@@ -192,9 +254,203 @@ else
               </div>
             );
           })}
+                {vis?<VerticalLoader/>:null}
         </div>
-        {vis?<VerticalLoader/>:null}
-      </InfiniteScroll>
+  
+      </InfiniteScroll>:
+      
+      <div className={Styles.maincontent} id="infiniteScroll">
+              {showcomments.val ? (
+          <div className={Styles.commenttopdiv}>
+            <Comments
+              username={username}
+              showcomments={showcomments}
+              setcommentsfunc={setcommentsfunc}
+            />
+          </div>
+        ) : null}
+               {showShare ? (
+          <div className={Styles.topshare}>
+            <span style={{ color: "red" }}>
+              <i
+                onClick={() => setShowShare(false)}
+                styles={{
+                  color: "Dodgerblue",
+                  cursor: "pointer",
+                  boxShadow: "8px 9px 15px 10px #5050504d",
+                }}
+                className="fa fa-times-circle"
+              ></i>
+            </span>
+            <div className={Styles.showshare}>
+              <input disabled value={sharePostURL} />
+              <button onClick={copyToClipboardHandler}>Copy link</button>
+            </div>
+          </div>
+        ) : null}
+      <InfiniteScroll
+      className={Styles.infi}
+      dataLength={posts.length}
+      next={call_func}
+      hasMore={hasMore}
+      loader={
+        <div
+          style={{ width: "10em", marginTop: "10%", height: "10em" }}
+        ></div>
+      }
+      endMessage={
+        <p className={Styles.infiP}>
+          <b>Yay! You have seen it all</b>
+        </p>
+      }
+    
+     
+    >
+      {posts.map((post, key) => (
+        <div key={post._id} className={Styles.singlecontainer}>
+          <div
+            className={Styles.topdiv}
+
+         
+          >
+        
+            <Suspense fallback={<FluidLoaderFive />}>
+              <img
+                src={
+                  post.profilepic
+                    ? post.profilepic
+                    : process.env.PUBLIC_URL + "/userImage.png"
+                }
+                alt=""
+              />
+            </Suspense>
+            <h6 className={Styles.usernamediv}>{post.username}</h6>
+          </div>
+          <button className={Styles.imgdiv}>
+            <Suspense fallback={<MyLoader />}>
+              <SuspenseImg alt="" src={post.picture} />
+            </Suspense>
+          </button>
+          <div className={Styles.bottomdiv}>
+            {post.likes.findIndex(
+              (ele) =>
+                ele.username === username
+            ) >= 0 ? (
+              <div>
+                <span
+                  style={{
+                    color: "red",
+
+                    cursor: "pointer",
+                  }}
+                >
+                  <i
+                    onClick={() => unlikefunction(post, post._id)}
+                    styles={{
+                      color: "Dodgerblue",
+                      cursor: "pointer",
+                      boxShadow: "8px 9px 15px 10px #5050504d",
+                    }}
+                    className="fa fa-heart"
+                    aria-hidden="true"
+                  ></i>
+                </span>{" "}
+                {post.likes.length}
+              </div>
+            ) : (
+              <div className={Styles.heart}>
+                <span
+                  style={{
+                    color: "grey",
+
+                    cursor: "pointer",
+                  }}
+                
+                >
+                  <i
+                    onClick={() => likefunction(post, post._id)}
+                    styles={{
+                      color: "Dodgerblue",
+                      cursor: "pointer",
+                      boxShadow: "8px 9px 15px 10px #5050504d",
+                    }}
+                    
+                    className={"fa fa-heart"}
+                    aria-hidden="true"
+                  ></i>
+                </span>{" "}
+                {post.likes.length}
+              </div>
+            )}
+            <div>
+              <span
+                style={{
+                  color: "black",
+
+                  cursor: "pointer",
+                }}
+              >
+                <i
+                  onClick={() =>
+                    setcommentsfunc({ val: true, post: post })
+                  }
+                  styles={{
+                    color: "Dodgerblue",
+                    cursor: "pointer",
+                    boxShadow: "8px 9px 15px 10px #5050504d",
+                  }}
+                  className="far fa-comment-alt"
+                  aria-hidden="true"
+                ></i>
+              </span>
+              {post?.comments?.length}
+            </div>
+            <span
+              style={{
+                color: "lightgreen",
+
+                cursor: "pointer",
+              }}
+            >
+              <i
+                onClick={() => {
+                  setSharePostURL(`${CURURL}/post/${post._id}`);
+                  setShowShare(true);
+                }}
+                styles={{
+                  color: "Dodgerblue",
+                  cursor: "pointer",
+                  boxShadow: "8px 9px 15px 10px #5050504d",
+                }}
+                className="fa fa-share-alt"
+                aria-hidden="true"
+              ></i>
+            </span>
+          </div>
+          <div
+            style={post.desc !== "" ? { padding: "3%" } : {}}
+            className={Styles.caption}
+          >
+            {post.desc}
+          </div>
+          <Addcomment
+            addCommentFunc={(comment) =>
+              addCommentFuncforContent(comment, post)
+            }
+          />
+      
+        </div>
+      ))}
+ 
+    </InfiniteScroll>
+      </div>
+      
+      
+      
+      
+      
+      }
+    
     </>
   );
 };

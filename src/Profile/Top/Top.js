@@ -6,11 +6,13 @@ import { useEffect, useState } from "react";
 import Editprofile from "./Editprofile";
 import Topprofile from "./Topprofile";
 import { useHistory, withRouter } from "react-router";
+import Preview from "../Preview/Preview";
 const URL = process.env.REACT_APP_URL;
 const Top = ({
   setposthand,
   setshowfollowershandle,
   setshowfollowinghandle,
+  preview,
 }) => {
   let {
     username,
@@ -64,8 +66,21 @@ const Top = ({
       {!post ? (
         edit ? (
           <Editprofile setprofpichandle={setprofpichandle} edit_it={edit_it} />
-        ) : (
+        ) :! preview ? (
           <Topprofile
+            name={name}
+            edit_it={edit_it}
+            logouthandle={logouthandle}
+            img={img}
+            username={username}
+            bio={bio}
+            postsnumber={postcount}
+            setposthandle={setposthandle}
+            setshowfollowershandle={setshowfollowershandle}
+            setshowfollowinghandle={setshowfollowinghandle}
+          />
+        ) : (
+          <Preview
             name={name}
             edit_it={edit_it}
             logouthandle={logouthandle}
