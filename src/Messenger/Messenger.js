@@ -16,6 +16,7 @@ const Messenger = () => {
   const [conversations, setconversations] = useState(null);
   const { box, socket } = useSelector((state) => state.MessageReducer);
   const [loading, setloading] = useState(false);
+  const {state} =useSelector((state)=>state);
   const { username } = useSelector((state) => state.user);
   const backbButFun = () => {
     socket?.disconnect();
@@ -61,14 +62,14 @@ const Messenger = () => {
           <Loader />
         ) : window.screen.width < 768 ? (
           box ? (
-            <Box conversations={conversations} username={username} />
+            <Box conversations={conversations} username={username} user={state.user} />
           ) : (
             (conversations!==null && conversations.length===0?null:<Messages />)
           )
         ) : (
           <>
             {" "}
-            <Box conversations={conversations} username={username} />{" "}
+            <Box conversations={conversations} username={username} user={state.user} />{" "}
             {(conversations!==null && conversations.length===0?null:<Messages />)}
           </>
         )}

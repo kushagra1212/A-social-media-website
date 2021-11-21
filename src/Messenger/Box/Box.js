@@ -23,19 +23,11 @@ const MyLoader = (props) => (
     <rect x="5" y="0" rx="10" ry="10" width="100%" height="50px" />
   </ContentLoader>
 );
-const List = ({ chatuser, conversationID,selectedID,selectIDHandler }) => {
-  const [user, setuser] = useState(null);
-  
+const List = ({ chatuser, conversationID,selectedID,selectIDHandler,user}) => {
+ 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const getUser = async () => {
-      const User = await getuser(chatuser);
 
-      setuser(User);
-    };
-    getUser(chatuser);
-  }, [chatuser]);
   if (user === null) {
     return (
       <div styles={{ height: "10px" }} className={Styles.listitem}>
@@ -44,6 +36,7 @@ const List = ({ chatuser, conversationID,selectedID,selectIDHandler }) => {
     );
   }
   const showmessages = () => {
+  
     selectIDHandler(user._id);
     dispatch({ type: "SETUSERCONVERSATION", payload: user });
     dispatch(setconversationID(conversationID));
@@ -76,7 +69,7 @@ const List = ({ chatuser, conversationID,selectedID,selectIDHandler }) => {
   );
 };
 
-const Box = ({ conversations, username }) => {
+const Box = ({ conversations, username,user }) => {
   const [selectedID,setSelectedID]=useState("");
   const selectIDHandler=(id)=>{
     setSelectedID(id);
@@ -110,6 +103,8 @@ const Box = ({ conversations, username }) => {
                   ? element.members[1]
                   : element.members[0]
               }
+              user={user}
+              
             />
           );
         })}
