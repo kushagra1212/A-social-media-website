@@ -17,7 +17,7 @@ const Messages = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!username || user.username===null) return;
+    if (!username || user?.username===null) return;
     if (socket) {
       socket.on("getmessage", ({ sender, text }) => {
         if (sender === user?.username) {

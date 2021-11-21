@@ -1,13 +1,14 @@
 import Styles from "./Box.module.css";
 import getuser from "../../methods/getuser";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
 import {
   setconversationID,
   setUserPicture,
 } from "../../reduces/actions/MessageReducerAction";
 import ContentLoader from "react-content-loader"
+
 let heightofAni = window.screen.width >= 768 ? "20vh" : "15vh";
 
 const MyLoader = (props) => (
@@ -23,12 +24,12 @@ const MyLoader = (props) => (
     <rect x="5" y="0" rx="10" ry="10" width="100%" height="50px" />
   </ContentLoader>
 );
-const List = ({ chatuser, conversationID,selectedID,selectIDHandler,user}) => {
+const List = ({ chatuser, conversationID,selectedID,selectIDHandler}) => {
  
   const dispatch = useDispatch();
+  const state =useSelector((state)=>state);
 
-
-  if (user === null) {
+  if (state?.user === null) {
     return (
       <div styles={{ height: "10px" }} className={Styles.listitem}>
         <MyLoader />
@@ -37,25 +38,25 @@ const List = ({ chatuser, conversationID,selectedID,selectIDHandler,user}) => {
   }
   const showmessages = () => {
   
-    selectIDHandler(user._id);
-    dispatch({ type: "SETUSERCONVERSATION", payload: user });
+    selectIDHandler(state?.user?._id);
+    dispatch({ type: "SETUSERCONVERSATION", payload: state?.user });
     dispatch(setconversationID(conversationID));
  
-    let userPicture= user.profilepic
-    ? user.profilepic
+    let userPicture= state?.user?.profilepic
+    ? state?.user?.profilepic
     : `${process.env.PUBLIC_URL}/userImage.png`;
     dispatch(setUserPicture(userPicture));
     if (window.screen.width < 768)
       dispatch({ type: "SHOWBOX", payload: false });
   };
-  console.log(selectedID,user._id);
+  console.log(selectedID,state?.user?._id);
   return (
-    <div className={Styles.listitem} style={user._id===selectedID?{backgroundColor:"rgba(5, 93, 133, 0.054)"}:{}} onClick={showmessages}>
+    <div className={Styles.listitem} style={state?.user?._id===selectedID?{backgroundColor:"rgba(5, 93, 133, 0.054)"}:{}} onClick={showmessages}>
       <div className={Styles.userimg}>
         <img
           src={
-            user.profilepic
-              ? user.profilepic
+            state?.user?.profilepic
+              ? state?.user?.profilepic
               : `${process.env.PUBLIC_URL}/userImage.png`
           }
           alt=""
@@ -63,7 +64,7 @@ const List = ({ chatuser, conversationID,selectedID,selectIDHandler,user}) => {
       </div>
       <div className={Styles.usernamediv}>
         <label style={{ fontWeight: "600" }}>{chatuser} </label>
-        <label style={{ fontSize: "0.7em" }}>{user?.bio}</label>
+        <label style={{ fontSize: "0.7em" }}>{state?.user?.bio}</label>
       </div>
     </div>
   );
@@ -103,7 +104,7 @@ const Box = ({ conversations, username,user }) => {
                   ? element.members[1]
                   : element.members[0]
               }
-              user={user}
+
               
             />
           );
