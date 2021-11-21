@@ -39,7 +39,7 @@ const Stories = () => {
               <img
                 src={
                   ele.stories[0].profilepic !== ""
-                    ? `url(${ele.stories[0].profilepic})`
+                    ? ele.stories[0].profilepic
                     : process.env.PUBLIC_URL + "/userImage.png"
                 }
                 alt=""
