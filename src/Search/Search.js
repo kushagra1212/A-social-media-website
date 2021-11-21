@@ -10,9 +10,15 @@ import verifiesusers from "../methods/verifiesusers";
 import SuggestionList from "../components/suggestionlist/SuggestionList";
 import getpartialusers from "../methods/getpartialusers";
 import getuser from "../methods/getuser";
+import Preview from "../Profile/Preview/Preview";
 const URL = process.env.REACT_APP_URL;
 let count = 0;
-const Search = ({ showprofilefromshowbar, usernameformshowbar, view,preview }) => {
+const Search = ({
+  showprofilefromshowbar,
+  usernameformshowbar,
+  view,
+  preview,
+}) => {
   const [searchuser, setsearchuser] = useState("");
   const [user, setuser] = useState("");
   const [users, setUsers] = useState([]);
@@ -29,11 +35,11 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view,preview }) =
   const [showfollowing, setshowfollowing] = useState(false);
   const [showlist, setshowlist] = useState(true);
   const [isUnmounted, setUnmounted] = useState(false);
- const [loading2,setLoading2]=useState(false);
+  const [loading2, setLoading2] = useState(false);
   const setfollowingfunc = (value) => {
     setfollowing(value);
   };
-  
+
   const getcounts = async (u) => {
     try {
       await axios.patch(`${URL}/count/updatefollowerscount`, {
@@ -43,13 +49,12 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view,preview }) =
         username: u.username,
       });
       if (res2.data) {
-        
         setpostcount(res2.data.postcount);
         setfollowerscount(res2.data.followerscount);
         setfollowingcount(res2.data.followingcount);
         setshowprofile(true);
         setshowlist(false);
-       
+
         setloading(false);
         setLoading2(false);
       }
@@ -60,12 +65,12 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view,preview }) =
 
   const showuserprofilehandle = (u) => {
     setloading(true);
-      setuser(u);
-      console.log(u,user);
-      getcounts(u);
-    };
+    setuser(u);
+    console.log(u, user);
+    getcounts(u);
+  };
   const searchuserhandle = (username) => {
-    if (username === "" || username.length>10) {
+    if (username === "" || username.length > 10) {
       setloading(false);
       setUsers([]);
       return;
@@ -75,11 +80,9 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view,preview }) =
     getpartialusers(username)
       .then((us) => {
         setUsers(us);
-     
-        
+
         setfound({ found: true, text: "" });
         setloading(false);
-        
       })
       .catch((err) => {
         setfound({ found: false, text: "user not found" });
@@ -92,17 +95,14 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view,preview }) =
     if (showprofilefromshowbar) {
       setshowlist(false);
       setloading(true);
-     
-setsearchuser(usernameformshowbar);
-   
-     
-      getuser(usernameformshowbar).then(u=>{
+
+      setsearchuser(usernameformshowbar);
+
+      getuser(usernameformshowbar).then((u) => {
         showuserprofilehandle(u);
-      })
+      });
       count++;
     }
- 
-
   }, [showprofilefromshowbar]);
 
   const collectposts = async (id) => {
@@ -115,9 +115,6 @@ setsearchuser(usernameformshowbar);
       console.log(err);
     }
   };
-
-
-
 
   const setshowfollowershandle = (val) => {
     setshowfollowers(val);
@@ -134,8 +131,8 @@ setsearchuser(usernameformshowbar);
     }
     return () => setUnmounted(true);
   }, [searchuser, isUnmounted, username]);
-  if(loading2){
-    return <div className={Styles.loader}></div> ;
+  if (loading2) {
+    return <div className={Styles.loader}></div>;
   }
   if (showprofilefromshowbar && !loading) {
     if (username === searchuser) {
@@ -154,28 +151,36 @@ setsearchuser(usernameformshowbar);
     }
     return (
       <div style={{ width: "100%", height: "100%" }}>
-        <User
-          profpic={user.profilepic}
-          name={user.name}
-          bio={user.bio}
-          postsnumber={postcount}
-          followerscount={followerscount}
-          followingcount={followingcount}
-          username={user.username}
-          getcounts={getcounts}
-          setshowfollowershandle={setshowfollowershandle}
-          setshowfollowinghandle={setshowfollowinghandle}
-          showfollowers={showfollowers}
-          showfollowing={showfollowing}
-          preview={preview}
-        />
-     
- 
-   
+        {preview ? (
+          <Preview
+            name={user.username}
+            img={user.profilepic}
+            username={user.username}
+            followerscount={followerscount}
+            followingcount={followingcount}
+            bio={user.bio}
+            postsnumber={postcount}
+          />
+        ) : (
+          <User
+            profpic={user.profilepic}
+            name={user.name}
+            bio={user.bio}
+            postsnumber={postcount}
+            followerscount={followerscount}
+            followingcount={followingcount}
+            username={user.username}
+            getcounts={getcounts}
+            setshowfollowershandle={setshowfollowershandle}
+            setshowfollowinghandle={setshowfollowinghandle}
+            showfollowers={showfollowers}
+            showfollowing={showfollowing}
+          />
+        )}
       </div>
     );
   } else if (showprofilefromshowbar && loading) {
-    return <div className={Styles.loader}></div> ;
+    return <div className={Styles.loader}></div>;
   } else if (showlist === true) {
     return (
       <>
@@ -211,7 +216,10 @@ setsearchuser(usernameformshowbar);
               <div
                 key={u._id}
                 className={Styles.userprofile}
-                onClick={() =>{  setLoading2(true); showuserprofilehandle(u);}}
+                onClick={() => {
+                  setLoading2(true);
+                  showuserprofilehandle(u);
+                }}
               >
                 <img
                   width="30px"
@@ -231,21 +239,36 @@ setsearchuser(usernameformshowbar);
                 <button>Go to profile</button>
               </div>
             ))}
-             {searchuser==="" && window.screen.width<768?<SuggestionList setShowProfileHandler={null} setUserSearchHandler={null} />:null}
-            {loading ? <div className={Styles.loader}></div> :searchuser!=="" && users.length===0?<div className={Styles.notfound}  >
-            
-            <img alt="" width="50%" height="40%" src={process.env.PUBLIC_URL+"/nouser.gif"} />
-            <h2>No User Found</h2>
-            </div>:null}
+            {searchuser === "" && window.screen.width < 768 ? (
+              <SuggestionList
+                setShowProfileHandler={null}
+                setUserSearchHandler={null}
+              />
+            ) : null}
+            {loading ? (
+              <div className={Styles.loader}></div>
+            ) : searchuser !== "" && users.length === 0 ? (
+              <div className={Styles.notfound}>
+                <img
+                  alt=""
+                  width="50%"
+                  height="40%"
+                  src={process.env.PUBLIC_URL + "/nouser.gif"}
+                />
+                <h2>No User Found</h2>
+              </div>
+            ) : null}
           </div>
-         
         </div>
-        {window.screen.width >= 768 ?<SuggestionList setShowProfileHandler={null} setUserSearchHandler={null} />: null}
-        
+        {window.screen.width >= 768 ? (
+          <SuggestionList
+            setShowProfileHandler={null}
+            setUserSearchHandler={null}
+          />
+        ) : null}
       </>
     );
   } else if (showprofile) {
-   
     if (
       username === user.username &&
       (showprofilefromshowbar === false || showprofilefromshowbar === undefined)
@@ -279,7 +302,6 @@ setsearchuser(usernameformshowbar);
           setshowfollowinghandle={setshowfollowinghandle}
           showfollowers={showfollowers}
           showfollowing={showfollowing}
-          preview={preview}
         />
       </div>
     );

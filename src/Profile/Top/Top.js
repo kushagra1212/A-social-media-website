@@ -31,6 +31,9 @@ const Top = ({
   const [isUnmounted, setIsUnmounted] = useState(false);
   const [pic, setprofpic] = useState(profilepic);
   const dispatch = useDispatch();
+  const { followerscount, followingcount } = useSelector(
+    (state) => state.count
+  );
 
   const edit_it = () => {
     setedit(!edit);
@@ -82,15 +85,15 @@ const Top = ({
         ) : (
           <Preview
             name={name}
-            edit_it={edit_it}
-            logouthandle={logouthandle}
+          
+          
             img={img}
             username={username}
+            followerscount={followerscount}
+            followingcount={followingcount}
             bio={bio}
             postsnumber={postcount}
-            setposthandle={setposthandle}
-            setshowfollowershandle={setshowfollowershandle}
-            setshowfollowinghandle={setshowfollowinghandle}
+            
           />
         )
       ) : (

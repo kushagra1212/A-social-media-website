@@ -4,25 +4,20 @@ import { useSelector } from "react-redux";
 import Styles from "./Preview.module.css";
 import { useAlert } from "react-alert";
 const Preview = ({
-  setposthandle,
-  edit_it,
-  logouthandle,
+
+        followerscount,
+        followingcount,
   name,
   img,
   username,
   bio,
   postsnumber,
-  setshowfollowershandle,
-  setshowfollowinghandle,
+ 
 }) => {
   const Alert = useAlert();
   const [showAlert, setShowAlert] = useState(true);
-  const { followerscount, followingcount } = useSelector(
-    (state) => state.count
-  );
-  let { profilepic } = useSelector((state) => {
-    return state.user;
-  });
+  
+
   const showAlertHandle = () => {
     Alert.info("Not Available 😛", {
       onOpen: () => {
@@ -38,9 +33,9 @@ const Preview = ({
     <div className={Styles.maindiv}>
       <div className={Styles.firstdiv}>
         <img
-        onClick={() => edit_it()}
+        onClick={() => {}}
           src={
-            profilepic ? profilepic : process.env.PUBLIC_URL + "/userImage.png"
+                img ? img : process.env.PUBLIC_URL + "/userImage.png"
           }
           alt=""
         />
@@ -49,7 +44,6 @@ const Preview = ({
       </div>
       <div className={Styles.seconddiv}>
         <h3>{name}</h3>
-        <img src={img} alt="" />
         <h6>@{username}</h6>
         <h5>{bio}</h5>
       </div>

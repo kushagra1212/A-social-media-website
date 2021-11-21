@@ -40,7 +40,7 @@ const Profile = ({preview}) => {
         setTimeout(() => {
           getpostcount(username, dispatch);
           getfollowers(username, dispatch);
-          getposts(_id, dispatch);
+         if(!preview) getposts(_id, dispatch);
         }, 0);
       }
       return () => {
