@@ -11,8 +11,6 @@ const List = ({ list }) => {
   const [showprofile, setshowprofile] = useState(false);
   const [username, setusername] = useState([]);
   const [isUnmounted, setIsUnmounted] = useState(false);
-
-
   const setusershandle = async () => {
     usernames.map(async (ele) => {
       const { username } = ele;
@@ -76,7 +74,7 @@ const List = ({ list }) => {
     );
   } else {
     return (
-      <div >
+      <div>
         <Search
           showprofilefromshowbar={showprofile}
           view={false}

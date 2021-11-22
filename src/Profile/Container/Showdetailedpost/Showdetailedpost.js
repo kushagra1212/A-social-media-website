@@ -129,30 +129,29 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
             `${URL}/post/deleteuserpost/${deletePost._id}`
           );
     
-
-          let c = postcount;
-          c -= 2;
-          dispatch(updatecountforpost(username, c));
-          dispatch(resetFeedPosts());
-          dispatch(resetUserPosts());
-   
-          setTimeout(()=>{
-            
-         
-            window.location.reload("/main");
-          },2000);
+       
+         const resP=await axios.patch(`${URL}/count/decreasepostcount`,{
+          username:username
+        });
+         window.location.reload("/main");
+     
         })
         .catch(async (err) => {
           try{
             const res = await axios.delete(
               `${URL}/post/deleteuserpost/${deletePost._id}`
             );
+         
+           
+            const resP=await axios.patch(`${URL}/count/decreasepostcount`,{
+              username:username
+            });
+             window.location.reload("/main");
+
+
           }catch(err2){
             console.log(err2);
           }
-          setShowConfirm(false)
-          setDeleteIt(false);
-         
           console.log(err);
         });
     };
@@ -178,7 +177,6 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
             <button
               className={Styles.confirmyes}
               onClick={() => {
-                
                 setDeleteIt(true);
               }}
             >
@@ -233,8 +231,8 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
             <div className={Styles.topdiv}>
               <img
                 src={
-                  profilepic
-                    ? profilepic
+                  post.profilepic
+                    ? post.profilepic
                     : process.env.PUBLIC_URL + "/userImage.png"
                 }
                 alt=" "

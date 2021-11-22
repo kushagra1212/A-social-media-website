@@ -47,15 +47,11 @@ const Addpost = ({ setposthandle }) => {
           },
         }
       );
-      dispatch(updatecountforpost(username, postcount));
-
-      dispatch(resetFeedPosts());
-      dispatch(resetUserPosts());
-
-      setloading(!loading);
-      setposthandle(false);
-      
-      window.location.reload("/main");
+      const resP=await axios.patch(`${URL}/count/increasepostcount`,{
+        username:username
+      });
+       window.location.reload("/main");
+  
     } catch (err) {
       console.log(err);
     }
@@ -107,13 +103,7 @@ const Addpost = ({ setposthandle }) => {
           setProgress(Math.round((100 * data.loaded) / data.total));
         },
       });
-
-      dispatch(resetFeedPosts());
-      dispatch(resetUserPosts());
-
-      setloading(!loading);
-      setposthandle(false);
-      window.location.reload("/main");
+  
     } catch (err) {
       console.log(err);
     }
