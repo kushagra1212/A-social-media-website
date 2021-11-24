@@ -13,7 +13,7 @@ import { MyLoader } from "../../Home/Feed/content/Content";
 import Loader from "../../Animation/Loader/Loader";
 import Addcomment from "../../Home/Feed/content/comments/Addcomment";
 import addcomment from "../../methods/addcomments";
-import  Comments from "../../Home/Feed/content/comments/Comments"
+import Comments from "../../Home/Feed/content/comments/Comments";
 import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
 import updatelikes from "../../methods/updatelikes";
 import deletelike from "../../methods/deletelike";
@@ -66,7 +66,7 @@ const Container = ({ toDelete, username }) => {
   const [isUnmounted, setIsUnmounted] = useState(false);
   const [postCount, setPostCount] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
-  const [vis,setVis]=useState(true);
+  const [vis, setVis] = useState(true);
   const gridHandler = (bool) => {
     setGrid(bool);
   };
@@ -125,13 +125,13 @@ const Container = ({ toDelete, username }) => {
       });
     }
   };
-useEffect(()=>{
-  if(posts.length===0){
-    setTimeout(()=>{
-      setVis(false);
-    },1000)
-  }
-},[posts])
+  useEffect(() => {
+    if (posts.length === 0) {
+      setTimeout(() => {
+        setVis(false);
+      }, 1000);
+    }
+  }, [posts]);
   useState(() => {
     console.log(username);
     getcount(username).then((res) => {
@@ -149,31 +149,32 @@ useEffect(()=>{
   const addCommentFuncforContent = async (comment, post) => {
     let id = post._id;
     let profilePicture = post.pic;
-    let index=posts.findIndex((ele)=>ele._id===id);
-    let poss=[...posts];
+    let index = posts.findIndex((ele) => ele._id === id);
+    let poss = [...posts];
 
     let com = await addcomment(id, username, comment, profilePicture);
 
     com.comments.sort((a, b) => new Date(b.date) - new Date(a.date));
-    poss[index]=com;
+    poss[index] = com;
     setPosts(poss);
-
   };
-  const likefunction=(post,id)=>{
-    let index=posts.findIndex((ele)=>ele._id===id);
-    let poss=[...posts];
-    poss[index].likes.push({username:username,postID:id});
-    updatelikes({username:username,id:post._id });
- 
+  const likefunction = (post, id) => {
+    let index = posts.findIndex((ele) => ele._id === id);
+    let poss = [...posts];
+    poss[index].likes.push({ username: username, postID: id });
+    updatelikes({ username: username, id: post._id });
+
     setPosts(poss);
-  }
-  const unlikefunction=(post,id)=>{
-    let index=posts.findIndex((ele)=>ele._id===id);
-    let poss=[...posts];
-    poss[index].likes=poss[index].likes.filter((ele)=>ele.username!==username);
-    deletelike({username:username,id:post._id});
+  };
+  const unlikefunction = (post, id) => {
+    let index = posts.findIndex((ele) => ele._id === id);
+    let poss = [...posts];
+    poss[index].likes = poss[index].likes.filter(
+      (ele) => ele.username !== username
+    );
+    deletelike({ username: username, id: post._id });
     setPosts(poss);
-  }
+  };
   if (showDetailedPost)
     return (
       <Showdetailedpost
@@ -182,85 +183,10 @@ useEffect(()=>{
         post={post}
       />
     );
-else
-  return (
-    <>
-      <div className={Styles.topButtons}>
-        <button
-          disabled={grid ? true : false}
-          onClick={() => gridHandler(true)}
-        >
-          {" "}
-          <img
-            width="30px"
-            height="30px"
-            src="https://img.icons8.com/ios-glyphs/60/000000/grid-2.png"
-            alt=""
-          />
-        </button>
-        <button
-          onClick={() => gridHandler(false)}
-          disabled={grid ? false : true}
-        >
-          {" "}
-          <img
-            width="30px"
-            height="30px"
-            src="https://img.icons8.com/material-outlined/60/000000/ingredients-list.png"
-            alt=""
-          />
-        </button>
-        {postCount === 0 ? (
-          <div className={Styles.noposts}> No Posts</div>
-        ) : null}
-      </div>
-
-
-   {grid?  
-   
-   <InfiniteScroll
-        className={Styles.infi}
-        dataLength={posts.length}
-        next={call_func}
-        hasMore={hasMore}
-        loader={
-          <div
-            style={{ width: "10em", marginTop: "10%", height: "10em" }}
-          ></div>
-        }
-        endMessage={
-         ""
-        }
-      >
-           
-        <div
-          style={ {}}
-          className={ Styles.maindiv}
-        >
-          {posts.map((post, id) => {
-            return (
-              <div key={id} className={grid ? Styles.boxgrid : Styles.box}>
-                <div
-                  className={Styles.test}
-                  onClick={() => setPostHandler(post)}
-                >
-                  <h1 style={{ color: "white" }}>View</h1>
-                </div>
-                <Suspense
-                  fallback={grid ? <MyLoaderGrid /> : <MyLoaderTable />}
-                >
-                  <SuspenseImg src={post.picture} />
-                </Suspense>
-              </div>
-            );
-          })}
-                {vis?<VerticalLoader/>:null}
-        </div>
-  
-      </InfiniteScroll>:
-      
-      <div className={Styles.maincontent} id="infiniteScroll">
-              {showcomments.val ? (
+  else
+    return (
+      <>
+        {showcomments.val ? (
           <div className={Styles.commenttopdiv}>
             <Comments
               username={username}
@@ -269,7 +195,7 @@ else
             />
           </div>
         ) : null}
-               {showShare ? (
+        {showShare ? (
           <div className={Styles.topshare}>
             <span style={{ color: "red" }}>
               <i
@@ -288,170 +214,217 @@ else
             </div>
           </div>
         ) : null}
-      <InfiniteScroll
-      className={Styles.infi}
-      dataLength={posts.length}
-      next={call_func}
-      hasMore={hasMore}
-      loader={
-        <div
-          style={{ width: "10em", marginTop: "10%", height: "10em" }}
-        ></div>
-      }
-      endMessage={
-        <p className={Styles.infiP}>
-          <b>Yay! You have seen it all</b>
-        </p>
-      }
-    
-     
-    >
-      {posts.map((post, key) => (
-        <div key={post._id} className={Styles.singlecontainer}>
-          <div
-            className={Styles.topdiv}
-
-         
+        <div className={Styles.topButtons}>
+          <button
+            disabled={grid ? true : false}
+            onClick={() => gridHandler(true)}
           >
-        
-            <Suspense fallback={<FluidLoaderFive />}>
-              <img
-                src={
-                  post.profilepic
-                    ? post.profilepic
-                    : process.env.PUBLIC_URL + "/userImage.png"
-                }
-                alt=""
-              />
-            </Suspense>
-            <h6 className={Styles.usernamediv}>{post.username}</h6>
-          </div>
-          <button className={Styles.imgdiv}>
-            <Suspense fallback={<MyLoader />}>
-              <SuspenseImg alt="" src={post.picture} />
-            </Suspense>
+            {" "}
+            <img
+              width="30px"
+              height="30px"
+              src="https://img.icons8.com/ios-glyphs/60/000000/grid-2.png"
+              alt=""
+            />
           </button>
-          <div className={Styles.bottomdiv}>
-            {post.likes.findIndex(
-              (ele) =>
-                ele.username === username
-            ) >= 0 ? (
-              <div>
-                <span
-                  style={{
-                    color: "red",
-
-                    cursor: "pointer",
-                  }}
-                >
-                  <i
-                    onClick={() => unlikefunction(post, post._id)}
-                    styles={{
-                      color: "Dodgerblue",
-                      cursor: "pointer",
-                      boxShadow: "8px 9px 15px 10px #5050504d",
-                    }}
-                    className="fa fa-heart"
-                    aria-hidden="true"
-                  ></i>
-                </span>{" "}
-                {post.likes.length}
-              </div>
-            ) : (
-              <div className={Styles.heart}>
-                <span
-                  style={{
-                    color: "grey",
-
-                    cursor: "pointer",
-                  }}
-                
-                >
-                  <i
-                    onClick={() => likefunction(post, post._id)}
-                    styles={{
-                      color: "Dodgerblue",
-                      cursor: "pointer",
-                      boxShadow: "8px 9px 15px 10px #5050504d",
-                    }}
-                    
-                    className={"fa fa-heart"}
-                    aria-hidden="true"
-                  ></i>
-                </span>{" "}
-                {post.likes.length}
-              </div>
-            )}
-            <div>
-              <span
-                style={{
-                  color: "black",
-
-                  cursor: "pointer",
-                }}
-              >
-                <i
-                  onClick={() =>
-                    setcommentsfunc({ val: true, post: post })
-                  }
-                  styles={{
-                    color: "Dodgerblue",
-                    cursor: "pointer",
-                    boxShadow: "8px 9px 15px 10px #5050504d",
-                  }}
-                  className="far fa-comment-alt"
-                  aria-hidden="true"
-                ></i>
-              </span>
-              {post?.comments?.length}
-            </div>
-            <span
-              style={{
-                color: "lightgreen",
-
-                cursor: "pointer",
-              }}
-            >
-              <i
-                onClick={() => {
-                  setSharePostURL(`${CURURL}/post/${post._id}`);
-                  setShowShare(true);
-                }}
-                styles={{
-                  color: "Dodgerblue",
-                  cursor: "pointer",
-                  boxShadow: "8px 9px 15px 10px #5050504d",
-                }}
-                className="fa fa-share-alt"
-                aria-hidden="true"
-              ></i>
-            </span>
-          </div>
-          <div
-            style={post.desc !== "" ? { padding: "3%" } : {}}
-            className={Styles.caption}
+          <button
+            onClick={() => gridHandler(false)}
+            disabled={grid ? false : true}
           >
-            {post.desc}
-          </div>
-          <Addcomment
-            addCommentFunc={(comment) =>
-              addCommentFuncforContent(comment, post)
-            }
-          />
-      
+            {" "}
+            <img
+              width="30px"
+              height="30px"
+              src="https://img.icons8.com/material-outlined/60/000000/ingredients-list.png"
+              alt=""
+            />
+          </button>
+          {postCount === 0 ? (
+            <div className={Styles.noposts}> No Posts</div>
+          ) : null}
         </div>
-      ))}
- 
-    </InfiniteScroll>
-      </div>
-      
-      
-      
-      
-      
-      }
-    
-    </>
-  );
+
+        {grid ? (
+          <InfiniteScroll
+            className={Styles.infi}
+            dataLength={posts.length}
+            next={call_func}
+            hasMore={hasMore}
+            loader={
+              <div
+                style={{ width: "10em", marginTop: "10%", height: "10em" }}
+              ></div>
+            }
+            endMessage={""}
+          >
+            <div style={{}} className={Styles.maindiv}>
+              {posts.map((post, id) => {
+                return (
+                  <div key={id} className={grid ? Styles.boxgrid : Styles.box}>
+                    <div
+                      className={Styles.test}
+                      onClick={() => setPostHandler(post)}
+                    >
+                      <h1 style={{ color: "white" }}>View</h1>
+                    </div>
+                    <Suspense
+                      fallback={grid ? <MyLoaderGrid /> : <MyLoaderTable />}
+                    >
+                      <SuspenseImg src={post.picture} />
+                    </Suspense>
+                  </div>
+                );
+              })}
+              {vis ? <VerticalLoader /> : null}
+            </div>
+          </InfiniteScroll>
+        ) : (
+          <div className={Styles.maincontent} id="infiniteScroll">
+            <InfiniteScroll
+              className={Styles.infi}
+              dataLength={posts.length}
+              next={call_func}
+              hasMore={hasMore}
+              loader={
+                <div
+                  style={{ width: "10em", marginTop: "10%", height: "10em" }}
+                ></div>
+              }
+              endMessage={
+                <p className={Styles.infiP}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
+              {posts.map((post, key) => (
+                <div key={post._id} className={Styles.singlecontainer}>
+                  <div className={Styles.topdiv}>
+                    <Suspense fallback={<FluidLoaderFive />}>
+                      <img
+                        src={
+                          post.profilepic
+                            ? post.profilepic
+                            : process.env.PUBLIC_URL + "/userImage.png"
+                        }
+                        alt=""
+                      />
+                    </Suspense>
+                    <h6 className={Styles.usernamediv}>{post.username}</h6>
+                  </div>
+                  <button className={Styles.imgdiv}>
+                    <Suspense fallback={<MyLoader />}>
+                      <SuspenseImg alt="" src={post.picture} />
+                    </Suspense>
+                  </button>
+                  <div className={Styles.bottomdiv}>
+                    {post.likes.findIndex((ele) => ele.username === username) >=
+                    0 ? (
+                      <div>
+                        <span
+                          style={{
+                            color: "red",
+
+                            cursor: "pointer",
+                          }}
+                        >
+                          <i
+                            onClick={() => unlikefunction(post, post._id)}
+                            styles={{
+                              color: "Dodgerblue",
+                              cursor: "pointer",
+                              boxShadow: "8px 9px 15px 10px #5050504d",
+                            }}
+                            className="fa fa-heart"
+                            aria-hidden="true"
+                          ></i>
+                        </span>{" "}
+                        {post.likes.length}
+                      </div>
+                    ) : (
+                      <div className={Styles.heart}>
+                        <span
+                          style={{
+                            color: "grey",
+
+                            cursor: "pointer",
+                          }}
+                        >
+                          <i
+                            onClick={() => likefunction(post, post._id)}
+                            styles={{
+                              color: "Dodgerblue",
+                              cursor: "pointer",
+                              boxShadow: "8px 9px 15px 10px #5050504d",
+                            }}
+                            className={"fa fa-heart"}
+                            aria-hidden="true"
+                          ></i>
+                        </span>{" "}
+                        {post.likes.length}
+                      </div>
+                    )}
+                    <div>
+                      <span
+                        style={{
+                          color: "black",
+
+                          cursor: "pointer",
+                        }}
+                      >
+                        <i
+                          onClick={() =>
+                            setcommentsfunc({ val: true, post: post })
+                          }
+                          styles={{
+                            color: "Dodgerblue",
+                            cursor: "pointer",
+                            boxShadow: "8px 9px 15px 10px #5050504d",
+                          }}
+                          className="far fa-comment-alt"
+                          aria-hidden="true"
+                        ></i>
+                      </span>
+                      {post?.comments?.length}
+                    </div>
+                    <span
+                      style={{
+                        color: "lightgreen",
+
+                        cursor: "pointer",
+                      }}
+                    >
+                      <i
+                        onClick={() => {
+                          setSharePostURL(`${CURURL}/post/${post._id}`);
+                          setShowShare(true);
+                        }}
+                        styles={{
+                          color: "Dodgerblue",
+                          cursor: "pointer",
+                          boxShadow: "8px 9px 15px 10px #5050504d",
+                        }}
+                        className="fa fa-share-alt"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
+                  </div>
+                  <div
+                    style={post.desc !== "" ? { padding: "3%" } : {}}
+                    className={Styles.caption}
+                  >
+                    {post.desc}
+                  </div>
+                  <Addcomment
+                    addCommentFunc={(comment) =>
+                      addCommentFuncforContent(comment, post)
+                    }
+                  />
+                </div>
+              ))}
+            </InfiniteScroll>
+          </div>
+        )}
+      </>
+    );
 };
 export default Container;

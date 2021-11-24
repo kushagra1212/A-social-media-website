@@ -8,7 +8,7 @@ import Loader from "../../src/Animation/Loader/Loader";
 import Messages from "./Box/Messages/Messages";
 import io from "socket.io-client";
 import { setsocket } from "../reduces/actions/MessageReducerAction";
-const ENDPOINT = "https://eimentum-chat-app.herokuapp.com:34111/";
+const ENDPOINT = "https://eimentum-chat-app.herokuapp.com/";
 //const ENDPOINT="http://localhost:8000/";
 const Messenger = () => {
   const dispatch = useDispatch();
@@ -33,11 +33,9 @@ const Messenger = () => {
       const getconversation = async () => {
         const conver = await getconversations(username);
      
-        let socket = io(ENDPOINT, {
-          transports: ["websocket", "polling", "flashsocket"],
-        });
+   
 
-        dispatch(setsocket(socket));
+        dispatch(setsocket(io(ENDPOINT)));
 
         setconversations(conver);
         dispatch({ type: "SHOWBOX", payload: true });
