@@ -51,7 +51,6 @@
     "tmpl": "^1.0.5",
     "url-parse": "^1.5.3",
     "web-vitals": "^1.1.0",
-    "ws": "^8.2.3",
     "xmlhttprequest-ssl": "^2.0.0"
   },
   "scripts": {
