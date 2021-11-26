@@ -28,7 +28,7 @@ import {
   setScrollPositionHandler,
 } from "../../../reduces/actions/PostAction";
 import getallposts from "../../../methods/getallposts";
-
+import { useSpring, animated as a } from "react-spring";
 const CURURL = process.env.REACT_APP_CURURL;
 let likeCountArray = [];
 let element = null;
@@ -222,24 +222,34 @@ const Content = () => {
     }
     window.scrollTo(0, scrollPosition);
   }, [showProfile, loading, noOne, state.Posts.posts.length, scrollPosition]);
-
+  const contentProps = useSpring({
+    opacity: showProfile ? 1 : 0,
+    marginTop: showProfile ? 0 : -500
+  });
+  const Popup = useSpring({
+    y:showShare? "0%":"-50%",
+    x:showShare? "0%":"0%",
+    transform:showShare?"scale(1)":"scale(0.1)",
+    opacity:showShare?"100%":"0%",
+  });
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);
   if (showProfile) {
     return (
-      <div className={Styles.userprofilemain}>
-        <span style={{ fontSize: "40px", color: "red" }}>
+      <a.div className={Styles.userprofilemain} style={{...contentProps,overflowX:"hidden"}}>
+        <span style={{ fontSize: "50px",boxShadow:"1px 1px 10px 1px grey",border:"1px solid white",borderRadius:"60px", color: "red"}}>
           <i
             onClick={() => {
               setShowProfile(false);
               setUserSearch("");
             }}
-            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            styles={{ color: "Dodgerblue", cursor: "pointer"}}
             className="fa fa-times-circle"
-          ></i>
+          >
+          </i>
         </span>
 
-        <div className={Styles.userProfile}>
+        <div className={Styles.userProfile} style={{height:"100%",top:"0%",left:"0%",width:"100%"}}>
           <Search
             showprofilefromshowbar={showProfile}
             view={false}
@@ -247,7 +257,7 @@ const Content = () => {
             preview={true}
           />
         </div>
-      </div>
+      </a.div>
     );
   }
   if (loading || !noOne) {
@@ -288,10 +298,10 @@ const Content = () => {
                 className="fa fa-times-circle"
               ></i>
             </span>
-            <div className={Styles.showshare}>
+            <a.div style={Popup} className={Styles.showshare}>
               <input disabled value={sharePostURL} />
               <button onClick={copyToClipboardHandler}>Copy link</button>
-            </div>
+            </a.div>
           </div>
         ) : null}
         {showcomments.val ? (
@@ -303,7 +313,7 @@ const Content = () => {
             />
           </div>
         ) : null}
-        <div className={Styles.maincontent} id="infiniteScroll">
+        <div  className={Styles.maincontent} id="infiniteScroll">
           <InfiniteScroll
             className={Styles.infi}
             dataLength={state.Posts.posts.length}
@@ -317,7 +327,7 @@ const Content = () => {
             }
             ref={sRef}
             onScroll={(e) => {
-              const scrollY = window.scrollY; //Don't get confused by what's scrolling - It's not the window
+              const scrollY = window.scrollY;
               if (scrollY !== 0) dispatch(setScrollPositionHandler(scrollY));
             }}
           >

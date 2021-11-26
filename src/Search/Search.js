@@ -122,7 +122,13 @@ const Search = ({
   const setshowfollowinghandle = (value) => {
     setshowfollowing(value);
   };
-
+  const setShowProfileHandler = (val) => {
+  
+  };
+  const setUserSearchHandler = (val) => {
+    setsearchuser(val);
+    searchuserhandle(val);
+  };
   useEffect(() => {
     if (!isUnmounted) {
       let usernameofsender = searchuser;
@@ -151,17 +157,7 @@ const Search = ({
     }
     return (
       <div style={{ width: "100%", height: "100%" }}>
-        {preview ? (
-          <Preview
-            name={user.username}
-            img={user.profilepic}
-            username={user.username}
-            followerscount={followerscount}
-            followingcount={followingcount}
-            bio={user.bio}
-            postsnumber={postcount}
-          />
-        ) : (
+     
           <User
             profpic={user.profilepic}
             name={user.name}
@@ -176,7 +172,7 @@ const Search = ({
             showfollowers={showfollowers}
             showfollowing={showfollowing}
           />
-        )}
+     
       </div>
     );
   } else if (showprofilefromshowbar && loading) {
@@ -241,8 +237,8 @@ const Search = ({
             ))}
             {searchuser === "" && window.screen.width < 768 ? (
               <SuggestionList
-                setShowProfileHandler={null}
-                setUserSearchHandler={null}
+                setShowProfileHandler={setShowProfileHandler}
+                setUserSearchHandler={setUserSearchHandler}
               />
             ) : null}
             {loading ? (
@@ -262,8 +258,8 @@ const Search = ({
         </div>
         {window.screen.width >= 768 ? (
           <SuggestionList
-            setShowProfileHandler={null}
-            setUserSearchHandler={null}
+          setShowProfileHandler={setShowProfileHandler}
+          setUserSearchHandler={setUserSearchHandler}
           />
         ) : null}
       </>

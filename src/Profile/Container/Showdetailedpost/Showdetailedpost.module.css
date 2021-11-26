@@ -14,7 +14,6 @@ px
   display: flex;
   flex-direction: column;
 
-  animation-name: animateIn;
   animation-duration: 350ms;
   animation-delay: calc(var(--animation-order) * 100ms);
   animation-fill-mode: both;
@@ -39,16 +38,7 @@ px
   border-radius: 10px;
   box-shadow: 1px 1px 10px grey;
 }
-@keyframes animateIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.6) translateY(-8px);
-  }
 
-  100% {
-    opacity: 1;
-  }
-}
 .topdiv {
   position: relative;
   background-color: rgba(140, 247, 255, 0);

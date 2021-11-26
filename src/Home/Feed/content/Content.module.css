@@ -216,7 +216,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .userprofilemain span {
   cursor: pointer;
@@ -233,7 +233,7 @@
   top: 45vh;
   min-height: 55vh;
   box-shadow: 0px 1px 520px 100px #4747474d;
-  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .infiP {
@@ -418,6 +418,7 @@
 
   .userprofilemain span,
   i {
+    position: static;
     top: 10%;
     right: 10%;
     transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;

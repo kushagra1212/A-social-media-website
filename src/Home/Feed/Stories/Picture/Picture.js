@@ -7,6 +7,7 @@ import { backgroundImages } from "./backgroundImages";
 import { show_others_stories_handle } from "../../../../reduces/actions/StoriesAction";
 import ContentLoader from "react-content-loader";
 import { SuspenseImg } from "../../content/SuspenceImage/SuspenceImg";
+
 let heightofAni = window.screen.width >= 768 ? "80vh" : "60vh";
 let widthofAni = window.screen.width >= 768 ? "40vw" : "100vw";
 const MyLoader = (props) => (
@@ -77,7 +78,7 @@ const Picture = ({ documents, set_picture_handle, other }) => {
       {other === true ? null : (
         <span
           className={Styles.addMore}
-          style={{ fontSize: "40px", color: "white" }}
+          style={{fontSize: "40px", color: "white" ,...other}}
         >
           <i
             onClick={() => set_picture_handle(false)}

@@ -47,9 +47,9 @@ const App = ({ match }) => {
         <Route path="/main">
           <Main />
         </Route>
-        <Route  path={`/post/:id`}>
-              <Post />
-            </Route>
+        <Route path={`/post/:id`}>
+          <Post />
+        </Route>
       </BrowserRouter>
     </div>
   );

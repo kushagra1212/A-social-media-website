@@ -31,12 +31,11 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
     setpost(com);
   }, []);
   const Popup = useSpring({
-    from: { y: "100%", x: "-50%", transform: "scale(0.1)" },
+    from: { y: "100%", x: "-50%", transform: "scale(0.1)",opacity:"0%" },
     y: "-50%",
     x: "-50%",
     transform: "scale(1)",
-
-    config: { mass: 10, tension: 100, friction: 10, duration: 200 },
+    opacity:"100%",
   });
 
   return (

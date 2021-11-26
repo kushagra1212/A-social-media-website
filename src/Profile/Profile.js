@@ -92,7 +92,7 @@ const Profile = ({preview}) => {
         />
 
           <>
-          {(username!=="" && !preview)?<Container toDelete={true} username={username}/>:null}{" "}
+          {(username!=="")?<Container toDelete={true} username={username}/>:null}{" "}
           </>
 
       </div>

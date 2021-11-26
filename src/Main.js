@@ -29,7 +29,6 @@ const Main = ({ match }) => {
           {message ? null : <Footer url={url} path={path} />}
 
           <Switch>
-
             <Route exact path="/main">
               <Home />
             </Route>

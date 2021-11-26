@@ -17,6 +17,7 @@ import firebase from "../../../Firebase/index";
 import axios from "axios";
 import { updatecountforpost } from "../../../reduces/actions/countAction";
 import { getcount } from "../../../methods/getcount";
+import { useSpring,animated as a } from "react-spring";
 import { FluidLoaderFive } from "../../../Animation/Loader/loader/FluidLoader";
 const URL = process.env.REACT_APP_URL;
 const CURURL = process.env.REACT_APP_CURURL;
@@ -158,6 +159,13 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
     if (deleteIt) deletePostHandle();
   }, [deleteIt]);
 
+  const showShareA = useSpring({
+    from: { y: "100%", x: "-50%", transform: "scale(0.1)",opacity:"0%" },
+    y: "-50%",
+    x: "-50%",
+    transform: "scale(1)",
+    opacity:"100%",
+  });
   if (showConfirm) {
 
     if(deleteIt)
@@ -216,7 +224,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
           />
         </div>
       ) : (
-        <div className={Styles.maincontent}>
+        <a.div syle={showShareA} className={Styles.maincontent}>
           <span
             className={Styles.backbut}
             style={{ fontSize: "40px", color: "blue", cursor: "pointer" }}
@@ -386,7 +394,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
             </div>
             <div style={{fontSize:"1.3em"}} className={Styles.caption}>{post.desc}</div>
           </div>
-        </div>
+        </a.div>
       )}
     </>
   );

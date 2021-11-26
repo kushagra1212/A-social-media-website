@@ -69,7 +69,7 @@ const Top = ({
       {!post ? (
         edit ? (
           <Editprofile setprofpichandle={setprofpichandle} edit_it={edit_it} />
-        ) :! preview ? (
+        ) : (
           <Topprofile
             name={name}
             edit_it={edit_it}
@@ -81,19 +81,6 @@ const Top = ({
             setposthandle={setposthandle}
             setshowfollowershandle={setshowfollowershandle}
             setshowfollowinghandle={setshowfollowinghandle}
-          />
-        ) : (
-          <Preview
-            name={name}
-          
-          
-            img={img}
-            username={username}
-            followerscount={followerscount}
-            followingcount={followingcount}
-            bio={bio}
-            postsnumber={postcount}
-            
           />
         )
       ) : (
