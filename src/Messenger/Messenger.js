@@ -6,10 +6,9 @@ import Box from "./Box/Box";
 import Styles from "./Messenger.module.css";
 import Loader from "../../src/Animation/Loader/Loader";
 import Messages from "./Box/Messages/Messages";
-import io from "socket.io-client";
-import { setsocket } from "../reduces/actions/MessageReducerAction";
-const ENDPOINT = "https://eimentum-chat-app.herokuapp.com/";
-//const ENDPOINT="http://localhost:8000/";
+
+import { useSpring,animated } from "react-spring";
+
 const Messenger = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -20,8 +19,7 @@ const Messenger = () => {
   const { username } = useSelector((state) => state.user);
   console.log(username);
   const backbButFun = () => {
-    socket?.disconnect();
-
+   
     dispatch({ type: "SHOWHOME", payload: true });
     history.push("/main");
   };
@@ -33,9 +31,6 @@ const Messenger = () => {
       const getconversation = async () => {
         const conver = await getconversations(username);
      
-        let socket = io.connect(ENDPOINT);
-
-        dispatch(setsocket(socket));
 
         setconversations(conver);
         dispatch({ type: "SHOWBOX", payload: true });
@@ -49,10 +44,14 @@ const Messenger = () => {
       history.push("/main");
     }
   }, []);
-
+  const contentProps = useSpring({
+   from:{marginTop:-500,opacity:0},
+   marginTop:0,opacity:1,
+   config:{duration:500}
+  });
   return (
-    <>
-      <div className={Styles.maindiv}>
+    <div>
+      <animated.div  style={contentProps} className={Styles.maindiv}>
         <div onClick={backbButFun} className={Styles.icon}>
           <div className={Styles.arrow}></div>
         </div>
@@ -72,8 +71,8 @@ const Messenger = () => {
             {(conversations!==null && conversations.length===0?null:<Messages />)}
           </>
         )}
-      </div>
-    </>
+      </animated.div>
+    </div>
   );
 };
 export default Messenger;

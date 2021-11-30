@@ -10,6 +10,15 @@ import { getCroppedImg } from "../../methods/createcrop";
 import ProgressBar from "../../Animation/Loader/Progressbar/ProgressBar";
 import { data_URL_to_file } from "../../../src/methods/data_URL_to_file";
 const URL = process.env.REACT_APP_URL;
+const calcXY = (x, y) => [
+  -(y - window.innerHeight / 2) / 10,
+  (x - window.innerWidth / 2) / 10,
+  1.0,
+];
+
+const perspective = (x, y, s) =>
+  `perspective(500px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
+
 const Editprofile = ({ edit_it, setprofpichandle }) => {
   const Alert = useAlert();
   const Refinput = useRef();
@@ -29,6 +38,10 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [progress, setProgress] = useState(0);
   const [fileName, setFileName] = useState("");
+  const [props, set] = useSpring(() => ({
+    xys: [0, 0, 1],
+    config: { mass: 5, tension: 200, friction: 100 },
+  }));
   const save_it = async (e) => {
     setloading(true);
     try {
@@ -130,9 +143,18 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     y: "0%",
     x: "0%",
 
-    config: { mass: 10, tension: 10, friction: 1, duration: 200 },
+    config: {  duration: 200 },
   });
-
+  const imageAni = useSpring({
+    from:{marginTop:-500,opacity:0},
+    marginTop:0,
+    opacity:1
+   });
+   const cropAni = useSpring({
+    
+    marginTop:image?0:500,
+    opacity:image?1:0
+   });
   if (loading) {
     return (
       <div className={Styles.cropdiv} style={{ backgroundColor: "white" }}>
@@ -144,7 +166,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     );
   } else if (image) {
     return (
-      <div className={Styles.cropdiv}>
+      <animated.div style={cropAni} className={Styles.cropdiv}>
         <ImageCropper
           crop={crop}
           image={image}
@@ -154,11 +176,11 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
           setImage={setImage}
           croppedArea={croppedArea}
         />
-      </div>
+      </animated.div>
     );
   } else {
     return (
-      <div className={Styles.editprofileMain}>
+      <animated.div style={floatDown} className={Styles.editprofileMain}>
                   <span
             className={Styles.backbut}
             style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
@@ -170,14 +192,18 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
             ></i>
           </span>
           {pic ? (
-            <img
+            <animated.img
+           
+            onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calcXY(x, y) })}
+            onMouseLeave={() => set({ xys: [0, 0, 1] })}
+            style={{ transform: props.xys.to(perspective) }}
               className={Styles.editimg}
               src={pic ? pic : process.env.PUBLIC_URL + "/userImage.png"}
               alt=""
             />
           ) : null}
-      <div className={Styles.Forms}>
-      <animated.form
+      <animated.div  style={floatDown} className={Styles.Forms}>
+      <form
           onSubmit={(e) => save_it(e)}
           className={Styles.editprofile}
           style={floatDown}
@@ -217,9 +243,9 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
           <button type="submit" className={Styles.savebut}>
             save
           </button>
-        </animated.form>
-      </div>
-      </div>
+        </form>
+      </animated.div>
+      </animated.div>
     );
   }
 };

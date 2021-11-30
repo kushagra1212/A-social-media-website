@@ -7,6 +7,7 @@ import { useSpring, animated } from "react-spring";
 import { useAlert } from "react-alert";
 import ProgressBar from "../../../Animation/Loader/Progressbar/ProgressBar";
 import ImageCropper from "../ImageCroper/ImageCropper";
+import Loader from "../../../Animation/Loader/Loader";
 import { getCroppedImg } from "../../../methods/createcrop";
 import {
   resetUserPosts,
@@ -14,6 +15,8 @@ import {
 } from "../../../reduces/actions/userAction";
 import { data_URL_to_file } from "../../../methods/data_URL_to_file";
 import firebase from "../../../Firebase/index";
+import VerticalLoader from "../../../Animation/Loader/loader/VerticalLoader";
+import NormalLoader from "../../../Animation/Loader/loader/NormalLoader";
 const URL = process.env.REACT_APP_URL;
 const Addpost = ({ setposthandle }) => {
   const [pic, setPic] = useState(null);
@@ -162,20 +165,14 @@ const Addpost = ({ setposthandle }) => {
   };
 
   const Popup = useSpring({
-    from: { y: "-70%", x: "5%", transform: "scale(0.2)" },
-    y: "-50%",
-    x: "-50%",
-    transform: "scale(1)",
-
-    config: { mass: 10, tension: 10, friction: 1, duration: 100 },
+    from: {marginTop:-500,opacity:0 },
+    marginTop:0,
+    opacity:1,
   });
   if (loading) {
     return (
-      <div className={Styles.cropdiv} style={{ backgroundColor: "white" }}>
-        <label style={{ color: "black", frontSize: "100px" }}>
-          {progress !== 0 ? "Wait for a while !  Uploading..." : "Loading..."}
-        </label>
-        <ProgressBar bgcolor="#99ff66" progress={progress} height={30} />
+      <div style={{width:"100vw",height:"100vh",zIndex:"100",position:"fixed",display:"flex",alignItems:"center",justifyContent:"center", backdropFilter: "blur(10px)"}}>
+      <NormalLoader/>
       </div>
     );
   } else if (image) {

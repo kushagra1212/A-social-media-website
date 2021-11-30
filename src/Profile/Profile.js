@@ -22,10 +22,7 @@ const Profile = ({preview}) => {
   const { followerscount, followingcount } = useSelector(
     (state) => state.count
   );
-
-
-
-  const setposthand = (is) => {
+const setposthand = (is) => {
     setpost(is);
   };
 

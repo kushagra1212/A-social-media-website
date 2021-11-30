@@ -19,6 +19,7 @@ import { updatecountforpost } from "../../../reduces/actions/countAction";
 import { getcount } from "../../../methods/getcount";
 import { useSpring,animated as a } from "react-spring";
 import { FluidLoaderFive } from "../../../Animation/Loader/loader/FluidLoader";
+import NormalLoader from "../../../Animation/Loader/loader/NormalLoader";
 const URL = process.env.REACT_APP_URL;
 const CURURL = process.env.REACT_APP_CURURL;
 let likeCountArray = [];
@@ -160,20 +161,29 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
   }, [deleteIt]);
 
   const showShareA = useSpring({
-    from: { y: "100%", x: "-50%", transform: "scale(0.1)",opacity:"0%" },
-    y: "-50%",
-    x: "-50%",
-    transform: "scale(1)",
-    opacity:"100%",
+   from:{marginTop:-500,opacity:0},
+   marginTop:0,
+   opacity:1
   });
+  const deleteAni = useSpring({
+    marginTop:(!deleteIt && showConfirm)?250:500,
+    opacity:(!deleteIt && showConfirm)?1:0
+   });
+  const showShareB = useSpring({
+    from:{marginBottom:-1000,opacity:0},
+    marginBottom:0,
+    opacity:1
+   });
   if (showConfirm) {
 
     if(deleteIt)
-    return ( <div className={Styles.confirmmain} style={{display:"flex",flexDirection:"row",justifyContent:"center",justifyItems:"center"}}><FluidLoaderFive/>     </div>)
+    return ( <a.div className={Styles.confirmmain} style={{...showShareB,display:"flex",alignItems:"center",flexDirection:"row",justifyContent:"center",justifyItems:"center"}}><NormalLoader/>    
+
+     </a.div>)
     else
     return (
-      <div className={Styles.confirmmain}>
-        <div className={Styles.confirm}>
+      <div   className={Styles.confirmmain}>
+        <a.div style={deleteAni}  className={Styles.confirm}>
           <label>Do you want to delete ?</label>
           <div>
             <button
@@ -191,12 +201,12 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
               Yes
             </button>
           </div>
-        </div>
+        </a.div>
       </div>
     );
   }
   return (
-    <>
+    <div>
       {showShare ? (
         <div className={Styles.topshare}>
           <span style={{ color: "red" }}>
@@ -224,7 +234,7 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
           />
         </div>
       ) : (
-        <a.div syle={showShareA} className={Styles.maincontent}>
+        <div className={Styles.maincontent} >
           <span
             className={Styles.backbut}
             style={{ fontSize: "40px", color: "blue", cursor: "pointer" }}
@@ -235,8 +245,8 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
               className="fa fa-arrow-circle-left"
             ></i>
           </span>
-          <div key={post._id} className={Styles.singlecontainer}>
-            <div className={Styles.topdiv}>
+          <div  key={post._id} className={Styles.singlecontainer}>
+            <a.div style={showShareB} className={Styles.topdiv}>
               <img
                 src={
                   post.profilepic
@@ -247,9 +257,9 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
               />
 
               <h2>{post.username}</h2>
-            </div>
-            <button
-
+            </a.div>
+            <a.button
+      style={showShareA}
               className={Styles.imgdiv}
             >
               <img
@@ -261,8 +271,8 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
                 width="100%"
                 alt=" "
               />
-            </button>
-            <div className={Styles.bottomdiv}>
+            </a.button>
+            <a.div     style={showShareB} className={Styles.bottomdiv}>
               {likesArray.findIndex(
                 (ele) => ele.username === username && ele.postID === post._id
               ) >= 0 ? (
@@ -391,12 +401,12 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
                 )
               ) : null}
               </div>
-            </div>
+            </a.div>
             <div style={{fontSize:"1.3em"}} className={Styles.caption}>{post.desc}</div>
           </div>
-        </a.div>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

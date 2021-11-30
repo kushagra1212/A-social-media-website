@@ -33,21 +33,9 @@ const Messages = () => {
         }
       });
     }
-  }, [username, conversationID?.conversationID, socket, user?.username]);
+  }, [socket]);
 
-  useEffect(() => {
-    if (socket) {
-      socket.on("connection", () => {
-        console.log(socket);
-        console.log("connection");
-      });
-      socket.emit("adduser", username);
-      socket.on("getuser", (users) => {
-        console.log(users, "users");
-      });
-    }
-  }, []);
-
+ 
   useEffect(() => {
     const getmessagehelper = async () => {
       const mess = await getmessages(conversationID);
@@ -65,6 +53,9 @@ const Messages = () => {
   }, [messages]);
   useEffect(() => {
     inputRef.current.focus();
+    return ()=>{
+      socket?.disconnect();
+    }
   }, []);
   const sendButtonHandler = async (e) => {
     inputRef.current.focus();

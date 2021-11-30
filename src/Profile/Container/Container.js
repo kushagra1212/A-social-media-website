@@ -18,7 +18,7 @@ import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
 import updatelikes from "../../methods/updatelikes";
 import deletelike from "../../methods/deletelike";
 import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
-import {animated as a,useSpring} from 'react-spring'
+import { animated as a, useSpring } from "react-spring";
 import { useAlert } from "react-alert";
 const CURURL = process.env.REACT_APP_CURURL;
 let heightofAni = window.screen.width >= 768 ? "45vh" : "20vh";
@@ -177,20 +177,19 @@ const Container = ({ toDelete, username }) => {
     setPosts(poss);
   };
   const showShareA = useSpring({
-    y:showDetailedPost? "0%":"-50%",
-    x:showDetailedPost? "0%":"0%",
-    transform:showDetailedPost?"scale(1)":"scale(0.1)",
-    opacity:showDetailedPost?"100%":"0%",
+ 
+    marginTop:(showDetailedPost)?0: 500,
+    opacity: (showDetailedPost)?1:0,
   });
   if (showDetailedPost)
     return (
-      <div >
-      <Showdetailedpost
-        setShowDetailedPostHandler={setShowDetailedPostHandler}
-        toDelete={toDelete}
-        post={post}
-      />
-      </div>
+    
+        <Showdetailedpost
+          setShowDetailedPostHandler={setShowDetailedPostHandler}
+          toDelete={toDelete}
+          post={post}
+        />
+     
     );
   else
     return (

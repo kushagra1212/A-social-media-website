@@ -8,9 +8,11 @@ import {
   setUserPicture,
 } from "../../reduces/actions/MessageReducerAction";
 import ContentLoader from "react-content-loader";
-
+import io from "socket.io-client";
+import { setsocket } from "../../reduces/actions/MessageReducerAction";
 let heightofAni = window.screen.width >= 768 ? "100vh" : "100vh";
-
+//const ENDPOINT="http://localhost:8000/";
+const ENDPOINT = "https://eimentum-chat-app.herokuapp.com/";
 const MyLoader = (props) => (
   <ContentLoader
     speed={1}
@@ -25,20 +27,43 @@ const MyLoader = (props) => (
   </ContentLoader>
 );
 const List = ({ chatuser, conversationID, selectedID, selectIDHandler }) => {
+  const { username } = useSelector((state) => state.user);
   console.log(chatuser);
   const dispatch = useDispatch();
 
   const showmessages = () => {
-    selectIDHandler(chatuser._id);
-    dispatch({ type: "SETUSERCONVERSATION", payload: chatuser });
-    dispatch(setconversationID(conversationID));
-
+    let sec=io.connect(ENDPOINT);
+    dispatch(setsocket(sec));
     let userPicture = chatuser.profilepic
-      ? chatuser.profilepic
-      : `${process.env.PUBLIC_URL}/userImage.png`;
+    ? chatuser.profilepic
+    : `${process.env.PUBLIC_URL}/userImage.png`;
+    selectIDHandler(chatuser._id);
+     
+    dispatch(setconversationID(conversationID));
     dispatch(setUserPicture(userPicture));
+    dispatch({ type: "SETUSERCONVERSATION", payload: chatuser });
     if (window.screen.width < 768)
-      dispatch({ type: "SHOWBOX", payload: false });
+    dispatch({ type: "SHOWBOX", payload: false });
+    sec.on("connection", () => {
+      console.log(sec);
+      console.log("connection");
+    
+
+
+        
+
+     
+ 
+
+    });
+    sec.emit("adduser", username);
+    sec.on("getuser", (users) => {
+      console.log(users, "users");
+     
+    });
+   
+   
+   
   };
 
   return (
