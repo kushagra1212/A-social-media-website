@@ -9,6 +9,16 @@ import addconversation from "../../methods/addconversation";
 import getconversations from "../../methods/getconversations";
 import deleteconversation from "../../methods/deleteconversation";
 import ShowPost from "./ShowPost";
+import { useSpring, animated } from "react-spring";
+const calcXY = (x, y) => [
+  -(y - window.innerHeight / 2) / 10,
+  (x - window.innerWidth / 2) / 10,
+  1.0,
+];
+
+const perspective = (x, y, s) =>
+  `perspective(500px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
+
 const User = ({
   profpic,
   name,
@@ -29,38 +39,39 @@ const User = ({
   const usernameofsender = useSelector((state) => state.user.username);
   const [isUnmounted, setUnmounted] = useState(false);
   const [showAlert, setShowAlert] = useState(true);
+  const [showProfilePic, setShowProfilePic] = useState(false);
   const Alert = useAlert();
+  const [props, set] = useSpring(() => ({
+    xys: [0, 0, 1],
+    config: { mass: 5, tension: 200, friction: 100 },
+  }));
   const setfollowinghandle = async (e) => {
-     setfollowers(username, usernameofsender, dispatch);
-     let exists=false;
+    setfollowers(username, usernameofsender, dispatch);
+    let exists = false;
     if (following === false) {
       const conver = await getconversations(username);
 
-      
       conver.forEach((element) => {
-       
         if (element.members.includes(usernameofsender)) {
-           exists=true;
+          exists = true;
         }
       });
-    if(!exists)
-     addconversation([username, usernameofsender]);
-     setfollowing(true);
+      if (!exists) addconversation([username, usernameofsender]);
+      setfollowing(true);
     }
   };
-  const removefollowinghandle=()=>{
+  const removefollowinghandle = () => {
     console.log("Remove");
     removefollowers(username, usernameofsender, dispatch);
     deleteconversation([username, usernameofsender]);
     setfollowing(false);
-  }
+  };
   const setfollowingfunc = (value) => {
     setfollowing(value);
   };
 
   useEffect(() => {
     if (!isUnmounted) {
-     
       verifiesusers(setfollowingfunc, username, usernameofsender);
 
       setloading(false);
@@ -78,7 +89,40 @@ const User = ({
       },
     });
   };
-
+  const floatDown = useSpring({
+    from: { y: "-100%", opacity: "0%" },
+    y: "0%",
+    x: "0%",
+    opacity: "100%",
+  });
+  if (showProfilePic) {
+    return (
+      <animated.div style={floatDown} className={Styles.editprofileMain}>
+        <span
+          className={Styles.backbut}
+          style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
+          onClick={() => setShowProfilePic(false)}
+        >
+          <i
+            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            className="fa fa-arrow-circle-left"
+          ></i>
+        </span>
+        {profpic ? (
+          <animated.img
+            onMouseMove={({ clientX: x, clientY: y }) =>
+              set({ xys: calcXY(x, y) })
+            }
+            onMouseLeave={() => set({ xys: [0, 0, 1] })}
+            style={{ transform: props.xys.to(perspective) }}
+            className={Styles.editimg}
+            src={profpic ? profpic : process.env.PUBLIC_URL + "/userImage.png"}
+            alt=""
+          />
+        ) : null}
+      </animated.div>
+    );
+  }
   if (showfollowers) {
     return (
       <Showbar
@@ -103,70 +147,75 @@ const User = ({
   }
   return (
     <>
-    <div className={Styles.maindiv}>
-      <div className={Styles.firstdiv}>
-        <img
-          alt=""
-          src={profpic ? profpic : process.env.PUBLIC_URL + "/userImage.png"}
-        />
-      </div>
-      <div className={Styles.seconddiv}>
-        <h3>{name}</h3>
-
-        <h6>@{username}</h6>
-        <h5>{bio}</h5>
-      </div>
-      <div className={Styles.thirddiv}>
-        <div className={Styles.posts}>
-          <label style={{ color: "white" }}>Posts</label>
-          <br />
-          {postsnumber}
+      <div className={Styles.maindiv}>
+        <div className={Styles.firstdiv}>
+          <img
+            alt=""
+            onClick={()=>setShowProfilePic(true)}
+            src={profpic ? profpic : process.env.PUBLIC_URL + "/userImage.png"}
+          />
         </div>
+        <div className={Styles.seconddiv}>
+          <h3>{name}</h3>
 
-        <label>
+          <h6>@{username}</h6>
+          <h5>{bio}</h5>
+        </div>
+        <div className={Styles.thirddiv}>
+          <div className={Styles.posts}>
+            <label style={{ color: "white" }}>Posts</label>
+            <br />
+            {postsnumber}
+          </div>
+
+          <label>
+            <button
+              className={Styles.followersbut}
+              onClick={() =>
+                followerscount >= 1
+                  ? setshowfollowershandle(true)
+                  : showAlert
+                  ? showAlertHandle()
+                  : null
+              }
+            >
+              followers{" "}
+            </button>{" "}
+            <h6>{followerscount}</h6>
+          </label>
+
+          <label>
+            <button
+              className={Styles.followingbut}
+              onClick={() =>
+                followingcount
+                  ? setshowfollowinghandle(true)
+                  : showAlert
+                  ? showAlertHandle()
+                  : null
+              }
+            >
+              following{" "}
+            </button>{" "}
+            <h6>{followingcount}</h6>
+          </label>
+
           <button
-            className={Styles.followersbut}
+            className={Styles.isfollowing}
+            style={following ? { backgroundColor: "grey" } : {}}
             onClick={() =>
-              followerscount >= 1
-                ? setshowfollowershandle(true)
-                : showAlert
-                ? showAlertHandle()
+              !loading
+                ? !following
+                  ? setfollowinghandle()
+                  : removefollowinghandle()
                 : null
             }
           >
-            followers{" "}
-          </button>{" "}
-          <h6>{followerscount}</h6>
-        </label>
-
-        <label>
-          <button
-            className={Styles.followingbut}
-            onClick={() =>
-              followingcount
-                ? setshowfollowinghandle(true)
-                : showAlert
-                ? showAlertHandle()
-                : null
-            }
-          >
-            following{" "}
-          </button>{" "}
-          <h6>{followingcount}</h6>
-        </label>
-
-        <button
-          className={Styles.isfollowing}
-          style={following?{backgroundColor:"grey"}:{}}
-
-          onClick={() => (!loading ?!following?setfollowinghandle():removefollowinghandle() : null)}
-        >
-          {following ? "Unfollow" : "Follow"}{" "}
-        </button>
+            {following ? "Unfollow" : "Follow"}{" "}
+          </button>
+        </div>
       </div>
-  
-    </div>
-        <ShowPost username={username} toDelete={false}/>
+      <ShowPost username={username} toDelete={false} />
     </>
   );
 };

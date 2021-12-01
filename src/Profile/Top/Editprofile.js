@@ -9,6 +9,7 @@ import ImageCropper from "./ImageCroper/ImageCropper";
 import { getCroppedImg } from "../../methods/createcrop";
 import ProgressBar from "../../Animation/Loader/Progressbar/ProgressBar";
 import { data_URL_to_file } from "../../../src/methods/data_URL_to_file";
+import NormalLoader from "../../Animation/Loader/loader/NormalLoader";
 const URL = process.env.REACT_APP_URL;
 const calcXY = (x, y) => [
   -(y - window.innerHeight / 2) / 10,
@@ -139,11 +140,10 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   };
 
   const floatDown = useSpring({
-    from: { y: "-100%" },
+    from: { y: "-100%",opacity:"0%" },
     y: "0%",
     x: "0%",
-
-    config: {  duration: 200 },
+    opacity:"100%",
   });
   const imageAni = useSpring({
     from:{marginTop:-500,opacity:0},
@@ -157,11 +157,8 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
    });
   if (loading) {
     return (
-      <div className={Styles.cropdiv} style={{ backgroundColor: "white" }}>
-        <label style={{ color: "black", frontSize: "100px" }}>
-          {progress !== 0 ? "Wait for a while !  Uploading..." : "Loading..."}
-        </label>
-        <ProgressBar bgcolor="#99ff66" progress={progress} height={30} />
+      <div style={{width:"100vw",height:"100vh",zIndex:"100",position:"fixed",display:"flex",alignItems:"center",justifyContent:"center", backdropFilter: "blur(10px)"}}>
+      <NormalLoader/>
       </div>
     );
   } else if (image) {

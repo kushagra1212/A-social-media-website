@@ -46,12 +46,14 @@ const Top = ({
     };
   }, [edit, isUnmounted]);
   const logouthandle = () => {
+    sessionStorage.clear();
     axios
       .post(`${URL}/auth/logout`, {}, { withCredentials: true })
       .then((res) => {
         console.log(res);
+      
         dispatch({ type: "access", payload: false });
-        history.push("/");
+  
         window.location.href = window.location.href;
       })
       .catch((err) => console.log(err));

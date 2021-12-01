@@ -33,6 +33,7 @@ const Addpost = ({ setposthandle }) => {
   const dispatch = useDispatch();
   const { postcount } = useSelector((state) => state.count);
   const [fileName, setfileName] = useState("");
+
   const upload = async (ul) => {
     try {
       const res = await axios.post(
@@ -180,6 +181,8 @@ const Addpost = ({ setposthandle }) => {
       <div className={Styles.cropdiv}>
         <ImageCropper
           crop={crop}
+      
+    
           image={image}
           setCrop={setCrop}
           onCropComplete={onCropComplete}

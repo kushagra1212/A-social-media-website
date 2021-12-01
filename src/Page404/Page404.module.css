@@ -1,0 +1,27 @@
+.maindiv {
+  background-color: rgb(255, 255, 255);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.homebut {
+  background-color: rgb(36, 124, 240);
+  border: 1px solid rgba(128, 128, 128, 0);
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px grey;
+  color: white;
+  font-size: 3em;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  padding: 2%;
+  outline: none;
+  animation: transform cubic-bezier(0.785, 0.135, 0.15, 0.86) 2s step-start;
+}
+.homebut:hover {
+  transform: scale3d(1.01, 1.01, 1.01);
+  box-shadow: 1px 1px 20px 5px grey;
+}

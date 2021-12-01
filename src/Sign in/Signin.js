@@ -43,10 +43,11 @@ const Signin = () => {
         }
       );
       const success = res.data.success;
-
+  
       if (success) {
+        sessionStorage.setItem('access','true');
         dispatch({ type: "access", payload: success });
-
+     
         dispatch(getuser(res.data.user._id));
       } else {
         console.log(res.data);
