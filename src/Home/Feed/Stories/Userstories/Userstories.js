@@ -18,6 +18,7 @@ import { data_URL_to_file } from "../../../../methods/data_URL_to_file";
 import { getCroppedImg } from "../../../../methods/createcrop";
 import { useAlert } from "react-alert";
 import firebase from "@firebase/app-compat";
+import NormalLoader from "../../../../Animation/Loader/loader/NormalLoader";
 
 const Userstories = () => {
   const dispatch = useDispatch();
@@ -149,11 +150,8 @@ const Userstories = () => {
     );
   if (loading) {
     return (
-      <div className={Styles.cropdiv} style={{ backgroundColor: "white" }}>
-        <label style={{ color: "black", frontSize: "100px" }}>
-          {progress !== 0 ? "Wait for a while !  Uploading..." : "Loading..."}
-        </label>
-        <ProgressBar bgcolor="#99ff66" progress={progress} height={30} />
+      <div style={{width:"100vw",height:"100vh",zIndex:"100",position:"fixed",display:"flex",alignItems:"center",justifyContent:"center", backdropFilter: "blur(10px)"}}>
+      <NormalLoader/>
       </div>
     );
   } else if (image) {

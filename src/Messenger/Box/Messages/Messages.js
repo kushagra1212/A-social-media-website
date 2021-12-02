@@ -66,13 +66,7 @@ const Messages = () => {
       sender: username,
       text: text,
     };
-    console.log(user.username);
-
-    socket?.emit("sendmessage", {
-      receiver: user.username,
-      sender: username,
-      text: text,
-    });
+    await addmessage(Message);
 
     setText("");
 
@@ -80,8 +74,15 @@ const Messages = () => {
       ...messages,
       { ...Message, createdAt: new Date() },
     ]);
+    socket?.emit("sendmessage", {
+      receiver: user.username,
+      sender: username,
+      text: text,
+    });
 
-    await addmessage(Message);
+   
+
+   
     Scrollref.current.scrollIntoView({
       behavior: "smooth",
       block: "start",
