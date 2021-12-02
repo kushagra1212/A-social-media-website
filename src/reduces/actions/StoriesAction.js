@@ -2,8 +2,8 @@
 export const show_user_stories_handle=(flag)=>{
   return ({type:"SHOW_USER_STORIES",payload:{show_user_stories:flag}});
 }
-export const show_others_stories_handle=(flag,key)=>{
-  return ({type:"SHOW_OTHERS_STORIES",payload:{flag:flag,key:key}});
+export const show_others_stories_handle=(flag,element)=>{
+  return ({type:"SHOW_OTHERS_STORIES",payload:{flag:flag,element:element}});
 }
 export const show_webcam_handle=(flag)=>{
   return {type:"SHOW_WEBCAM",payload:{show_webcam:flag}};

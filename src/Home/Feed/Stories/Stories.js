@@ -29,11 +29,11 @@ const Stories = () => {
             height="100%"
           />
         </li>
-        {othersStories?.map((ele, id) =>
+        {othersStories?.map((ele) =>
           ele.stories.length >= 1 ? (
             <li
-              key={id}
-              onClick={() => dispatch(show_others_stories_handle(true, id))}
+              key={ele._id}
+              onClick={() => dispatch(show_others_stories_handle(true, ele))}
               className={Styles.particular}
             >
               <img

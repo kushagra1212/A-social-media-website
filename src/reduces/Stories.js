@@ -1,7 +1,7 @@
 const Stories = (
   state = {
     show_user_stories: false,
-    show_others_stories: { flag: false, key: -1 },
+    show_others_stories: { flag: false, element: null },
     show_webcam: false,
     documents: [],
     othersStories: [],
@@ -37,10 +37,8 @@ const Stories = (
         loading: false,
       };
     case "SHOW_OTHERS_STORIES":
-      let flag = action.payload.flag;
-      let key = action.payload.key;
-
-      return { ...state, show_others_stories: { flag: flag, key: key } };
+  
+      return { ...state, show_others_stories: { flag: action.payload.flag, element: action.payload.element } };
 
     default:
       return state;
