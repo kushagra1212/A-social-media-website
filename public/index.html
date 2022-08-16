@@ -13,11 +13,16 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  
+    <link rel="manifest" href="/manifest.webmanifest" />
     <title>Eimentum</title>
   </head>
   <body>
     <noscript>.</noscript>
+    <script>
+      // Register Service worker for Add to Home Screen option to work
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/service-worker.js') }
+
+    </script>
 
     <div id="root"></div>
   

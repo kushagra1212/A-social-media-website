@@ -21,7 +21,7 @@
     "immer": "^9.0.6",
     "is-svg": "^4.3.1",
     "lodash": "^4.17.21",
-    "node-fetch": "^3.1.0",
+    "node-fetch": "^3.1.1",
     "nth-check": "^2.0.1",
     "path-parse": "^1.0.7",
     "postcss": "^8.3.11",
@@ -49,7 +49,7 @@
     "tar": "^6.1.11",
     "thunk": "0.0.1",
     "tmpl": "^1.0.5",
-    "url-parse": "^1.5.3",
+    "url-parse": "^1.5.9",
     "web-vitals": "^1.1.0",
     "xmlhttprequest-ssl": "^2.0.0"
   },
