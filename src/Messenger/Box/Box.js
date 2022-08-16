@@ -1,18 +1,18 @@
-import Styles from "./Box.module.css";
-import getuser from "../../methods/getuser";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
+import Styles from './Box.module.css';
+import getuser from '../../methods/getuser';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import VerticalLoader from '../../Animation/Loader/loader/VerticalLoader';
 import {
   setconversationID,
   setUserPicture,
-} from "../../reduces/actions/MessageReducerAction";
-import ContentLoader from "react-content-loader";
-import io from "socket.io-client";
-import { setsocket } from "../../reduces/actions/MessageReducerAction";
-let heightofAni = window.screen.width >= 768 ? "100vh" : "100vh";
-//const ENDPOINT="http://localhost:8000/";
-const ENDPOINT = "https://eimentum-chat-app.herokuapp.com/";
+} from '../../reduces/actions/MessageReducerAction';
+import ContentLoader from 'react-content-loader';
+import io from 'socket.io-client';
+import { setsocket } from '../../reduces/actions/MessageReducerAction';
+let heightofAni = window.screen.width >= 768 ? '100vh' : '100vh';
+
+const ENDPOINT = process.env.REACT_APP_SOCKETURL;
 const MyLoader = (props) => (
   <ContentLoader
     speed={1}
@@ -22,7 +22,7 @@ const MyLoader = (props) => (
     foregroundColor="#ecebeb"
     {...props}
   >
-    {" "}
+    {' '}
     <rect x="5" y="0" rx="10" ry="10" width="100%" height="100%" />
   </ContentLoader>
 );
@@ -32,38 +32,26 @@ const List = ({ chatuser, conversationID, selectedID, selectIDHandler }) => {
   const dispatch = useDispatch();
 
   const showmessages = () => {
-    let sec=io.connect(ENDPOINT);
+    let sec = io.connect(ENDPOINT);
     dispatch(setsocket(sec));
     let userPicture = chatuser.profilepic
-    ? chatuser.profilepic
-    : `${process.env.PUBLIC_URL}/userImage.png`;
+      ? chatuser.profilepic
+      : `${process.env.PUBLIC_URL}/userImage.png`;
     selectIDHandler(chatuser._id);
-     
+
     dispatch(setconversationID(conversationID));
     dispatch(setUserPicture(userPicture));
-    dispatch({ type: "SETUSERCONVERSATION", payload: chatuser });
+    dispatch({ type: 'SETUSERCONVERSATION', payload: chatuser });
     if (window.screen.width < 768)
-    dispatch({ type: "SHOWBOX", payload: false });
-    sec.on("connection", () => {
+      dispatch({ type: 'SHOWBOX', payload: false });
+    sec.on('connection', () => {
       console.log(sec);
-      console.log("connection");
-    
-
-
-        
-
-     
- 
-
+      console.log('connection');
     });
-    sec.emit("adduser", username);
-    sec.on("getuser", (users) => {
-      console.log(users, "users");
-     
+    sec.emit('adduser', username);
+    sec.on('getuser', (users) => {
+      console.log(users, 'users');
     });
-   
-   
-   
   };
 
   return (
@@ -71,7 +59,7 @@ const List = ({ chatuser, conversationID, selectedID, selectIDHandler }) => {
       className={Styles.listitem}
       style={
         chatuser._id === selectedID
-          ? { backgroundColor: "rgba(5, 93, 133, 0.054)" }
+          ? { backgroundColor: 'rgba(5, 93, 133, 0.054)' }
           : {}
       }
       onClick={showmessages}
@@ -87,15 +75,15 @@ const List = ({ chatuser, conversationID, selectedID, selectIDHandler }) => {
         />
       </div>
       <div className={Styles.usernamediv}>
-        <label style={{ fontWeight: "600" }}>{chatuser.username} </label>
-        <label style={{ fontSize: "0.7em" }}>{chatuser.bio}</label>
+        <label style={{ fontWeight: '600' }}>{chatuser.username} </label>
+        <label style={{ fontSize: '0.7em' }}>{chatuser.bio}</label>
       </div>
     </div>
   );
 };
 
 const Box = ({ conversations, username }) => {
-  const [selectedID, setSelectedID] = useState("");
+  const [selectedID, setSelectedID] = useState('');
   const [loading, setLoading] = useState(false);
   const [conversationState, setConversationState] = useState([]);
   const selectIDHandler = (id) => {
@@ -127,7 +115,7 @@ const Box = ({ conversations, username }) => {
   if (conversations != null && conversations.length === 0) {
     return (
       <div className={Styles.maindiv2}>
-        <img alt="" src={process.env.PUBLIC_URL + "/noconversation.gif"} />
+        <img alt="" src={process.env.PUBLIC_URL + '/noconversation.gif'} />
         <label> You have no conversation</label>
         <h6>Please Follow your friends</h6>
       </div>
@@ -135,7 +123,7 @@ const Box = ({ conversations, username }) => {
   }
   if (loading) {
     return (
-      <div  className={Styles.list}>
+      <div className={Styles.list}>
         <MyLoader />
       </div>
     );
@@ -143,8 +131,8 @@ const Box = ({ conversations, username }) => {
   return (
     <div className={Styles.maindiv}>
       <div className={Styles.messagetext}>
-        {" "}
-        <h2 style={{ marginLeft: "10%", opacity: "0.6" }}>Messages</h2>
+        {' '}
+        <h2 style={{ marginLeft: '10%', opacity: '0.6' }}>Messages</h2>
       </div>
       <div className={Styles.list}>
         {conversationState?.map((element, id) => {
