@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import getusers from '../../methods/getusers';
 import Styles from './SuggestionList.module.css';
 import { useSelector } from 'react-redux';
 import ContentLoader from 'react-content-loader';
-import isconnection from '../../methods/isconnection';
 import { setfollowers } from '../../methods/setfollowers';
 import { useDispatch } from 'react-redux';
 import addconversation from '../../methods/addconversation';
 import getconversations from '../../methods/getconversations';
 import { addSuggestions } from '../../reduces/actions/SuggestionsAction';
+import getSuggestion from '../../methods/getSuggestion';
 const MyLoaderPC = (props) => (
   <ContentLoader
     speed={3}
@@ -45,33 +44,23 @@ const SuggestionList = ({ setShowProfileHandler, setUserSearchHandler }) => {
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.user);
   const { suggestion } = useSelector((state) => state.Suggestions);
-  const checkUsers = async (Users) => {
-    let newArray = [];
-
-    for (let user of Users) {
-      let currentusername = user.username;
-      const found = await isconnection(currentusername, username);
-      if (!found && username !== currentusername)
-        newArray.push({ user: user, following: false });
+  const checkUsers = async () => {
+    let suggestedUser = [];
+    try {
+      suggestedUser = await getSuggestion(username);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(addSuggestions(suggestedUser));
+      setLoading(false);
     }
-
-    dispatch(addSuggestions(newArray));
-    setLoading(false);
   };
 
   useEffect(() => {
-    if (username !== '') {
-      if (suggestion.length >= 1) {
-        setLoading(false);
-        return;
-      }
-      getusers()
-        .then((res) => {
-          checkUsers(res.data);
-        })
-        .catch((err) => console.log(err));
+    if (username && username !== '') {
+      checkUsers();
     }
-  }, [username, suggestion]);
+  }, [username]);
 
   const handleAdd = async (user) => {
     setfollowers(user.username, username, dispatch);
@@ -108,49 +97,46 @@ const SuggestionList = ({ setShowProfileHandler, setUserSearchHandler }) => {
         )}
       </>
     );
-  else
-    return (
-      <>
-        <div className={Styles.maindiv}>
-          {suggestion.length > 0 &&
-            suggestion.map((user) => {
-              return (
-                <div key={user.user._id} className={Styles.listitem}>
-                  <div className={Styles.listhead}>
-                    <img
-                      width="70px"
-                      height="70px"
-                      className={Styles.listimg}
-                      alt=""
-                      src={
-                        user.user.profilepic
-                          ? user.user.profilepic
-                          : process.env.PUBLIC_URL + '/userImage.png'
-                      }
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => {
-                        let x = user.user.username;
-                        setUserSearchHandler(x);
+  return (
+    <>
+      <div className={Styles.maindiv}>
+        {suggestion.length &&
+          suggestion?.map((user) => {
+            return (
+              <div key={user._id} className={Styles.listitem}>
+                <div className={Styles.listhead}>
+                  <img
+                    width="70px"
+                    height="70px"
+                    className={Styles.listimg}
+                    alt=""
+                    src={
+                      user.profilepic
+                        ? user.profilepic
+                        : process.env.PUBLIC_URL + '/userImage.png'
+                    }
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      let x = user.username;
+                      setUserSearchHandler(x);
 
-                        setShowProfileHandler(true);
-                      }}
-                    />
-                    <button
-                      onClick={() => handleAdd(user.user)}
-                      className={Styles.listbut}
-                      styles={
-                        user.following ? { backgroundColor: 'black' } : {}
-                      }
-                    >
-                      {user.following ? 'following' : 'follow'}
-                    </button>
-                  </div>
-                  <h6>@{user.user.username}</h6>
+                      setShowProfileHandler(true);
+                    }}
+                  />
+                  <button
+                    onClick={() => handleAdd(user)}
+                    className={Styles.listbut}
+                    styles={user.following ? { backgroundColor: 'black' } : {}}
+                  >
+                    {user.following ? 'following' : 'follow'}
+                  </button>
                 </div>
-              );
-            })}
-        </div>
-      </>
-    );
+                <h6>@{user.username}</h6>
+              </div>
+            );
+          })}
+      </div>
+    </>
+  );
 };
 export default SuggestionList;
