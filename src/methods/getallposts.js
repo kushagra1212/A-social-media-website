@@ -6,7 +6,7 @@ const getallposts = (username, last, limit) => {
       const res = await axios.get(
         `${URL}/post/allposts?username=${username}&last=${last}&limit=${limit}`
       );
-      console.log(last, limit, 'last, limit');
+      //console.log(last, limit, 'last, limit');
       // console.log(res.data, 'Posts');
       resolve(res.data);
     } catch (err) {

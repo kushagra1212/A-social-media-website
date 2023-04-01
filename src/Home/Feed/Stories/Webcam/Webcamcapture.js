@@ -1,56 +1,53 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   show_user_stories_handle,
   show_webcam_handle,
-} from "../../../../reduces/actions/StoriesAction";
-import Styles from "./Webcamcapture.module.css";
-import { animated, useSpring } from "react-spring";
-import { uploadstories } from "../../../../methods/uploadstories";
-import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
-import "react-html5-camera-photo/build/css/index.css";
-import "./webcam.css";
+} from '../../../../reduces/actions/StoriesAction';
+import Styles from './Webcamcapture.module.css';
+import { animated, useSpring } from 'react-spring';
+import { uploadstories } from '../../../../methods/uploadstories';
+import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
+import 'react-html5-camera-photo/build/css/index.css';
+import './webcam.css';
 const Webcamcapture = () => {
   const [imagecaptured, setimagecaptured] = useState(null);
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
-  const { username ,profilepic} = useSelector((state) => state.user);
+  const { username, profilepic } = useSelector((state) => state.user);
 
   const [retake, setRetake] = useState(true);
 
-
   const savePhotoButStyle = useSpring({
-    transform: loading === false ? "scale(1.2,1.2)" : "scale(1,1)",
+    transform: loading === false ? 'scale(1.2,1.2)' : 'scale(1,1)',
   });
 
   function handleTakePhoto(dataUri) {
-  
     setRetake(false);
     setimagecaptured(dataUri);
 
-    console.log("takePhoto");
+    console.log('takePhoto');
   }
 
   function handleTakePhotoAnimationDone(dataUri) {
-   
-    console.log("takePhoto");
+    console.log('takePhoto');
   }
 
   function handleCameraError(error) {
-    console.log("handleCameraError", error);
+    console.log('handleCameraError', error);
   }
 
   function handleCameraStart(stream) {
-    console.log("handleCameraStart");
+    console.log('handleCameraStart');
   }
 
   function handleCameraStop() {
-    console.log("handleCameraStop");
+    console.log('handleCameraStop');
   }
 
   const save_button_handle = () => {
     setloading(true);
-    uploadstories(username, imagecaptured,profilepic, dispatch);
+    uploadstories(username, imagecaptured, profilepic, dispatch);
 
     setTimeout(() => {
       setloading(false);

@@ -1,6 +1,5 @@
 import Styles from './Box.module.css';
-import getuser from '../../methods/getuser';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setconversationID,
@@ -27,7 +26,6 @@ const MyLoader = (props) => (
 );
 const List = ({ chatuser, conversationID, selectedID, selectIDHandler }) => {
   const { username } = useSelector((state) => state.user);
-  console.log(chatuser);
   const dispatch = useDispatch();
 
   const showmessages = () => {
@@ -85,29 +83,29 @@ const Box = ({ conversations, username }) => {
   const selectIDHandler = (id) => {
     setSelectedID(id);
   };
-  useEffect(() => {
-    if (conversations !== null && conversationState.length === 0) {
-      let conv = [];
-      const getUsersHandler = async () => {
-        setLoading(true);
-        let con = conversations;
+  // useEffect(() => {
+  //   if (conversations !== null && conversationState.length === 0) {
+  //     let conv = [];
+  //     const getUsersHandler = async () => {
+  //       setLoading(true);
+  //       let con = conversations;
 
-        let us;
-        for (let i = 0; i < con.length; i++) {
-          us =
-            con[i].members[0] === username
-              ? con[i].members[1]
-              : con[i].members[0];
+  //       let us;
+  //       for (let i = 0; i < con.length; i++) {
+  //         us =
+  //           con[i].members[0] === username
+  //             ? con[i].members[1]
+  //             : con[i].members[0];
 
-          let USER = await getuser(us);
-          conv.push({ element: con[i], USER: USER });
-        }
-        setConversationState(conv);
-        setLoading(false);
-      };
-      getUsersHandler();
-    }
-  }, []);
+  //         let USER = await getuser(us);
+  //         conv.push({ element: con[i], USER: USER });
+  //       }
+  //       setConversationState(conv);
+  //       setLoading(false);
+  //     };
+  //     getUsersHandler();
+  //   }
+  // }, []);
   if (conversations != null && conversations.length === 0) {
     return (
       <div className={Styles.maindiv2}>
@@ -131,15 +129,15 @@ const Box = ({ conversations, username }) => {
         <h2 style={{ marginLeft: '10%', opacity: '0.6' }}>Messages</h2>
       </div>
       <div className={Styles.list}>
-        {conversationState?.map((element, id) => {
+        {conversations?.map((element, id) => {
           // console.log(element);
           return (
             <List
               selectedID={selectedID}
               key={id}
-              conversationID={element.element._id}
+              conversationID={element._id}
               selectIDHandler={selectIDHandler}
-              chatuser={element.USER}
+              chatuser={element.chatWithUser[0]}
             />
           );
         })}
