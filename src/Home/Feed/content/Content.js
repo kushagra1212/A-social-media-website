@@ -1,24 +1,23 @@
-import Styles from "./Content.module.css";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { Suspense, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import getitem from "../../../methods/getitem";
-import updatelikes from "../../../methods/updatelikes";
-import deletelike from "../../../methods/deletelike";
-import Comments from "./comments/Comments";
-import { getstoriesFromOthers } from "../../../methods/uploadstories";
-import { updatepost } from "../../../reduces/actions/userAction";
-import { FluidLoaderFive } from "../../../Animation/Loader/loader/FluidLoader";
-import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
-import { SuspenseImg } from "./SuspenceImage/SuspenceImg";
-import { getstories } from "../../../methods/uploadstories";
-import ContentMainAnimate from "./ContentMainAnimate/ContentMainAnimate";
-import Addcomment from "./comments/Addcomment";
-import addcomment from "../../../methods/addcomments";
-import Search from "../../../Search/Search";
-import { useAlert } from "react-alert";
-import SuggestionList from "../../../components/suggestionlist/SuggestionList";
-import ContentLoader from "react-content-loader";
+import Styles from './Content.module.css';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { Suspense, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import getitem from '../../../methods/getitem';
+import updatelikes from '../../../methods/updatelikes';
+import deletelike from '../../../methods/deletelike';
+import Comments from './comments/Comments';
+import { getstoriesFromOthers } from '../../../methods/uploadstories';
+import { FluidLoaderFive } from '../../../Animation/Loader/loader/FluidLoader';
+import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
+import { SuspenseImg } from './SuspenceImage/SuspenceImg';
+import { getstories } from '../../../methods/uploadstories';
+import ContentMainAnimate from './ContentMainAnimate/ContentMainAnimate';
+import Addcomment from './comments/Addcomment';
+import addcomment from '../../../methods/addcomments';
+import Search from '../../../Search/Search';
+import { useAlert } from 'react-alert';
+import SuggestionList from '../../../components/suggestionlist/SuggestionList';
+import ContentLoader from 'react-content-loader';
 import {
   updateLastCount,
   updateLatestLikesArray,
@@ -26,26 +25,29 @@ import {
   updateLatestUnlikesArray,
   addLatestPosts,
   setScrollPositionHandler,
-} from "../../../reduces/actions/PostAction";
-import getallposts from "../../../methods/getallposts";
-import { useSpring, animated as a } from "react-spring";
+} from '../../../reduces/actions/PostAction';
+import getallposts from '../../../methods/getallposts';
+import { useSpring, animated as a } from 'react-spring';
 const CURURL = process.env.REACT_APP_CURURL;
-let likeCountArray = [];
+let likeCountArray = []; // Array to store the likes count of each post
 let element = null;
+const LIMIT = 3;
 export const MyLoader = (props) => {
-  let heightofAni = window.screen.width >= 768 ? "100vh" : "45vh";
+  let heightofAni = window.screen.width >= 768 ? '100vh' : '45vh';
 
-return(  <ContentLoader
-  speed={1}
-  width="100%"
-  height={heightofAni}
-  backgroundColor="#f3f3f3"
-  foregroundColor="#ecebeb"
-  {...props}
->
-  {" "}
-  <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
-</ContentLoader>);
+  return (
+    <ContentLoader
+      speed={1}
+      width="100%"
+      height={heightofAni}
+      backgroundColor="#f3f3f3"
+      foregroundColor="#ecebeb"
+      {...props}
+    >
+      {' '}
+      <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
+    </ContentLoader>
+  );
 };
 const Content = () => {
   const dispatch = useDispatch();
@@ -56,7 +58,6 @@ const Content = () => {
   const { likesLatestArray, scrollPosition } = useSelector((state) => {
     return state?.Posts;
   });
-
   const [hasMore, sethasmore] = useState(true);
 
   const [isUnmounted, setIsUnmounted] = useState(false);
@@ -66,8 +67,8 @@ const Content = () => {
   const [likeLoading, setlikeLoading] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showShare, setShowShare] = useState(false);
-  const [userSearch, setUserSearch] = useState("");
-  const [sharePostURL, setSharePostURL] = useState("");
+  const [userSearch, setUserSearch] = useState('');
+  const [sharePostURL, setSharePostURL] = useState('');
   const sRef = useRef();
   const [noOne, setNoOne] = useState(false);
   const setShowProfileHandler = (val) => {
@@ -162,13 +163,13 @@ const Content = () => {
     dispatch(updateLatestPost(com));
   };
   const setcommentsfunc = ({ val, post }) => {
-    element = document.querySelector("#infiniteScroll");
+    element = document.querySelector('#infiniteScroll');
     setshowcomments({ val: val, post: post });
   };
   const copyToClipboardHandler = () => {
     if (!showAlert) {
       navigator.clipboard.writeText(sharePostURL);
-      Alert.success("Link Copied", {
+      Alert.success('Link Copied', {
         onOpen: () => {
           setShowAlert(false);
         },
@@ -179,13 +180,12 @@ const Content = () => {
     }
   };
   const getPosts = () => {
-    getallposts(username, state?.Posts.lastcount, 3)
+    getallposts(username, state?.Posts.posts.length, LIMIT)
       .then((posts) => {
-        console.log(posts);
         if (posts.length > 0) {
+          dispatch(updateLastCount(state?.Posts.posts.length + posts.length));
           dispatch(addLatestPosts(posts, array));
           setarray([...array, ...posts]);
-          dispatch(updateLastCount(state?.Posts.lastcount + 3));
           posts.forEach((ele) => {
             ele.likes.forEach((ele2) => {
               dispatch(updateLatestLikesArray(ele2.username, ele._id));
@@ -224,32 +224,45 @@ const Content = () => {
   }, [showProfile, loading, noOne, state.Posts.posts.length, scrollPosition]);
   const contentProps = useSpring({
     opacity: showProfile ? 1 : 0,
-    marginTop: showProfile ? 0 : -500
+    marginTop: showProfile ? 0 : -500,
   });
   const Popup = useSpring({
-    y:showShare? "0%":"-50%",
-    x:showShare? "0%":"0%",
-    transform:showShare?"scale(1)":"scale(0.1)",
-    opacity:showShare?"100%":"0%",
+    y: showShare ? '0%' : '-50%',
+    x: showShare ? '0%' : '0%',
+    transform: showShare ? 'scale(1)' : 'scale(0.1)',
+    opacity: showShare ? '100%' : '0%',
   });
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);
   if (showProfile) {
     return (
-      <a.div className={Styles.userprofilemain} style={{...contentProps,overflowX:"hidden"}}>
-        <span style={{ fontSize: "50px",boxShadow:"1px 1px 10px 1px grey",border:"1px solid white",borderRadius:"60px", color: "red"}}>
+      <a.div
+        className={Styles.userprofilemain}
+        style={{ ...contentProps, overflowX: 'hidden' }}
+      >
+        <span
+          style={{
+            fontSize: '50px',
+            boxShadow: '1px 1px 10px 1px grey',
+            border: '1px solid white',
+            borderRadius: '60px',
+            color: 'red',
+          }}
+        >
           <i
             onClick={() => {
               setShowProfile(false);
-              setUserSearch("");
+              setUserSearch('');
             }}
-            styles={{ color: "Dodgerblue", cursor: "pointer"}}
+            styles={{ color: 'Dodgerblue', cursor: 'pointer' }}
             className="fa fa-times-circle"
-          >
-          </i>
+          ></i>
         </span>
 
-        <div className={Styles.userProfile} style={{height:"100%",top:"0%",left:"0%",width:"100%"}}>
+        <div
+          className={Styles.userProfile}
+          style={{ height: '100%', top: '0%', left: '0%', width: '100%' }}
+        >
           <Search
             showprofilefromshowbar={showProfile}
             view={false}
@@ -265,13 +278,13 @@ const Content = () => {
   } else if (state.Posts.posts.length === 0 && noOne) {
     return (
       <>
-        <div className={Styles.maincontentstart} style={{ overflow: "hidden" }}>
+        <div className={Styles.maincontentstart} style={{ overflow: 'hidden' }}>
           No Post to See Please Follow your Friends !
           <img
             width="100%"
             height="90%"
             alt=""
-            src={process.env.PUBLIC_URL + "/nopost.gif"}
+            src={process.env.PUBLIC_URL + '/nopost.gif'}
           />
         </div>
         {window.screen.width < 768 ? (
@@ -287,13 +300,13 @@ const Content = () => {
       <>
         {showShare ? (
           <div className={Styles.topshare}>
-            <span style={{ color: "red" }}>
+            <span style={{ color: 'red' }}>
               <i
                 onClick={() => setShowShare(false)}
                 styles={{
-                  color: "Dodgerblue",
-                  cursor: "pointer",
-                  boxShadow: "8px 9px 15px 10px #5050504d",
+                  color: 'Dodgerblue',
+                  cursor: 'pointer',
+                  boxShadow: '8px 9px 15px 10px #5050504d',
                 }}
                 className="fa fa-times-circle"
               ></i>
@@ -313,13 +326,13 @@ const Content = () => {
             />
           </div>
         ) : null}
-        <div  className={Styles.maincontent} id="infiniteScroll">
+        <div className={Styles.maincontent} id="infiniteScroll">
           <InfiniteScroll
             className={Styles.infi}
             dataLength={state.Posts.posts.length}
             next={getPosts}
             hasMore={hasMore}
-            loader={<div style={{ marginTop: "50px" }}></div>}
+            loader={<div style={{ marginTop: '50px' }}></div>}
             endMessage={
               <p className={Styles.infiP}>
                 <b>Yay! You have seen it all</b>
@@ -335,7 +348,7 @@ const Content = () => {
               <div key={post._id} className={Styles.singlecontainer}>
                 <div
                   className={Styles.topdiv}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                   onClick={() => {
                     dispatch(setScrollPositionHandler(window.scrollY));
 
@@ -348,7 +361,7 @@ const Content = () => {
                       src={
                         post.profilepic
                           ? post.profilepic
-                          : process.env.PUBLIC_URL + "/userImage.png"
+                          : process.env.PUBLIC_URL + '/userImage.png'
                       }
                       alt=""
                     />
@@ -368,22 +381,22 @@ const Content = () => {
                     <div>
                       <span
                         style={{
-                          color: "red",
+                          color: 'red',
 
-                          cursor: "pointer",
+                          cursor: 'pointer',
                         }}
                       >
                         <i
                           onClick={() => unlikefunction(post, post._id)}
                           styles={{
-                            color: "Dodgerblue",
-                            cursor: "pointer",
-                            boxShadow: "8px 9px 15px 10px #5050504d",
+                            color: 'Dodgerblue',
+                            cursor: 'pointer',
+                            boxShadow: '8px 9px 15px 10px #5050504d',
                           }}
                           className="fa fa-heart"
                           aria-hidden="true"
                         ></i>
-                      </span>{" "}
+                      </span>{' '}
                       {likeCountArray.findIndex(
                         (ele) =>
                           ele.username === username && ele.postID === post._id
@@ -395,22 +408,22 @@ const Content = () => {
                     <div className={Styles.heart}>
                       <span
                         style={{
-                          color: "grey",
+                          color: 'grey',
 
-                          cursor: "pointer",
+                          cursor: 'pointer',
                         }}
                       >
                         <i
                           onClick={() => likefunction(post, post._id)}
                           styles={{
-                            color: "Dodgerblue",
-                            cursor: "pointer",
-                            boxShadow: "8px 9px 15px 10px #5050504d",
+                            color: 'Dodgerblue',
+                            cursor: 'pointer',
+                            boxShadow: '8px 9px 15px 10px #5050504d',
                           }}
-                          className={"fa fa-heart"}
+                          className={'fa fa-heart'}
                           aria-hidden="true"
                         ></i>
-                      </span>{" "}
+                      </span>{' '}
                       {likeCountArray.findIndex(
                         (ele) =>
                           ele.username === username && ele.postID === post._id
@@ -422,9 +435,9 @@ const Content = () => {
                   <div>
                     <span
                       style={{
-                        color: "black",
+                        color: 'black',
 
-                        cursor: "pointer",
+                        cursor: 'pointer',
                       }}
                     >
                       <i
@@ -432,9 +445,9 @@ const Content = () => {
                           setcommentsfunc({ val: true, post: post })
                         }
                         styles={{
-                          color: "Dodgerblue",
-                          cursor: "pointer",
-                          boxShadow: "8px 9px 15px 10px #5050504d",
+                          color: 'Dodgerblue',
+                          cursor: 'pointer',
+                          boxShadow: '8px 9px 15px 10px #5050504d',
                         }}
                         className="far fa-comment-alt"
                         aria-hidden="true"
@@ -444,9 +457,9 @@ const Content = () => {
                   </div>
                   <span
                     style={{
-                      color: "lightgreen",
+                      color: 'lightgreen',
 
-                      cursor: "pointer",
+                      cursor: 'pointer',
                     }}
                   >
                     <i
@@ -455,9 +468,9 @@ const Content = () => {
                         setShowShare(true);
                       }}
                       styles={{
-                        color: "Dodgerblue",
-                        cursor: "pointer",
-                        boxShadow: "8px 9px 15px 10px #5050504d",
+                        color: 'Dodgerblue',
+                        cursor: 'pointer',
+                        boxShadow: '8px 9px 15px 10px #5050504d',
                       }}
                       className="fa fa-share-alt"
                       aria-hidden="true"
@@ -465,7 +478,7 @@ const Content = () => {
                   </span>
                 </div>
                 <div
-                  style={post.desc !== "" ? { padding: "3%" } : {}}
+                  style={post.desc !== '' ? { padding: '3%' } : {}}
                   className={Styles.caption}
                 >
                   {post.desc}

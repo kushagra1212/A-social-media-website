@@ -1,6 +1,6 @@
-import { useParams } from "react-router";
-import { useEffect, useState } from "react";
-import Styles from "./Post.module.css";
+import { useParams } from 'react-router';
+import { useEffect, useState } from 'react';
+import Styles from './Post.module.css';
 const URL = process.env.REACT_APP_URL;
 const Post = () => {
   const { id } = useParams();
@@ -8,10 +8,10 @@ const Post = () => {
   useEffect(() => {
     const getPost = async () => {
       const rawRes = await fetch(`${URL}/post/userpost/${id}`, {
-        method: "get",
+        method: 'get',
       });
       const res = await rawRes.json();
-      console.log(res);
+      // console.log(res);
       res.map((post) => setPost(post));
     };
     getPost();
@@ -22,7 +22,7 @@ const Post = () => {
       <div className={Styles.maincontent}>
         <div key={post._id} className={Styles.singlecontainer}>
           <div className={Styles.topdiv}>
-            <img src={process.env.PUBLIC_URL + "/userImage.png"} alt=" " />
+            <img src={process.env.PUBLIC_URL + '/userImage.png'} alt=" " />
 
             <h5>{post.username}</h5>
           </div>

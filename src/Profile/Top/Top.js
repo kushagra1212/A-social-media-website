@@ -1,12 +1,11 @@
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import Addpost from "./post/Addpost";
-import { useEffect, useState } from "react";
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import Addpost from './post/Addpost';
+import { useEffect, useState } from 'react';
 
-import Editprofile from "./Editprofile";
-import Topprofile from "./Topprofile";
-import { useHistory, withRouter } from "react-router";
-import Preview from "../Preview/Preview";
+import Editprofile from './Editprofile';
+import Topprofile from './Topprofile';
+import { useHistory, withRouter } from 'react-router';
 const URL = process.env.REACT_APP_URL;
 const Top = ({
   setposthand,
@@ -50,10 +49,10 @@ const Top = ({
     axios
       .post(`${URL}/auth/logout`, {}, { withCredentials: true })
       .then((res) => {
-        console.log(res);
-      
-        dispatch({ type: "access", payload: false });
-  
+        // console.log(res);
+
+        dispatch({ type: 'access', payload: false });
+
         window.location.href = window.location.href;
       })
       .catch((err) => console.log(err));

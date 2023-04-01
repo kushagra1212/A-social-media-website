@@ -1,35 +1,35 @@
-import Styles from "./Content.module.css";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { getpostsforfeed } from "../../../methods/getpostsforfeed";
-import { Suspense, useEffect, useState } from "react";
-import getuser from "../../../methods/getuser";
-import { useDispatch, useSelector } from "react-redux";
-import getitem from "../../../methods/getitem";
-import updatelikes from "../../../methods/updatelikes";
-import deletelike from "../../../methods/deletelike";
+import Styles from './Content.module.css';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { getpostsforfeed } from '../../../methods/getpostsforfeed';
+import { Suspense, useEffect, useState } from 'react';
+import getuser from '../../../methods/getuser';
+import { useDispatch, useSelector } from 'react-redux';
+import getitem from '../../../methods/getitem';
+import updatelikes from '../../../methods/updatelikes';
+import deletelike from '../../../methods/deletelike';
 import {
   feedPostsUpdateFriend,
   feedPostsUpdateUser,
-} from "../../../posts/Feedposts";
-import Comments from "./comments/Comments";
-import { getstoriesFromOthers } from "../../../methods/uploadstories";
-import { updatepost } from "../../../reduces/actions/userAction";
-import { FluidLoaderFive } from "../../../Animation/Loader/loader/FluidLoader";
-import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
-import { SuspenseImg } from "./SuspenceImage/SuspenceImg";
-import { getstories } from "../../../methods/uploadstories";
-import ContentMainAnimate from "./ContentMainAnimate/ContentMainAnimate";
-import Addcomment from "./comments/Addcomment";
-import addcomment from "../../../methods/addcomments";
+} from '../../../posts/Feedposts';
+import Comments from './comments/Comments';
+import { getstoriesFromOthers } from '../../../methods/uploadstories';
+import { updatepost } from '../../../reduces/actions/userAction';
+import { FluidLoaderFive } from '../../../Animation/Loader/loader/FluidLoader';
+import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
+import { SuspenseImg } from './SuspenceImage/SuspenceImg';
+import { getstories } from '../../../methods/uploadstories';
+import ContentMainAnimate from './ContentMainAnimate/ContentMainAnimate';
+import Addcomment from './comments/Addcomment';
+import addcomment from '../../../methods/addcomments';
 import {
   updateLikesArray,
   updateUnlikesArray,
-} from "../../../reduces/actions/userAction";
-import Search from "../../../Search/Search";
-import { useAlert } from "react-alert";
-import SuggestionList from "../../../components/suggestionlist/SuggestionList";
-import ContentLoader from "react-content-loader";
-let heightofAni = window.screen.width >= 768 ? "100vh" : "45vh";
+} from '../../../reduces/actions/userAction';
+import Search from '../../../Search/Search';
+import { useAlert } from 'react-alert';
+import SuggestionList from '../../../components/suggestionlist/SuggestionList';
+import ContentLoader from 'react-content-loader';
+let heightofAni = window.screen.width >= 768 ? '100vh' : '45vh';
 const CURURL = process.env.REACT_APP_CURURL;
 let likeCountArray = [];
 let element = null;
@@ -42,7 +42,7 @@ const MyLoader = (props) => (
     foregroundColor="#ecebeb"
     {...props}
   >
-    {" "}
+    {' '}
     <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
   </ContentLoader>
 );
@@ -63,11 +63,11 @@ const Contentmain = () => {
   const [likeLoading, setlikeLoading] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showShare, setShowShare] = useState(false);
-  const [userSearch, setUserSearch] = useState("");
-  const [sharePostURL, setSharePostURL] = useState("");
-  const [hasMoreUser,setHasMoreUser]=useState(true);
-  const [hasMoreFriend,setHasMoreFriend]=useState(true);
-  const [noOne,setNoOne]=useState(false);
+  const [userSearch, setUserSearch] = useState('');
+  const [sharePostURL, setSharePostURL] = useState('');
+  const [hasMoreUser, setHasMoreUser] = useState(true);
+  const [hasMoreFriend, setHasMoreFriend] = useState(true);
+  const [noOne, setNoOne] = useState(false);
   const unique = (array) => {
     let isvisited = {};
     let newarray = [];
@@ -214,7 +214,6 @@ const Contentmain = () => {
         dispatch(updateLikesArray(ele2.username, ele._id));
       });
     });
-   
 
     feedPostsUpdateFriend(posts, array1, friend, 3, dispatch);
     setarray([...array, ...newArray]);
@@ -224,7 +223,6 @@ const Contentmain = () => {
     let newArray = [];
 
     if (Posts.length === 0) {
-  
       setloading(false);
       return;
     }
@@ -254,7 +252,6 @@ const Contentmain = () => {
   const getothers = () => {
     if (username) {
       getitem(username).then(async (item) => {
-  
         getstories(username, dispatch);
         let otherUsersLastcount = state.feedposts.otherUsersLastcount;
         for (let dat of item.following) {
@@ -268,31 +265,27 @@ const Contentmain = () => {
           picki = res.profilepic;
 
           posts.map((elee) => {
-            return (elee["pic"] = picki);
+            return (elee['pic'] = picki);
           });
-         
+
           friendPostWraper(dat.username, posts);
-        
         }
-      
       });
     }
   };
 
   const call_func = () => {
     if (username) {
-
       let otherUsersLastcount = state.feedposts.otherUsersLastcount;
       let post1 = [];
       getpostsforfeed(username, otherUsersLastcount[username], 3).then(
         async (res) => {
           post1 = res;
-          console.log(post1);
           userPostWraper(username, post1);
           getothers();
-         
+
           post1.map((ele) => {
-            return (ele["pic"] = profilepic);
+            return (ele['pic'] = profilepic);
           });
         }
       );
@@ -309,13 +302,13 @@ const Contentmain = () => {
     dispatch(updatepost(com));
   };
   const setcommentsfunc = ({ val, post }) => {
-    element = document.querySelector("#infiniteScroll");
+    element = document.querySelector('#infiniteScroll');
     setshowcomments({ val: val, post: post });
   };
   const copyToClipboardHandler = () => {
     if (!showAlert) {
       navigator.clipboard.writeText(sharePostURL);
-      Alert.success("Link Copied", {
+      Alert.success('Link Copied', {
         onOpen: () => {
           setShowAlert(false);
         },
@@ -325,48 +318,44 @@ const Contentmain = () => {
       });
     }
   };
-useEffect(()=>{
-   if(hasMoreUser===false && hasMoreFriend===false)
-    sethasmore(false);
-},[hasMoreFriend,hasMoreUser])
+  useEffect(() => {
+    if (hasMoreUser === false && hasMoreFriend === false) sethasmore(false);
+  }, [hasMoreFriend, hasMoreUser]);
   useEffect(() => {
     if (!isUnmounted) {
       if (state.feedposts.posts.length === 0) {
         setloading(true);
-       
+
         call_func();
       }
       getitem(username).then(async (item) => {
         item?.following.forEach((ele) => {
-           getstoriesFromOthers(ele.username, dispatch);
+          getstoriesFromOthers(ele.username, dispatch);
         });
       });
       setarray(state.feedposts.array);
     }
 
-    return () => {  setIsUnmounted(true);};
-  }, [
-    username,
-    isUnmounted,
-    state.feedposts.array,
-    state.feedposts.posts,
-  ]);
-  useEffect(()=>{
-    setTimeout(()=>{
+    return () => {
+      setIsUnmounted(true);
+    };
+  }, [username, isUnmounted, state.feedposts.array, state.feedposts.posts]);
+  useEffect(() => {
+    setTimeout(() => {
       setNoOne(true);
-    },3000)
-  },[])
+    }, 3000);
+  }, []);
   console.log(noOne);
- 
+
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);
   if (showProfile) {
     return (
       <div className={Styles.userprofilemain}>
-        <span style={{ fontSize: "40px", color: "red" }}>
+        <span style={{ fontSize: '40px', color: 'red' }}>
           <i
             onClick={() => setShowProfile(false)}
-            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            styles={{ color: 'Dodgerblue', cursor: 'pointer' }}
             className="fa fa-times-circle"
           ></i>
         </span>
@@ -387,11 +376,11 @@ useEffect(()=>{
   } else if (state.feedposts.posts.length === 0 && noOne) {
     return (
       <>
-      <div className={Styles.maincontentstart}>
-        You are not following any one , please follow others to see
-        their posts
-      </div>
-      {window.screen.width<768?<SuggestionList/>:null}
+        <div className={Styles.maincontentstart}>
+          You are not following any one , please follow others to see their
+          posts
+        </div>
+        {window.screen.width < 768 ? <SuggestionList /> : null}
       </>
     );
   } else {
@@ -399,13 +388,13 @@ useEffect(()=>{
       <>
         {showShare ? (
           <div className={Styles.topshare}>
-            <span style={{ color: "red" }}>
+            <span style={{ color: 'red' }}>
               <i
                 onClick={() => setShowShare(false)}
                 styles={{
-                  color: "Dodgerblue",
-                  cursor: "pointer",
-                  boxShadow: "8px 9px 15px 10px #5050504d",
+                  color: 'Dodgerblue',
+                  cursor: 'pointer',
+                  boxShadow: '8px 9px 15px 10px #5050504d',
                 }}
                 className="fa fa-times-circle"
               ></i>
@@ -433,7 +422,7 @@ useEffect(()=>{
             dataLength={state.feedposts.posts.length}
             next={call_func}
             hasMore={hasMore}
-            loader={<div style={{marginTop:"50px"}} ></div>}
+            loader={<div style={{ marginTop: '50px' }}></div>}
             endMessage={
               <p className={Styles.infiP}>
                 <b>Yay! You have seen it all</b>
@@ -444,7 +433,7 @@ useEffect(()=>{
               <div key={post._id} className={Styles.singlecontainer}>
                 <div
                   className={Styles.topdiv}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                   onClick={() => {
                     setUserSearch(post.username);
                     setShowProfile(true);
@@ -455,7 +444,7 @@ useEffect(()=>{
                       src={
                         post.pic
                           ? post.pic
-                          : process.env.PUBLIC_URL + "/userImage.png"
+                          : process.env.PUBLIC_URL + '/userImage.png'
                       }
                       alt=""
                     />
@@ -475,22 +464,22 @@ useEffect(()=>{
                     <div>
                       <span
                         style={{
-                          color: "red",
+                          color: 'red',
 
-                          cursor: "pointer",
+                          cursor: 'pointer',
                         }}
                       >
                         <i
                           onClick={() => unlikefunction(post, post._id)}
                           styles={{
-                            color: "Dodgerblue",
-                            cursor: "pointer",
-                            boxShadow: "8px 9px 15px 10px #5050504d",
+                            color: 'Dodgerblue',
+                            cursor: 'pointer',
+                            boxShadow: '8px 9px 15px 10px #5050504d',
                           }}
                           className="fa fa-heart"
                           aria-hidden="true"
                         ></i>
-                      </span>{" "}
+                      </span>{' '}
                       {likeCountArray.findIndex(
                         (ele) =>
                           ele.username === username && ele.postID === post._id
@@ -502,24 +491,22 @@ useEffect(()=>{
                     <div className={Styles.heart}>
                       <span
                         style={{
-                          color: "grey",
+                          color: 'grey',
 
-                          cursor: "pointer",
+                          cursor: 'pointer',
                         }}
-                      
                       >
                         <i
                           onClick={() => likefunction(post, post._id)}
                           styles={{
-                            color: "Dodgerblue",
-                            cursor: "pointer",
-                            boxShadow: "8px 9px 15px 10px #5050504d",
+                            color: 'Dodgerblue',
+                            cursor: 'pointer',
+                            boxShadow: '8px 9px 15px 10px #5050504d',
                           }}
-                          
-                          className={"fa fa-heart"}
+                          className={'fa fa-heart'}
                           aria-hidden="true"
                         ></i>
-                      </span>{" "}
+                      </span>{' '}
                       {likeCountArray.findIndex(
                         (ele) =>
                           ele.username === username && ele.postID === post._id
@@ -531,9 +518,9 @@ useEffect(()=>{
                   <div>
                     <span
                       style={{
-                        color: "black",
+                        color: 'black',
 
-                        cursor: "pointer",
+                        cursor: 'pointer',
                       }}
                     >
                       <i
@@ -541,9 +528,9 @@ useEffect(()=>{
                           setcommentsfunc({ val: true, post: post })
                         }
                         styles={{
-                          color: "Dodgerblue",
-                          cursor: "pointer",
-                          boxShadow: "8px 9px 15px 10px #5050504d",
+                          color: 'Dodgerblue',
+                          cursor: 'pointer',
+                          boxShadow: '8px 9px 15px 10px #5050504d',
                         }}
                         className="far fa-comment-alt"
                         aria-hidden="true"
@@ -553,9 +540,9 @@ useEffect(()=>{
                   </div>
                   <span
                     style={{
-                      color: "lightgreen",
+                      color: 'lightgreen',
 
-                      cursor: "pointer",
+                      cursor: 'pointer',
                     }}
                   >
                     <i
@@ -564,9 +551,9 @@ useEffect(()=>{
                         setShowShare(true);
                       }}
                       styles={{
-                        color: "Dodgerblue",
-                        cursor: "pointer",
-                        boxShadow: "8px 9px 15px 10px #5050504d",
+                        color: 'Dodgerblue',
+                        cursor: 'pointer',
+                        boxShadow: '8px 9px 15px 10px #5050504d',
                       }}
                       className="fa fa-share-alt"
                       aria-hidden="true"
@@ -574,7 +561,7 @@ useEffect(()=>{
                   </span>
                 </div>
                 <div
-                  style={post.desc !== "" ? { padding: "3%" } : {}}
+                  style={post.desc !== '' ? { padding: '3%' } : {}}
                   className={Styles.caption}
                 >
                   {post.desc}

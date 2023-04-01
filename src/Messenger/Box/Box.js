@@ -2,7 +2,6 @@ import Styles from './Box.module.css';
 import getuser from '../../methods/getuser';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import VerticalLoader from '../../Animation/Loader/loader/VerticalLoader';
 import {
   setconversationID,
   setUserPicture,
@@ -44,13 +43,10 @@ const List = ({ chatuser, conversationID, selectedID, selectIDHandler }) => {
     dispatch({ type: 'SETUSERCONVERSATION', payload: chatuser });
     if (window.screen.width < 768)
       dispatch({ type: 'SHOWBOX', payload: false });
-    sec.on('connection', () => {
-      console.log(sec);
-      console.log('connection');
-    });
+    sec.on('connection', () => {});
     sec.emit('adduser', username);
     sec.on('getuser', (users) => {
-      console.log(users, 'users');
+      // console.log(users, 'users');
     });
   };
 
@@ -136,7 +132,7 @@ const Box = ({ conversations, username }) => {
       </div>
       <div className={Styles.list}>
         {conversationState?.map((element, id) => {
-          console.log(element);
+          // console.log(element);
           return (
             <List
               selectedID={selectedID}

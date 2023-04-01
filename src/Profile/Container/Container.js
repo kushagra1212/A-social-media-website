@@ -1,30 +1,29 @@
-import Styles from "./Container.module.css";
-import { useState, Suspense, useEffect } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import Showdetailedpost from "./Showdetailedpost/Showdetailedpost";
-import { useDispatch, useSelector } from "react-redux";
-import { SuspenseImg } from "../../Home/Feed/content/SuspenceImage/SuspenceImg";
-import { getpostsforfeed } from "../../methods/getpostsforfeed";
-import { updateLikesArray } from "../../reduces/actions/userAction";
-import { getcount } from "../../methods/getcount";
-import { FluidLoaderFive } from "../../Animation/Loader/loader/FluidLoader";
-import ContentLoader from "react-content-loader";
-import { MyLoader } from "../../Home/Feed/content/Content";
-import Loader from "../../Animation/Loader/Loader";
-import Addcomment from "../../Home/Feed/content/comments/Addcomment";
-import addcomment from "../../methods/addcomments";
-import Comments from "../../Home/Feed/content/comments/Comments";
-import VerticalLoader from "../../Animation/Loader/loader/VerticalLoader";
-import updatelikes from "../../methods/updatelikes";
-import deletelike from "../../methods/deletelike";
-import { enableBodyScroll, disableBodyScroll } from "body-scroll-lock";
-import { animated as a, useSpring } from "react-spring";
-import { useAlert } from "react-alert";
+import Styles from './Container.module.css';
+import { useState, Suspense, useEffect } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Showdetailedpost from './Showdetailedpost/Showdetailedpost';
+import { useDispatch } from 'react-redux';
+import { SuspenseImg } from '../../Home/Feed/content/SuspenceImage/SuspenceImg';
+import { getpostsforfeed } from '../../methods/getpostsforfeed';
+import { updateLikesArray } from '../../reduces/actions/userAction';
+import { getcount } from '../../methods/getcount';
+import { FluidLoaderFive } from '../../Animation/Loader/loader/FluidLoader';
+import ContentLoader from 'react-content-loader';
+import { MyLoader } from '../../Home/Feed/content/Content';
+import Addcomment from '../../Home/Feed/content/comments/Addcomment';
+import addcomment from '../../methods/addcomments';
+import Comments from '../../Home/Feed/content/comments/Comments';
+import VerticalLoader from '../../Animation/Loader/loader/VerticalLoader';
+import updatelikes from '../../methods/updatelikes';
+import deletelike from '../../methods/deletelike';
+import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
+import { useSpring } from 'react-spring';
+import { useAlert } from 'react-alert';
 const CURURL = process.env.REACT_APP_CURURL;
-let heightofAni = window.screen.width >= 768 ? "45vh" : "20vh";
-let widthofAni = window.screen.width >= 768 ? "100%" : "100%";
-let heightofAniT = window.screen.width >= 768 ? "95vh" : "45vh";
-let widthofAniT = window.screen.width >= 768 ? "100%" : "100%";
+let heightofAni = window.screen.width >= 768 ? '45vh' : '20vh';
+let widthofAni = window.screen.width >= 768 ? '100%' : '100%';
+let heightofAniT = window.screen.width >= 768 ? '95vh' : '45vh';
+let widthofAniT = window.screen.width >= 768 ? '100%' : '100%';
 let element = null;
 const MyLoaderGrid = (props) => (
   <ContentLoader
@@ -35,7 +34,7 @@ const MyLoaderGrid = (props) => (
     foregroundColor="#ecebeb"
     {...props}
   >
-    {" "}
+    {' '}
     <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
   </ContentLoader>
 );
@@ -48,7 +47,7 @@ const MyLoaderTable = (props) => (
     foregroundColor="#ecebeb"
     {...props}
   >
-    {" "}
+    {' '}
     <rect x="0" y="0" rx="1" ry="3" width="100%" height="100%" />
   </ContentLoader>
 );
@@ -61,7 +60,7 @@ const Container = ({ toDelete, username }) => {
   const [post, setPost] = useState([]);
   const [showShare, setShowShare] = useState(false);
   const [showcomments, setshowcomments] = useState(false);
-  const [sharePostURL, setSharePostURL] = useState("");
+  const [sharePostURL, setSharePostURL] = useState('');
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [isUnmounted, setIsUnmounted] = useState(false);
@@ -116,7 +115,7 @@ const Container = ({ toDelete, username }) => {
   const copyToClipboardHandler = () => {
     if (!showAlert) {
       navigator.clipboard.writeText(sharePostURL);
-      Alert.success("Link Copied", {
+      Alert.success('Link Copied', {
         onOpen: () => {
           setShowAlert(false);
         },
@@ -134,7 +133,6 @@ const Container = ({ toDelete, username }) => {
     }
   }, [posts]);
   useState(() => {
-    console.log(username);
     getcount(username).then((res) => {
       if (res.postcount === 0) setHasMore(false);
       call_func();
@@ -142,7 +140,7 @@ const Container = ({ toDelete, username }) => {
     });
   }, [username]);
   const setcommentsfunc = ({ val, post }) => {
-    element = document.querySelector("#infiniteScroll");
+    element = document.querySelector('#infiniteScroll');
     setshowcomments({ val: val, post: post });
   };
   if (showcomments.val) disableBodyScroll(element);
@@ -177,19 +175,16 @@ const Container = ({ toDelete, username }) => {
     setPosts(poss);
   };
   const showShareA = useSpring({
- 
-    marginTop:(showDetailedPost)?0: 500,
-    opacity: (showDetailedPost)?1:0,
+    marginTop: showDetailedPost ? 0 : 500,
+    opacity: showDetailedPost ? 1 : 0,
   });
   if (showDetailedPost)
     return (
-    
-        <Showdetailedpost
-          setShowDetailedPostHandler={setShowDetailedPostHandler}
-          toDelete={toDelete}
-          post={post}
-        />
-     
+      <Showdetailedpost
+        setShowDetailedPostHandler={setShowDetailedPostHandler}
+        toDelete={toDelete}
+        post={post}
+      />
     );
   else
     return (
@@ -205,13 +200,13 @@ const Container = ({ toDelete, username }) => {
         ) : null}
         {showShare ? (
           <div className={Styles.topshare}>
-            <span style={{ color: "red" }}>
+            <span style={{ color: 'red' }}>
               <i
                 onClick={() => setShowShare(false)}
                 styles={{
-                  color: "Dodgerblue",
-                  cursor: "pointer",
-                  boxShadow: "8px 9px 15px 10px #5050504d",
+                  color: 'Dodgerblue',
+                  cursor: 'pointer',
+                  boxShadow: '8px 9px 15px 10px #5050504d',
                 }}
                 className="fa fa-times-circle"
               ></i>
@@ -227,7 +222,7 @@ const Container = ({ toDelete, username }) => {
             disabled={grid ? true : false}
             onClick={() => gridHandler(true)}
           >
-            {" "}
+            {' '}
             <img
               width="30px"
               height="30px"
@@ -239,7 +234,7 @@ const Container = ({ toDelete, username }) => {
             onClick={() => gridHandler(false)}
             disabled={grid ? false : true}
           >
-            {" "}
+            {' '}
             <img
               width="30px"
               height="30px"
@@ -260,10 +255,10 @@ const Container = ({ toDelete, username }) => {
             hasMore={hasMore}
             loader={
               <div
-                style={{ width: "10em", marginTop: "10%", height: "10em" }}
+                style={{ width: '10em', marginTop: '10%', height: '10em' }}
               ></div>
             }
-            endMessage={""}
+            endMessage={''}
           >
             <div style={{}} className={Styles.maindiv}>
               {posts.map((post, id) => {
@@ -273,7 +268,7 @@ const Container = ({ toDelete, username }) => {
                       className={Styles.test}
                       onClick={() => setPostHandler(post)}
                     >
-                      <h1 style={{ color: "white" }}>View</h1>
+                      <h1 style={{ color: 'white' }}>View</h1>
                     </div>
                     <Suspense
                       fallback={grid ? <MyLoaderGrid /> : <MyLoaderTable />}
@@ -295,7 +290,7 @@ const Container = ({ toDelete, username }) => {
               hasMore={hasMore}
               loader={
                 <div
-                  style={{ width: "10em", marginTop: "10%", height: "10em" }}
+                  style={{ width: '10em', marginTop: '10%', height: '10em' }}
                 ></div>
               }
               endMessage={
@@ -312,7 +307,7 @@ const Container = ({ toDelete, username }) => {
                         src={
                           post.profilepic
                             ? post.profilepic
-                            : process.env.PUBLIC_URL + "/userImage.png"
+                            : process.env.PUBLIC_URL + '/userImage.png'
                         }
                         alt=""
                       />
@@ -330,53 +325,53 @@ const Container = ({ toDelete, username }) => {
                       <div>
                         <span
                           style={{
-                            color: "red",
+                            color: 'red',
 
-                            cursor: "pointer",
+                            cursor: 'pointer',
                           }}
                         >
                           <i
                             onClick={() => unlikefunction(post, post._id)}
                             styles={{
-                              color: "Dodgerblue",
-                              cursor: "pointer",
-                              boxShadow: "8px 9px 15px 10px #5050504d",
+                              color: 'Dodgerblue',
+                              cursor: 'pointer',
+                              boxShadow: '8px 9px 15px 10px #5050504d',
                             }}
                             className="fa fa-heart"
                             aria-hidden="true"
                           ></i>
-                        </span>{" "}
+                        </span>{' '}
                         {post.likes.length}
                       </div>
                     ) : (
                       <div className={Styles.heart}>
                         <span
                           style={{
-                            color: "grey",
+                            color: 'grey',
 
-                            cursor: "pointer",
+                            cursor: 'pointer',
                           }}
                         >
                           <i
                             onClick={() => likefunction(post, post._id)}
                             styles={{
-                              color: "Dodgerblue",
-                              cursor: "pointer",
-                              boxShadow: "8px 9px 15px 10px #5050504d",
+                              color: 'Dodgerblue',
+                              cursor: 'pointer',
+                              boxShadow: '8px 9px 15px 10px #5050504d',
                             }}
-                            className={"fa fa-heart"}
+                            className={'fa fa-heart'}
                             aria-hidden="true"
                           ></i>
-                        </span>{" "}
+                        </span>{' '}
                         {post.likes.length}
                       </div>
                     )}
                     <div>
                       <span
                         style={{
-                          color: "black",
+                          color: 'black',
 
-                          cursor: "pointer",
+                          cursor: 'pointer',
                         }}
                       >
                         <i
@@ -384,9 +379,9 @@ const Container = ({ toDelete, username }) => {
                             setcommentsfunc({ val: true, post: post })
                           }
                           styles={{
-                            color: "Dodgerblue",
-                            cursor: "pointer",
-                            boxShadow: "8px 9px 15px 10px #5050504d",
+                            color: 'Dodgerblue',
+                            cursor: 'pointer',
+                            boxShadow: '8px 9px 15px 10px #5050504d',
                           }}
                           className="far fa-comment-alt"
                           aria-hidden="true"
@@ -396,9 +391,9 @@ const Container = ({ toDelete, username }) => {
                     </div>
                     <span
                       style={{
-                        color: "lightgreen",
+                        color: 'lightgreen',
 
-                        cursor: "pointer",
+                        cursor: 'pointer',
                       }}
                     >
                       <i
@@ -407,9 +402,9 @@ const Container = ({ toDelete, username }) => {
                           setShowShare(true);
                         }}
                         styles={{
-                          color: "Dodgerblue",
-                          cursor: "pointer",
-                          boxShadow: "8px 9px 15px 10px #5050504d",
+                          color: 'Dodgerblue',
+                          cursor: 'pointer',
+                          boxShadow: '8px 9px 15px 10px #5050504d',
                         }}
                         className="fa fa-share-alt"
                         aria-hidden="true"
@@ -417,7 +412,7 @@ const Container = ({ toDelete, username }) => {
                     </span>
                   </div>
                   <div
-                    style={post.desc !== "" ? { padding: "3%" } : {}}
+                    style={post.desc !== '' ? { padding: '3%' } : {}}
                     className={Styles.caption}
                   >
                     {post.desc}

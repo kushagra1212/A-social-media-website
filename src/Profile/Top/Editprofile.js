@@ -1,15 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { useAlert } from "react-alert";
-import { useRef, useState } from "react";
-import { useSpring, animated } from "react-spring";
-import Styles from "./Editprofile.module.css";
-import ImageCropper from "./ImageCroper/ImageCropper";
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { useAlert } from 'react-alert';
+import { useRef, useState } from 'react';
+import { useSpring, animated } from 'react-spring';
+import Styles from './Editprofile.module.css';
+import ImageCropper from './ImageCroper/ImageCropper';
 
-import { getCroppedImg } from "../../methods/createcrop";
-import ProgressBar from "../../Animation/Loader/Progressbar/ProgressBar";
-import { data_URL_to_file } from "../../../src/methods/data_URL_to_file";
-import NormalLoader from "../../Animation/Loader/loader/NormalLoader";
+import { getCroppedImg } from '../../methods/createcrop';
+import { data_URL_to_file } from '../../../src/methods/data_URL_to_file';
+import NormalLoader from '../../Animation/Loader/loader/NormalLoader';
 const URL = process.env.REACT_APP_URL;
 const calcXY = (x, y) => [
   -(y - window.innerHeight / 2) / 10,
@@ -38,7 +37,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   const [croppedArea, setCroppedArea] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [progress, setProgress] = useState(0);
-  const [fileName, setFileName] = useState("");
+  const [fileName, setFileName] = useState('');
   const [props, set] = useSpring(() => ({
     xys: [0, 0, 1],
     config: { mass: 5, tension: 200, friction: 100 },
@@ -47,9 +46,9 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     setloading(true);
     try {
       const data = new FormData(e.target);
-      data.append("file", selectedFile);
+      data.append('file', selectedFile);
 
-      console.log(selectedFile, "selcected");
+      // console.log(selectedFile, "selcected");
 
       const res = await axios.patch(`${URL}/upload/updateuser`, data, {
         params: {
@@ -69,7 +68,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
         setloading(false);
 
         dispatch({
-          type: "UPDATE_USER",
+          type: 'UPDATE_USER',
           payload: {
             email: newemail,
             username: newusername,
@@ -79,11 +78,11 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
         });
 
         edit_it();
-      } else console.log("err");
+      } else console.log('err');
     } catch (err) {
       console.log(err);
 
-      Alert.show("Bio word limit 80 😀 ");
+      Alert.show('Bio word limit 80 😀 ');
       setTimeout(() => {
         setloading(false);
         edit_it();
@@ -96,10 +95,9 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     setFileName(e.target.files[0].name);
-    reader.addEventListener("load", () => {
+    reader.addEventListener('load', () => {
       setImage(reader.result);
     });
-
   };
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
@@ -112,14 +110,14 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     }
     setloading(true);
     const canvas = await getCroppedImg(imageSrc, crop);
-    let dataURL = canvas.toDataURL("image/jpeg", 0.7);
+    let dataURL = canvas.toDataURL('image/jpeg', 0.7);
 
     setSelectedFile(data_URL_to_file(dataURL, fileName));
     canvas.toBlob(
       (blob) => {
         const previewUrl = window.URL.createObjectURL(blob);
 
-        const anchor = document.createElement("a");
+        const anchor = document.createElement('a');
 
         anchor.href = window.URL.createObjectURL(blob);
 
@@ -130,7 +128,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
         setloading(false);
         setImage(null);
       },
-      "image/",
+      'image/',
       0.01
     );
   };
@@ -140,25 +138,35 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   };
 
   const floatDown = useSpring({
-    from: { y: "-100%",opacity:"0%" },
-    y: "0%",
-    x: "0%",
-    opacity:"100%",
+    from: { y: '-100%', opacity: '0%' },
+    y: '0%',
+    x: '0%',
+    opacity: '100%',
   });
   const imageAni = useSpring({
-    from:{marginTop:-500,opacity:0},
-    marginTop:0,
-    opacity:1
-   });
-   const cropAni = useSpring({
-    
-    marginTop:image?0:500,
-    opacity:image?1:0
-   });
+    from: { marginTop: -500, opacity: 0 },
+    marginTop: 0,
+    opacity: 1,
+  });
+  const cropAni = useSpring({
+    marginTop: image ? 0 : 500,
+    opacity: image ? 1 : 0,
+  });
   if (loading) {
     return (
-      <div style={{width:"100vw",height:"100vh",zIndex:"100",position:"fixed",display:"flex",alignItems:"center",justifyContent:"center", backdropFilter: "blur(10px)"}}>
-      <NormalLoader/>
+      <div
+        style={{
+          width: '100vw',
+          height: '100vh',
+          zIndex: '100',
+          position: 'fixed',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backdropFilter: 'blur(10px)',
+        }}
+      >
+        <NormalLoader />
       </div>
     );
   } else if (image) {
@@ -178,70 +186,68 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   } else {
     return (
       <animated.div style={floatDown} className={Styles.editprofileMain}>
-                  <span
-            className={Styles.backbut}
-            style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
-            onClick={edit_it}
-          >
-            <i
-              styles={{ color: "Dodgerblue", cursor: "pointer" }}
-              className="fa fa-arrow-circle-left"
-            ></i>
-          </span>
-          {pic ? (
-            <animated.img
-           
-            onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calcXY(x, y) })}
+        <span
+          className={Styles.backbut}
+          style={{ fontSize: '50px', color: 'blue', cursor: 'pointer' }}
+          onClick={edit_it}
+        >
+          <i
+            styles={{ color: 'Dodgerblue', cursor: 'pointer' }}
+            className="fa fa-arrow-circle-left"
+          ></i>
+        </span>
+        {pic ? (
+          <animated.img
+            onMouseMove={({ clientX: x, clientY: y }) =>
+              set({ xys: calcXY(x, y) })
+            }
             onMouseLeave={() => set({ xys: [0, 0, 1] })}
             style={{ transform: props.xys.to(perspective) }}
-              className={Styles.editimg}
-              src={pic ? pic : process.env.PUBLIC_URL + "/userImage.png"}
-              alt=""
-            />
-          ) : null}
-      <animated.div  style={floatDown} className={Styles.Forms}>
-      <form
-          onSubmit={(e) => save_it(e)}
-          className={Styles.editprofile}
-          style={floatDown}
-        >
-        
-
-
-          <input
-            style={{ display: "none" }}
-            type="file"
-            ref={Refinput}
-            onChange={selectedFileHandle}
+            className={Styles.editimg}
+            src={pic ? pic : process.env.PUBLIC_URL + '/userImage.png'}
+            alt=""
           />
-
-          <button
-            className={Styles.choosebutton}
-            type="button"
-            onClick={openChoosefile}
+        ) : null}
+        <animated.div style={floatDown} className={Styles.Forms}>
+          <form
+            onSubmit={(e) => save_it(e)}
+            className={Styles.editprofile}
+            style={floatDown}
           >
-            Choose Image
-          </button>
+            <input
+              style={{ display: 'none' }}
+              type="file"
+              ref={Refinput}
+              onChange={selectedFileHandle}
+            />
 
-          <label className={Styles.editlabel}>Email</label>
-          <input
-             disabled={true}
-            onChange={(e) => setnewemail(e.target.value)}
-            value={newemail}
-          />
-          <label className={Styles.editlabel}>User Name</label>
-          <input
-          disabled={true}
-            onChange={(e) => setnewusername(e.target.value)}
-            value={newusername}
-          />
-          <label className={Styles.editlabel}>Bio</label>
-          <input onChange={(e) => setnewbio(e.target.value)} value={newbio} />
-          <button type="submit" className={Styles.savebut}>
-            save
-          </button>
-        </form>
-      </animated.div>
+            <button
+              className={Styles.choosebutton}
+              type="button"
+              onClick={openChoosefile}
+            >
+              Choose Image
+            </button>
+
+            <label className={Styles.editlabel}>Email</label>
+            <input
+              disabled={true}
+              onChange={(e) => setnewemail(e.target.value)}
+              value={newemail}
+            />
+            <label className={Styles.editlabel}>User Name</label>
+            <input
+              disabled={true}
+              onChange={(e) => setnewusername(e.target.value)}
+              value={newusername}
+            />
+            <label className={Styles.editlabel}>Bio</label>
+            <input onChange={(e) => setnewbio(e.target.value)} value={newbio} />
+            <button type="submit" className={Styles.savebut}>
+              save
+            </button>
+          </form>
+        </animated.div>
       </animated.div>
     );
   }
