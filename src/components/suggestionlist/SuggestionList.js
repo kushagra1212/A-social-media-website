@@ -75,7 +75,7 @@ const SuggestionList = ({ setShowProfileHandler, setUserSearchHandler }) => {
     });
     if (!exists) addconversation([username, user.username]);
 
-    let index = suggestion.findIndex((item) => item.user._id === user._id);
+    let index = suggestion.findIndex((item) => item._id === user._id);
 
     let u = suggestion;
     u[index].following = true;
