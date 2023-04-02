@@ -52,7 +52,7 @@ const Top = ({
 
         dispatch({ type: 'access', payload: false });
         sessionStorage.clear();
-        history.replace('/signin');
+        window.location.href = '/';
       })
       .catch((err) => console.log(err));
   };

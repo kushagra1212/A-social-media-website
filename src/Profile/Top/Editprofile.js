@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import Styles from './Editprofile.module.css';
 import ImageCropper from './ImageCroper/ImageCropper';
-
+import firebase from '../../Firebase/index.js';
 import { getCroppedImg } from '../../methods/createcrop';
 import { data_URL_to_file } from '../../../src/methods/data_URL_to_file';
 import NormalLoader from '../../Animation/Loader/loader/NormalLoader';
@@ -15,6 +15,14 @@ const calcXY = (x, y) => [
   (x - window.innerWidth / 2) / 10,
   1.0,
 ];
+export const generateRandomString = (length) => {
+  let randomString = '';
+  const randomAscii = () => Math.round(Math.random() * 25) + 65;
+  for (let i = 0; i < length; i++) {
+    randomString += String.fromCharCode(randomAscii());
+  }
+  return randomString;
+};
 
 const perspective = (x, y, s) =>
   `perspective(500px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
@@ -26,7 +34,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   const { username, email, profilepic, _id, bio } = useSelector(
     (state) => state.user
   );
-
+  const ALert = useAlert();
   const [newemail, setnewemail] = useState(email);
   const [newusername, setnewusername] = useState(username);
   const [loading, setloading] = useState(false);
@@ -42,26 +50,23 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     xys: [0, 0, 1],
     config: { mass: 5, tension: 200, friction: 100 },
   }));
-  const save_it = async (e) => {
-    setloading(true);
+  const upload = async (ul) => {
     try {
-      const data = new FormData(e.target);
-      data.append('file', selectedFile);
-
-      // console.log(selectedFile, "selcected");
-
-      const res = await axios.patch(`${URL}/upload/updateuser`, data, {
-        params: {
+      const res = await axios.post(
+        `${URL}/upload/updateuser`,
+        {
           email: newemail,
           username: newusername,
           _id: _id,
-          profilepic: pic,
+          profilepic: ul,
           bio: newbio,
         },
-        onUploadProgress: (data) => {
-          setProgress(Math.round((100 * data.loaded) / data.total));
-        },
-      });
+        {
+          onUploadProgress: (data) => {
+            setProgress(Math.round((100 * data.loaded) / data.total));
+          },
+        }
+      );
 
       if (res) {
         setprofpichandle(pic);
@@ -82,12 +87,41 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
     } catch (err) {
       console.log(err);
 
-      Alert.show('Bio word limit 80 😀 ');
+      Alert.show('Something went wrong');
       setTimeout(() => {
         setloading(false);
         edit_it();
       }, 50);
     }
+  };
+
+  const save_it = async (e) => {
+    if (selectedFile == null) {
+      ALert.error('Oops ! 😜');
+      return;
+    }
+
+    setloading(true);
+    setloading(!loading);
+    const storage = firebase.storage();
+    const fileName = `${generateRandomString(5)}+${selectedFile.name}}`;
+    const uploadTask = storage.ref(`photos/${fileName}`).put(selectedFile);
+    uploadTask.on(
+      'state_changed',
+      () => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref('photos')
+          .child(fileName)
+          .getDownloadURL()
+          .then((ul) => {
+            upload(ul);
+          });
+      }
+    );
   };
   const selectedFileHandle = (e) => {
     e.preventDefault();

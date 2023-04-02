@@ -1,5 +1,5 @@
 import Styles from './Container.module.css';
-import { useState, Suspense, useEffect } from 'react';
+import { useState, Suspense } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Showdetailedpost from './Showdetailedpost/Showdetailedpost';
 import { useDispatch } from 'react-redux';
@@ -13,7 +13,6 @@ import { MyLoader } from '../../Home/Feed/content/Content';
 import Addcomment from '../../Home/Feed/content/comments/Addcomment';
 import addcomment from '../../methods/addcomments';
 import Comments from '../../Home/Feed/content/comments/Comments';
-import VerticalLoader from '../../Animation/Loader/loader/VerticalLoader';
 import updatelikes from '../../methods/updatelikes';
 import deletelike from '../../methods/deletelike';
 import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
@@ -77,39 +76,25 @@ const Container = ({ toDelete, username }) => {
     setPost(post);
     setShowDetailedPostHandler(true);
   };
-  const unique = (array) => {
-    let isvisited = {};
-    let newarray = [];
-
-    array.forEach((ele) => {
-      if (!isvisited[ele.picture]) {
-        newarray.push(ele);
-        isvisited[ele.picture] = true;
-      }
-    });
-    return newarray;
-  };
   const call_func = async () => {
-    if (!isUnmounted) {
-      let lastCount;
-      if (posts) lastCount = posts.length;
-      else lastCount = 0;
-      let temp_array = [];
-      try {
-        temp_array = await getpostsforfeed(username, lastCount, 5);
-        temp_array.forEach((ele) => {
-          ele.likes.forEach((ele2) => {
-            dispatch(updateLikesArray(ele2.username, ele._id));
-          });
+    try {
+      const temp_array = await getpostsforfeed(username, posts.length, 5);
+      temp_array.forEach((ele) => {
+        ele.likes.forEach((ele2) => {
+          dispatch(updateLikesArray(ele2.username, ele._id));
         });
-        let newArray = [...posts, ...temp_array];
-        newArray = unique(newArray);
-        setPosts(newArray);
-        if (newArray.length === postCount) setHasMore(false);
-      } catch (err) {
+      });
+      if (!isUnmounted) setPosts([...posts, ...temp_array]);
+      if (temp_array.length < 5 && !isUnmounted) {
         setHasMore(false);
-        console.log(err);
+        setVis(false);
       }
+    } catch (err) {
+      if (!isUnmounted) {
+        setHasMore(false);
+        setVis(false);
+      }
+      console.log(err);
     }
   };
   const copyToClipboardHandler = () => {
@@ -125,19 +110,22 @@ const Container = ({ toDelete, username }) => {
       });
     }
   };
-  useEffect(() => {
-    if (posts.length === 0) {
-      setTimeout(() => {
-        setVis(false);
-      }, 1000);
-    }
-  }, [posts]);
+
   useState(() => {
-    getcount(username).then((res) => {
-      if (res.postcount === 0) setHasMore(false);
-      call_func();
-      setPostCount(res.postcount);
-    });
+    if (username) {
+      getcount(username)
+        .then((res) => {
+          if (res.postcount === 0) setHasMore(false);
+          call_func();
+          setPostCount(res.postcount);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    return () => {
+      setIsUnmounted(true);
+    };
   }, [username]);
   const setcommentsfunc = ({ val, post }) => {
     element = document.querySelector('#infiniteScroll');
@@ -250,7 +238,7 @@ const Container = ({ toDelete, username }) => {
         {grid ? (
           <InfiniteScroll
             className={Styles.infi}
-            dataLength={posts.length}
+            dataLength={postCount}
             next={call_func}
             hasMore={hasMore}
             loader={
@@ -278,14 +266,14 @@ const Container = ({ toDelete, username }) => {
                   </div>
                 );
               })}
-              {vis ? <VerticalLoader /> : null}
+              {/* {vis ? <VerticalLoader /> : null} */}
             </div>
           </InfiniteScroll>
         ) : (
           <div className={Styles.maincontent} id="infiniteScroll">
             <InfiniteScroll
               className={Styles.infi}
-              dataLength={posts.length}
+              dataLength={postCount}
               next={call_func}
               hasMore={hasMore}
               loader={

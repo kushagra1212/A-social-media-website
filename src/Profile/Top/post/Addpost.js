@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatecountforpost } from '../../../reduces/actions/countAction';
 import axios from 'axios';
 import Styles from './Addpost.module.css';
 import { useSpring, animated } from 'react-spring';
@@ -10,6 +9,7 @@ import { getCroppedImg } from '../../../methods/createcrop';
 import { data_URL_to_file } from '../../../methods/data_URL_to_file';
 import firebase from '../../../Firebase/index';
 import NormalLoader from '../../../Animation/Loader/loader/NormalLoader';
+import { generateRandomString } from '../Editprofile';
 const URL = process.env.REACT_APP_URL;
 const Addpost = ({ setposthandle }) => {
   const [pic, setPic] = useState(null);
@@ -57,13 +57,10 @@ const Addpost = ({ setposthandle }) => {
       ALert.error('Oops ! 😜');
       return;
     }
-
     setloading(!loading);
     const storage = firebase.storage();
-
-    const uploadTask = storage
-      .ref(`photos/${selectedFile.name}`)
-      .put(selectedFile);
+    const fileName = `${generateRandomString(5)}+${selectedFile.name}}`;
+    const uploadTask = storage.ref(`photos/${fileName}`).put(selectedFile);
     uploadTask.on(
       'state_changed',
       () => {},
@@ -73,7 +70,7 @@ const Addpost = ({ setposthandle }) => {
       () => {
         storage
           .ref('photos')
-          .child(selectedFile.name)
+          .child(fileName)
           .getDownloadURL()
           .then((ul) => {
             upload(ul);
@@ -81,28 +78,29 @@ const Addpost = ({ setposthandle }) => {
       }
     );
   };
-  const savehandle = async (e) => {
-    if (selectedFile == null) {
-      ALert.error('Oops ! 😜');
-      return;
-    }
-    setloading(!loading);
-    const data = new FormData(e.target);
-    data.append('file', selectedFile);
-
-    try {
-      const res = await axios.post(`${URL}/post/uploadpost`, data, {
-        params: { username: username, desc: desc },
-        onUploadProgress: (data) => {
-          //Set the progress value to show the progress bar
-          setProgress(Math.round((100 * data.loaded) / data.total));
-        },
-      });
-    } catch (err) {
-      console.log(err);
-    }
-    dispatch(updatecountforpost(username, postcount));
-  };
+  // const savehandle = async (e) => {
+  //   if (selectedFile == null) {
+  //     ALert.error('Oops ! 😜');
+  //     return;
+  //   }
+  //   setloading(!loading);
+  //   const data = new FormData(e.target);
+  //   data.append('file', selectedFile);
+  //   console.log(selectedFile, 'Upload file');
+  //   console.log(data, 'Upload data');
+  //   try {
+  //     const res = await axios.post(`${URL}/post/uploadpost`, data, {
+  //       params: { username: username, desc: desc },
+  //       onUploadProgress: (data) => {
+  //         //Set the progress value to show the progress bar
+  //         setProgress(Math.round((100 * data.loaded) / data.total));
+  //       },
+  //     });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  //   dispatch(updatecountforpost(username, postcount));
+  // };
 
   const selectedFileHandle = (e) => {
     e.preventDefault();

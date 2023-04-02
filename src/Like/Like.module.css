@@ -32,11 +32,9 @@
 
   flex-direction: row;
   width: 95%;
-  background-color: rgba(248, 248, 248, 0.219);
   margin-top: 1%;
   border: 2px solid rgba(255, 255, 255, 0);
   border-radius: 10px;
-  box-shadow: 1px 1px 5px 0px rgb(73 73 80 / 55%);
   margin: 2%;
   justify-content: space-around;
   align-items: stretch;
@@ -53,6 +51,7 @@
   border: 2px soild greenyellow;
   border-radius: 10px;
   transition: tranform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+  box-shadow: 1px 1px 8px 0px #7a79795e;
 }
 .loadmorebut {
   position: relative;

@@ -1,14 +1,10 @@
-
 const Userposts = () => {
-
-
-let loading = false;
-
+  let loading = false;
 
   if (loading) {
     return <div>Loading...</div>;
   } else {
   }
-  return null
+  return null;
 };
 export default Userposts;
