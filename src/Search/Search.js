@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import User from "./Searchuser/User";
-import ShowPost from "./Searchuser/ShowPost";
-import { useSelector } from "react-redux";
-import Profile from "../Profile/Profile";
-import Styles from "./Search.module.css";
-import searchImg from "./icons/search-icon.png";
-import verifiesusers from "../methods/verifiesusers";
-import SuggestionList from "../components/suggestionlist/SuggestionList";
-import getpartialusers from "../methods/getpartialusers";
-import getuser from "../methods/getuser";
-import Preview from "../Profile/Preview/Preview";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import User from './Searchuser/User';
+import { useSelector } from 'react-redux';
+import Profile from '../Profile/Profile';
+import Styles from './Search.module.css';
+import searchImg from './icons/search-icon.png';
+import verifiesusers from '../methods/verifiesusers';
+import SuggestionList from '../components/suggestionlist/SuggestionList';
+import getpartialusers from '../methods/getpartialusers';
+import getuser from '../methods/getuser';
 const URL = process.env.REACT_APP_URL;
 let count = 0;
 const Search = ({
@@ -19,11 +17,11 @@ const Search = ({
   view,
   preview,
 }) => {
-  const [searchuser, setsearchuser] = useState("");
-  const [user, setuser] = useState("");
+  const [searchuser, setsearchuser] = useState('');
+  const [user, setuser] = useState('');
   const [users, setUsers] = useState([]);
   const [loading, setloading] = useState(false);
-  const [found, setfound] = useState({ found: false, text: "" });
+  const [found, setfound] = useState({ found: false, text: '' });
 
   const [showprofile, setshowprofile] = useState(false);
   const { username } = useSelector((state) => state.user);
@@ -70,7 +68,7 @@ const Search = ({
     getcounts(u);
   };
   const searchuserhandle = (username) => {
-    if (username === "" || username.length > 10) {
+    if (username === '' || username.length > 10) {
       setloading(false);
       setUsers([]);
       return;
@@ -81,11 +79,11 @@ const Search = ({
       .then((us) => {
         setUsers(us);
 
-        setfound({ found: true, text: "" });
+        setfound({ found: true, text: '' });
         setloading(false);
       })
       .catch((err) => {
-        setfound({ found: false, text: "user not found" });
+        setfound({ found: false, text: 'user not found' });
         setloading(false);
       });
 
@@ -105,26 +103,13 @@ const Search = ({
     }
   }, [showprofilefromshowbar]);
 
-  const collectposts = async (id) => {
-    try {
-      const res = await axios.get(`${URL}/post/getpost?id=${id}`);
-      if (res) {
-        return res.data;
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const setshowfollowershandle = (val) => {
     setshowfollowers(val);
   };
   const setshowfollowinghandle = (value) => {
     setshowfollowing(value);
   };
-  const setShowProfileHandler = (val) => {
-  
-  };
+  const setShowProfileHandler = (val) => {};
   const setUserSearchHandler = (val) => {
     setsearchuser(val);
     searchuserhandle(val);
@@ -150,29 +135,27 @@ const Search = ({
       count++;
 
       return (
-        <div style={{ width: "100%", height: "100%", zIndex: 100 }}>
+        <div style={{ width: '100%', height: '100%', zIndex: 100 }}>
           <Profile preview={preview} />
         </div>
       );
     }
     return (
-      <div style={{ width: "100%", height: "100%" }}>
-     
-          <User
-            profpic={user.profilepic}
-            name={user.name}
-            bio={user.bio}
-            postsnumber={postcount}
-            followerscount={followerscount}
-            followingcount={followingcount}
-            username={user.username}
-            getcounts={getcounts}
-            setshowfollowershandle={setshowfollowershandle}
-            setshowfollowinghandle={setshowfollowinghandle}
-            showfollowers={showfollowers}
-            showfollowing={showfollowing}
-          />
-     
+      <div style={{ width: '100%', height: '100%' }}>
+        <User
+          profpic={user.profilepic}
+          name={user.name}
+          bio={user.bio}
+          postsnumber={postcount}
+          followerscount={followerscount}
+          followingcount={followingcount}
+          username={user.username}
+          getcounts={getcounts}
+          setshowfollowershandle={setshowfollowershandle}
+          setshowfollowinghandle={setshowfollowinghandle}
+          showfollowers={showfollowers}
+          showfollowing={showfollowing}
+        />
       </div>
     );
   } else if (showprofilefromshowbar && loading) {
@@ -224,7 +207,7 @@ const Search = ({
                   src={
                     u.profilepic
                       ? u.profilepic
-                      : process.env.PUBLIC_URL + "/userImage.png"
+                      : process.env.PUBLIC_URL + '/userImage.png'
                   }
                 />
 
@@ -235,7 +218,7 @@ const Search = ({
                 <button>Go to profile</button>
               </div>
             ))}
-            {searchuser === "" && window.screen.width < 768 ? (
+            {searchuser === '' && window.screen.width < 768 ? (
               <SuggestionList
                 setShowProfileHandler={setShowProfileHandler}
                 setUserSearchHandler={setUserSearchHandler}
@@ -243,13 +226,13 @@ const Search = ({
             ) : null}
             {loading ? (
               <div className={Styles.loader}></div>
-            ) : searchuser !== "" && users.length === 0 ? (
+            ) : searchuser !== '' && users.length === 0 ? (
               <div className={Styles.notfound}>
                 <img
                   alt=""
                   width="50%"
                   height="40%"
-                  src={process.env.PUBLIC_URL + "/nouser.gif"}
+                  src={process.env.PUBLIC_URL + '/nouser.gif'}
                 />
                 <h2>No User Found</h2>
               </div>
@@ -258,8 +241,8 @@ const Search = ({
         </div>
         {window.screen.width >= 768 ? (
           <SuggestionList
-          setShowProfileHandler={setShowProfileHandler}
-          setUserSearchHandler={setUserSearchHandler}
+            setShowProfileHandler={setShowProfileHandler}
+            setUserSearchHandler={setUserSearchHandler}
           />
         ) : null}
       </>
@@ -277,14 +260,14 @@ const Search = ({
       count++;
 
       return (
-        <div style={{ width: "100%", height: "100%" }}>
+        <div style={{ width: '100%', height: '100%' }}>
           <Profile preview={preview} />
         </div>
       );
     }
 
     return (
-      <div style={{ width: "100%", height: "100%", zIndex: 100 }}>
+      <div style={{ width: '100%', height: '100%', zIndex: 100 }}>
         <User
           profpic={user.profilepic}
           name={user.name}
