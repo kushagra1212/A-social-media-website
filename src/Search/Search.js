@@ -64,7 +64,6 @@ const Search = ({
   const showuserprofilehandle = (u) => {
     setloading(true);
     setuser(u);
-    console.log(u, user);
     getcounts(u);
   };
   const searchuserhandle = (username) => {

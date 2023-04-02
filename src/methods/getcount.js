@@ -7,7 +7,7 @@ export const getcount = (username) => {
         `${URL}/count/getpostcount?username=${username}`
       );
       // console.log(res);
-      resolve(res.data);
+      // resolve(res.data);
     } catch (err) {
       reject(err);
     }

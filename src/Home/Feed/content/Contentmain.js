@@ -345,7 +345,6 @@ const Contentmain = () => {
       setNoOne(true);
     }, 3000);
   }, []);
-  console.log(noOne);
 
   if (showcomments.val) disableBodyScroll(element);
   else if (element != null) enableBodyScroll(element);

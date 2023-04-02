@@ -25,17 +25,17 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
     dispatch(updatepost(com));
   };
   useEffect(() => {
-    let com = showcomments.post;
-    com.comments.sort((a, b) => new Date(b.date) - new Date(a.date));
-    setpost(com);
+    let _post = showcomments.post;
+    _post.comments = _post?.comments.filter(
+      (ele) => JSON.stringify(ele.user) !== '[]'
+    );
+    setpost(_post);
   }, []);
   const Popup = useSpring({
     from: { marginTop: 500, opacity: 0 },
     marginTop: 0,
     opacity: 1,
   });
-  console.log(post);
-
   return (
     <>
       <div className={Styles.wrapspan}>
@@ -66,27 +66,51 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
           ) : null}
         </div>
         <div className={Styles.main}>
-          {post?.comments.map((ele, id) => {
-            return (
-              <div className={Styles.commentdiv} key={id}>
-                <img
-                  alt=""
-                  className={Styles.profileimage}
-                  src={
-                    ele?.user?.profilepic
-                      ? ele?.user?.profilepic
-                      : process.env.PUBLIC_URL + '/userImage.png'
-                  }
-                  width="20px"
-                  height="20px"
-                />
-                <div className={Styles.username}>
-                  <strong>{ele.username}</strong>{' '}
+          {post?.comments.length > 0 ? (
+            post?.comments.map((ele, id) => {
+              return (
+                <div className={Styles.commentdiv} key={id}>
+                  <img
+                    alt=""
+                    className={Styles.profileimage}
+                    src={
+                      ele?.user?.profilepic
+                        ? ele?.user?.profilepic
+                        : process.env.PUBLIC_URL + '/userImage.png'
+                    }
+                    width="20px"
+                    height="20px"
+                  />
+                  <div className={Styles.username}>
+                    <strong>{ele.username}</strong>{' '}
+                  </div>
+                  <div className={Styles.comment}>{ele.comment}</div>
                 </div>
-                <div className={Styles.comment}>{ele.comment}</div>
+              );
+            })
+          ) : (
+            <div
+              className={Styles.commentdiv}
+              style={{
+                opacity: 0.5,
+                fontSize: '1em',
+                alignSelf: 'center',
+                justifySelf: 'center',
+              }}
+            >
+              <div
+                className={Styles.comment}
+                style={{
+                  opacity: 0.5,
+                  fontSize: '1em',
+                  alignSelf: 'center',
+                  justifySelf: 'center',
+                }}
+              >
+                Eimentum
               </div>
-            );
-          })}
+            </div>
+          )}
         </div>
       </animated.div>
     </>
