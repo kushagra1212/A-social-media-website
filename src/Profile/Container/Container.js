@@ -94,7 +94,7 @@ const Container = ({ toDelete, username }) => {
       let lastCount;
       if (posts) lastCount = posts.length;
       else lastCount = 0;
-      let temp_array;
+      let temp_array = [];
       try {
         temp_array = await getpostsforfeed(username, lastCount, 5);
         temp_array.forEach((ele) => {

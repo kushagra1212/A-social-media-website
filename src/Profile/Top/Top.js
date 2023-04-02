@@ -45,15 +45,14 @@ const Top = ({
     };
   }, [edit, isUnmounted]);
   const logouthandle = () => {
-    sessionStorage.clear();
     axios
       .post(`${URL}/auth/logout`, {}, { withCredentials: true })
       .then((res) => {
         // console.log(res);
 
         dispatch({ type: 'access', payload: false });
-
-        window.location.href = window.location.href;
+        sessionStorage.clear();
+        history.replace('/signin');
       })
       .catch((err) => console.log(err));
   };

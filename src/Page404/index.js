@@ -1,8 +1,8 @@
-import styles from "./Page404.module.css";
-import { useHistory } from "react-router";
-const Page404 = () => {
+import styles from './Page404.module.css';
+import { useHistory } from 'react-router';
+const Page404 = ({ match }) => {
   const history = useHistory();
- 
+
   return (
     <div className={styles.maindiv}>
       <img
@@ -11,8 +11,13 @@ const Page404 = () => {
         width="60%"
         height="100%"
       />
-      
-      <button className={styles.homebut} onClick={() => history.replace("/")}>
+
+      <button
+        className={styles.homebut}
+        onClick={() => {
+          history.replace('/main');
+        }}
+      >
         Go Home
       </button>
     </div>
