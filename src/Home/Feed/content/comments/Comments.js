@@ -73,8 +73,8 @@ const Comment = ({ username, showcomments, setcommentsfunc }) => {
                   alt=""
                   className={Styles.profileimage}
                   src={
-                    ele.user.profilepic
-                      ? ele.user.profilepic
+                    ele?.user?.profilepic
+                      ? ele?.user?.profilepic
                       : process.env.PUBLIC_URL + '/userImage.png'
                   }
                   width="20px"
