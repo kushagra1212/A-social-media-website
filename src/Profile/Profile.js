@@ -26,14 +26,10 @@ const Profile = ({ preview }) => {
 
   useEffect(() => {
     if (!isUnmounted) {
-      setTimeout(() => {
-        getfollowing(username, dispatch);
-      }, 0);
-      setTimeout(() => {
-        getpostcount(username, dispatch);
-        getfollowers(username, dispatch);
-        if (!preview) getposts(_id, dispatch);
-      }, 0);
+      getfollowing(username, dispatch);
+      getpostcount(username, dispatch);
+      getfollowers(username, dispatch);
+      if (!preview) getposts(_id, dispatch);
     }
     return () => {
       setIsUnmounted(true);
@@ -78,7 +74,9 @@ const Profile = ({ preview }) => {
         />
 
         <>
-          {username ? <Container toDelete={true} username={username} /> : null}{' '}
+          {username && username !== '' ? (
+            <Container toDelete={true} username={username} />
+          ) : null}{' '}
         </>
       </div>
     );
