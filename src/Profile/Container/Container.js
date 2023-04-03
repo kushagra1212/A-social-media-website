@@ -293,8 +293,8 @@ const Container = ({ toDelete, username }) => {
                     <Suspense fallback={<FluidLoaderFive />}>
                       <img
                         src={
-                          post.profilepic
-                            ? post.profilepic
+                          post.profilepic.length > 0
+                            ? post.profilepic[0]
                             : process.env.PUBLIC_URL + '/userImage.png'
                         }
                         alt=""

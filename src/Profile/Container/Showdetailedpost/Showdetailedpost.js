@@ -1,24 +1,18 @@
 import { useState } from "react";
 import Styles from "./Showdetailedpost.module.css";
 import {
-  resetFeedPosts,
-  resetUserPosts,
   updateLikesArray,
-  updateUnlikesArray,
+  updateUnlikesArray
 } from "../../../reduces/actions/userAction";
 import Comments from "../../../Home/Feed/content/comments/Comments";
 import updatelikes from "../../../methods/updatelikes";
 import deletelike from "../../../methods/deletelike";
 import { useAlert } from "react-alert";
 import { useEffect } from "react";
-import deletePost from "../../../methods/deletePost";
 import { useDispatch, useSelector } from "react-redux";
 import firebase from "../../../Firebase/index";
 import axios from "axios";
-import { updatecountforpost } from "../../../reduces/actions/countAction";
-import { getcount } from "../../../methods/getcount";
-import { useSpring,animated as a } from "react-spring";
-import { FluidLoaderFive } from "../../../Animation/Loader/loader/FluidLoader";
+import { useSpring, animated as a } from "react-spring";
 import NormalLoader from "../../../Animation/Loader/loader/NormalLoader";
 const URL = process.env.REACT_APP_URL;
 const CURURL = process.env.REACT_APP_CURURL;
@@ -249,8 +243,8 @@ const Showdetailedpost = ({ post, setShowDetailedPostHandler, toDelete }) => {
             <a.div style={showShareB} className={Styles.topdiv}>
               <img
                 src={
-                  post.profilepic
-                    ? post.profilepic
+                  post.profilepic?.length>0
+                    ? post.profilepic[0]
                     : process.env.PUBLIC_URL + "/userImage.png"
                 }
                 alt=" "
