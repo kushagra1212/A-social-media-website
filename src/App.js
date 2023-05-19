@@ -12,6 +12,7 @@ import {
 } from 'react-router-dom';
 import Page404 from './Page404';
 import withAuthentication from './Guard/withAuthentication';
+import LimitReached from './LimitReached/LimitReached';
 
 const App = ({ match }) => {
   return (
@@ -36,6 +37,7 @@ const App = ({ match }) => {
             path={`/post/:id`}
             component={withAuthentication(Post, '/post/:id')}
           />
+          <Route path={`/limit-reached`} exact component={LimitReached} />
           <Route>
             <Page404 />
           </Route>

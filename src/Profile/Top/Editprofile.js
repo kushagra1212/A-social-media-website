@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { useAlert } from 'react-alert';
 import { useRef, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
@@ -9,6 +8,8 @@ import firebase from '../../Firebase/index.js';
 import { getCroppedImg } from '../../methods/createcrop';
 import { data_URL_to_file } from '../../../src/methods/data_URL_to_file';
 import NormalLoader from '../../Animation/Loader/loader/NormalLoader';
+import axiosInstance from '../../Errors/httpInterceptor';
+
 const URL = process.env.REACT_APP_URL;
 const calcXY = (x, y) => [
   -(y - window.innerHeight / 2) / 10,
@@ -52,7 +53,7 @@ const Editprofile = ({ edit_it, setprofpichandle }) => {
   }));
   const upload = async (ul) => {
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${URL}/upload/updateuser`,
         {
           email: newemail,

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import User from './Searchuser/User';
 import { useSelector } from 'react-redux';
 import Profile from '../Profile/Profile';
@@ -9,6 +8,7 @@ import verifiesusers from '../methods/verifiesusers';
 import SuggestionList from '../components/suggestionlist/SuggestionList';
 import getpartialusers from '../methods/getpartialusers';
 import getuser from '../methods/getuser';
+import axiosInstance from '../Errors/httpInterceptor';
 const URL = process.env.REACT_APP_URL;
 let count = 0;
 const Search = ({
@@ -40,12 +40,15 @@ const Search = ({
 
   const getcounts = async (u) => {
     try {
-      await axios.patch(`${URL}/count/updatefollowerscount`, {
+      await axiosInstance.patch(`${URL}/count/updatefollowerscount`, {
         username: u.username,
       });
-      const res2 = await axios.patch(`${URL}/count/updatefollowingcount`, {
-        username: u.username,
-      });
+      const res2 = await axiosInstance.patch(
+        `${URL}/count/updatefollowingcount`,
+        {
+          username: u.username,
+        }
+      );
       if (res2.data) {
         setpostcount(res2.data.postcount);
         setfollowerscount(res2.data.followerscount);

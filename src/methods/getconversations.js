@@ -1,9 +1,10 @@
-import axios from 'axios';
+import axiosInstance from '../Errors/httpInterceptor';
+
 const URL = process.env.REACT_APP_URL;
 const getconversations = async (username) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const conversations = await axios.get(
+      const conversations = await axiosInstance.get(
         `${URL}/messenger/conversation?username=${username}`
       );
       resolve(conversations.data);

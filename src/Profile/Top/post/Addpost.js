@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import Styles from './Addpost.module.css';
 import { useSpring, animated } from 'react-spring';
 import { useAlert } from 'react-alert';
@@ -10,6 +9,7 @@ import { data_URL_to_file } from '../../../methods/data_URL_to_file';
 import firebase from '../../../Firebase/index';
 import NormalLoader from '../../../Animation/Loader/loader/NormalLoader';
 import { generateRandomString } from '../Editprofile';
+import axiosInstance from '../../../Errors/httpInterceptor';
 const URL = process.env.REACT_APP_URL;
 const Addpost = ({ setposthandle }) => {
   const [pic, setPic] = useState(null);
@@ -29,7 +29,7 @@ const Addpost = ({ setposthandle }) => {
 
   const upload = async (ul) => {
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${URL}/post/addpost`,
         {
           username: username,
@@ -44,7 +44,7 @@ const Addpost = ({ setposthandle }) => {
           },
         }
       );
-      const resP = await axios.patch(`${URL}/count/increasepostcount`, {
+      const resP = await axiosInstance.patch(`${URL}/count/increasepostcount`, {
         username: username,
       });
       window.location.reload('/main');
@@ -89,7 +89,7 @@ const Addpost = ({ setposthandle }) => {
   //   console.log(selectedFile, 'Upload file');
   //   console.log(data, 'Upload data');
   //   try {
-  //     const res = await axios.post(`${URL}/post/uploadpost`, data, {
+  //     const res = await axiosInstance.post(`${URL}/post/uploadpost`, data, {
   //       params: { username: username, desc: desc },
   //       onUploadProgress: (data) => {
   //         //Set the progress value to show the progress bar

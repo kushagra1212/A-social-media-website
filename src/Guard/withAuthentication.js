@@ -1,9 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { access_Action } from '../reduces/actions/userAction';
 import { getuser } from '../reduces/actions/userAction';
+import axiosInstance from '../Errors/httpInterceptor';
 const authRoutePaths = ['/signin', '/signup'];
 
 const URL = process.env.REACT_APP_URL;
@@ -17,7 +17,7 @@ const withAuthentication = (ProtectedRoute, path) => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
       if (!isUnmounted) {
-        axios
+        axiosInstance
           .get(`${URL}/auth/verify`, {
             withCredentials: true,
           })

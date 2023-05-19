@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axiosInstance from '../../Errors/httpInterceptor';
+
 const URL = process.env.REACT_APP_URL;
 const setuser = (user) => {
   return {
@@ -51,7 +52,7 @@ export const populateLike = (posts, lastcount) => {
 };
 export const getuser = (id) => {
   return async (dispatch) => {
-    const res = await axios.get(`${URL}/upload/getuser?id=${id}`);
+    const res = await axiosInstance.get(`${URL}/upload/getuser?id=${id}`);
 
     if (res) {
       dispatch(setuser(res.data));

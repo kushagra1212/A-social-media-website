@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import Addpost from './post/Addpost';
 import { useEffect, useState } from 'react';
@@ -6,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Editprofile from './Editprofile';
 import Topprofile from './Topprofile';
 import { useHistory, withRouter } from 'react-router';
+import axiosInstance from '../../Errors/httpInterceptor';
 const URL = process.env.REACT_APP_URL;
 const Top = ({
   setposthand,
@@ -45,7 +45,7 @@ const Top = ({
     };
   }, [edit, isUnmounted]);
   const logouthandle = () => {
-    axios
+    axiosInstance
       .post(`${URL}/auth/logout`, {}, { withCredentials: true })
       .then((res) => {
         // console.log(res);
