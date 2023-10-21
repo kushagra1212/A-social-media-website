@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8" />
+    <meta name="google-site-verification" content="SZimjFrh-6ougzNsjtuz-_XG5YosOK9FHiA2w_XXZsM" />
+ <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,  user-scalable=no" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Eimentum | Social Networking Website"
+    />
+  
+    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <title>Eimentum</title>
+  </head>
+  <body>
+    <noscript>.</noscript>
+    <script>
+      // Register Service worker for Add to Home Screen option to work
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('../service-worker.js') }
+
+    </script>
+<script type="module" src="src/index.tsx"></script>
+
+    <div id="root"></div>
+  </body>
+</html>
