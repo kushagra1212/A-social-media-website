@@ -9,7 +9,7 @@ import AlertTemplate from 'react-alert-template-basic';
 import 'font-awesome/css/font-awesome.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { ErrorBoundaries } from './Errors/ErrorBoundaries';
-
+import './index.css';
 import { RouterProvider } from 'react-router-dom';
 
 import { router } from './router/ruter';

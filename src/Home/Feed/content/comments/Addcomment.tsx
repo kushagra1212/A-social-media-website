@@ -1,36 +1,32 @@
-import { useState } from "react";
-import Styles from "./Addcomment.module.css";
+import { useState } from 'react';
+import Styles from './Addcomment.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAd, faPlus } from '@fortawesome/free-solid-svg-icons';
 const Addcomment = ({ addCommentFunc }) => {
-  const [comment, setcomment] = useState("");
+  const [comment, setcomment] = useState('');
   const add_comment_handle = () => {
-    if (comment !== "") {
+    if (comment !== '') {
       addCommentFunc(comment);
-      setcomment("");
+      setcomment('');
     }
   };
   return (
     <div className={Styles.maindiv}>
-      <input className={Styles.comment_input}
-        onKeyDown={(event) =>
-          event.key === "Enter" ? add_comment_handle() : null
-        }
+      <input
+        className={Styles.comment_input}
+        onKeyDown={(event) => (event.key === 'Enter' ? add_comment_handle() : null)}
         placeholder="Write a Comment"
         type="text"
         value={comment}
         onChange={(e) => setcomment(e.target.value)}
       />
-      <button
-        className={Styles.add}
-        style={
-          comment === ""
-            ? { display: "none" }
-            : { opacity: 1, display: "block" }
-        }
+      <FontAwesomeIcon
+        style={comment === '' ? { display: 'none' } : { opacity: 1, display: 'block' }}
         onClick={add_comment_handle}
-      >
-        {" "}
-        Add{" "}
-      </button>
+        icon={faPlus}
+        cursor={'pointer'}
+        className={Styles.addIcon}
+      />
     </div>
   );
 };

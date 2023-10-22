@@ -5,6 +5,13 @@ import { getuser, setuser } from '../reduces/actions/userAction';
 import { useAlert } from 'react-alert';
 import { Link, useHref, useNavigate } from 'react-router-dom';
 import { Background } from '../Animation/Loader/Background/Background';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowRight,
+  faArrowRightArrowLeft,
+  faRightLeft,
+  faUserPlus,
+} from '@fortawesome/free-solid-svg-icons';
 import axiosInstance from '../Errors/httpInterceptor';
 import { API_END_POINT } from '../utils/constants/env';
 const URL = API_END_POINT;
@@ -66,11 +73,14 @@ const Signin = () => {
   };
 
   return (
-    <>
+    <div className={Styles.main_container}>
+      <div className={Styles.container_backdrop}> </div>
+      <img src="logo.png" alt="Logo" className={Styles.logo} />
+      <div className={Styles.signin}>
+        <h1>Sign In</h1>
+      </div>
       <div className={Styles.container}>
-        <img className={Styles.logo} src={'logo.svg'} alt="logo" />
         <div className={Styles.input}>
-          {' '}
           <input
             placeholder="username"
             onChange={(e) => setusername(e.target.value.substr(0, 15).toLowerCase().trim(''))}
@@ -88,17 +98,16 @@ const Signin = () => {
         <button onClick={loginhandle} className={Styles.loginbut}>
           Log in
         </button>
-
-        <div className={Styles.account}>
-          <label>Don't have an account ?</label>
-          <Link to="/signup" onClick={() => dispatch({ type: 'signup', payload: true })}>
-            {' '}
-            Sign up
-          </Link>
-        </div>
       </div>
-      <Background />
-    </>
+      <Link
+        to="/signup"
+        className={Styles.account}
+        onClick={() => dispatch({ type: 'signup', payload: true })}
+      >
+        <label>Don't have an account ? </label>
+        <FontAwesomeIcon icon={faArrowRight} className={Styles.icon} color="white" />
+      </Link>
+    </div>
   );
 };
 export default Signin;

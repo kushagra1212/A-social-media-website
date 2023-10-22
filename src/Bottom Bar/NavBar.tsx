@@ -1,18 +1,17 @@
-import Styles from './Footer.module.css';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { PUBLIC_URL } from '../utils/constants/env';
+import Styles from './NavBar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHome, faSearch, faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
-const Footer = () => {
+import { Link } from 'react-router-dom';
+const NavBar = () => {
   const dispatch = useDispatch();
   const { home, search, like, profile } = useSelector((state) => state.main);
   const { profilepic } = useSelector((state) => state.user);
   const url = '';
   return (
-    <div className={Styles.footer_container}>
-      <div className={Styles.footer_backdrop}></div>
-      <div className={Styles.footer}>
+    <div className={Styles.navbar_container}>
+      <div className={Styles.navbar_backdrop}></div>
+      <div className={Styles.navbar}>
         <Link to={`${url}/feed`}>
           <FontAwesomeIcon
             onClick={() => {
@@ -60,4 +59,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default NavBar;

@@ -4,7 +4,6 @@
   width: 100%;
   scroll-behavior: smooth;
   height: 70vh;
-  top: 10vh;
   position: absolute;
   z-index: -1;
 }
@@ -53,12 +52,7 @@
   margin-top: 0%;
   display: flex;
   align-items: center;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    #e8e8e8 50%,
-    transparent 100%
-  );
+  background: linear-gradient(to right, transparent 0%, #e8e8e8 50%, transparent 100%);
 }
 
 .topdiv img {
@@ -82,14 +76,8 @@
   display: flex;
   margin-top: 0%;
   justify-content: space-evenly;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    #e8e8e8 50%,
-    transparent 100%
-  );
-  animation: ContentMainAnimate_load__1OgoM 1s cubic-bezier(0.4, 0, 0.2, 1)
-    infinite;
+  background: linear-gradient(to right, transparent 0%, #e8e8e8 50%, transparent 100%);
+  animation: ContentMainAnimate_load__1OgoM 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   border: 2px solid rgba(245, 222, 179, 0);
   border-radius: 2px;
   height: 5vh;
@@ -99,12 +87,7 @@
 .caption {
   position: relative;
   width: 100%;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    #e8e8e8 50%,
-    transparent 100%
-  );
+  background: linear-gradient(to right, transparent 0%, #e8e8e8 50%, transparent 100%);
   animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   min-height: 20px;
   max-height: 50px;

@@ -1,24 +1,17 @@
-import { useEffect, useState } from "react";
-import Content from "./content/Content";
-import Contentmain from "./content/Contentmain";
-import Styles from "./Feed.module.css";
-import Stories from "./Stories/Stories";
+import { useEffect, useState } from 'react';
+import Content from './content/Content';
+import Contentmain from './content/Contentmain';
+import Styles from './Feed.module.css';
+import Stories from './Stories/Stories';
 const Feed = () => {
   const [go, setgo] = useState(false);
   const [isUnmounted, setUnmounted] = useState(false);
   useEffect(() => {
     if (!isUnmounted) {
-     
-        setgo(true);
-   
+      setgo(true);
     }
     return () => setUnmounted(true);
   }, []);
-  return (
-    <div className={Styles.maindiv}>
- <Stories/>
-      {go ? <Content/> : null}
-    </div>
-  );
+  return null;
 };
 export default Feed;

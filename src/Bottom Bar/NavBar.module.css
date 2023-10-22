@@ -1,0 +1,81 @@
+.navbar a {
+  align-self: center;
+}
+
+.navbar_backdrop {
+  position: absolute;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  justify-content: space-around;
+
+  border-radius: 10em 10em 0 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.827);
+  backdrop-filter: blur(1000em);
+}
+.selected {
+  color: #7e93fa;
+}
+.notselected {
+  color: #48507a;
+}
+
+.navbar a:hover {
+  transform: scale(1.5);
+  color: #7e93fa;
+}
+.navbar a:active {
+  transform: scale(1.5);
+  color: #7e93fa;
+}
+.navbar_container {
+  position: fixed;
+  display: flex;
+  width: 10vw;
+  justify-content: space-around;
+  bottom: 0%;
+  height: auto;
+  z-index: 10;
+  padding: 0;
+  margin: 0;
+  border-radius: 10em 10em 0 0;
+  height: 80vh;
+  border: 1px solidrgba(255, 255, 255, 0) e;
+  border-radius: 10em;
+  background: linear-gradient(to right, rgb(6, 6, 13), white);
+}
+
+.navbar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  border: 1px solidrgba(255, 255, 255, 0) e;
+  border-radius: 10em 10em 0 0;
+  padding: 0.5em;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  align-self: center;
+  border: 2px solid rgba(0, 0, 0, 0);
+  z-index: 10;
+
+  box-shadow: 0 0 1px #777777, 0 0 20px #0f1d63, 0 0 20px 10px #030a36;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+}
+
+@media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+  .navbar_container {
+    width: 8vw;
+  }
+}
+
+@media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+  .navbar_container {
+    width: 5vw;
+  }
+}

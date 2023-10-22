@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Styles from "./User.module.css";
-import { removefollowers, setfollowers } from "../../methods/setfollowers";
-import verifiesusers from "../../methods/verifiesusers";
-import Showbar from "../../showbar/Showbar";
-import { useAlert } from "react-alert";
-import addconversation from "../../methods/addconversation";
-import getconversations from "../../methods/getconversations";
-import deleteconversation from "../../methods/deleteconversation";
-import ShowPost from "./ShowPost";
-import { useSpring, animated } from "react-spring";
-import { PUBLIC_URL } from "../../utils/constants/env";
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Styles from './User.module.css';
+import { removefollowers, setfollowers } from '../../methods/setfollowers';
+import verifiesusers from '../../methods/verifiesusers';
+import Showbar from '../../showbar/Showbar';
+import { useAlert } from 'react-alert';
+import addconversation from '../../methods/addconversation';
+import getconversations from '../../methods/getconversations';
+import deleteconversation from '../../methods/deleteconversation';
+import ShowPost from './ShowPost';
+import { useSpring, animated } from 'react-spring';
+import { PUBLIC_URL } from '../../utils/constants/env';
 const calcXY = (x, y) => [
   -(y - window.innerHeight / 2) / 10,
   (x - window.innerWidth / 2) / 10,
   1.0,
 ];
 
-const perspective = (x, y, s) =>
-  `perspective(500px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
+const perspective = (x, y, s) => `perspective(500px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
 
 const User = ({
   profpic,
@@ -79,7 +78,7 @@ const User = ({
     return () => setUnmounted(true);
   }, []);
   const showAlertHandle = () => {
-    Alert.info("Not Available 😛", {
+    Alert.info('Not Available 😛', {
       onOpen: () => {
         setShowAlert(false);
       },
@@ -90,33 +89,31 @@ const User = ({
     });
   };
   const floatDown = useSpring({
-    from: { y: "-100%", opacity: "0%" },
-    y: "0%",
-    x: "0%",
-    opacity: "100%",
+    from: { y: '-100%', opacity: '0%' },
+    y: '0%',
+    x: '0%',
+    opacity: '100%',
   });
   if (showProfilePic) {
     return (
       <animated.div style={floatDown} className={Styles.editprofileMain}>
         <span
           className={Styles.backbut}
-          style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
+          style={{ fontSize: '50px', color: 'blue', cursor: 'pointer' }}
           onClick={() => setShowProfilePic(false)}
         >
           <i
-            styles={{ color: "Dodgerblue", cursor: "pointer" }}
+            style={{ color: 'Dodgerblue', cursor: 'pointer' }}
             className="fa fa-arrow-circle-left"
           ></i>
         </span>
         {profpic ? (
           <animated.img
-            onMouseMove={({ clientX: x, clientY: y }) =>
-              set({ xys: calcXY(x, y) })
-            }
+            onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calcXY(x, y) })}
             onMouseLeave={() => set({ xys: [0, 0, 1] })}
             style={{ transform: props.xys.to(perspective) }}
             className={Styles.editimg}
-            src={profpic ? profpic : "userImage.png"}
+            src={profpic ? profpic : 'userImage.png'}
             alt=""
           />
         ) : null}
@@ -152,7 +149,7 @@ const User = ({
           <img
             alt=""
             onClick={() => setShowProfilePic(true)}
-            src={profpic ? profpic : "userImage.png"}
+            src={profpic ? profpic : 'userImage.png'}
           />
         </div>
         <div className={Styles.seconddiv}>
@@ -163,7 +160,7 @@ const User = ({
         </div>
         <div className={Styles.thirddiv}>
           <div className={Styles.posts}>
-            <label style={{ color: "white" }}>Posts</label>
+            <label style={{ color: 'white' }}>Posts</label>
             <br />
             {postsnumber}
           </div>
@@ -179,8 +176,8 @@ const User = ({
                   : null
               }
             >
-              followers{" "}
-            </button>{" "}
+              followers{' '}
+            </button>{' '}
             <h6>{followerscount}</h6>
           </label>
 
@@ -188,30 +185,22 @@ const User = ({
             <button
               className={Styles.followingbut}
               onClick={() =>
-                followingcount
-                  ? setshowfollowinghandle(true)
-                  : showAlert
-                  ? showAlertHandle()
-                  : null
+                followingcount ? setshowfollowinghandle(true) : showAlert ? showAlertHandle() : null
               }
             >
-              following{" "}
-            </button>{" "}
+              following{' '}
+            </button>{' '}
             <h6>{followingcount}</h6>
           </label>
 
           <button
             className={Styles.isfollowing}
-            style={following ? { backgroundColor: "grey" } : {}}
+            style={following ? { backgroundColor: 'grey' } : {}}
             onClick={() =>
-              !loading
-                ? !following
-                  ? setfollowinghandle()
-                  : removefollowinghandle()
-                : null
+              !loading ? (!following ? setfollowinghandle() : removefollowinghandle()) : null
             }
           >
-            {following ? "Unfollow" : "Follow"}{" "}
+            {following ? 'Unfollow' : 'Follow'}{' '}
           </button>
         </div>
       </div>

@@ -2,28 +2,111 @@
   position: relative;
   padding-bottom: 3%;
   width: 100%;
-  height: 1000px;
-  top: 10vh;
   z-index: 1;
   scroll-behavior: smooth;
 }
-
-.maincontentstart {
+.no_post_container {
   position: relative;
-  padding-bottom: 3%;
   width: 100%;
   scroll-behavior: smooth;
-  background: #fbfbfb;
-  margin-top: 5%;
-  width: 90%;
   top: 10vh;
-  margin-left: 5%;
+  height: 10em;
   font-family: cursive;
-  border: 1px solid #80808000;
   font-size: 1.2em;
   border-radius: 10px;
-  box-shadow: 1px 1px 10px 1px #80808047;
+
+  background-size: 200% 200%;
+}
+.no_post_container_backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+  font-family: cursive;
+  font-size: 1.2em;
+  border-radius: 10px;
   text-align: center;
+}
+.maincontentstart {
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+  font-family: cursive;
+  font-size: 1.2em;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 5;
+  color: white;
+  font-size: 2em;
+
+  font-size: 2em;
+  color: #fff;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0051ff, 0 0 70px #0051ff,
+    0 0 80px #0051ff, 0 0 100px #0051ff, 0 0 150px #0051ff;
+  animation: flicker 1s infinite alternate;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  1% {
+    opacity: 0.8;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0051ff, 0 0 70px #0051ff,
+      0 0 80px #0051ff, 0 0 100px #0051ff, 0 0 150px #0051ff;
+  }
+  2% {
+    opacity: 0.6;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0051ff, 0 0 70px #0051ff,
+      0 0 80px #0051ff, 0 0 100px #0051ff, 0 0 150px #0051ff;
+  }
+  3% {
+    opacity: 0.4;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0051ff, 0 0 70px #0051ff,
+      0 0 80px #0051ff, 0 0 100px #0051ff, 0 0 150px #0051ff;
+  }
+  4% {
+    opacity: 0.2;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0051ff, 0 0 70px #0051ff,
+      0 0 80px #0051ff, 0 0 100px #0051ff, 0 0 150px #0051ff;
+  }
+  5% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  6% {
+    opacity: 0.2;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0051ff, 0 0 70px #0051ff,
+      0 0 80px #0051ff, 0 0 100px #0051ff, 0 0 150px #0051ff;
+  }
+  7% {
+    opacity: 0.4;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0051ff, 0 0 70px #0051ff,
+      0 0 80px #0051ff, 0 0 100px #0051ff, 0 0 150px #0051ff;
+  }
+  8% {
+    opacity: 0.6;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0051ff, 0 0 70px #0051ff,
+      0 0 80px #0051ff, 0 0 100px #0051ff, 0 0 150px #0051ff;
+  }
+  9% {
+    opacity: 0.8;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0051ff, 0 0 70px #0051ff,
+      0 0 80px #0051ff, 0 0 100px #0051ff, 0 0 150px #0051ff;
+  }
+  10% {
+    opacity: 1;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0051ff, 0 0 70px #0051ff,
+      0 0 80px #0051ff, 0 0 100px #0051ff, 0 0 150px #0051ff;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .singlecontainer {
@@ -44,11 +127,22 @@
   border: 2px solid rgba(255, 255, 255, 0);
   border-radius: 20px;
   flex-direction: column;
-  background-color: #f5f5f5;
-
   justify-items: center;
+  background: linear-gradient(to bottom, #000000, #2e2e2e5c);
+  box-shadow: 0 0 1px #ffffff69, 0 0 2px #ffffff85, 0 0 3px #605d5d9b, 0 0 10px #6965658f;
 }
-
+.topdiv {
+  position: relative;
+  height: 45px;
+  font-family: sans-serif;
+  margin-top: 0%;
+  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+  /* border: 20px; */
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  border: 2px solid #80808000;
+}
 @keyframes animateIn {
   0% {
     opacity: 0;
@@ -62,7 +156,6 @@
 
 .topdiv {
   position: relative;
-  background-color: rgb(255 255 255);
   height: 45px;
   font-family: sans-serif;
   margin-top: 0%;
@@ -72,7 +165,11 @@
   align-items: center;
   font-weight: bold;
   border: 2px solid #80808000;
+
   border-radius: 20px;
+  color: white;
+
+  box-shadow: 1px 1px 10px 1px #0000004a;
 }
 
 .topdiv img {
@@ -97,16 +194,15 @@
   display: flex;
   margin-top: 0%;
   justify-content: space-evenly;
-  background-color: rgb(255, 255, 255);
   border: 2px solid rgba(245, 222, 179, 0);
   border-radius: 2px;
+  color: white;
 
   align-items: center;
 }
 
 .caption {
   position: relative;
-  background-color: rgb(255, 255, 255);
   min-height: 0px;
   max-height: 50px;
   border-top: 1px solid grey;
@@ -124,22 +220,21 @@
 
 .imgdiv {
   display: flex;
-  background-color: rgb(255, 255, 255);
   padding: 0%;
   align-items: center;
   justify-content: center;
   /* margin-top: 1%; */
-  margin: 1%;
   margin-bottom: 5%;
   min-height: 45vh;
   outline: none;
   border: 2px solid rgba(245, 222, 179, 0);
   border-radius: 20px;
   border: none;
+  width: 100%;
+  background-color: black;
 }
 
 .imgdiv img {
-  height: 100%;
 }
 
 .loader,
@@ -298,7 +393,7 @@
   justify-content: space-around;
   border: 1px solid #80808017;
   color: white;
-  font-family: "FontAwesome";
+  font-family: 'FontAwesome';
   background-color: black;
   border-radius: 10px;
   font-size: 1.3em;
@@ -336,18 +431,17 @@
 }
 
 .usernamediv {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1.1em;
 }
 
 .commenttopdiv {
   width: 100vw;
-  height: 90%;
+  height: 100vh;
   display: flex;
   position: fixed;
   z-index: 105;
-  top: 10vh;
   background-color: rgb(252 252 252 / 11%);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
@@ -431,8 +525,11 @@
 
   .topdiv:hover {
     transform: scale3d(1.1, 1.1, 10);
-    background-color: rgb(62, 57, 65);
     color: white;
+    box-shadow: 0 0 1px 0 #00f, 0 0 2px 0 #0ff, 0 0 3px 0 #0af, 0 0 10px 0 #08f, 0 0 20px 0 #06f,
+      0 0 25px 0 #04f, 0 0 30px 0 #02f;
+
+    background: linear-gradient(to bottom, #1c1c1c, #000033, #02279985);
   }
 
   .infiP {

@@ -15,6 +15,7 @@
   /* width: 100%; */
   display: flex;
   cursor: pointer;
+  z-index: 10;
   /* height: 3
 vh
 ; */

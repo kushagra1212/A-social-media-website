@@ -1,9 +1,2 @@
 .maindiv {
 }
-
-@media screen and (min-width: 768px) {
-  .maindiv {
-    position: absolute;
-    width: 100%;
-  }
-}

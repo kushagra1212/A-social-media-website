@@ -1,47 +1,50 @@
-import Feed from './Feed/Feed';
 import Header from './Top Bar/Header';
 import Styles from './Home.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { memo, useEffect, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 import Userstories from '../Home/Feed/Stories/Userstories/Userstories';
-import Othersstories from '../Home/Feed/Stories/Othersstories/Othersstories';
 import { getstories } from '../methods/uploadstories';
-import SuggestionList from '../components/suggestionlist/SuggestionList';
 import Search from '../Search/Search';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Othersstories from './Feed/Stories/Othersstories/Othersstories';
+import Content from './Feed/content/Content';
+import Responsive from '../components/responsive/Responsive';
+import SuggestionList from '../components/suggestionlist/SuggestionList';
 
 const Home = () => {
   const { username } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [showProfile, setShowProfile] = useState(false);
-
   const history = useNavigate();
-
   const [userSearch, setUserSearch] = useState('');
   const { show_user_stories, show_others_stories } = useSelector((state) => {
     return state.Stories;
   });
+
   const fade = useSpring({
     opacity: show_user_stories ? 1 : 1,
     config: { duration: 250 },
   });
+
   const func = async () => {
     return getstories(username, dispatch);
   };
+
   useEffect(() => {
     history('/feed');
     func();
-
     dispatch({ type: 'SHOWHOME', payload: true });
   }, []);
 
   const setShowProfileHandler = (val) => {
     setShowProfile(val);
   };
+
   const setUserSearchHandler = (val) => {
     setUserSearch(val);
   };
+
   if (showProfile) {
     return (
       <div className={Styles.userprofilemain}>
@@ -67,6 +70,7 @@ const Home = () => {
       </div>
     );
   }
+
   if (show_others_stories.flag) {
     return (
       <div
@@ -108,17 +112,21 @@ const Home = () => {
           </animated.div>
         ) : (
           <>
-            <Header /> <Feed />
-            {window.screen.width >= 768 ? (
-              <SuggestionList
-                setShowProfileHandler={setShowProfileHandler}
-                setUserSearchHandler={setUserSearchHandler}
-              />
-            ) : null}
+            <Header />
+            <Content />
+            <Responsive displayIn={['Laptop']}>
+              <div className={Styles.sugglist}>
+                <SuggestionList
+                  setShowProfileHandler={setShowProfileHandler}
+                  setUserSearchHandler={setUserSearchHandler}
+                />
+              </div>
+            </Responsive>
           </>
         )}
       </div>
     );
   }
 };
+
 export default memo(Home);

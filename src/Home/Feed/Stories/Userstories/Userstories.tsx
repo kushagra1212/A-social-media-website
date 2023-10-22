@@ -1,33 +1,28 @@
-import Styles from "./Userstories.module.css";
-import FileBase64 from "react-file-base64";
+import Styles from './Userstories.module.css';
 import {
   show_user_stories_handle,
   show_webcam_handle,
-} from "../../../../reduces/actions/StoriesAction";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect, useRef } from "react";
-import { useSpring, animated } from "react-spring";
-import cameraimg from "./cameraimg.png";
-import backImg from "./backImage.png";
-import ImageCropper from "../../../../Profile/Top/ImageCroper/ImageCropper";
-import Webcamcapture from "../Webcam/Webcamcapture";
-import Picture from "../Picture/Picture";
-import ProgressBar from "../../../../Animation/Loader/Progressbar/ProgressBar";
-import { uploadstories } from "../../../../methods/uploadstories";
-import { data_URL_to_file } from "../../../../methods/data_URL_to_file";
-import { getCroppedImg } from "../../../../methods/createcrop";
-import { useAlert } from "react-alert";
-import firebase from "@firebase/app-compat";
-import NormalLoader from "../../../../Animation/Loader/loader/NormalLoader";
-import { PUBLIC_URL } from "../../../../utils/constants/env";
+} from '../../../../reduces/actions/StoriesAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect, useRef } from 'react';
+import ImageCropper from '../../../../Profile/Top/ImageCroper/ImageCropper';
+import Webcamcapture from '../Webcam/Webcamcapture';
+import Picture from '../Picture/Picture';
+import { uploadstories } from '../../../../methods/uploadstories';
+import { data_URL_to_file } from '../../../../methods/data_URL_to_file';
+import { getCroppedImg } from '../../../../methods/createcrop';
+import { useAlert } from 'react-alert';
+import firebase from '@firebase/app-compat';
+import NormalLoader from '../../../../Animation/Loader/loader/NormalLoader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowCircleLeft, faArrowLeft, faCamera } from '@fortawesome/free-solid-svg-icons';
+import Responsive from '../../../../components/responsive/Responsive';
 
 const Userstories = () => {
   const dispatch = useDispatch();
   const Alert = useAlert();
   const [pic, setPic] = useState(null);
-  const { show_webcam, show_others_stories } = useSelector(
-    (state) => state.Stories
-  );
+  const { show_webcam, show_others_stories } = useSelector((state) => state.Stories);
   const { username, profilepic } = useSelector((state) => state.user);
   const { documents } = useSelector((state) => state.Stories);
   const [showpictures, setshowpictures] = useState(true);
@@ -37,53 +32,41 @@ const Userstories = () => {
   const Refinput = useRef();
   const [croppedArea, setCroppedArea] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [progress, setProgress] = useState(0);
   const [showChoosebut, setShowChoosebut] = useState(true);
-  const [fileName, setfileName] = useState("");
+  const [fileName, setfileName] = useState('');
 
   const set_picture_handle = (ans) => {
     setshowpictures(ans);
   };
 
-  const [styleOne, animateOne] = useSpring({ x: 100 }, []);
-  const [styleTwo, animateTwo] = useSpring({ y: -100 }, []);
-  useEffect(() => {
-    animateOne.start({ x: 0, y: 0 });
-    animateTwo.start({ y: 0, x: 0 });
-  }, [showpictures, show_webcam, animateTwo, animateOne]);
-
   const selectedFileHandle = (e) => {
     e.preventDefault();
-
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     setfileName(e.target.files[0].name);
-    reader.addEventListener("load", () => {
+    reader.addEventListener('load', () => {
       setImage(reader.result);
     });
-
-    //  setSelectedFile(e.target.files[0]);
-    // this was previous code
-    // setPic(global.URL.createObjectURL(e.target.files[0]));
   };
 
   const openChoosefile = () => {
     Refinput.current.click();
   };
+
   const handleUpdateItemImage = (sfile) => {
     setloading(!loading);
     const storage = firebase.storage();
 
     const uploadTask = storage.ref(`stories/${fileName}`).put(sfile);
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       () => {},
       (error) => {
         console.log(error);
       },
       () => {
         storage
-          .ref("stories")
+          .ref('stories')
           .child(fileName)
           .getDownloadURL()
           .then((ul) => {
@@ -91,7 +74,7 @@ const Userstories = () => {
               .then((res) => {
                 setloading(false);
                 setSelectedFile(null);
-                Alert.success("Story Added");
+                Alert.success('Story Added');
                 dispatch(show_user_stories_handle(false));
               })
               .catch((err) => {
@@ -99,22 +82,24 @@ const Userstories = () => {
                 dispatch(show_user_stories_handle(false));
               });
           });
-      }
+      },
     );
   };
+
   const generateDownload = async (imageSrc, crop) => {
     if (!crop || !imageSrc) {
       return;
     }
+
     setloading(true);
     const canvas = await getCroppedImg(imageSrc, crop);
-    let dataURL = canvas.toDataURL("image/jpeg", 0.4);
+    let dataURL = canvas.toDataURL('image/jpeg', 0.4);
     const sfile = await data_URL_to_file(dataURL, fileName);
-
     setPic(dataURL);
     setImage(null);
     handleUpdateItemImage(sfile);
   };
+
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
   };
@@ -124,28 +109,19 @@ const Userstories = () => {
   };
 
   if (documents.length >= 1 && showpictures)
-    return (
-      <Picture
-        other={false}
-        documents={documents}
-        set_picture_handle={set_picture_handle}
-      />
-    );
+    return <Picture other={false} documents={documents} set_picture_handle={set_picture_handle} />;
 
   if (show_webcam)
     return (
       <div className={Styles.cameradiv}>
-        <span
-          style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
+        <div
+          className={Styles.backarrow}
           onClick={() => {
             dispatch(show_webcam_handle(false));
           }}
         >
-          <i
-            styles={{ color: "Dodgerblue", cursor: "pointer" }}
-            className="fa fa-arrow-circle-left"
-          ></i>
-        </span>
+          <FontAwesomeIcon icon={faArrowLeft} size="2x" color="white" />
+        </div>
         <Webcamcapture />
       </div>
     );
@@ -153,14 +129,14 @@ const Userstories = () => {
     return (
       <div
         style={{
-          width: "100vw",
-          height: "100vh",
-          zIndex: "100",
-          position: "fixed",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backdropFilter: "blur(10px)",
+          width: '100vw',
+          height: '100vh',
+          zIndex: '100',
+          position: 'fixed',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backdropFilter: 'blur(10px)',
         }}
       >
         <NormalLoader />
@@ -185,26 +161,17 @@ const Userstories = () => {
   return (
     <>
       <div className={Styles.maindiv}>
-        <animated.div style={styleTwo}>
-          <span
-            style={{ fontSize: "50px", color: "blue", cursor: "pointer" }}
-            onClick={() => {
-              dispatch(show_user_stories_handle(false));
-            }}
-          >
-            <i
-              styles={{ color: "Dodgerblue", cursor: "pointer" }}
-              className="fa fa-arrow-circle-left"
-            ></i>
-          </span>
-        </animated.div>
+        <div
+          className={Styles.backarrow}
+          onClick={() => {
+            dispatch(show_user_stories_handle(false));
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowLeft} size="2x" color="white" />
+        </div>
         {pic ? (
           <>
-            <img
-              className={Styles.editimg}
-              src={pic ? pic : "userImage.png"}
-              alt=""
-            />
+            <img className={Styles.editimg} src={pic ? pic : '/userImage.png'} alt="" />
 
             <button className={Styles.savebut} onClick={save_button_handle}>
               Add to Stories
@@ -213,41 +180,35 @@ const Userstories = () => {
         ) : null}
 
         <input
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
           type="file"
           ref={Refinput}
           onChange={selectedFileHandle}
         />
 
         {showChoosebut ? (
-          <button
-            className={Styles.choosebutton}
-            type="button"
-            onClick={openChoosefile}
-          >
-            Choose Picture
+          <button className={Styles.choosebutton} type="button" onClick={openChoosefile}>
+            Add Photo
           </button>
         ) : null}
 
-        {window.screen.width >= 768 ? (
-          <animated.div
-            style={styleOne}
+        <Responsive displayIn={['Laptop']}>
+          <FontAwesomeIcon
             className={Styles.camera}
             onClick={() => dispatch(show_webcam_handle(true))}
-          >
-            <img width="100%" height="100%" src={cameraimg} alt="NAN" />
-          </animated.div>
-        ) : (
-          <animated.div style={styleOne}>
-            <img style={{ marginLeft: "50vw" }} alt="" src={"stories.gif"} />
-          </animated.div>
-        )}
+            icon={faCamera}
+            color="white"
+            size="2x"
+          />
+        </Responsive>
+
+        <Responsive displayIn={['Mobile', 'MobilePortrait', 'Tablet']}>
+          <img style={{ marginLeft: '50vw' }} alt="" src={'/stories.gif'} />
+        </Responsive>
       </div>
-      {window.screen.width >= 768 ? (
-        <animated.div style={styleOne}>
-          <img style={{ marginLeft: "50vw" }} alt="" src={"stories.gif"} />
-        </animated.div>
-      ) : null}
+      <Responsive displayIn={['Laptop']}>
+        <img style={{ marginLeft: '50vw' }} alt="" src={'/stories.gif'} />
+      </Responsive>
     </>
   );
 };

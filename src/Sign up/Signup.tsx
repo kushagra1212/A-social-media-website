@@ -9,6 +9,8 @@ import axios from 'axios';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Background } from '../Animation/Loader/Background/Background';
 import { API_END_POINT } from '../utils/constants/env';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const URL = API_END_POINT;
 const Signup = (): JSX.Element => {
@@ -130,14 +132,15 @@ const Signup = (): JSX.Element => {
     }
   };
 
-  // if(signup===false){
-  //  return  <Redirect to="/signin" />
-  // }
-
   return (
-    <>
+    <div className={Styles.main_container}>
+      <div className={Styles.container_backdrop}> </div>
+      <img className={Styles.logo} src={'logo.png'} alt="logo" />
+      <div className={Styles.signin}>
+        <h1>Sign Up</h1>
+      </div>
+
       <div className={Styles.container}>
-        <img className={Styles.logo} src={'logo.svg'} alt="logo" />
         <div className={Styles.input}>
           <input
             value={email}
@@ -180,18 +183,17 @@ const Signup = (): JSX.Element => {
         <button onClick={submithandle} className={Styles.loginbut}>
           Sign up
         </button>
-
-        <NavLink
-          to="/signin"
-          replace
-          className={Styles.goto}
-          onClick={() => dispatch({ type: 'signup', payload: false })}
-        >
-          Go to Login page
-        </NavLink>
       </div>
-      <Background />
-    </>
+      <NavLink
+        to="/signin"
+        replace
+        className={Styles.account}
+        onClick={() => dispatch({ type: 'signup', payload: false })}
+      >
+        <FontAwesomeIcon icon={faArrowLeft} className={Styles.icon} color="white" />
+        <label> {'   '}Go to Login page </label>
+      </NavLink>
+    </div>
   );
 };
 export default Signup;

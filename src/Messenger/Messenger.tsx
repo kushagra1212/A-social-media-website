@@ -9,6 +9,8 @@ import Messages from './Box/Messages/Messages';
 
 import { useSpring, animated } from 'react-spring';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Messenger = () => {
   const dispatch = useDispatch();
@@ -52,8 +54,8 @@ const Messenger = () => {
   return (
     <div>
       <animated.div style={contentProps} className={Styles.maindiv}>
-        <div onClick={backbButFun} className={Styles.icon}>
-          <div className={Styles.arrow}></div>
+        <div className={Styles.backarrow} onClick={backbButFun}>
+          <FontAwesomeIcon icon={faArrowLeft} size="2x" color="white" />
         </div>
         <label className={Styles.chats_label}>chats</label>
         {loading ? (
@@ -66,8 +68,7 @@ const Messenger = () => {
           )
         ) : (
           <>
-            {' '}
-            <Box conversations={conversations} username={username} />{' '}
+            <Box conversations={conversations} username={username} />
             {conversations !== null && conversations.length === 0 ? null : <Messages />}
           </>
         )}

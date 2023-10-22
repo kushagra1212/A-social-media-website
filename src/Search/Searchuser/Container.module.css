@@ -1,4 +1,4 @@
-.maindiv{
+.maindiv {
   position: relative;
   /* width: 100%; */
   display: flex;
@@ -10,25 +10,21 @@
   /* margin-top: 1%; */
   /* z-index: 10; */
   /* background-color: rgb(255 255 255); */
- 
 }
-.maindiv img{
+.maindiv img {
   position: relative;
 
   width: 40%;
-  margin: 2%; 
-  border:2px solid rgba(182, 22, 22, 0);
-  border-radius:5px;
-
-
-
+  margin: 2%;
+  border: 2px solid rgba(182, 22, 22, 0);
+  border-radius: 5px;
 }
-.nopost{
+.nopost {
   position: relative;
   display: flex;
-  margin-top:25%;
+  margin-top: 25%;
 }
-.topButtons{
+.topButtons {
   position: relative;
   /* margin-bottom: 2%; */
   margin-top: 1%;
@@ -42,7 +38,7 @@
   align-content: flex-end;
   justify-content: space-around;
 }
-.topButtons button{
+.topButtons button {
   width: 30%;
   background: #ffffff00;
   border: 2px solid #80808000;
@@ -51,10 +47,9 @@
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   transition-property: box-shadow;
   transition-duration: 10ms;
-
 }
-.topButtons button:active{
-box-shadow: 1px 1px 4px 1px grey;
+.topButtons button:active {
+  box-shadow: 1px 1px 4px 1px grey;
 }
 .loader,
 .loader:after {
@@ -99,15 +94,15 @@ box-shadow: 1px 1px 4px 1px grey;
   }
 }
 
-@media screen and (min-width:768px){
-  .topButtons{
+@media screen and (min-width: 768px) {
+  .topButtons {
     position: absolute;
     /* margin-bottom: 2%; */
     margin-top: 1%;
     width: 50%;
     padding: 0%;
   }
-  .maindiv{
+  .maindiv {
     width: 50%;
   }
 }

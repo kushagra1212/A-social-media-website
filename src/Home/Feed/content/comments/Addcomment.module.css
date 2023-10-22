@@ -1,18 +1,17 @@
 .maindiv {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0);
-
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
+  width: 100%;
+  margin-top: 1em;
 }
 .comment_input {
   min-height: 30px;
-  margin: 2%;
+  width: 80%;
   outline: none;
-  width: 100%;
   text-align: center;
   z-index: 10;
   /* color: black; */
@@ -24,48 +23,73 @@
   background-color: rgb(255 255 255 / 7%);
   transition: 500ms ease-in-out box-shadow;
   font-size: 1em;
+  color: white;
+  font-weight: 400;
 }
 .comment_input:focus {
   box-shadow: 2px 2px 1000px 1000px rgba(51, 56, 58, 0.171);
-
-  background-color: white;
 }
 .add {
-  width: 30px;
-  height: 30px;
   position: relative;
-  background-color: rgb(0 0 0);
-  color: white;
-  border: 2px solid rgb(0 0 0 / 11%);
   border-radius: 5px;
-  box-shadow: 2px 2px 10px grey;
-  outline: none;
   /* padding: 0.2em; */
   z-index: 110;
   transition: 10000ms ease-in-out box-shadow;
   font-weight: 600;
   /* font-size: inherit; */
-  transition: 10000ms ease-in-out box-shadow;
 }
+
+.addIcon {
+  font-size: 1.3em;
+  color: white;
+  font-weight: 700;
+  border-radius: 5em;
+  padding: 0.5em;
+  background: linear-gradient(to bottom, #1b1b1b, #4b4b4b);
+}
+
+.maindiv button {
+  /* existing styles */
+  outline: none;
+}
+
+.addIcon:hover {
+  /* existing styles */
+  background: linear-gradient(to bottom, #1b1b1b, #41ff6a);
+}
+
+.maindiv button:hover {
+  box-shadow: 0 0 10px #72d47d, 0 0 20px #41ff6a, 0 0 30px #0fff6f;
+}
+.maindiv a {
+}
+.maindiv button {
+  font-size: 1.2em;
+  padding: 0 0.25em;
+  border-radius: 1em;
+}
+
 .add:active {
   box-shadow: 2px 2px 5px grey;
 }
 .maindiv button:active {
-  background-color: rgb(11, 72, 129);
   color: white;
 }
 
-@media screen and (min-width: 768px) {
-  .maindiv {
-    font-size: 1.3em;
-  }
-  .add {
-    transform: scale(1);
-    animation: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
-  }
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .comment_input {
+    font-size: 1.25em;
   }
-  .add:hover {
-    transform: scale(1.1);
+}
+
+@media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+  .comment_input {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+  .comment_input {
+    font-size: 1.5em;
   }
 }
