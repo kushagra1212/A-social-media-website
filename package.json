@@ -50,6 +50,7 @@
     "tar": "^6.1.11",
     "thunk": "0.0.1",
     "tmpl": "^1.0.5",
+    "typescript": "^5.2.2",
     "url-parse": "^1.5.9",
     "vite": "^4.5.0",
     "vite-tsconfig-paths": "^4.2.1",
@@ -58,7 +59,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build",
+    "build": "npx tsc && vite build",
     "preview": "vite preview"
   },
   "eslintConfig": {
