@@ -31,5 +31,7 @@
     "src/service/service.d.ts",
     "src/service/**/*.ts",
     "src/utils/**/*.ts"
-  ]
+  ],
+  "noEmit": false,
+  "noEmitOnError": false
 }
