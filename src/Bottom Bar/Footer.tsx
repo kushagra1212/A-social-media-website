@@ -1,7 +1,6 @@
 import Styles from './Footer.module.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { PUBLIC_URL } from '../utils/constants/env';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHome, faSearch, faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 const Footer = () => {

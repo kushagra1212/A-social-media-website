@@ -87,7 +87,7 @@ const Messages = () => {
   if (user === null) {
     return (
       <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
-        <div className={Styles.chatWidthFriends}>
+        <div className={Styles.chatWithFriends}>
           <img alt="" src={'chat2.gif'} />
           <h4 style={{ fontSize: '4em', opacity: '0.5' }}> Chat with Friends</h4>{' '}
         </div>
