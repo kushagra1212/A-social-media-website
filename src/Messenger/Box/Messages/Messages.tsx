@@ -82,9 +82,6 @@ const Messages = () => {
       block: 'start',
     });
   };
-  const backButFun = () => {
-    dispatch({ type: 'SHOWBOX', payload: true });
-  };
   if (user === null) {
     return (
       <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
@@ -111,9 +108,18 @@ const Messages = () => {
       </div>
     );
   }
+  const backbButFun = () => {
+    dispatch({ type: 'SHOWBOX', payload: true });
+  };
   return (
     <div className={Styles.maindiv}>
       <div className={Styles.topdivmessage}>
+        {' '}
+        <Responsive displayIn={['Mobile', 'MobilePortrait', 'Tablet']}>
+          <div className={Styles.backarrowMes} onClick={backbButFun}>
+            <FontAwesomeIcon icon={faArrowLeft} size="2x" color="white" />
+          </div>
+        </Responsive>
         <label style={{ fontSize: '1.2em' }}>{user?.username}</label>
         <img width="30px" height="30px" className={Styles.userPicture} src={userPicture} alt="" />
       </div>

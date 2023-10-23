@@ -47,13 +47,13 @@ function onRender(
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container!); // createRoot(container!) : when TypeScript
 root.render(
-  <Profiler id="App" onRender={onRender}>
-    <Provider store={store}>
-      <AlertProvider template={AlertTemplate} {...options}>
-        <ErrorBoundaries>
-          <RouterProvider router={router} />
-        </ErrorBoundaries>
-      </AlertProvider>
-    </Provider>
-  </Profiler>,
+  //<Profiler id="App" onRender={onRender}>
+  <Provider store={store}>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <ErrorBoundaries>
+        <RouterProvider router={router} />
+      </ErrorBoundaries>
+    </AlertProvider>
+  </Provider>,
+  //</Profiler>,
 );
