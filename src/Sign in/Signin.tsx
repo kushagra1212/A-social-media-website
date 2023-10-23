@@ -68,7 +68,7 @@ const Signin = () => {
       <div className={Styles.container_backdrop}> </div>
       <img src="logo.png" alt="Logo" className={Styles.logo} />
       <div className={Styles.signin}>
-        <h1>Sign In</h1>
+        <h1>Eimentum</h1>
       </div>
       <div className={Styles.container}>
         {' '}
