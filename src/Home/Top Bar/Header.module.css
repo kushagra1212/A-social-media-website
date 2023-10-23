@@ -21,17 +21,19 @@
     0 0 90px #0ff, 0 0 100px #0ff, 0 0 150px #0ff;
   animation: neon 1.5s ease-in-out alternate;
   box-shadow: 0 0 5px #383838be, 0 0 10px #383838be, 0 0 15px 3px #110f0fbe, 0 0 15px 5px #3a3a3abe;
+
+  animation: slide-down 0.5s ease-in-out forwards;
 }
 #cameraimg:hover {
   box-shadow: 0 0 10px #fff, 0 0 20px #0055ff, 0 0 70px #0055ff, 0 0 80px #0055ff;
   cursor: pointer;
 }
-@keyframes neon {
-  from {
-    opacity: 0.4;
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
   }
-  to {
-    opacity: 1;
+  100% {
+    transform: translateY(0);
   }
 }
 
@@ -105,4 +107,37 @@ px
 .messageimg:hover {
   box-shadow: 0 0 10px #fff, 0 0 20px #0055ff, 0 0 70px #0055ff, 0 0 80px #0055ff;
   cursor: pointer;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  #cameraimg {
+    width: 2em;
+    height: 2em;
+  }
+  .messageimg {
+    width: 2em;
+    height: 2em;
+  }
+}
+
+@media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+  #cameraimg {
+    width: 3em;
+    height: 3em;
+  }
+  .messageimg {
+    width: 3em;
+    height: 3em;
+  }
+}
+
+@media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+  #cameraimg {
+    width: 3em;
+    height: 3em;
+  }
+  .messageimg {
+    width: 3em;
+    height: 3em;
+  }
 }

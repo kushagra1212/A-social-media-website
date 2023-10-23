@@ -6,6 +6,8 @@ import ContentLoader from 'react-content-loader';
 import io from 'socket.io-client';
 import { setsocket } from '../../reduces/actions/MessageReducerAction';
 import { PUBLIC_URL, REACT_APP_SOCKETURL } from '../../utils/constants/env';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 let heightofAni = window.screen.width >= 768 ? '100vh' : '100vh';
 
 const ENDPOINT = REACT_APP_SOCKETURL;
@@ -56,7 +58,11 @@ const List = ({ chatuser, conversationID, selectedID, selectIDHandler }) => {
       onClick={showmessages}
     >
       <div className={Styles.userimg}>
-        <img src={chatuser.profilepic ? chatuser.profilepic : `userImage.png`} alt="" />
+        {chatuser.profilepic !== '' ? (
+          <img src={chatuser.profilepic} alt="" />
+        ) : (
+          <FontAwesomeIcon icon={faUserAstronaut} size="2x" color="white" />
+        )}
       </div>
       <div className={Styles.usernamediv}>
         <label style={{ fontWeight: '600' }}>{chatuser.username} </label>

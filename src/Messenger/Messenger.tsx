@@ -44,6 +44,8 @@ const Messenger = () => {
       dispatch({ type: 'SHOWHOME', payload: true });
       history('/feed', { replace: true });
     }
+
+    dispatch({ type: 'SHOWMESSAGE', payload: true });
   }, []);
   const contentProps = useSpring({
     from: { marginTop: -500, opacity: 0 },

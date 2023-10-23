@@ -270,7 +270,6 @@
   margin-top: 1em;
 }
 .searchbar input {
-  background-color: white;
   width: 60vw;
   position: relative;
   height: 50px;
@@ -282,11 +281,29 @@
   outline: none;
   animation: Search_Search_Search_boxAni__1z34p__3sZ-x__1kqDo 1s ease-in-out infinite
     alternate-reverse;
+
+  background: linear-gradient(to bottom, #242424, #191313);
+  color: white;
 }
 .searchbar input:focus {
-  animation: boxAni 100s ease-in-out infinite alternate-reverse;
+  /* FILEPATH: /projects-2023/Eimentum/src/Search/Search.module.css */
+
+  color: #fff;
 }
 
+.searchbar input {
+  box-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 30px #ff00de, 0 0 40px #ff00de;
+  animation: neon 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .searchbtn {
   position: relative;
   margin-left: 10%;

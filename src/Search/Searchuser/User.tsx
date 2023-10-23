@@ -160,7 +160,7 @@ const User = ({
         </div>
         <div className={Styles.thirddiv}>
           <div className={Styles.posts}>
-            <label style={{ color: 'white' }}>Posts</label>
+            <label>Posts</label>
             <br />
             {postsnumber}
           </div>

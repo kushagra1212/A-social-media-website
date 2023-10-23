@@ -456,6 +456,7 @@
   backdrop-filter: blur(5px);
   display: flex;
   flex-direction: row;
+
   align-items: flex-start;
   justify-content: flex-end;
 }

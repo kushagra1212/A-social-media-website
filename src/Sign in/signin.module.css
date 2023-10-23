@@ -111,6 +111,39 @@
   transition: background-color 1s ease;
 }
 
+.loginbutAsGuest {
+  background: linear-gradient(to right bottom, #0f1327, #455b92dc);
+  outline: none;
+  border: 2px solid rgba(82, 91, 255, 0.252);
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  border-radius: 0px;
+  border-radius: 5em;
+  height: 3em;
+  font-size: 1.2em;
+  width: 50%;
+  align-self: center;
+
+  font-weight: 900;
+
+  background: linear-gradient(to right bottom, #cd06ff, #ff72e3dc);
+  background-size: 200% 200%;
+
+  transition: background-color 1s ease;
+}
+
+.loginbutAsGuest:hover {
+  background: linear-gradient(to right bottom, #cd06ff, #ff72e3dc);
+  box-shadow: 1px 10px 50px rgb(188, 30, 255);
+  cursor: pointer;
+}
+
+.loginbutAsGuest:active {
+  background: linear-gradient(to right bottom, #cd06ff, #ff72e3dc);
+  box-shadow: 1px 10px 50px rgb(188, 30, 255);
+  cursor: pointer;
+}
+
 .loginbut:hover {
   background: linear-gradient(to right bottom, #062bff, #729affdc);
   box-shadow: 1px 10px 50px rgb(30, 68, 255);

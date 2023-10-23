@@ -215,7 +215,7 @@
   font-size: large;
   font-weight: 400;
   font: caption;
-  color: #000000df;
+  color: white;
 }
 
 .imgdiv {
@@ -305,6 +305,7 @@
   box-shadow: azure;
   position: relative;
   z-index: 10;
+  width: 100vw;
   background-color: rgba(255, 255, 255, 0.15);
   -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);

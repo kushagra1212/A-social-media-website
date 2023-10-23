@@ -31,3 +31,26 @@
   box-shadow: 0 0 1px rgb(106, 106, 106), 0 0 10px #0080ff;
   background: linear-gradient(to bottom, #0080ff, #0080ff);
 }
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .stories > li,
+  .particular {
+    width: 3em;
+    height: 3em;
+  }
+}
+
+@media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+  .stories > li,
+  .particular {
+    width: 3.5em;
+    height: 3.5em;
+  }
+}
+
+@media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+  .stories > li,
+  .particular {
+    width: 3.5em;
+    height: 3.5em;
+  }
+}

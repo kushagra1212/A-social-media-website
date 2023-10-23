@@ -4,13 +4,16 @@
   display: flex;
   flex-direction: column;
   justify-items: center;
-  align-items: stretch;
   overflow: scroll;
   padding: 1%;
-  height: 94%;
+  height: 100vh;
   flex-wrap: nowrap;
-  overflow-x: hidden;
+  overflow-x: hidd;
+  background: linear-gradient(to bottom, #000000 0%, #0b0d21 100%);
+  color: white;
+  align-items: center;
 }
+
 .infiP {
   text-align: center;
   background-color: #424242;
@@ -31,10 +34,10 @@
   position: relative;
 
   flex-direction: row;
-  width: 95%;
   margin-top: 1%;
   border: 2px solid rgba(255, 255, 255, 0);
   border-radius: 10px;
+  width: 100%;
   margin: 2%;
   justify-content: space-around;
   align-items: stretch;
@@ -55,18 +58,46 @@
 }
 .loadmorebut {
   position: relative;
-  background-color: rgb(88, 204, 88);
   outline: none;
   border: 2px solid rgba(255, 255, 255, 0.041);
   border-radius: 10px;
   width: 25%;
   align-items: center;
   left: 35%;
+  margin-top: 1em;
+  margin-bottom: 2em;
   display: flex;
   justify-content: center;
-
   transition: ease-in-out zoom;
+
+  color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 30px #0ff, 0 0 50px #0ff;
+  box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #0ff, 0 0 80px #0ff;
+
+  animation: fade 1s ease-in-out infinite alternate, flutter 0.5s ease-in-out infinite alternate;
 }
+
+@keyframes flutter {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .loadmorebut:active {
   zoom: 110%;
 }
@@ -140,25 +171,20 @@
   background: #b30000;
 }
 
-@media screen and (min-width: 768px) {
-  .maindiv {
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .posts {
     width: 50%;
-    padding-bottom: 50px;
-    overflow-x: hidden;
-    scrollbar-gutter: red;
   }
-  .posts:hover {
-    transform: scale(1.05);
+}
+
+@media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+  .posts {
+    width: 50%;
   }
-  .loadmorebut:hover {
-    transform: scale3d(1, 1.1, 1);
-  }
-  .infiP {
-    padding-bottom: 0%;
-    margin-bottom: 10px;
-    padding-left: 15%;
+}
+
+@media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+  .posts {
+    width: 50%;
   }
 }

@@ -31,7 +31,7 @@ import { useSpring, animated as a } from 'react-spring';
 import { PUBLIC_URL, REACT_APP_CURURL } from '../../../utils/constants/env';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Responsive from '../../../components/responsive/Responsive';
-import { faComment, faHeart, faShare } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faComment, faHeart, faShare } from '@fortawesome/free-solid-svg-icons';
 const CURURL = REACT_APP_CURURL;
 let likeCountArray = []; // Array to store the likes count of each post
 let element = null;
@@ -236,24 +236,16 @@ const Content = () => {
   if (showProfile) {
     return (
       <a.div className={Styles.userprofilemain} style={{ ...contentProps, overflowX: 'hidden' }}>
-        <span
-          style={{
-            fontSize: '50px',
-            boxShadow: '1px 1px 10px 1px grey',
-            border: '1px solid white',
-            borderRadius: '60px',
-            color: 'red',
+        <FontAwesomeIcon
+          icon={faClose}
+          size="2x"
+          color="red"
+          style={{ zIndex: 10, cursor: 'pointer' }}
+          onClick={() => {
+            setShowProfile(false);
+            setUserSearch('');
           }}
-        >
-          <i
-            onClick={() => {
-              setShowProfile(false);
-              setUserSearch('');
-            }}
-            styles={{ color: 'Dodgerblue', cursor: 'pointer' }}
-            className="fa fa-times-circle"
-          ></i>
-        </span>
+        />
 
         <div
           className={Styles.userProfile}

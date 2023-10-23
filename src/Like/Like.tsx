@@ -19,9 +19,7 @@ const Like = () => {
     getpostsforfeed(username, state.lastcount, 2)
       .then((res) => {
         if (res.length > 0) {
-          dispatch(
-            populateLike([...state.posts, ...res], state.lastcount + res.length)
-          );
+          dispatch(populateLike([...state.posts, ...res], state.lastcount + res.length));
         } else {
           sethasmore(false);
         }
@@ -37,6 +35,10 @@ const Like = () => {
     }
     return () => setunmounted(true);
   }, [username]);
+
+  useEffect(() => {
+    dispatch({ type: 'SHOWLIKE', payload: true });
+  }, []);
 
   return (
     <>

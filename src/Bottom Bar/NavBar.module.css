@@ -47,6 +47,15 @@
   background: linear-gradient(to right, rgb(6, 6, 13), white);
 }
 
+/* Define animation */
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 .navbar {
   position: absolute;
   display: flex;
@@ -71,11 +80,13 @@
 @media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
   .navbar_container {
     width: 8vw;
+    animation: slideRight 0.5s ease-in-out forwards;
   }
 }
 
 @media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
   .navbar_container {
     width: 5vw;
+    animation: slideRight 0.5s ease-in-out forwards;
   }
 }

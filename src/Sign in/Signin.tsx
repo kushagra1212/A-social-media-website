@@ -14,6 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import axiosInstance from '../Errors/httpInterceptor';
 import { API_END_POINT } from '../utils/constants/env';
+import loginUserHandler from '../methods/loginuser';
 const URL = API_END_POINT;
 const Signin = () => {
   const dispatch = useDispatch();
@@ -24,9 +25,8 @@ const Signin = () => {
   const Alert = useAlert();
   let access = useSelector((state) => state.signinReducer.access);
 
-  const loginhandle = async (e) => {
-    e.preventDefault();
-    if (!username || !password) {
+  const loginhandle = async ({ _username, _password }) => {
+    if (!_username || !_password) {
       if (showAlert) {
         Alert.error('Field is Empty !', {
           onOpen: () => {
@@ -40,16 +40,7 @@ const Signin = () => {
       return;
     }
     try {
-      const res = await axiosInstance.post(
-        `${URL}/auth/signin`,
-        {
-          username: username,
-          password: password,
-        },
-        {
-          withCredentials: true,
-        },
-      );
+      const res = await loginUserHandler({ username: _username, password: _password });
       const success = res.data.success;
 
       if (success) {
@@ -80,25 +71,58 @@ const Signin = () => {
         <h1>Sign In</h1>
       </div>
       <div className={Styles.container}>
+        {' '}
+        <button
+          onClick={(e) => {
+            loginhandle({ _username: 'kushagra07', _password: 'kushagra07' });
+          }}
+          className={Styles.loginbutAsGuest}
+        >
+          Sign in as Guest
+        </button>
         <div className={Styles.input}>
           <input
+            onKeyDown={(event) =>
+              event.key === 'Enter'
+                ? loginhandle({
+                    _username: username,
+                    _password: password,
+                  })
+                : null
+            }
             placeholder="username"
             onChange={(e) => setusername(e.target.value.substr(0, 15).toLowerCase().trim(''))}
             value={username}
             type="text"
           />
           <input
-            onKeyDown={(event) => (event.key === 'Enter' ? loginhandle(event) : null)}
+            onKeyDown={(event) =>
+              event.key === 'Enter'
+                ? loginhandle({
+                    _username: username,
+                    _password: password,
+                  })
+                : null
+            }
             onChange={(e) => setpassword(e.target.value.trim(''))}
             value={password}
             placeholder="Password"
             type="password"
           />
         </div>
-        <button onClick={loginhandle} className={Styles.loginbut}>
+        <button
+          onClick={() =>
+            loginhandle({
+              _username: username,
+              _password: password,
+            })
+          }
+          className={Styles.loginbut}
+        >
           Log in
         </button>
       </div>
+
       <Link
         to="/signup"
         className={Styles.account}

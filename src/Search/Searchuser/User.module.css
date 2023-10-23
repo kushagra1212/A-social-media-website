@@ -62,7 +62,7 @@
 }
 .followingbut {
   width: 80px;
-  font-size: 1.1em;
+  font-size: 1em;
   color: white;
   font-weight: 700;
   font-family: ui-monospace;
@@ -79,7 +79,7 @@
   box-shadow: 1px 1px 20px grey;
 }
 .addapost {
-  font-size: 1.1em;
+  font-size: 1em;
   color: white;
   font-weight: 700;
   font-family: ui-monospace;
@@ -98,19 +98,18 @@
 .posts {
   position: relative;
   padding: 0%;
+  color: black;
   margin-right: 1%;
 }
 .posts label {
   text-decoration: aliceblue;
-  background-color: #ab47bc;
   outline: none;
   border-radius: 5px;
-  border: 2px solid rgba(128, 128, 128, 0.466);
   transform-origin: center;
 }
 .logoutbut {
   height: 30px;
-  font-size: 1.1em;
+  font-size: 1em;
   color: white;
   font-weight: 700;
   font-family: ui-monospace;

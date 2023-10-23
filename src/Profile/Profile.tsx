@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
-import Top from "./Top/Top";
-import getfollowing from "../methods/getfollowing.js";
-import getpostcount from "../methods/getpostcount";
-import getfollowers from "../methods/getfollowers";
-import Container from "./Container/Container";
-import Showbar from "../showbar/Showbar";
-import { useEffect, useState } from "react";
-import { getposts } from "../methods/getposts";
-import Styles from "./Profile.module.css";
+import { useDispatch, useSelector } from 'react-redux';
+import Top from './Top/Top';
+import getfollowing from '../methods/getfollowing.js';
+import getpostcount from '../methods/getpostcount';
+import getfollowers from '../methods/getfollowers';
+import Container from './Container/Container';
+import Showbar from '../showbar/Showbar';
+import { useEffect, useState } from 'react';
+import { getposts } from '../methods/getposts';
+import Styles from './Profile.module.css';
 const Profile = ({ preview }) => {
   const dispatch = useDispatch();
   const [post, setpost] = useState(false);
@@ -16,9 +16,7 @@ const Profile = ({ preview }) => {
   const [showfollowers, setshowfollowers] = useState(false);
   const [showfollowing, setshowfollowing] = useState(false);
   const [isUnmounted, setIsUnmounted] = useState(false);
-  const { followerscount, followingcount } = useSelector(
-    (state) => state.count
-  );
+  const { followerscount, followingcount } = useSelector((state) => state.count);
   const setposthand = (is) => {
     setpost(is);
   };
@@ -41,6 +39,14 @@ const Profile = ({ preview }) => {
   const setshowfollowinghandle = (value) => {
     setshowfollowing(value);
   };
+
+  useEffect(() => {
+    dispatch({ type: 'SHOWPROFILE', payload: true });
+
+    return () => {
+      dispatch({ type: 'SHOWPROFILE', payload: false });
+    };
+  }, []);
 
   if (showfollowers) {
     return (
@@ -73,9 +79,7 @@ const Profile = ({ preview }) => {
         />
 
         <>
-          {username && username !== "" ? (
-            <Container toDelete={true} username={username} />
-          ) : null}{" "}
+          {username && username !== '' ? <Container toDelete={true} username={username} /> : null}{' '}
         </>
       </div>
     );

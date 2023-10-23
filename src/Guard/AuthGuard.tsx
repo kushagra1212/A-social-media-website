@@ -16,11 +16,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ ProtectedRoute, path }) => {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading)
-    return (
-      <div>
-        <p>Loading..</p>
-      </div>
-    );
+    return <div style={{ width: '100vw', height: '100vh', backgroundColor: 'black' }}></div>;
 
   if (isAuthenticated) {
     if (authRoutePaths.includes(path)) return <Navigate to="/feed" replace />;

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { useSelector } from "react-redux";
-import Styles from "./Topprofile.module.css";
-import { useAlert } from "react-alert";
-import { PUBLIC_URL } from "../../utils/constants/env";
+import { useSelector } from 'react-redux';
+import Styles from './Topprofile.module.css';
+import { useAlert } from 'react-alert';
+import { PUBLIC_URL } from '../../utils/constants/env';
 const Topprofile = ({
   setposthandle,
   edit_it,
@@ -18,14 +18,12 @@ const Topprofile = ({
 }) => {
   const Alert = useAlert();
   const [showAlert, setShowAlert] = useState(true);
-  const { followerscount, followingcount } = useSelector(
-    (state) => state.count
-  );
+  const { followerscount, followingcount } = useSelector((state) => state.count);
   let { profilepic } = useSelector((state) => {
     return state.user;
   });
   const showAlertHandle = () => {
-    Alert.info("Not Available 😛", {
+    Alert.info('Not Available 😛', {
       onOpen: () => {
         setShowAlert(false);
       },
@@ -38,11 +36,7 @@ const Topprofile = ({
   return (
     <div className={Styles.maindiv}>
       <div className={Styles.firstdiv}>
-        <img
-          onClick={() => edit_it()}
-          src={profilepic ? profilepic : "userImage.png"}
-          alt=""
-        />
+        <img onClick={() => edit_it()} src={profilepic ? profilepic : 'userImage.png'} alt="" />
         <button onClick={() => edit_it()} className={Styles.editbut}>
           Edit Profile
         </button>
@@ -58,13 +52,13 @@ const Topprofile = ({
       </div>
       <div className={Styles.thirddiv}>
         <div className={Styles.posts}>
-          <label style={{ color: "white" }}>Posts</label>
+          <label>Posts</label>
           <br />
           <h6> {postsnumber}</h6>
         </div>
 
         <label>
-          {" "}
+          {' '}
           <button
             className={Styles.followersbut}
             onClick={() =>
@@ -75,30 +69,26 @@ const Topprofile = ({
                 : null
             }
           >
-            followers{" "}
-          </button>{" "}
-          <h6>{followerscount}</h6>{" "}
+            followers{' '}
+          </button>{' '}
+          <h6>{followerscount}</h6>{' '}
         </label>
 
         <label>
-          {" "}
+          {' '}
           <button
             className={Styles.followingbut}
             onClick={() =>
-              followingcount
-                ? setshowfollowinghandle(true)
-                : showAlert
-                ? showAlertHandle()
-                : null
+              followingcount ? setshowfollowinghandle(true) : showAlert ? showAlertHandle() : null
             }
           >
-            following{" "}
-          </button>{" "}
+            following{' '}
+          </button>{' '}
           <h6>{followingcount}</h6>
         </label>
 
         <button className={Styles.addapost} onClick={setposthandle}>
-          Add a Post{" "}
+          Add a Post{' '}
         </button>
       </div>
     </div>

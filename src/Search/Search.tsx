@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import User from './Searchuser/User';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Profile from '../Profile/Profile';
 import Styles from './Search.module.css';
 import verifiesusers from '../methods/verifiesusers';
@@ -31,6 +31,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view, preview }) 
   const [showlist, setshowlist] = useState(true);
   const [isUnmounted, setUnmounted] = useState(false);
   const [loading2, setLoading2] = useState(false);
+  const dispatch = useDispatch();
   const setfollowingfunc = (value) => {
     setfollowing(value);
   };
@@ -111,6 +112,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view, preview }) 
     searchuserhandle(val);
   };
   useEffect(() => {
+    dispatch({ type: 'SHOWSEARCH', payload: true });
     if (!isUnmounted) {
       let usernameofsender = searchuser;
 
@@ -164,6 +166,7 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view, preview }) 
             {view ? (
               <div className={Styles.searchbar}>
                 <input
+                  ref={(input) => input && input.focus()}
                   placeholder="Search Users Here..."
                   type="text"
                   value={searchuser}

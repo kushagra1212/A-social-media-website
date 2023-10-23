@@ -288,6 +288,9 @@ px
   .chatWithFriends {
     height: 100%;
   }
+  .perticularmessage_receiver {
+    max-width: 70%;
+  }
 }
 
 @media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
@@ -304,7 +307,9 @@ px
     justify-self: flex-end;
     left: 50%;
   }
-
+  .perticularmessage_receiver {
+    max-width: 100%;
+  }
   .chatWithFriends {
     height: 100%;
   }

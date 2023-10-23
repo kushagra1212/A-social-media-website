@@ -1,6 +1,5 @@
 .maindiv {
   max-height: 100vh;
-  background-color: #263238;
   overflow-y: hidden;
 }
 
@@ -23,7 +22,7 @@
   /* Add neon effect */
   background: linear-gradient(to bottom, #000000 0%, #070707 100%);
   box-shadow: 0 0 1px #ffffff9e, 0 0 5px #ffffff89, 0 0 10px #1d77fff9, 0 0 15px #1d77ffef,
-    0 0 100px #1d77ff7e;
+    0 0 65px #1d77ffef, 0 0 105px #1d77ffef, 0 0 35px #1d77ffef, 0 0 100px #1d77ff7e !important;
 }
 
 .listitem {
