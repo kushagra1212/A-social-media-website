@@ -32,6 +32,6 @@
     "src/utils/**/*.ts"
   ],
   "noEmit": true,
-  "noEmitOnError": true
-  //,"exclude": ["src/"]
+  "noEmitOnError": true,
+  "exclude": ["src/"]
 }
