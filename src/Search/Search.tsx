@@ -9,6 +9,8 @@ import getpartialusers from '../methods/getpartialusers';
 import getuser from '../methods/getuser';
 import axiosInstance from '../Errors/httpInterceptor';
 import { PUBLIC_URL, API_END_POINT } from '../utils/constants/env';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 const URL = API_END_POINT;
 let count = 0;
 const Search = ({ showprofilefromshowbar, usernameformshowbar, view, preview }) => {
@@ -171,13 +173,12 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view, preview }) 
                   }}
                   required
                 />
-                <img
+
+                <FontAwesomeIcon
+                  icon={faSearch}
                   className={Styles.searchbtn}
+                  size="2x"
                   onClick={() => (searchuser.length > 0 ? setshowprofile(true) : null)}
-                  src={'/search/search.png'}
-                  width="40px"
-                  height="40px"
-                  alt=""
                 />
               </div>
             ) : null}
@@ -192,13 +193,11 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view, preview }) 
                   showuserprofilehandle(u);
                 }}
               >
-                <img
-                  width="30px"
-                  height="30px"
-                  alt=""
-                  src={u.profilepic ? u.profilepic : 'userImage.png'}
-                />
-
+                {u.profilepic ? (
+                  <img alt="" src={u.profilepic} />
+                ) : (
+                  <FontAwesomeIcon icon={faUserAstronaut} size="2x" />
+                )}
                 <div>
                   <h6>@{u.username}</h6>
                   <h4>{u.name}</h4>
@@ -216,17 +215,18 @@ const Search = ({ showprofilefromshowbar, usernameformshowbar, view, preview }) 
               <div className={Styles.loader}></div>
             ) : searchuser !== '' && users.length === 0 ? (
               <div className={Styles.notfound}>
-                <img alt="" width="50%" height="40%" src={'nouser.gif'} />
                 <h2>No User Found</h2>
               </div>
             ) : null}
           </div>
         </div>
         {window.screen.width >= 768 ? (
-          <SuggestionList
-            setShowProfileHandler={setShowProfileHandler}
-            setUserSearchHandler={setUserSearchHandler}
-          />
+          <div className={Styles.suggestionListWrap}>
+            <SuggestionList
+              setShowProfileHandler={setShowProfileHandler}
+              setUserSearchHandler={setUserSearchHandler}
+            />
+          </div>
         ) : null}
       </>
     );

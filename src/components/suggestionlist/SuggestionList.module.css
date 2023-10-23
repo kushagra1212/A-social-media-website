@@ -46,6 +46,13 @@
   border-bottom: 2px solid #80808026;
   color: white;
   font-weight: 900;
+  border-radius: 0.5em;
+}
+
+.listitem:hover {
+  background-color: #80808026;
+
+  cursor: pointer;
 }
 
 .listitem h6 {

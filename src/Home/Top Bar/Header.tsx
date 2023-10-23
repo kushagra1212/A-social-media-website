@@ -12,14 +12,13 @@ const Header = () => {
 
   return (
     <div className={Styles.Header}>
-      <div id={Styles.cameraimg}>
-        <FontAwesomeIcon
-          onClick={() => {
-            dispatch(show_user_stories_handle(true));
-          }}
-          icon={faCamera}
-          color="white"
-        />
+      <div
+        id={Styles.cameraimg}
+        onClick={() => {
+          dispatch(show_user_stories_handle(true));
+        }}
+      >
+        <FontAwesomeIcon icon={faCamera} color="white" />
       </div>
       <div className={Styles.stories}>
         <Stories />

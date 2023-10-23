@@ -3,8 +3,9 @@
   padding-bottom: 3%;
   width: 100%;
   scroll-behavior: smooth;
-  height: 70vh;
+  height: auto;
   position: absolute;
+  background-color: rgb(42, 39, 39);
   z-index: -1;
 }
 .singlecontainer {
@@ -24,7 +25,7 @@
   padding: 0%;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: #000000;
   border-radius: 10px;
   height: 100%;
   justify-items: center;
@@ -52,7 +53,7 @@
   margin-top: 0%;
   display: flex;
   align-items: center;
-  background: linear-gradient(to right, transparent 0%, #e8e8e8 50%, transparent 100%);
+  background: linear-gradient(to right, transparent 0%, #120d0d 50%, transparent 100%);
 }
 
 .topdiv img {
@@ -76,7 +77,7 @@
   display: flex;
   margin-top: 0%;
   justify-content: space-evenly;
-  background: linear-gradient(to right, transparent 0%, #e8e8e8 50%, transparent 100%);
+  background: linear-gradient(to right, transparent 0%, #282828 50%, transparent 100%);
   animation: ContentMainAnimate_load__1OgoM 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   border: 2px solid rgba(245, 222, 179, 0);
   border-radius: 2px;
@@ -87,7 +88,7 @@
 .caption {
   position: relative;
   width: 100%;
-  background: linear-gradient(to right, transparent 0%, #e8e8e8 50%, transparent 100%);
+  background: linear-gradient(to right, transparent 0%, #3a3434 50%, transparent 100%);
   animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   min-height: 20px;
   max-height: 50px;
@@ -100,7 +101,7 @@
 }
 .imgdiv {
   display: flex;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(33, 23, 23);
   padding: 0%;
   margin-top: 1%;
   outline: none;
@@ -131,8 +132,8 @@
 
 @media screen and (min-width: 768px) {
   .maincontent {
-    background: white;
-    top: 18vh;
+    background: rgb(28, 23, 23);
+    padding-top: 18vh;
     height: 100vh;
     display: flex;
     flex-direction: column;

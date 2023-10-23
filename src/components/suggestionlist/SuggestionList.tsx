@@ -10,7 +10,7 @@ import { addSuggestions } from '../../reduces/actions/SuggestionsAction';
 import getSuggestion from '../../methods/getSuggestion';
 import { PUBLIC_URL } from '../../utils/constants/env';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserAlt, faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 const MyLoaderPC = (props) => (
   <ContentLoader
     speed={3}
@@ -108,7 +108,7 @@ const SuggestionList = ({ setShowProfileHandler, setUserSearchHandler }) => {
                 ) : (
                   <FontAwesomeIcon
                     className={Styles.listimg}
-                    icon={faUserAlt}
+                    icon={faUserAstronaut}
                     onClick={() => {
                       let x = user.username;
                       setUserSearchHandler(x);

@@ -12,22 +12,22 @@
   min-height: 30px;
   width: 80%;
   outline: none;
+  border-radius: 1em;
   text-align: center;
   z-index: 10;
   /* color: black; */
   /* background-color: rgb(140 247 255 / 0%); */
   border: 2px solid rgb(0 0 0 / 0%);
-  border-radius: 5px;
   overflow: visible;
   /* box-shadow: 1px 1px 1px #80808000; */
   background-color: rgb(255 255 255 / 7%);
   transition: 500ms ease-in-out box-shadow;
   font-size: 1em;
   color: white;
-  font-weight: 400;
 }
 .comment_input:focus {
-  box-shadow: 2px 2px 1000px 1000px rgba(51, 56, 58, 0.171);
+  /* existing styles */
+  box-shadow: 0 0 3px #ffffff, 0 0 4px #0033ff, 0 0 5px #0033ff, 0 0 10px #0033ff;
 }
 .add {
   position: relative;

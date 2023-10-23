@@ -22,15 +22,15 @@
 
   /* Add neon effect */
   background: linear-gradient(to bottom, #000000 0%, #070707 100%);
-  box-shadow: 0 0 20px #fff, 0 0 40px #fff, 0 0 60px #ff1de8, 0 0 80px #ff1de8, 0 0 100px #ff1de8,
-    0 0 120px #ff1de8;
+  box-shadow: 0 0 1px #ffffff9e, 0 0 5px #ffffff89, 0 0 10px #1d77fff9, 0 0 15px #1d77ffef,
+    0 0 100px #1d77ff7e;
 }
 
 .listitem {
   cursor: pointer;
   position: relative;
   display: flex;
-  height: 50px;
+  height: auto;
   /* border: 2px solid #80808061; */
   /* border-radius: 10px; */
   /* height: 15%; */
@@ -42,12 +42,18 @@
   transform: scale(1);
 }
 .listitem:active {
-  transform: scale(1.1);
+  background: linear-gradient(rgb(0, 31, 79) 0%, rgb(0, 15, 51) 100%);
 }
+
+.listitem:hover {
+  background: linear-gradient(rgb(0, 31, 79) 0%, rgb(0, 15, 51) 100%);
+}
+
 .userimg {
   position: relative;
-  width: 15%;
-  border-radius: 10px;
+  width: 3em;
+  border-radius: 2em;
+  height: 3em;
 }
 .userimg img {
   width: 100%;
@@ -90,6 +96,11 @@
   top: 13vh;
   position: absolute;
 }
+.messagetext h2 {
+  margin-left: 10%;
+  opacity: 0.9;
+}
+
 .maindiv2 img {
   cursor: none;
   height: 300px;
@@ -112,7 +123,11 @@
 }
 @media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
   .maindiv {
-    width: 50%;
+    width: 100%;
+    color: white;
+    overflow: hidden;
+    height: 100%;
+    position: absolute;
   }
   .list {
     display: flex;
@@ -125,26 +140,23 @@
     flex-direction: column;
     scroll-behavior: smooth;
     top: 13vh;
-    padding-top: 20px;
+
+    padding-top: 3em;
     height: 88vh;
     overflow: hidden;
     overflow-y: hidden;
     overflow-y: scroll;
-    background: linear-gradient(to bottom, #000000 0%, #070707 100%);
-    box-shadow: 0 0 20px #fff, 0 0 40px #fff, 0 0 60px #ff1de8, 0 0 80px #ff1de8, 0 0 100px #ff1de8,
-      0 0 120px #ff1de8;
   }
   .listitem {
     cursor: pointer;
     position: relative;
     display: flex;
     height: 50px;
-    border: 2px solid #80808061;
     border-radius: 10px;
-    height: 15%;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+    height: auto;
     margin-top: 2%;
     padding: 10px;
     transform: scale(1);
@@ -152,4 +164,42 @@
 }
 
 @media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+  .maindiv {
+    width: 100%;
+    color: white;
+    overflow: hidden;
+    height: 100%;
+    position: absolute;
+  }
+  .list {
+    display: flex;
+    position: absolute;
+    width: 50%;
+    border-top: 1px solid #ffffff00;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    background-blend-mode: multiply;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    top: 13vh;
+    padding-top: 3em;
+    height: 88vh;
+    overflow: hidden;
+    overflow-y: hidden;
+    overflow-y: scroll;
+  }
+  .listitem {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    height: 50px;
+    border-radius: 10px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 2%;
+    height: auto;
+    padding: 10px;
+    transform: scale(1);
+  }
 }

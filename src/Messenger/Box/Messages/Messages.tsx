@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import TimeAgo from 'react-timeago';
 import getmessages from '../../../methods/getmessages';
 import addmessage from '../../../methods/addmessage';
+import Responsive from '../../../components/responsive/Responsive';
 import { PUBLIC_URL } from '../../../utils/constants/env';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -87,10 +88,15 @@ const Messages = () => {
   if (user === null) {
     return (
       <div style={{ display: 'flex', justifyContent: 'flex-end', height: '100%' }}>
-        <div className={Styles.chatWithFriends}>
-          <img alt="" src={'chat2.gif'} />
-          <h4 style={{ fontSize: '4em', opacity: '0.5' }}> Chat with Friends</h4>{' '}
-        </div>
+        <Responsive displayIn={['Laptop']}>
+          <div className={Styles.chatWithFriends}>
+            <img alt="" src={'chat2.gif'} />
+            <h4 style={{ fontSize: '3em', opacity: '0.5', color: 'white' }}>
+              {' '}
+              Chat with Friends
+            </h4>{' '}
+          </div>
+        </Responsive>
 
         <div className={Styles.scrolldiv} ref={Scrollref}></div>
         <textarea

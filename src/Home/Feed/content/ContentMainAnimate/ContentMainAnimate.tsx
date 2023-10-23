@@ -5,8 +5,8 @@ const MyLoader = (props) => (
     speed={1}
     width="100%"
     height="100vh"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
+    backgroundColor="#000000"
+    foregroundColor="#666666"
     {...props}
   >
     {' '}

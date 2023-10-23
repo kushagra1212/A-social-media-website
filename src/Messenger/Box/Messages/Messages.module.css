@@ -56,6 +56,8 @@
   display: flex;
   width: 100 vw;
   justify-content: space-evenly;
+  margin: 1em;
+  border-radius: 1em;
   padding: 0%;
   align-items: stretch;
   bottom: 0;
@@ -65,7 +67,8 @@
   margin-bottom: 0;
   background: linear-gradient(to bottom, #121e2d, #000000);
 
-  box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #006aff, 0 0 70px #006aff, 0 0 80px #006aff;
+  box-shadow: 0 0 1px #ffffff9e, 0 0 5px #ffffff89, 0 0 10px #1d77fff9, 0 0 15px #1d77ffef,
+    0 0 100px #1d77ff7e;
 }
 .textarea {
   position: relative;
@@ -276,8 +279,10 @@ px
     align-content: initial;
     justify-content: flex-end;
     height: 100%;
-    width: 100%;
+    width: 50%;
     background-color: black;
+    justify-self: flex-end;
+    left: 50%;
   }
 
   .chatWithFriends {
@@ -286,4 +291,21 @@ px
 }
 
 @media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+  .maindiv {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    justify-self: inherit;
+    align-content: initial;
+    justify-content: flex-end;
+    height: 100%;
+    width: 50%;
+    background-color: black;
+    justify-self: flex-end;
+    left: 50%;
+  }
+
+  .chatWithFriends {
+    height: 100%;
+  }
 }

@@ -44,8 +44,8 @@ export const MyLoader = (props) => {
       speed={1}
       width="100%"
       height={heightofAni}
-      backgroundColor="#f3f3f3"
-      foregroundColor="#ecebeb"
+      backgroundColor="#00000"
+      foregroundColor="#666666"
       {...props}
     >
       {' '}
@@ -155,12 +155,11 @@ const Content = () => {
   };
 
   const addCommentFuncforContent = async (comment, post) => {
-    let id = post._id;
-    let profilePicture = post.pic;
+    const id = post._id;
 
-    let com = await addcomment(id, username, comment, profilePicture);
+    let com = await addcomment(id, username, comment);
 
-    dispatch(updateLatestPost(com, id));
+    dispatch(updateLatestPost(com));
   };
   const setcommentsfunc = ({ val, post }) => {
     element = document.querySelector('#infiniteScroll');
