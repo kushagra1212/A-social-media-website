@@ -2,7 +2,6 @@
   position: relative;
   height: 30%;
   width: 100%;
-  background-color: rgb(255, 255, 255);
   border: 2px solid rgba(128, 128, 128, 0);
   border-radius: 5%;
   box-shadow: 2px 2px 20px 2px rgb(128 128 128 / 25%);
@@ -26,7 +25,7 @@
 .editbut {
   height: 30px;
   width: 30%;
-  font-size: 1.1em;
+  font-size: 1em;
   color: white;
   font-weight: 700;
   font-family: ui-monospace;
@@ -44,7 +43,7 @@
 }
 .followersbut {
   width: 80px;
-  font-size: 1.1em;
+  font-size: 1em;
   color: white;
   cursor: default;
   font-weight: 700;
@@ -60,7 +59,7 @@
 
 .followingbut {
   width: 80px;
-  font-size: 1.1em;
+  font-size: 1em;
   color: white;
   font-weight: 700;
   font-family: ui-monospace;
@@ -95,13 +94,12 @@
   position: relative;
   padding: 0%;
   margin-right: 1%;
+  color: black;
 }
 .posts label {
   text-decoration: aliceblue;
-  background-color: #ab47bc;
   outline: none;
   border-radius: 5px;
-  border: 2px solid rgba(128, 128, 128, 0.466);
   transform-origin: center;
 }
 .logoutbut {

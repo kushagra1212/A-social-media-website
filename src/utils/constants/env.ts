@@ -1,0 +1,11 @@
+export const PUBLIC_URL = import.meta.env.VITE_PUBLIC_URL;
+export const REACT_APP_SOCKETURL = import.meta.env.VITE_REACT_APP_SOCKETURL;
+export const API_END_POINT = import.meta.env.VITE_API_END_POINT;
+export const REACT_APP_CURURL = import.meta.env.VITE_REACT_APP_CURURL;
+export const REACT_APP_FAPIKEY = import.meta.env.VITE_REACT_APP_FAPIKEY;
+export const REACT_APP_AUTHDOM = import.meta.env.VITE_REACT_APP_AUTHDOM;
+export const REACT_APP_PROJECTID = import.meta.env.VITE_REACT_APP_PROJECTID;
+export const REACT_APP_SB = import.meta.env.VITE_REACT_APP_SB;
+export const REACT_APP_MSID = import.meta.env.VITE_REACT_APP_MSID;
+export const REACT_APP_APPID = import.meta.env.VITE_REACT_APP_APPID;
+export const REACT_APP_MID = import.meta.env.VITE_REACT_APP_MID;

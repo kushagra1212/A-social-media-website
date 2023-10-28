@@ -1,60 +1,61 @@
-* {
-  box-sizing: border-box;
-}
-.footer {
+.footer_container {
   position: fixed;
   display: flex;
   width: 100%;
   justify-content: space-around;
-  top: 94%;
-  height: 100px;
-  background-color: rgb(255, 255, 255);
-  border: 2px solid rgba(0, 0, 0, 0);
-  border-radius: 10px;
-  box-shadow: 2px -3px 20px 0px rgb(103 103 103);
+  bottom: 0%;
+  height: auto;
   z-index: 10;
+  padding: 0;
+  margin: 0;
+  height: 3em;
+
+  border: 1px solidrgba(255, 255, 255, 0) e;
+  border-radius: 10em 10em 0 0;
+  background: linear-gradient(to right, rgb(13, 13, 20), white);
 }
 
-.footer img {
-  background-color: rgb(255, 255, 255);
-  border: 2px solid rgba(245, 222, 179, 0);
-  border-radius: 10px;
-
-  height: 30px;
-  width: 30px;
-  transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+.selected {
+  color: #7e93fa;
 }
-
-.footer img:hover {
+.notselected {
+  color: #48507a;
+}
+.footer a:hover {
   transform: scale(1.5);
+  color: #7e93fa;
 }
-.footer img:active {
+.footer a:active {
   transform: scale(1.5);
+  color: #7e93fa;
+}
+.footer_backdrop {
+  position: absolute;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  border-radius: 10em 10em 0 0;
+  width: 100%;
+  justify-content: space-around;
+  height: 3em;
+  background-color: rgba(0, 0, 0, 0.827);
+  backdrop-filter: blur(1000em);
 }
 
-@media screen and (min-width: 768px) {
-  .footer img {
-    transform: rotate(270deg);
-  }
-  .footer {
-    position: fixed;
+.footer {
+  position: absolute;
+  display: flex;
+  margin: 0;
+  border: 1px solidrgba(255, 255, 255, 0) e;
+  border-radius: 10em 10em 0 0;
+  padding: 0.5em;
+  border-radius: 10em 10em 0 0;
+  width: 100%;
+  justify-content: space-around;
+  align-self: center;
+  border: 2px solid rgba(0, 0, 0, 0);
+  z-index: 10;
+  height: 3em;
 
-    width: 40%;
-    transform: rotate(90deg);
-
-    justify-content: space-around;
-    top: 50%;
-    align-items: center;
-
-    left: -15%;
-
-    background-color: rgb(255, 255, 255);
-    border: 2px solid rgba(0, 0, 0, 0);
-    border-radius: 10px;
-    box-shadow: 2px 1px 20px 0px rgb(103 103 103 / 40%);
-    transition: transform cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
-  }
-  .footer img:hover {
-    transform: scale(1.5);
-  }
+  box-shadow: 0 0 5px #777777, 0 0 10px #6e6e6e, 0 0 20px #09123f, 0 0 40px 10px #000728;
 }

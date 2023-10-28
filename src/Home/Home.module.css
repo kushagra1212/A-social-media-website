@@ -1,27 +1,41 @@
 * {
   margin: 0%;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  padding: 0%;
 }
 .maindiv {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10vh;
+  background: linear-gradient(to bottom, #000000, #1a1a1a);
 }
-/*FOR BIGGER SCREEN DEVICES*/
-@media screen and (min-width: 768px) {
+.sugglist {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 767px) {
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .maindiv {
-    background: white;
+    padding-top: 0vh;
   }
-  .userstoriesani {
-    height: 100vh;
+}
+
+@media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+  .maindiv {
+    padding-top: 0vh;
   }
-  .helperdiv {
-    background-color: rgba(56, 55, 55, 0.253);
-    -webkit-backdrop-filter: blur(25px);
-    backdrop-filter: blur(25px);
-    height: 100vh;
-    width: 100vw;
+}
+
+@media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+  .maindiv {
+    padding-top: 0vh;
   }
 }

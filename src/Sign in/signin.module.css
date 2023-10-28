@@ -1,76 +1,201 @@
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
-.container {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 10%;
-  background-image: linear-gradient(120deg, #f5f5f5 0%, #ebedee 100%);
-
-  overflow-x: hidden;
-}
-.instagram {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 2em;
-}
-.input {
-  position: relative;
+.main_container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding-top: 5%;
-  padding-bottom: 10px;
-  margin-top: 10%;
-  margin-bottom: 10%;
-  width: 100%;
-  font-size: 1.2em;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  overflow-x: hidden;
+
+  background: linear-gradient(to right bottom, #000000, #000000dc);
 }
+.container_backdrop {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-size: 200% 200%;
+  backdrop-filter: blur(100000px);
+}
+.signin {
+  position: relative;
+  font-weight: bolder;
+  font-weight: 900;
+  z-index: 10;
+  height: auto;
+  backdrop-filter: blur(20px);
+  color: white;
+  border-radius: 1em;
+  font-size: 1.5em;
+  width: 100%;
+  text-align: center;
+
+  opacity: 1;
+  align-self: flex-start;
+  color: #fff;
+  text-shadow: 0 0 40px rgb(0, 255, 255), 0 0 80px rgb(0, 94, 255), 0 0 90px rgb(0, 106, 255),
+    0 0 100px #0ff, 0 0 150px rgb(0, 76, 255);
+
+  opacity: 0;
+  transform: opacity(0);
+  animation: slide-in 0.5s ease forwards;
+}
+
+.container {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  padding: 0em;
+  justify-self: center;
+  padding: 1em;
+  border: 2px solid rgba(112, 142, 233, 0);
+  border-radius: 20px;
+  z-index: 10;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: linear-gradient(to right bottom, #3d3d3d94, #05060b90);
+  backdrop-filter: blur(5px);
+}
+/* @keyframes neon-animation {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #0ff, 0 0 80px #0ff,
+      0 0 90px #0ff, 0 0 100px #0ff, 0 0 150px #0ff;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #f0f, 0 0 80px #f0f,
+      0 0 90px #f0f, 0 0 100px #f0f, 0 0 150px #f0f;
+  }
+} */
 .input input {
   width: 100%;
   margin-top: 5%;
   margin-bottom: 5%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1.2em;
-  height: 3em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 2em;
+  height: 4em;
   background-color: #ffffff;
   color: rgb(0, 0, 0);
-  border: 2px solid rgb(255 255 255);
-  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 1em;
   outline: none;
   padding: 2%;
   font-size: medium;
-  transition: transform cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
-  /* align-items: center; */
+  box-shadow: 1px 1px 5px rgba(128, 128, 128, 0.624);
 }
 .loginbut {
-  background-color: #f57c00;
+  background: linear-gradient(to right bottom, #0f1327, #455b92dc);
   outline: none;
-  border: 2px solid rgba(255, 255, 255, 0);
-  color: white;
+  border: 2px solid rgba(82, 91, 255, 0.252);
+  color: rgb(255, 255, 255);
   font-weight: bolder;
   border-radius: 0px;
-  height: 40px;
-  border: 2px solid #80808000;
-  border-radius: 5px;
-  box-shadow: 1px 1px 10px grey;
-  z-index: 10;
-  transition: transform cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+  border-radius: 5em;
+  height: 3em;
+  font-size: 1.2em;
+  width: 50%;
+  align-self: center;
+
+  font-weight: 900;
+
+  background: linear-gradient(to right bottom, #062bff, #729affdc);
+  background-size: 200% 200%;
+
+  transition: background-color 1s ease;
 }
 
+.loginbutAsGuest {
+  background: linear-gradient(to right bottom, #0f1327, #455b92dc);
+  outline: none;
+  border: 2px solid rgba(82, 91, 255, 0.252);
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  border-radius: 0px;
+  border-radius: 5em;
+  height: 3em;
+  font-size: 1.2em;
+  width: 50%;
+  align-self: center;
+
+  font-weight: 900;
+
+  background: linear-gradient(to right bottom, #cd06ff, #ff72e3dc);
+  background-size: 200% 200%;
+
+  transition: background-color 1s ease;
+}
+
+.loginbutAsGuest:hover {
+  background: linear-gradient(to right bottom, #cd06ff, #ff72e3dc);
+  box-shadow: 1px 10px 50px rgb(188, 30, 255);
+  cursor: pointer;
+}
+
+.loginbutAsGuest:active {
+  background: linear-gradient(to right bottom, #cd06ff, #ff72e3dc);
+  box-shadow: 1px 10px 50px rgb(188, 30, 255);
+  cursor: pointer;
+}
+
+.loginbut:hover {
+  background: linear-gradient(to right bottom, #062bff, #729affdc);
+  box-shadow: 1px 10px 50px rgb(30, 68, 255);
+  cursor: pointer;
+}
 .loginbut:active {
-  background-color: rgb(4, 122, 200);
+  background: linear-gradient(to right bottom, #062bff, #729affdc);
+  box-shadow: 1px 10px 50px rgb(30, 68, 255);
+  cursor: pointer;
 }
 .account {
-  margin-top: 10%;
   z-index: 10;
+  background-color: white;
+  width: 90%;
+
+  font-size: 1.3em;
+  align-self: center;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0);
+  border-radius: 3em;
+  z-index: 10;
+  background: linear-gradient(to right bottom, #000000, #3c3c3cdc);
+  box-shadow: 10px 1px 10px rgba(0, 0, 0, 0.229);
+  bottom: 0;
+  font-weight: 900;
+  padding: 1em;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+
+  /* existing styles */
+  opacity: 0;
+  transform: translateY(100%);
+  animation: slide-in 0.5s ease forwards;
+}
+
+.account:hover {
+  background: linear-gradient(to right bottom, #111522, rgba(52, 83, 255, 0.863));
+  box-shadow: 10px 1px 10px rgba(0, 0, 0, 0.229);
+  cursor: pointer;
+}
+
+.account:active {
+  background: linear-gradient(to right bottom, #111522, rgba(52, 83, 255, 0.863));
+  box-shadow: 10px 1px 10px rgba(0, 0, 0, 0.229);
+  cursor: pointer;
+}
+
+.account a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
 }
 .account button {
   background-color: rgb(255 255 255 / 0%);
@@ -79,41 +204,79 @@
   text-decoration: underline;
   color: #fce4ec;
 }
-.input input:focus {
-  transform: scale3d(1.1, 1.1, 1.1);
-  box-shadow: 1px 1px 20px 1px rgba(128, 128, 128, 0.568);
+
+.account:hover {
+  color: #ffffff;
+  text-decoration: underline;
+  cursor: pointer;
 }
-@media screen and (min-width: 768px) {
+
+.logo {
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.input input:focus {
+  box-shadow: 0 0 1px 2px #0044ff, 0 0 2px 4px #0044ff, 0 0 3px 4px #0044ff;
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 767px) {
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .container {
-    width: 30%;
-    height: 96vh;
-    padding: 5%;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    box-shadow: 1px 1px 100px 1px rgba(128, 128, 128, 0.472);
-    border: 2px solid #69696900;
-    border-radius: 10px;
-    overflow-x: hidden;
+    width: 50%;
+  }
+  .account {
+    width: 50%;
+  }
+  .signin {
+    font-size: 2em;
+  }
+}
+
+@media only screen and (min-device-width: 1025px) and (max-device-width: 1366px) {
+  .container {
+    width: 50%;
+  }
+  .account {
+    width: 50%;
+  }
+}
+@keyframes slide-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media only screen and (min-device-width: 1367px) and (max-device-width: 3024px) {
+  .container {
+    width: 40%;
+    align-self: center;
+    padding-left: 5em;
+    padding-right: 5em;
+  }
+  .account {
+    width: 40%;
+    box-shadow: 2px 2px 100px rgba(0, 36, 75, 0.52);
+  }
+  .logo {
+    width: 50%;
+  }
+  .input input {
+    font-size: 1em;
   }
   .loginbut {
-    transition: transform background-color
-      cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+    font-size: 1em;
   }
-
-  .loginbut:hover {
-    transform: scale3d(1.1, 1.1, 1.1);
-    background-color: #225af5;
-    box-shadow: 1px 1px 20px grey;
+  .signin {
+    font-size: 1.5em;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    z-index: 10;
+    margin: 2em;
   }
-
-  .input input:focus {
-    transform: scale3d(1.1, 1.1, 1.1);
-    box-shadow: 1px 1px 20px 1px rgba(128, 128, 128, 0.376);
-  }
-}
-.logo {
-  height: 100px;
-  position: static;
-  transform: scale(8.5);
 }

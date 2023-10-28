@@ -22,8 +22,7 @@
   border: 2px solid rgba(182, 22, 22, 0);
   border-radius: 5px;
   box-shadow: 1px 1px 5px 1px rgb(128 128 128);
-  animation: Container_transform__Sz9t6 cubic-bezier(0.55, 0.055, 0.675, 0.19)
-    0.2s;
+  animation: Container_transform__Sz9t6 cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
 .shadow {
   box-shadow: 1px 1px 5px 1px rgba(128, 128, 128, 0.226);
@@ -35,8 +34,7 @@
   border: 0.3px solid rgba(182, 22, 22, 0);
   border-radius: 5px;
   box-shadow: 1px 1px 10px 1px rgb(128 128 128 / 29%);
-  animation: Container_transform__Sz9t6 cubic-bezier(0.55, 0.055, 0.675, 0.19)
-    0.2s;
+  animation: Container_transform__Sz9t6 cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
 }
 .boxgrid img {
   position: relative;
@@ -185,7 +183,6 @@
 }
 .infiP {
   text-align: center;
-  background-color: #424242;
   color: white;
   width: 100%;
   height: 30px;
@@ -197,7 +194,6 @@
   border-radius: 10px;
   /* padding-bottom: 15%; */
   left: 25%;
-
   box-shadow: 1px 1px 10px 1px grey;
 }
 
@@ -241,8 +237,8 @@
     border: 2px solid rgba(182, 22, 22, 0);
     border-radius: 5px;
     box-shadow: 1px 1px 5px 1px rgb(128 128 128);
-    animation: Container_Container_transform__Sz9t6__P2hPR
-      cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.2s;
+    animation: Container_Container_transform__Sz9t6__P2hPR cubic-bezier(0.55, 0.055, 0.675, 0.19)
+      0.2s;
   }
 }
 .maincontent {
@@ -263,7 +259,6 @@
   background: #fbfbfb;
   margin-top: 5%;
   width: 90%;
-  top: 10vh;
   margin-left: 5%;
   font-family: cursive;
   border: 1px solid #80808000;
@@ -309,7 +304,6 @@
 
 .topdiv {
   position: relative;
-  background-color: rgb(255 255 255);
   height: 45px;
   font-family: sans-serif;
   margin-top: 0%;
@@ -344,7 +338,6 @@
   display: flex;
   margin-top: 0%;
   justify-content: space-evenly;
-  background-color: rgb(255, 255, 255);
   border: 2px solid rgba(245, 222, 179, 0);
   border-radius: 2px;
 
@@ -353,7 +346,6 @@
 
 .caption {
   position: relative;
-  background-color: rgb(255, 255, 255);
   min-height: 0px;
   max-height: 50px;
   border-top: 1px solid grey;
@@ -371,7 +363,6 @@
 
 .imgdiv {
   display: flex;
-  background-color: rgb(255, 255, 255);
   padding: 0%;
   align-items: center;
   justify-content: center;
@@ -465,6 +456,7 @@
   backdrop-filter: blur(5px);
   display: flex;
   flex-direction: row;
+
   align-items: flex-start;
   justify-content: flex-end;
 }
@@ -478,7 +470,6 @@
   position: absolute;
   top: 0%;
   z-index: 9;
-  background-color: whitesmoke;
   width: 100vw;
   min-height: 100vh;
   box-shadow: 0px 1px 520px 100px #4747474d;
@@ -530,7 +521,7 @@
   justify-content: space-around;
   border: 1px solid #80808017;
   color: white;
-  font-family: "FontAwesome";
+  font-family: 'FontAwesome';
   background-color: black;
   border-radius: 10px;
   font-size: 1.3em;
@@ -566,35 +557,24 @@
 .singlecontainer span {
   font-size: 30px;
 }
+.commenttopdiv {
+}
 
 .usernamediv {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1.1em;
 }
 
-.commenttopdiv {
-  width: 100vw;
-  height: 90%;
-  display: flex;
-  position: fixed;
-  z-index: 105;
-  top: 0vh;
-  background-color: rgb(252 252 252 / 11%);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-  flex-direction: row;
-  justify-content: flex-end;
-}
 .infi2 {
   text-align: center;
   display: flex;
   flex-direction: column;
   position: relative;
 }
+
 @media screen and (min-width: 768px) {
   .maincontent {
-    top: 10vh;
     margin-left: 9%;
     z-index: 0;
     height: 100vh;
